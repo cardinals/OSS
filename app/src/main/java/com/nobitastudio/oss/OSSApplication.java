@@ -25,8 +25,8 @@ import com.nobitastudio.oss.manager.QMUISwipeBackActivityManager;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
- * Demo 的 Application 入口。
- * Created by cgine on 16/3/22.
+ * Application 入口。
+ * Created by nobita on 19/02/14.
  */
 public class OSSApplication extends Application {
 
