@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="?attr/qmui_config_color_background"
+        android:fitsSystemWindows="true">
+
+        <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- show health news-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="132dp"
+                        android:background="@color/qmui_config_color_white">
+
+                        <com.tmall.ultraviewpager.UltraViewPager
+                            android:id="@+id/ultraviewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <!-- show hospital service -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:background="@color/qmui_config_color_white"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="4dp"
+                                android:src="@mipmap/flower" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:lines="2"
+                                android:text="医院服务"
+                                android:textColor="?attr/qmui_config_color_blue"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <!-- 分割线-->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@drawable/qmui_divider_top_bitmap" />
+
+                    </LinearLayout>
+
+                    <!-- show hospital service content one-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/qmui_config_color_white"
+                        android:orientation="horizontal">
+
+                        <!-- show register  -->
+                        <LinearLayout
+                            android:id="@+id/register_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/doctor" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="预约挂号"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show outpatient payment  -->
+                        <LinearLayout
+                            android:id="@+id/pay_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/pay" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="门诊缴费"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show medical card  -->
+                        <LinearLayout
+                            android:id="@+id/medical_card_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/medical_card" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="诊疗卡"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <!-- show navgation  -->
+                        <LinearLayout
+                            android:id="@+id/navigation_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/navigation" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="导航导诊"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- show hospital service content two-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/qmui_config_color_white"
+                        android:orientation="horizontal">
+
+                        <!-- show smart hospital guide -->
+                        <LinearLayout
+                            android:id="@+id/smart_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/pentagram" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="智能导诊"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show outpatient payment  -->
+                        <LinearLayout
+                            android:id="@+id/consulting_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/consulting" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="在线咨询"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show medical card  -->
+                        <LinearLayout
+                            android:id="@+id/coming_soon_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/coming_soon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="敬请期待"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+
+                        <!-- show test icon -->
+                        <LinearLayout
+                            android:id="@+id/test_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/code" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="测试"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- 健康服务 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:background="@color/qmui_config_color_white"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="4dp"
+                                android:src="@mipmap/leaf" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:lines="2"
+                                android:text="健康服务"
+                                android:textColor="?attr/qmui_config_color_blue"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <!-- 分割线-->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@drawable/qmui_divider_top_bitmap" />
+
+                    </LinearLayout>
+
+                    <!-- 健康服务 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/qmui_config_color_white"
+                        android:orientation="horizontal">
+
+                        <!-- show register  -->
+                        <LinearLayout
+                            android:id="@+id/register_detail_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/register_record" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="挂号记录"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show outpatient payment  -->
+                        <LinearLayout
+                            android:id="@+id/case_history_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/electronic_case_history" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="电子病历"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+                        <!-- show medical card  -->
+                        <LinearLayout
+                            android:id="@+id/article_linearLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginBottom="4dp"
+                                android:src="@mipmap/article" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="健康资讯"
+                                android:textColor="?attr/qmui_config_color_gray_6"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+
+                        <!-- show navgation  -->
+                        <LinearLayout
+                            android:id="@+id/fragment_hospitalhome_paydetails_linearlayout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical" />
+
+
+                    </LinearLayout>
+
+                    <!-- 健康头条 新闻,名医讲堂 视频-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <com.qmuiteam.qmui.widget.QMUITabSegment
+                            android:id="@+id/tabs"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/home_tab_height"
+                            android:layout_gravity="start"
+                            android:background="?attr/qmui_list_item_bg_with_border_top"
+                            android:textSize="12sp"
+                            app:qmui_tab_icon_position="left" />
+
+                        <!-- 内容 -->
+                        <com.nobitastudio.oss.widget.ScrollByViewpager
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/app_content_bg_color" />
+                    </LinearLayout>
+
+                    <!--display 我也是有底线的~ -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:orientation="horizontal">
+
+                        <!--the left line-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:gravity="start">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/qmui_config_color_gray_7" />
+
+                        </LinearLayout>
+
+                        <!--"我也是有底线的~"-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:text="我也是有底线的~"
+                            android:textColor="?attr/qmui_config_color_gray_6"
+                            android:textSize="11sp" />
+
+                        <!--the right line-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="12dp"
+                            android:layout_weight="1"
+                            android:gravity="end">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/qmui_config_color_gray_7" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
+    </FrameLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

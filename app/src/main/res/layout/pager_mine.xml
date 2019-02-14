@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:qmui_detail_text="正在加载"
+        app:qmui_show_loading="true" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="?attr/qmui_config_color_background"
+        android:fitsSystemWindows="true">
+
+        <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <!-- 用户头像 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:background="#00A8E1"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/activity_personal_center_user_imageView"
+                            android:layout_width="96dp"
+                            android:layout_height="96dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/nav_header_desc"
+                            android:paddingTop="@dimen/nav_header_vertical_spacing"
+                            android:src="@drawable/ic_user"
+                            app:civ_border_color="#00000000"
+                            app:civ_border_width="2dp" />
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="start"
+                            android:text="用户名"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                    </LinearLayout>
+
+                    <!-- 用户选项 -->
+                    <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                        android:id="@+id/groupListView"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
+    </FrameLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

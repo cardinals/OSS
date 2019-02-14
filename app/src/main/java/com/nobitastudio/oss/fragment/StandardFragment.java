@@ -504,4 +504,26 @@ public abstract class StandardFragment extends BaseFragment {
             imageView.setImageDrawable(solidImageBitmapDrawable);
         }
     }
+
+
+    // ======================== tools
+    /**
+     * 锁定所有视图不可选定
+     * @param views
+     */
+    public static void lockView(View... views) {
+        for (View view : views) {
+            view.setClickable(false);
+        }
+    }
+
+    /**
+     * 解锁视图
+     * @param views
+     */
+    public static void unlockView(View... views) {
+        for (View view : views) {
+            view.setClickable(true);
+        }
+    }
 }

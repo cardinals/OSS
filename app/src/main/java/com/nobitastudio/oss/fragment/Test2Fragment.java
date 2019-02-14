@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 
 import butterknife.ButterKnife;
@@ -14,7 +15,7 @@ public class Test2Fragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.login_button})
     void onClick(View v) {
-        popBackStack();
+        startFragmentAndDestroyCurrent(new Test3Fragment());
     }
 
     @Override

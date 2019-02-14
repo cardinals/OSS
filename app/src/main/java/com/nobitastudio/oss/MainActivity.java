@@ -22,6 +22,7 @@ import android.os.Bundle;
 
 import com.nobitastudio.oss.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.fragment.BaseFragment;
+import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 
 public class MainActivity extends BaseFragmentActivity {
@@ -43,7 +44,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            BaseFragment fragment = new TestFragment();
+            BaseFragment fragment = new LoginFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()

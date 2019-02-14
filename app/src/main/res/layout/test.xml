@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/doctor_linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@color/qmui_config_color_white"
+    android:alpha="0.7"
+    android:elevation="28dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:qmui_borderColor="?attr/qmui_config_color_separator"
+    app:qmui_outerNormalColor="?attr/qmui_config_color_background"
+    app:qmui_showBorderOnlyBeforeL="true">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        app:cardCornerRadius="50dp">
+
+        <ImageView
+            android:id="@+id/doctor_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_doctor" />
+
+    </android.support.v7.widget.CardView>
+
+    <!-- 中间医生信息 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- 医生姓名和级别 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/doctor_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/qmui_config_color_gray_3"
+                android:text="医生姓名"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/app_primary_color">
+
+                    <TextView
+                        android:id="@+id/doctor_level_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"
+                        android:text="一级专家"
+                        android:textColor="@color/qmui_config_color_white" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <!-- 门诊科室 -->
+        <TextView
+            android:id="@+id/deparment_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="营养咨询专科门诊"
+            android:textColor="?attr/qmui_config_color_gray_5"
+            android:textSize="@dimen/spanUtils_common_textSize"/>
+
+        <!-- 亚专业 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="亚专业:"
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="@dimen/spanUtils_common_textSize"/>
+
+            <TextView
+                android:id="@+id/submajor_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="亚专业描述"
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="@dimen/spanUtils_common_textSize"/>
+        </LinearLayout>
+
+        <!-- 擅长 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="擅长:"
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="@dimen/spanUtils_common_textSize"/>
+
+            <TextView
+                android:id="@+id/speciality_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="擅长"
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="@dimen/spanUtils_common_textSize"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 右侧现实是否有号 -->
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/roundButton"
+        style="@style/QMUI.RoundButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:text="无"
+        android:textColor="@color/app_color_theme_5"
+        app:qmui_borderColor="@color/app_color_theme_5"/>
+
+</com.qmuiteam.qmui.layout.QMUILinearLayout>

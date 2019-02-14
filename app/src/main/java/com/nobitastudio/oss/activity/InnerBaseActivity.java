@@ -22,7 +22,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.nobitastudio.oss.util.Utils;
+import com.nobitastudio.oss.util.QMUIUtil;
 
 
 //Fix the bug: Only fullscreen activities can request orientation in Android version 26, 27
@@ -32,7 +32,7 @@ public class InnerBaseActivity extends AppCompatActivity {
     private int mPendingRequestedOrientation = NO_REQUESTED_ORIENTATION_SET;
 
     public void convertToTranslucentCauseOrientationChanged() {
-        Utils.convertActivityToTranslucent(this);
+        QMUIUtil.convertActivityToTranslucent(this);
         mConvertToTranslucentCauseOrientationChanged = true;
     }
 
@@ -54,7 +54,7 @@ public class InnerBaseActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         if (mConvertToTranslucentCauseOrientationChanged) {
             mConvertToTranslucentCauseOrientationChanged = false;
-            Utils.convertActivityFromTranslucent(this);
+            QMUIUtil.convertActivityFromTranslucent(this);
             if (mPendingRequestedOrientation != NO_REQUESTED_ORIENTATION_SET) {
                 super.setRequestedOrientation(mPendingRequestedOrientation);
                 mPendingRequestedOrientation = NO_REQUESTED_ORIENTATION_SET;

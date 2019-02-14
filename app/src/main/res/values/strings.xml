@@ -221,7 +221,7 @@
     <string name="statusBarHelper_translucentActivity_desc">通过在 Activity 中调用 QMUIStatusBarHelper.translucent() 方法，即可实现沉浸式状态栏的效果</string>
     <string name="statusBarHelper_statusBar_height_result">状态栏实际高度为 %1$d</string>
 
-    <!-- Span Utils 各种 Span 工具 -->
+    <!-- Span QMUIUtil 各种 Span 工具 -->
     <string name="spanUtils_side_icon_title">在文字左边或者右边直接添加 Icon</string>
     <string name="spanUtils_align_middle_title">支持垂直居中的 ImageSpan</string>
     <string name="spanUtils_margin_image_title">支持增加左右间距的 ImageSpan</string>

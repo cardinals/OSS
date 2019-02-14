@@ -38,7 +38,7 @@ import android.widget.FrameLayout;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.QMUIFragmentActivity;
 import com.nobitastudio.oss.manager.QMUISwipeBackActivityManager;
-import com.nobitastudio.oss.util.Utils;
+import com.nobitastudio.oss.util.QMUIUtil;
 import com.nobitastudio.oss.widget.SwipeBackLayout;
 import com.nobitastudio.oss.widget.SwipeBackgroundView;
 import com.qmuiteam.qmui.QMUILog;
@@ -329,7 +329,7 @@ public abstract class QMUIFragment extends Fragment {
                         }
                     }
                     FragmentManager fragmentManager = getFragmentManager();
-                    Utils.findAndModifyOpInBackStackRecord(fragmentManager, -1, new Utils.OpHandler() {
+                    QMUIUtil.findAndModifyOpInBackStackRecord(fragmentManager, -1, new QMUIUtil.OpHandler() {
                         @Override
                         public boolean handle(Object op) {
                             Field cmdField;
@@ -643,7 +643,7 @@ public abstract class QMUIFragment extends Fragment {
      *                 or after the enter animation is finished.
      */
     public void runAfterAnimation(Runnable runnable, boolean onlyEnd) {
-        Utils.assertInMainThread();
+        QMUIUtil.assertInMainThread();
         boolean ok = onlyEnd ? mEnterAnimationStatus == ANIMATION_ENTER_STATUS_END :
                 mEnterAnimationStatus != ANIMATION_ENTER_STATUS_STARTED;
         if (ok) {

@@ -56,7 +56,7 @@
     <dimen name="drawableHelper_item_marginHorizontal">20dp</dimen>
     <dimen name="drawableHelper_common_shape_size">50dp</dimen>
 
-    <!-- Span Utils 各种 Span 工具 -->
+    <!-- Span QMUIUtil 各种 Span 工具 -->
     <dimen name="spanUtils_column_marginBottom">35dp</dimen>
     <dimen name="spanUtils_common_textSize">16sp</dimen>
 

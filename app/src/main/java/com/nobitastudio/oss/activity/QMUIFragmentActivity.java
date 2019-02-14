@@ -25,7 +25,7 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.nobitastudio.oss.fragment.QMUIFragment;
-import com.nobitastudio.oss.util.Utils;
+import com.nobitastudio.oss.util.QMUIUtil;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 
@@ -91,7 +91,7 @@ public abstract class QMUIFragmentActivity extends InnerBaseActivity {
                         transitionConfig.popenter, transitionConfig.popout)
                 .replace(getContextViewId(), fragment, tagName);
         int index = transaction.commit();
-        Utils.findAndModifyOpInBackStackRecord(fragmentManager, -1, new Utils.OpHandler() {
+        QMUIUtil.findAndModifyOpInBackStackRecord(fragmentManager, -1, new QMUIUtil.OpHandler() {
             @Override
             public boolean handle(Object op) {
                 Field cmdField = null;
