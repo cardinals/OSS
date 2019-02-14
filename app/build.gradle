@@ -1,0 +1,103 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion parent.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.nobitastudio.oss"
+        minSdkVersion 26
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "b2eb1e88d3ed7c7d37483e78",   //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default",   //暂时填写默认值即可.
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    splits {
+        abi {
+            enable true
+            reset()
+            //include 'armeabi'//, 'x86_64'// release，只打包armeabi平台的，就算有其他文件夹也不管 大部分android 手机是ARM架构
+            //include 'x86_64' //test
+            //include 'x86'    // release
+            include 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'x86', 'x86_64'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:recyclerview-v7:$supportVersion"
+        force "com.android.support:appcompat-v7:$supportVersion"
+        force "com.android.support:design:$supportVersion"
+        force "com.android.support:support-vector-drawable:$supportVersion"
+        force "com.android.support:support-v4:$supportVersion"
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation files('libs/paysdk-release-1.2.2.jar')
+    implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
+    implementation 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
+    // 混淆依赖
+    implementation "com.blankj:free-proguard:0.0.10"
+    implementation 'com.blankj:utilcode:1.23.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    // 左右对齐textview
+    implementation 'me.codeboy.android:align-text-view:2.3.2'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    // implementation 'joda-time:joda-time:2.10.1'
+
+//    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+//    implementation "org.projectlombok:lombok:1.18.4"
+
+    implementation "com.android.support:support-v4:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.qmuiteam:qmui:1.1.12'
+
+    //leak
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+
+}
