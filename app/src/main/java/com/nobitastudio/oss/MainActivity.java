@@ -23,17 +23,8 @@ import android.os.Bundle;
 import com.nobitastudio.oss.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.fragment.BaseFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
-import com.nobitastudio.oss.fragment.TestFragment;
 
 public class MainActivity extends BaseFragmentActivity {
-    private static final String KEY_FRAGMENT = "key_fragment";
-    private static final String KEY_URL = "key_url";
-    private static final String KEY_TITLE = "key_title";
-    private static final int VALUE_FRAGMENT_HOME = 0;
-    private static final int VALUE_FRAGMENT_NOTCH_HELPER = 1;
-    private static final int VALUE_FRAGMENT_ARCH_TEST = 2;
-    private static final int VALUE_FRAGMENT_WEB_EXPLORER_TEST = 3;
-    private static final int VALUE_FRAGMENT_SURFACE_TEST = 4;
 
     @Override
     protected int getContextViewId() {
@@ -52,37 +43,5 @@ public class MainActivity extends BaseFragmentActivity {
                     .addToBackStack(fragment.getClass().getSimpleName())
                     .commit();
         }
-    }
-
-//    private BaseFragment getFirstFragment() {
-//        Intent intent = getIntent();
-//
-//        return null;
-//    }
-
-    public static Intent createNotchHelperIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(KEY_FRAGMENT, VALUE_FRAGMENT_NOTCH_HELPER);
-        return intent;
-    }
-
-    public static Intent createArchTestIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(KEY_FRAGMENT, VALUE_FRAGMENT_ARCH_TEST);
-        return intent;
-    }
-
-    public static Intent createWebExplorerIntent(Context context, String url, String title) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(KEY_FRAGMENT, VALUE_FRAGMENT_WEB_EXPLORER_TEST);
-        intent.putExtra(KEY_URL, url);
-        intent.putExtra(KEY_TITLE, title);
-        return intent;
-    }
-
-    public static Intent createSurfaceTestIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(KEY_FRAGMENT, VALUE_FRAGMENT_SURFACE_TEST);
-        return intent;
     }
 }
