@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -38,6 +39,8 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUIEmptyView mEmptyView;
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
+
+    ControllerClickHandler mHandler;
 
     private void initTopBar() {
         mTopBar.setBackgroundDividerEnabled(false);
@@ -185,8 +188,9 @@ public class MineController extends QMUIWindowInsetLayout {
         builder.setOnSheetItemClickListener(itemClickListener).build().show();
     }
 
-    public MineController(Context context) {
+    public MineController(Context context, ControllerClickHandler mHandler) {
         super(context);
+        this.mHandler = mHandler;
         LayoutInflater.from(context).inflate(R.layout.pager_mine, this);
         ButterKnife.bind(this);
         init();

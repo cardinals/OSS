@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.decorator.GridDividerItemDecoration;
 import com.nobitastudio.oss.model.vo.ItemDescription;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -38,6 +39,8 @@ public class InfoController extends QMUIWindowInsetLayout {
     QMUIPullRefreshLayout mPullRefreshLayout;
     @BindView(R.id.emptyView)
     QMUIEmptyView mEmptyView;
+
+    ControllerClickHandler mHandler;
 
     protected void init() {
         initTopBar();
@@ -87,8 +90,9 @@ public class InfoController extends QMUIWindowInsetLayout {
         }
     }
 
-    public InfoController(Context context) {
+    public InfoController(Context context, ControllerClickHandler mHandler) {
         super(context);
+        this.mHandler = mHandler;
         LayoutInflater.from(context).inflate(R.layout.pager_info, this);
         ButterKnife.bind(this);
         init();

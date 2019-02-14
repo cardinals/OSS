@@ -11,9 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.HealthArticleRecycleViewAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.fragment.DepartmentFragment;
+import com.nobitastudio.oss.fragment.MedicalCardFragment;
+import com.nobitastudio.oss.fragment.NavigationFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.util.CommonUtil;
+import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -94,6 +102,8 @@ public class HomeController extends QMUIWindowInsetLayout {
     };
     HealthArticleRecycleViewAdapter recycleViewAdapter;
 
+    ControllerClickHandler mHandler;
+
     List<HealthArticle> healthArticles;
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout, R.id.navigation_linearLayout,
@@ -103,16 +113,15 @@ public class HomeController extends QMUIWindowInsetLayout {
         switch (view.getId()) {
             case R.id.register_linearLayout:
                 // 进入科室activity
-                //ActivityUtils.startActivity(DepartmentActivity.class);
+                mHandler.startFragment(new DepartmentFragment());
                 break;
             case R.id.pay_linearLayout:
-
                 break;
             case R.id.medical_card_linearLayout:
-                //ActivityUtils.startActivity(MedicalCardActivity.class);
+                mHandler.startFragment(new MedicalCardFragment());
                 break;
             case R.id.navigation_linearLayout:
-                //ActivityUtils.startActivity(NavigationActivity.class);
+                mHandler.startFragment(new NavigationFragment());
                 break;
             case R.id.smart_linearLayout:
                 break;
@@ -132,9 +141,8 @@ public class HomeController extends QMUIWindowInsetLayout {
                 ToastUtils.showShort("进入天气预报");
                 break;
             default:
-                showInfoTipDialog(NO_SUPPORT_VIEW_ID,1500l);
+                showInfoTipDialog(NO_SUPPORT_VIEW_ID, 1500l);
                 break;
-
         }
     }
 
@@ -344,12 +352,36 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    public HomeController(Context context) {
+    public void setmHandler(ControllerClickHandler mHandler) {
+        this.mHandler = mHandler;
+    }
+
+    static class HealthArticleRecycleViewAdapter extends BaseRecyclerAdapter<HealthArticle> {
+
+        public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recycleview_item_health_article;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
+            Glide.with(mContext).load(R.drawable.hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
+            holder.setText(R.id.title_textView, item.getTitle());
+            holder.setText(R.id.type_textView, item.getType().name());
+            holder.setText(R.id.publish_time_textView,CommonUtil.handleHealthNewsPublishTime(DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime())));
+        }
+    }
+
+    public HomeController(Context context, ControllerClickHandler mHandler) {
         super(context);
+        this.mHandler = mHandler;
         LayoutInflater.from(context).inflate(R.layout.pager_home, this);
         ButterKnife.bind(this);
         init();
         //mViewPager.
     }
-
 }

@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.controller.HomeController;
 import com.nobitastudio.oss.controller.InfoController;
 import com.nobitastudio.oss.controller.MineController;
@@ -76,9 +75,20 @@ public class HomeFragment extends BaseFragment {
      */
     private void initPagers() {
         mPages = new HashMap<>();
-        mPages.put(Pager.HOME, new HomeController(getContext()));
-        mPages.put(Pager.INFO, new InfoController(getContext()));
-        mPages.put(Pager.SETTING, new MineController(getContext()));
+        ControllerClickHandler mHandler = new ControllerClickHandler() {
+            @Override
+            public void startFragment(BaseFragment fragment) {
+                HomeFragment.this.startFragment(fragment);
+            }
+
+            @Override
+            public void startFragmentAndDestroyCurrent(BaseFragment fragment) {
+                HomeFragment.this.startFragmentAndDestroyCurrent(fragment);
+            }
+        };
+        mPages.put(Pager.HOME, new HomeController(getContext(), mHandler));
+        mPages.put(Pager.INFO, new InfoController(getContext(), mHandler));
+        mPages.put(Pager.SETTING, new MineController(getContext(), mHandler));
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
     }
@@ -156,7 +166,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected View onCreateView() {
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
-        ButterKnife.bind(this,frameLayout);
+        ButterKnife.bind(this, frameLayout);
         initTabs();
         initPagers();
         return frameLayout;

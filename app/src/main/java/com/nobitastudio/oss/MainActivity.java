@@ -35,7 +35,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            BaseFragment fragment = new LoginFragment();
+            BaseFragment fragment = getFirstFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -44,4 +44,13 @@ public class MainActivity extends BaseFragmentActivity {
                     .commit();
         }
     }
+
+    /**
+     * 检测登录及其异常状态
+     * @return
+     */
+    protected BaseFragment getFirstFragment() {
+        return new LoginFragment();
+    }
+
 }
