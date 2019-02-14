@@ -22,6 +22,7 @@ import android.os.Bundle;
 
 import com.nobitastudio.oss.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.fragment.BaseFragment;
+import com.nobitastudio.oss.fragment.TestFragment;
 
 public class MainActivity extends BaseFragmentActivity {
     private static final String KEY_FRAGMENT = "key_fragment";
@@ -42,7 +43,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            BaseFragment fragment = getFirstFragment();
+            BaseFragment fragment = new TestFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -52,11 +53,11 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
-    private BaseFragment getFirstFragment() {
-        Intent intent = getIntent();
-
-        return null;
-    }
+//    private BaseFragment getFirstFragment() {
+//        Intent intent = getIntent();
+//
+//        return null;
+//    }
 
     public static Intent createNotchHelperIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
