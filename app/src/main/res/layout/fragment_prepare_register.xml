@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:qmui_detail_text="正在加载"
+        app:qmui_show_loading="true" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:fitsSystemWindows="true">
+
+        <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="12dp"
+                android:paddingTop="18dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="18dp">
+
+                <!-- 挂号单详情 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/register_basic_msg_imageview"
+                        android:layout_width="@dimen/solid_image_common_width"
+                        android:layout_height="@dimen/solid_image_common_height" />
+
+                    <TextView
+                        style="@style/QDCommonTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="挂号单基本信息" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@drawable/qmui_divider_top_bitmap" />
+
+                <!-- display the top -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!--display the fist line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊科室:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊科室"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                    </LinearLayout>
+
+                    <!--display the fist line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="医生姓名:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="医生姓名"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                    </LinearLayout>
+
+                    <!--display the third line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊时间:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="年-月-日"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                    </LinearLayout>
+
+                    <!--display the fourth line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊时段:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="时分秒"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                    </LinearLayout>
+
+                    <!--display the fiveth line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊地点:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="就诊地点"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                    </LinearLayout>
+
+                    <!--display the fist line-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="预约挂号费:" />
+
+                        <!--就诊科室-->
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="费用"
+                            android:textColor="?attr/app_primary_color" />
+
+                    </LinearLayout>
+
+                    <!--Segmenting line-->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginTop="6dp"
+                        android:background="@drawable/qmui_divider_top_bitmap" />
+
+                    <!--display the patient module-->
+                    <LinearLayout
+                        android:id="@+id/medical_card_ownername_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:text="就诊人:" />
+
+
+                        <TextView
+                            android:id="@+id/choose_medical_card_textview"
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="请选择"
+                            android:textColor="?attr/qmui_config_color_gray_1" />
+
+                        <ImageView
+                            android:id="@+id/choose_medical_card_imageview"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right" />
+
+                    </LinearLayout>
+
+                    <!--Segmenting line-->
+                    <!--Segmenting line-->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/qmui_divider_top_bitmap" />
+
+                    <!--display the Verification Code module-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="验证码:" />
+
+
+                        <EditText
+                            android:id="@+id/verification_code_edittext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:ellipsize="end"
+                            android:hint="请输入右侧验证码"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:maxLines="1"
+                            android:paddingBottom="6dp"
+                            android:singleLine="true"
+                            android:textColor="@color/app_color_description"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:id="@+id/activity_register_pictrueverificationcode_imageview"
+                            android:layout_width="104dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_verificationcode"
+                            android:scaleType="fitXY" />
+
+                    </LinearLayout>
+
+                    <!--Segmenting line-->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/qmui_divider_top_bitmap" />
+
+                    <!-- dis play the alert inf-->
+                    <TextView
+                        style="@style/QDCommonTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="12dp"
+                        android:gravity="start"
+                        android:text="注意事项：请在30分钟内支付，逾期作废。逾期超5次将会冻结就诊卡"
+                        android:textColor="@color/app_color_theme_1" />
+
+                </LinearLayout>
+
+                <!-- display the register button-->
+                <Button
+                    android:id="@+id/confirm_register_msg"
+                    style="@style/AppQDRadiusButton"
+                    android:layout_width="match_parent"
+                    android:text="确   定" />
+            </LinearLayout>
+        </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
+    </FrameLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

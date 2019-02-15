@@ -1,7 +1,6 @@
 package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
@@ -50,7 +47,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         doctors.add(new Doctor());
         doctors.add(new Doctor());
         DoctorRecycleViewAdapter adapter = new DoctorRecycleViewAdapter(getContext(), doctors);
-       // adapter.setOnItemClickListener((view, pos) -> ActivityUtils.startActivity(DoctorDetailActivity.class));
+        adapter.setOnItemClickListener((view, pos) -> startFragment(new DoctorDetailFragment()));
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(adapter);
@@ -64,7 +61,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initRefreshLayout() {
-
+        mPullRefreshLayout.setEnabled(true);
     }
 
     @Override
@@ -100,7 +97,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
             Button button = holder.getButton(R.id.roundButton);
             linearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
                     QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
-            Glide.with(DoctorListFragment.this).load(R.drawable.hospital_trademark).into(imageView);
+            Glide.with(DoctorListFragment.this).load(R.drawable.bg_hospital_trademark).into(imageView);
             doctorNameTextView.setText("名字111");
             doctorLevelTextView.setText("医生水平11");
             doctorDepartmentTextView.setText("科室信息1111");
@@ -114,7 +111,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected View onCreateView() {
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_doctor_list, null);
-        ButterKnife.bind(this,frameLayout);
+        ButterKnife.bind(this, frameLayout);
         init();
         return frameLayout;
     }

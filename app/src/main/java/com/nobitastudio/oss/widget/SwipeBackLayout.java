@@ -168,11 +168,11 @@ public class SwipeBackLayout extends QMUIWindowInsetLayout {
         setEdgeTrackingEnabled(mode);
 
         int shadowLeft = a.getResourceId(R.styleable.SwipeBackLayout_shadow_left,
-                R.drawable.shadow_left);
+                R.drawable.bg_shadow_left);
         int shadowRight = a.getResourceId(R.styleable.SwipeBackLayout_shadow_right,
-                R.drawable.shadow_right);
+                R.drawable.bg_shadow_right);
         int shadowBottom = a.getResourceId(R.styleable.SwipeBackLayout_shadow_bottom,
-                R.drawable.shadow_bottom);
+                R.drawable.bg_shadow_bottom);
         setShadow(shadowLeft, EDGE_LEFT);
         setShadow(shadowRight, EDGE_RIGHT);
         setShadow(shadowBottom, EDGE_BOTTOM);

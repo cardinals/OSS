@@ -70,7 +70,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:paddingLeft">?attr/qmui_content_spacing_horizontal</item>
         <item name="android:paddingRight">?attr/qmui_content_spacing_horizontal</item>
-        <item name="android:background">@drawable/s_radius_button_bg</item>
+        <item name="android:background">@drawable/bg_s_radius_button</item>
         <item name="android:textColor">@color/s_app_color_blue_2</item>
         <item name="android:textSize">14sp</item>
         <item name="android:gravity">center</item>
@@ -168,13 +168,13 @@
 
     <!-- arch -->
     <style name="SwipeBackLayout">
-        <item name="shadow_left">@drawable/shadow_left</item>
-        <item name="shadow_right">@drawable/shadow_right</item>
-        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+        <item name="shadow_left">@drawable/bg_shadow_left</item>
+        <item name="shadow_right">@drawable/bg_shadow_right</item>
+        <item name="shadow_bottom">@drawable/bg_shadow_bottom</item>
     </style>
 
     <style name="AppQDRadiusButton" parent="@style/QDRadiusButton">
-        <item name="android:background">@drawable/s_opaque_radius_button_bg</item>
+        <item name="android:background">@drawable/bg_s_opaque_radius_button</item>
     </style>
 
 </resources>

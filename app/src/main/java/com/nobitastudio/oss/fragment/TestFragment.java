@@ -16,14 +16,6 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.login_button})
     void onClick(View v) {
-        startFragment(new Test2Fragment());
-    }
-
-    @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
-        ButterKnife.bind(this,frameLayout);
-        return frameLayout;
     }
 
     @Override
@@ -49,5 +41,12 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected View.OnClickListener getEmptyViewRetryButtonListener() {
         return null;
+    }
+
+    @Override
+    protected View onCreateView() {
+        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
+        ButterKnife.bind(this,frameLayout);
+        return frameLayout;
     }
 }

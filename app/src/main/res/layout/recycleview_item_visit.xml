@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <!-- 左边布局 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!--the top LinearLayout-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:id="@+id/date_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="0dp"
+                    android:text="年-月-日" />
+
+                <TextView
+                    android:id="@+id/week_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="星期" />
+
+                <TextView
+                    android:id="@+id/time_slot_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="时间段" />
+
+                <TextView
+                    android:id="@+id/hospital_name_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="8dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:layout_marginBottom="0dp"
+                    android:text="院区" />
+
+            </LinearLayout>
+
+            <!--the bottom LinearLayout-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/submajor_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="0dp"
+                    android:text="亚专业" />
+
+                <TextView
+                    android:id="@+id/area_textview"
+                    style="@style/QDCommonDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="0dp"
+                    android:text="区域" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 右侧现实是否有号 -->
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/green_roundbutton"
+            style="@style/QMUI.RoundButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="24dp"
+            android:clickable="false"
+            android:text="有号"
+            android:textColor="@color/app_color_theme_5"
+            android:visibility="gone"
+            app:qmui_borderColor="@color/app_color_theme_5" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/red_roundbutton"
+            style="@style/QMUI.RoundButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="24dp"
+            android:clickable="false"
+            android:text="无号"
+            android:textColor="@color/app_color_theme_2"
+            app:qmui_borderColor="@color/app_color_theme_2" />
+
+    </LinearLayout>
+
+    <!--Segmenting line-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="24dp"
+        android:background="@drawable/qmui_divider_top_bitmap" />
+
+</LinearLayout>
