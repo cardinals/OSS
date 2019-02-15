@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.fragment.AboutFragment;
+import com.nobitastudio.oss.fragment.MedicalCardFragment;
+import com.nobitastudio.oss.fragment.SettingFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -45,7 +48,8 @@ public class MineController extends QMUIWindowInsetLayout {
     private void initTopBar() {
         mTopBar.setBackgroundDividerEnabled(false);
         mTopBar.setTitle(getResources().getString(R.string.mine));
-        mTopBar.addRightImageButton(R.mipmap.setting, R.id.topbar_right_setting_button).setOnClickListener(view -> ToastUtils.showShort("打开设置"));
+        mTopBar.addRightImageButton(R.mipmap.setting, R.id.topbar_right_setting_button)
+                .setOnClickListener(view -> mHandler.startFragment(new SettingFragment()));
     }
 
     protected void init() {
@@ -136,7 +140,7 @@ public class MineController extends QMUIWindowInsetLayout {
 
         QMUICommonListItemView helpCenterItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.info),
-                "帮助中心",
+                "关于我们",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -154,9 +158,9 @@ public class MineController extends QMUIWindowInsetLayout {
                 .setTitle("常用工具")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
                 .addItemView(myCollectionItem, null)
-                .addItemView(myMedicalCardsItem, null)
+                .addItemView(myMedicalCardsItem, view -> mHandler.startFragment(new MedicalCardFragment()))
                 .addItemView(parkPayItem, null)
-                .addItemView(helpCenterItem, null)
+                .addItemView(helpCenterItem, view -> mHandler.startFragment(new AboutFragment()))
                 .addItemView(shareItem, v -> showSimpleBottomSheetGrid(
                         getContext(),
                         Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),

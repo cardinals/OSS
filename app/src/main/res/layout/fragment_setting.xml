@@ -3,7 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="@color/qmui_config_color_white"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:qmui_detail_text="正在加载"
+        app:qmui_show_loading="true" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -31,40 +44,27 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview"
+                    <!-- 系统设置 -->
+                    <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                        android:id="@+id/groupListView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/qmui_config_color_white"
-                        android:divider="@null"
-                        android:dividerHeight="0dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp" />
+
+                    <Button
+                        android:id="@+id/logout_button"
+                        style="@style/AppQDRadiusButton"
+                        android:layout_width="match_parent"
+                        android:text="退出登录" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
     </FrameLayout>
 
-    <com.qmuiteam.qmui.widget.QMUIEmptyView
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
-        android:background="@color/qmui_config_color_white"
-        android:fitsSystemWindows="true"
-        android:visibility="gone"
-        app:qmui_detail_text="正在加载"
-        app:qmui_show_loading="true" />
-
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <!-- 对其进行搜索支持 -->
-        <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-
-    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
+        android:fitsSystemWindows="true" />
 
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

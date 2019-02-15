@@ -10,7 +10,7 @@
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    android:background="@color/qmui_config_color_white"
+    android:background="?attr/qmui_s_list_item_bg_with_border_bottom_inset_left"
     android:gravity="center"
     android:orientation="horizontal"
     app:qmui_borderColor="?attr/qmui_config_color_separator"

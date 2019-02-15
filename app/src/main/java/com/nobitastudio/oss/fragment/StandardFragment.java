@@ -56,6 +56,15 @@ public abstract class StandardFragment extends BaseFragment {
     int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
     long mDefaultTipDialogShowTime = 1500l;
 
+    // SLIDE_TRANSITION_CONFIG  左右滑动
+    // SCALE_TRANSITION_CONFIG  从中间出
+    protected static final TransitionConfig animConfig = SLIDE_TRANSITION_CONFIG;  // 默认左右滑动
+
+    @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return animConfig;
+    }
+
     public StandardFragment() {
         mGson = new Gson();
         mOkHttpClient = new OkHttpClient();
@@ -511,7 +520,7 @@ public abstract class StandardFragment extends BaseFragment {
      * 锁定所有视图不可选定
      * @param views
      */
-    public static void lockView(View... views) {
+    public void lockView(View... views) {
         for (View view : views) {
             view.setClickable(false);
         }
@@ -521,7 +530,7 @@ public abstract class StandardFragment extends BaseFragment {
      * 解锁视图
      * @param views
      */
-    public static void unlockView(View... views) {
+    public void unlockView(View... views) {
         for (View view : views) {
             view.setClickable(true);
         }

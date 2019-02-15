@@ -38,65 +38,56 @@
                 android:fillViewport="true"
                 android:scrollbars="vertical">
 
+                <!-- 除去 toobar 的全部布局 -->
                 <LinearLayout
-                    android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/qmui_config_color_white"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:divider="@null"
-                        android:dividerHeight="0dp" />
-
+                    <!--the main layout-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:orientation="vertical" />
+                        android:layout_height="wrap_content"
+                        android:paddingTop="25dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            style="@style/QDCommonTitle"
+                            android:layout_marginTop="10dp"
+                            android:text="致      谢"/>
+
+                        <me.codeboy.android.aligntextview.AlignTextView
+                            android:id="@+id/content_textView"
+                            android:paddingLeft="24dp"
+                            android:paddingRight="24dp"
+                            style="@style/QDCommonDescription"
+                            android:text="@string/gratitude_content"
+                            android:gravity="left"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/qmui_config_color_white"
+                        android:layout_weight="1"/>
+
+                    <!-- 版权,责任 -->
+                    <TextView
+                        android:id="@+id/copyright_textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="25dp"
+                        android:gravity="center_horizontal"
+                        android:text="Copyright © Nobita chen All rights reserved."
+                        android:textColor="?attr/qmui_config_color_gray_7"/>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
-    </FrameLayout>
-
-    <!-- 办卡 / 绑卡 -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                android:id="@+id/create_medical_card_button"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:alpha="255"
-                android:gravity="center"
-                android:text="办理诊疗卡"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomLeft="20dp"
-                app:qmui_radiusTopLeft="20dp" />
-
-            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                android:id="@+id/bind_medical_card_button"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="绑定诊疗卡"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomRight="20dp"
-                app:qmui_radiusTopRight="20dp" />
-        </LinearLayout>
     </FrameLayout>
 
     <com.qmuiteam.qmui.widget.QMUITopBarLayout

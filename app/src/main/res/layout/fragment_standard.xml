@@ -122,17 +122,13 @@
 
                     </LinearLayout>
 
-
-                    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    <Button
                         android:id="@+id/login_button"
-                        style="@style/QMUI.RoundButton"
+                        style="@style/AppQDRadiusButton"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
                         android:layout_marginLeft="51dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="51dp"
-                        android:text="登          录"
-                        app:qmui_backgroundColor="@color/app_color_blue_btn_bg" />
+                        android:text="登          录" />
 
 
                 </LinearLayout>

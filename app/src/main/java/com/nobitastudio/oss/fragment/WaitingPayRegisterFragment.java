@@ -104,9 +104,9 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     @Override
     protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_waiting_pay_register, null);
-        ButterKnife.bind(this, frameLayout);
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_waiting_pay_register, null);
+        ButterKnife.bind(this, root);
         init();
-        return frameLayout;
+        return root;
     }
 }

@@ -72,12 +72,11 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
         return null;
     }
 
-
     @Override
     protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_register_success, null);
-        ButterKnife.bind(this, frameLayout);
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_register_success, null);
+        ButterKnife.bind(this, root);
         init();
-        return frameLayout;
+        return root;
     }
 }
