@@ -116,6 +116,8 @@ public class HomeController extends QMUIWindowInsetLayout {
                 // 进入科室activity
                 mHandler.startFragment(new DepartmentFragment());
 //                mHandler.startFragment(new TestFragment());
+
+
                 break;
             case R.id.pay_linearLayout:
                 break;
