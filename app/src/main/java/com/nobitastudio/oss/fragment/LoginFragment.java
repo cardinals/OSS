@@ -143,6 +143,11 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
+    }
+
+    @Override
     protected View onCreateView() {
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_login, null);
         ButterKnife.bind(this,frameLayout);

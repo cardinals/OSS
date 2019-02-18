@@ -693,7 +693,7 @@ public abstract class QMUIFragment extends Fragment {
     }
 
     /**
-     * When finishing to pop back last fragment, let activity have a chance to do something
+     * When finishing to pop back last fragment, let ic_activity have a chance to do something
      * like start a new fragment
      *
      * @return QMUIFragment to start a new fragment or Intent to start a new Activity
@@ -704,7 +704,7 @@ public abstract class QMUIFragment extends Fragment {
     }
 
     /**
-     * restore sub window(e.g dialog) when drag back to previous activity
+     * restore sub window(e.g dialog) when drag back to previous ic_activity
      * @return
      */
     protected boolean restoreSubWindowWhenDragBack(){

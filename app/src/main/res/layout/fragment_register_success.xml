@@ -470,16 +470,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="@dimen/space_top_bottom_button">
 
         <Button
             android:id="@+id/cancel_register_button"
             style="@style/AppQDRadiusButton"
             android:layout_width="match_parent"
-            android:layout_marginLeft="51dp"
-            android:layout_marginRight="51dp"
+            android:layout_marginLeft="@dimen/spece_left_right_button"
+            android:layout_marginRight="@dimen/spece_left_right_button"
             android:text="申请退号" />
     </FrameLayout>
 

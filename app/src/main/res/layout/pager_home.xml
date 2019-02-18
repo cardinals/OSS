@@ -309,7 +309,7 @@
                                 android:layout_height="36dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginBottom="4dp"
-                                android:src="@mipmap/code" />
+                                android:src="@mipmap/ic_code" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -453,7 +453,7 @@
                                 android:layout_height="36dp"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginBottom="4dp"
-                                android:src="@mipmap/article" />
+                                android:src="@mipmap/ic_article" />
 
                             <TextView
                                 android:layout_width="wrap_content"

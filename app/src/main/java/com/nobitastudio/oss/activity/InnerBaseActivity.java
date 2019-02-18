@@ -40,7 +40,7 @@ public class InnerBaseActivity extends AppCompatActivity {
     public void setRequestedOrientation(int requestedOrientation) {
         if (mConvertToTranslucentCauseOrientationChanged && (Build.VERSION.SDK_INT == Build.VERSION_CODES.O
                 || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1)) {
-            Log.i("InnerBaseActivity", "setRequestedOrientation when activity is translucent");
+            Log.i("InnerBaseActivity", "setRequestedOrientation when ic_activity is translucent");
             mPendingRequestedOrientation = requestedOrientation;
         } else {
             super.setRequestedOrientation(requestedOrientation);

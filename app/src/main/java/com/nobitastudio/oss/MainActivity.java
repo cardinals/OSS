@@ -22,7 +22,9 @@ import android.os.Bundle;
 
 import com.nobitastudio.oss.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.fragment.BaseFragment;
+import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
+import com.nobitastudio.oss.fragment.TestFragment;
 
 public class MainActivity extends BaseFragmentActivity {
 
@@ -50,7 +52,9 @@ public class MainActivity extends BaseFragmentActivity {
      * @return
      */
     protected BaseFragment getFirstFragment() {
-        return new LoginFragment();
+//        return new TestFragment();
+//        return new LoginFragment();
+        return new HomeFragment();
     }
 
 }

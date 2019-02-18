@@ -43,7 +43,7 @@ public class UpgradeTipTask implements UpgradeTask {
 
     @Override
     public void upgrade() {
-        throw new RuntimeException("please call upgrade(Activity activity)");
+        throw new RuntimeException("please call upgrade(Activity ic_activity)");
     }
 
     public void upgrade(Activity activity) {

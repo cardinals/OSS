@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:gravity="center"
-                        android:text="这是framgent2,\n点击调用startFragmentAndDestroyCurrent（new Fragment3()）后 \n 进入fragment3"
+                        android:text="这是framgent3,滑动返回fragment1 动画将出现异常"
                         android:layout_weight="1"/>
 
                     <Button
@@ -58,7 +58,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="51dp"
                         android:layout_marginRight="51dp"
-                        android:text="这是fragment2" />
+                        android:text="这是fragment3" />
 
                     <ImageView
                         android:layout_width="match_parent"

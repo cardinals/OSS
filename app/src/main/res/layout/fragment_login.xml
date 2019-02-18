@@ -183,8 +183,8 @@ android:focusableInTouchMode="true">
                             android:id="@+id/login_button"
                             style="@style/AppQDRadiusButton"
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="51dp"
-                            android:layout_marginRight="51dp"
+                            android:layout_marginLeft="@dimen/spece_left_right_button"
+                            android:layout_marginRight="@dimen/spece_left_right_button"
                             android:text="登          录" />
 
                     </LinearLayout>

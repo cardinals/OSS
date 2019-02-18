@@ -104,7 +104,7 @@ public class SwipeBackLayout extends QMUIWindowInsetLayout {
     private int mEdgeFlag;
 
     /**
-     * Threshold of scroll, we will close the activity, when scrollPercent over
+     * Threshold of scroll, we will close the ic_activity, when scrollPercent over
      * this value;
      */
     private float mScrollThreshold = DEFAULT_SCROLL_THRESHOLD;
@@ -308,7 +308,7 @@ public class SwipeBackLayout extends QMUIWindowInsetLayout {
     }
 
     /**
-     * Set scroll threshold, we will close the activity, when scrollPercent over
+     * Set scroll threshold, we will close the ic_activity, when scrollPercent over
      * this value
      *
      * @param threshold

@@ -252,7 +252,7 @@
         \n\u3000\u3000源码地址：https://github.com/nobita0522/oss-client
 </string>
 
-    <!--  home activity -->
+    <!--  home ic_activity -->
     <string name="home">首页</string>
     <string name="msg">消息</string>
     <string name="mine">我的</string>

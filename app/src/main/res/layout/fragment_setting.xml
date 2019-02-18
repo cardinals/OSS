@@ -48,14 +48,24 @@
                     <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
                         android:id="@+id/groupListView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_height="wrap_content" />
 
-                    <Button
-                        android:id="@+id/logout_button"
-                        style="@style/AppQDRadiusButton"
+                    <!-- 剩余空间 -->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:text="退出登录" />
+                        android:layout_height="match_parent"
+                        android:background="@color/qmui_config_color_white">
+
+                        <Button
+                            android:id="@+id/logout_button"
+                            style="@style/AppQDRadiusButton"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="@dimen/spece_left_right_button"
+                            android:layout_marginTop="@dimen/space_top_bottom_button"
+                            android:layout_marginBottom="@dimen/space_top_bottom_button"
+                            android:layout_marginRight="@dimen/spece_left_right_button"
+                            android:text="退出登录" />
+                    </LinearLayout>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

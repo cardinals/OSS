@@ -32,7 +32,7 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import java.lang.reflect.Field;
 
 /**
- * the container activity for {@link QMUIFragment}.
+ * the container ic_activity for {@link QMUIFragment}.
  * Created by cgspine on 15/9/14.
  */
 public abstract class QMUIFragmentActivity extends InnerBaseActivity {

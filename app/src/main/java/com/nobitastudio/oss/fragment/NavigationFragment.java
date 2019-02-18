@@ -1,7 +1,6 @@
 package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,7 +81,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     protected void initData() {
         mEmptyView.hide();
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
-                Arrays.asList(new ItemDescription("驾车", R.mipmap.car_big), new ItemDescription("步行", R.mipmap.foot)));
+                Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car_big), new ItemDescription("步行", R.mipmap.foot)));
         mItemAdapter.setOnItemClickListener((v, pos) -> ToastUtils.showShort(pos));
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
         mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -194,6 +193,11 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
                 holder.getImageView(R.id.item_icon).setImageResource(item.getIconRes());
             }
         }
+    }
+
+    @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
     }
 
     @Override

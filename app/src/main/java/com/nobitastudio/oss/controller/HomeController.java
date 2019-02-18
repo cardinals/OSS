@@ -19,6 +19,7 @@ import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.DepartmentFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.NavigationFragment;
+import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.util.CommonUtil;
 import com.nobitastudio.oss.util.DateUtil;
@@ -114,6 +115,7 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.register_linearLayout:
                 // 进入科室activity
                 mHandler.startFragment(new DepartmentFragment());
+//                mHandler.startFragment(new TestFragment());
                 break;
             case R.id.pay_linearLayout:
                 break;
@@ -350,10 +352,6 @@ public class HomeController extends QMUIWindowInsetLayout {
                     return HEALTH_ARTICLE;
             }
         }
-    }
-
-    public void setmHandler(ControllerClickHandler mHandler) {
-        this.mHandler = mHandler;
     }
 
     static class HealthArticleRecycleViewAdapter extends BaseRecyclerAdapter<HealthArticle> {

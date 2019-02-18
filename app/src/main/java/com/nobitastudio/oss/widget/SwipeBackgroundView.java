@@ -62,7 +62,7 @@ public class SwipeBackgroundView extends View {
             if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ||
                     requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
                 // TODO is it suitable for fixed screen orientation
-                // the prev activity has locked the screen orientation
+                // the prev ic_activity has locked the screen orientation
                 mDoRotate = true;
             } else if (swipeActivity instanceof InnerBaseActivity) {
                 swipeActivity.getWindow().getDecorView().setBackgroundColor(0);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -36,10 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingLeft="12dp"
-                android:paddingTop="18dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="18dp">
+                android:paddingLeft="@dimen/space_left_right_content"
+                android:paddingTop="@dimen/space_top_bottom_button"
+                android:paddingRight="@dimen/space_left_right_content"
+                android:paddingBottom="@dimen/space_top_bottom_button">
 
                 <!-- 挂号单详情 -->
                 <LinearLayout
@@ -370,6 +371,8 @@
                     android:id="@+id/confirm_register_msg"
                     style="@style/AppQDRadiusButton"
                     android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/spece_left_right_button_minus_12"
+                    android:layout_marginRight="@dimen/spece_left_right_button_minus_12"
                     android:text="确   定" />
             </LinearLayout>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

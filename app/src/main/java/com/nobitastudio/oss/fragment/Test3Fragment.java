@@ -9,11 +9,11 @@ import com.nobitastudio.oss.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TestFragment extends StandardWithTobBarLayoutFragment {
+public class Test3Fragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.login_button})
     void onClick(View v) {
-        startFragment(new Test2Fragment());
+        
     }
 
     @Override
@@ -23,7 +23,7 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initTopBar() {
-        mTopBar.setTitle("1");
+        mTopBar.setTitle("3");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
+        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test3, null);
         ButterKnife.bind(this,frameLayout);
         initTopBar();
         return frameLayout;

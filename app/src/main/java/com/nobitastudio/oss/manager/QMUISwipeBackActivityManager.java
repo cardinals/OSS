@@ -89,7 +89,7 @@ public class QMUISwipeBackActivityManager implements Application.ActivityLifecyc
     /**
      *
      * refer to https://github.com/bingoogolapple/BGASwipeBackLayout-Android/
-     * @param currentActivity the last activity
+     * @param currentActivity the last ic_activity
      * @return
      */
     @Nullable
@@ -102,7 +102,7 @@ public class QMUISwipeBackActivityManager implements Application.ActivityLifecyc
                 if (currentActivity.equals(activity)) {
                     int index = mActivityStack.indexOf(currentActivity);
                     if (index > 0) {
-                        // if memory leaks or the last activity is being finished
+                        // if memory leaks or the last ic_activity is being finished
                         activity = mActivityStack.get(index - 1);
                     } else if (mActivityStack.size() == 2) {
                         // if screen orientation changes, there may be an error sequence in the stack

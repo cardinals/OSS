@@ -73,6 +73,11 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
+    protected boolean canDragBack() {
+        return false;  // 不然其拖动返回，动画异常
+    }
+
+    @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_register_success, null);
         ButterKnife.bind(this, root);

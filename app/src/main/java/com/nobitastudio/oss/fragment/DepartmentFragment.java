@@ -170,6 +170,10 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
         return view -> showLoadingEmptyView(null);
     }
 
+    @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
+    }
 
     @Override
     protected View onCreateView() {

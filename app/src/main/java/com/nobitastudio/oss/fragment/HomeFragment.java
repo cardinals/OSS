@@ -88,7 +88,7 @@ public class HomeFragment extends BaseFragment {
         };
         mPages.put(Pager.HOME, new HomeController(getContext(), mHandler));
         mPages.put(Pager.INFO, new InfoController(getContext(), mHandler));
-        mPages.put(Pager.SETTING, new MineController(getContext(), mHandler));
+        mPages.put(Pager.MINE, new MineController(getContext(), mHandler));
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
     }
@@ -147,7 +147,7 @@ public class HomeFragment extends BaseFragment {
      * 初始化有哪些 pager
      */
     enum Pager {
-        HOME, INFO, SETTING;
+        HOME, INFO, MINE;
 
         public static Pager getPagerFromPosition(int position) {
             switch (position) {
@@ -156,11 +156,16 @@ public class HomeFragment extends BaseFragment {
                 case 1:
                     return INFO;
                 case 2:
-                    return SETTING;
+                    return MINE;
                 default:
                     return HOME;
             }
         }
+    }
+
+    @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
     }
 
     @Override

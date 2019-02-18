@@ -205,7 +205,7 @@ public class QMUIActivity extends InnerBaseActivity {
     }
 
     /**
-     * restore sub window(e.g dialog) when drag back to previous activity
+     * restore sub window(e.g dialog) when drag back to previous ic_activity
      * @return
      */
     protected boolean restoreSubWindowWhenDragBack(){

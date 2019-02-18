@@ -415,9 +415,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="@dimen/space_top_bottom_button">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -428,10 +426,11 @@
                 android:id="@+id/cancel_register_button"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/spece_left_right_button"
                 android:layout_weight="1"
+                android:alpha="255"
                 android:gravity="center"
                 android:text="取消预约"
-                android:alpha="255"
                 app:qmui_backgroundColor="@color/app_color_blue_full"
                 app:qmui_radiusBottomLeft="20dp"
                 app:qmui_radiusTopLeft="20dp" />
@@ -440,6 +439,7 @@
                 android:id="@+id/pay_now_roundbutton"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_marginRight="@dimen/spece_left_right_button"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="立即支付"

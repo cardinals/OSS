@@ -94,13 +94,17 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
                 .addTo(aboutListQMUIGroupListView);
     }
 
-    /**
+    /**ww
      * 初始化版权信息
      */
     private void initCopyRight() {
         mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
     }
 
+    @Override
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
+    }
 
     @Override
     protected View onCreateView() {

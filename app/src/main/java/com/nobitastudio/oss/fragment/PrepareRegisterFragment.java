@@ -80,7 +80,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                         ToastUtils.showShort("用户已经取消");
                         dialog.dismiss();
                     }, "立即绑定/创建", (dialog, index) -> {
-                        ToastUtils.showShort("goto medicalcard activity");
+                        ToastUtils.showShort("goto medicalcard ic_activity");
                         dialog.dismiss();
                     });
         }
@@ -145,10 +145,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initData() {
-        mEmptyView.show(true);
-        mEmptyView.postDelayed(() -> {
-            mEmptyView.hide();
-        }, 1500);
+
     }
 
     @Override

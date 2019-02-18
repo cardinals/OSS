@@ -1,13 +1,10 @@
 package com.nobitastudio.oss.fragment;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -58,7 +55,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                         "再想想", (dialog, index) -> dialog.dismiss());
                 break;
             case R.id.pay_now_roundbutton:
-                showSimpleBottomSheetGrid(getContext(), Arrays.asList(R.mipmap.ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
+                showSimpleBottomSheetGrid(getContext(), Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
                         Arrays.asList("支付宝", "微信", "云闪付", "QQ钱包"),
                         Arrays.asList(1, 2, 3, 4),
                         (dialog, itemView) -> {
@@ -94,7 +91,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     @Override
     protected void initData() {
-        mEmptyView.hide();
+
     }
 
     @Override

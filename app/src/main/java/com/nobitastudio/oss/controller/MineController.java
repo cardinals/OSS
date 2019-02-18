@@ -5,10 +5,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.AboutFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -20,7 +18,6 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -131,24 +128,8 @@ public class MineController extends QMUIWindowInsetLayout {
         );
 
         QMUICommonListItemView parkPayItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.car),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_car),
                 "停车缴费",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        );
-
-        QMUICommonListItemView helpCenterItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.info),
-                "关于我们",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        );
-
-        QMUICommonListItemView shareItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.share),
-                "分享",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -160,13 +141,6 @@ public class MineController extends QMUIWindowInsetLayout {
                 .addItemView(myCollectionItem, null)
                 .addItemView(myMedicalCardsItem, view -> mHandler.startFragment(new MedicalCardFragment()))
                 .addItemView(parkPayItem, null)
-                .addItemView(helpCenterItem, view -> mHandler.startFragment(new AboutFragment()))
-                .addItemView(shareItem, v -> showSimpleBottomSheetGrid(
-                        getContext(),
-                        Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),
-                        Arrays.asList("微信", "朋友圈", "微博", "QQ", "QQ空间", "短信"),
-                        Arrays.asList(1, 2, 3, 4, 5, 6),
-                        null))
                 .addTo(mGroupListView);
     }
 
