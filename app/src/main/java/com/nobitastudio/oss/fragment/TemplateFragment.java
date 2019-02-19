@@ -17,11 +17,8 @@ public class TemplateFragment extends StandardWithTobBarLayoutFragment {
     ImageView solidImage;
 
     @Override
-    protected void init() {
-        initSolidImage(solidImage);
-        initTopBar();
-        initRefreshLayout();
-        initData();
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return v -> ToastUtils.showShort("点击了emptyView" + v);
     }
 
     @Override
@@ -31,26 +28,12 @@ public class TemplateFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
+    protected int getLayoutId() {
+        return R.layout.fragment_standard;
     }
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return v -> ToastUtils.showShort("点击了emptyView" + v);
-    }
-
-
-    @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_standard, null);
-        ButterKnife.bind(this,frameLayout);
-        init();
-        return frameLayout;
+    protected void initLastCustom() {
+        initSolidImage(solidImage);
     }
 }

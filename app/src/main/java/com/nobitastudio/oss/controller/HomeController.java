@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.DepartmentFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
@@ -45,6 +46,44 @@ import butterknife.OnClick;
  * @description
  */
 public class HomeController extends QMUIWindowInsetLayout {
+
+    /**
+     * 初始化有哪些 pager
+     */
+    enum Pager {
+        HEALTH_ARTICLE, DOCTOR_LECTURE;
+
+        public static Pager getPagerFromPosition(int position) {
+            switch (position) {
+                case 0:
+                    return HEALTH_ARTICLE;
+                case 1:
+                    return DOCTOR_LECTURE;
+                default:
+                    return HEALTH_ARTICLE;
+            }
+        }
+    }
+
+    static class HealthArticleRecycleViewAdapter extends BaseRecyclerAdapter<HealthArticle> {
+
+        public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recycleview_item_health_article;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
+            Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
+            holder.setText(R.id.title_textView, item.getTitle());
+            holder.setText(R.id.type_textView, item.getType().name());
+            holder.setText(R.id.publish_time_textView, CommonUtil.handleHealthNewsPublishTime(DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime())));
+        }
+    }
 
     static final String NO_SUPPORT_VIEW_ID = "不支持的点击事件";
 
@@ -98,9 +137,11 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-
-    QMUITipDialog mQmuiTipDialog;
     public HashMap<Pager, View> mPages;
+    HealthArticleRecycleViewAdapter recycleViewAdapter;
+    ControllerClickHandler mHandler;
+    List<HealthArticle> healthArticles;
+    TipDialogHelper mTipDialogHelper;
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
 
         private int mChildCount = 0;
@@ -143,20 +184,22 @@ public class HomeController extends QMUIWindowInsetLayout {
             super.notifyDataSetChanged();
         }
     };
-    HealthArticleRecycleViewAdapter recycleViewAdapter;
-    ControllerClickHandler mHandler;
-    List<HealthArticle> healthArticles;
 
     /**
      * 初始化方法
      */
     private void init() {
+        initBasic();
         initTopBar();
         initPullFreshLayout();
         initUltraViewPager();
         initTabs();
         initData();
         initPagers();
+    }
+
+    private void initBasic() {
+        mTipDialogHelper = new TipDialogHelper(getContext());
     }
 
     private void initData() {
@@ -290,87 +333,23 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     protected void showNetworkLoadingTipDialog(String detailMsg) {
-        closeTipDialog();
-        mQmuiTipDialog = new QMUITipDialog.Builder(getContext())
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                .setTipWord(detailMsg == null ? "正在加载" : detailMsg)
-                .create();
-        mQmuiTipDialog.show();
-        //ViewUtil.lockView(forgetPasswordTextView, enrollTextView, loginButton);
+        mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg);
     }
 
     protected void closeTipDialog() {
-        if (mQmuiTipDialog != null && mQmuiTipDialog.isShowing()) {
-            mQmuiTipDialog.hide();
-        }
+        mTipDialogHelper.closeTipDialog();
     }
 
     protected void showErrorTipDialog(String errorMsg, Long delayMills) {
-        closeTipDialog();
-        mQmuiTipDialog = new QMUITipDialog.Builder(getContext())
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
-                .setTipWord(errorMsg == null ? "发送失败" : errorMsg)
-                .create();
-        mQmuiTipDialog.show();
-        mTopBar.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, mTopBar);
     }
 
     protected void showInfoTipDialog(String infoMsg, Long delayMills) {
-        closeTipDialog();
-        mQmuiTipDialog = new QMUITipDialog.Builder(getContext())
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_INFO)
-                .setTipWord(infoMsg == null ? "请勿重复操作" : infoMsg)
-                .create();
-        mQmuiTipDialog.show();
-        mTopBar.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, mTopBar);
     }
 
     protected void showSuccessTipDialog(String successMsg, Long delayMills) {
-        closeTipDialog();
-        mQmuiTipDialog = new QMUITipDialog.Builder(getContext())
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
-                .setTipWord(successMsg == null ? "发送成功" : successMsg)
-                .create();
-        mQmuiTipDialog.show();
-        mTopBar.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
-    }
-
-    /**
-     * 初始化有哪些 pager
-     */
-    enum Pager {
-        HEALTH_ARTICLE, DOCTOR_LECTURE;
-
-        public static Pager getPagerFromPosition(int position) {
-            switch (position) {
-                case 0:
-                    return HEALTH_ARTICLE;
-                case 1:
-                    return DOCTOR_LECTURE;
-                default:
-                    return HEALTH_ARTICLE;
-            }
-        }
-    }
-
-    static class HealthArticleRecycleViewAdapter extends BaseRecyclerAdapter<HealthArticle> {
-
-        public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_health_article;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
-            Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
-            holder.setText(R.id.title_textView, item.getTitle());
-            holder.setText(R.id.type_textView, item.getType().name());
-            holder.setText(R.id.publish_time_textView,CommonUtil.handleHealthNewsPublishTime(DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime())));
-        }
+        mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, mTopBar);
     }
 
     public HomeController(Context context, ControllerClickHandler mHandler) {

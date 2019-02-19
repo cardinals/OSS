@@ -85,10 +85,10 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
                 startFragmentAndDestroyCurrent(new HomeFragment());
             } else {
                 // 登录失败
-                mQmuiTipDialog.hide();
+                closeTipDialog();
                 showErrorTipDialog(MOBILE_OR_PASSWORD_ERROR);
                 mEmptyView.postDelayed(() -> {
-                    mQmuiTipDialog.hide();
+                    closeTipDialog();
                 }, 1500);
             }
         }
@@ -111,10 +111,8 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void init() {
-        initTopBar();
-        initRefreshLayout();
-        initData();
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
     }
 
     /**
@@ -128,30 +126,18 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_login, null);
-        ButterKnife.bind(this,frameLayout);
-        init();
-        return frameLayout;
+    protected int getLayoutId() {
+        return R.layout.fragment_login;
     }
+
+    @Override
+    protected void initLastCustom() {
+        initCopyRight();
+    }
+
 }

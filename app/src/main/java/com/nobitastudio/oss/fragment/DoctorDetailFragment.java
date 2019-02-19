@@ -36,6 +36,61 @@ import butterknife.OnClick;
 
 public class DoctorDetailFragment extends StandardWithTobBarFragment {
 
+    /**
+     * 初始化有哪些 pager
+     */
+    enum Pager {
+        AVAILABLE_VISIT, ALL_VISIT;
+
+        public static Pager getPagerFromPosition(int position) {
+            switch (position) {
+                case 0:
+                    return AVAILABLE_VISIT;
+                case 1:
+                    return ALL_VISIT;
+                default:
+                    return AVAILABLE_VISIT;
+            }
+        }
+    }
+
+    public class VisitRecycleViewAdapter extends BaseRecyclerAdapter<Visit> {
+        public VisitRecycleViewAdapter(Context ctx, List<Visit> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recycleview_item_visit;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, Visit item) {
+            TextView mDateTextView = holder.getTextView(R.id.date_textview);
+            TextView mWeekTextView = holder.getTextView(R.id.week_textview);
+            TextView mTimeSlotTextView = holder.getTextView(R.id.time_slot_textview);
+            TextView mHospitalNameTextView = holder.getTextView(R.id.hospital_name_textview);
+            TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textview);
+            TextView mAreaTextView = holder.getTextView(R.id.area_textview);
+            QMUIRoundButton mGreenRoundButton = (QMUIRoundButton) holder.getView(R.id.green_roundbutton);
+            QMUIRoundButton mRedRoundButton = (QMUIRoundButton) holder.getView(R.id.red_roundbutton);
+
+            mDateTextView.setText(DateUtil.formatLocalDateTimeToSimpleString2(item.getDiagnosisTime()));
+            mWeekTextView.setText(item.getDiagnosisTime().getDayOfWeek().name());
+            mTimeSlotTextView.setText("上午");
+            mHospitalNameTextView.setText("石河子大学医学院");
+            mSubMajorTextView.setText("这是医生的亚专业");
+            mAreaTextView.setText("A区");
+            if (position > 3) {
+                mGreenRoundButton.setVisibility(View.GONE);
+                mRedRoundButton.setVisibility(View.VISIBLE);
+            } else {
+                mGreenRoundButton.setVisibility(View.VISIBLE);
+                mRedRoundButton.setVisibility(View.GONE);
+            }
+        }
+    }
+
     @BindView(R.id.collapsing_topbar_layout)
     QMUICollapsingTopBarLayout mCollapsingTopBarLayout;
     @BindView(R.id.fab)
@@ -102,16 +157,6 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
                 mFab.setImageResource(R.drawable.ic_heart_red);
                 break;
         }
-    }
-
-    @Override
-    protected void init() {
-        initSolidImage(mIntroductionSolidImageView, mSpecialitySolidImageView);
-        initTopBar();
-        initRefreshLayout();
-        initData();
-        initTabs();
-        initPagers();
     }
 
     private void initPagers() {
@@ -203,87 +248,26 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
     }
 
     @Override
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
+    }
+
+    @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
         mCollapsingTopBarLayout.setTitle("医生姓名2222");
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
+    protected int getLayoutId() {
+        return R.layout.fragment_doctor_detail;
     }
 
     @Override
-    protected void initData() {
-
+    protected void initLastCustom() {
+        initSolidImage(mIntroductionSolidImageView, mSpecialitySolidImageView);
+        initTabs();
+        initPagers();
     }
 
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    /**
-     * 初始化有哪些 pager
-     */
-    enum Pager {
-        AVAILABLE_VISIT, ALL_VISIT;
-
-        public static Pager getPagerFromPosition(int position) {
-            switch (position) {
-                case 0:
-                    return AVAILABLE_VISIT;
-                case 1:
-                    return ALL_VISIT;
-                default:
-                    return AVAILABLE_VISIT;
-            }
-        }
-    }
-
-    public class VisitRecycleViewAdapter extends BaseRecyclerAdapter<Visit> {
-        public VisitRecycleViewAdapter(Context ctx, List<Visit> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_visit;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Visit item) {
-            TextView mDateTextView = holder.getTextView(R.id.date_textview);
-            TextView mWeekTextView = holder.getTextView(R.id.week_textview);
-            TextView mTimeSlotTextView = holder.getTextView(R.id.time_slot_textview);
-            TextView mHospitalNameTextView = holder.getTextView(R.id.hospital_name_textview);
-            TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textview);
-            TextView mAreaTextView = holder.getTextView(R.id.area_textview);
-            QMUIRoundButton mGreenRoundButton = (QMUIRoundButton) holder.getView(R.id.green_roundbutton);
-            QMUIRoundButton mRedRoundButton = (QMUIRoundButton) holder.getView(R.id.red_roundbutton);
-
-            mDateTextView.setText(DateUtil.formatLocalDateTimeToSimpleString2(item.getDiagnosisTime()));
-            mWeekTextView.setText(item.getDiagnosisTime().getDayOfWeek().name());
-            mTimeSlotTextView.setText("上午");
-            mHospitalNameTextView.setText("石河子大学医学院");
-            mSubMajorTextView.setText("这是医生的亚专业");
-            mAreaTextView.setText("A区");
-            if (position > 3) {
-                mGreenRoundButton.setVisibility(View.GONE);
-                mRedRoundButton.setVisibility(View.VISIBLE);
-            } else {
-                mGreenRoundButton.setVisibility(View.VISIBLE);
-                mRedRoundButton.setVisibility(View.GONE);
-            }
-        }
-    }
-
-
-    @Override
-    protected View onCreateView() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_doctor_detail, null);
-        ButterKnife.bind(this,view);
-        init();
-        return view;
-    }
 }

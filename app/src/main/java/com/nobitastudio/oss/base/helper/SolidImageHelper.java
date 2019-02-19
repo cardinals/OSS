@@ -17,12 +17,18 @@ import com.qmuiteam.qmui.util.QMUIDrawableHelper;
  */
 public class SolidImageHelper {
 
-    protected void initSolidImage(Context context, ImageView... imageViews) {
-        int commonWidth = context.getResources().getDimensionPixelSize(R.dimen.solid_image_common_width);
-        int commonHeight = context.getResources().getDimensionPixelSize(R.dimen.solid_image_common_height);
-        int commonShapeRadius = QMUIDisplayHelper.dp2px(context, 2);
-        BitmapDrawable solidImageBitmapDrawable = QMUIDrawableHelper.createDrawableWithSize(context.getResources(), commonWidth, commonHeight,
-                commonShapeRadius, ContextCompat.getColor(context, R.color.app_color_blue));
+    Context mContext;
+
+    public SolidImageHelper(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public void initSolidImage(ImageView... imageViews) {
+        int commonWidth = mContext.getResources().getDimensionPixelSize(R.dimen.solid_image_common_width);
+        int commonHeight = mContext.getResources().getDimensionPixelSize(R.dimen.solid_image_common_height);
+        int commonShapeRadius = QMUIDisplayHelper.dp2px(mContext, 2);
+        BitmapDrawable solidImageBitmapDrawable = QMUIDrawableHelper.createDrawableWithSize(mContext.getResources(), commonWidth, commonHeight,
+                commonShapeRadius, ContextCompat.getColor(mContext, R.color.app_color_blue));
         for (ImageView imageView : imageViews) {
             imageView.setImageDrawable(solidImageBitmapDrawable);
         }

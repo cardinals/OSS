@@ -69,13 +69,13 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
             showListPopView(getContext(), mChooseMedicalCardTextView, items, 120, 160,
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
-                        mListPopup.dismiss();
+                        popViewDismiss();
                     }, () -> {
                         ToastUtils.showShort("dismiss");
                     });
         } else {
             // 未绑定诊疗卡
-            showMessagePositiveDialog(getContext(), "提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
+            showMessagePositiveDialog("提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
                     "取消", (dialog, index) -> {
                         ToastUtils.showShort("用户已经取消");
                         dialog.dismiss();
@@ -123,13 +123,9 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
         return Boolean.TRUE;
     }
 
-
     @Override
-    protected void init() {
-        initSolidImage(mRegisterBasicMsgSolidImageView);
-        initTopBar();
-        initRefreshLayout();
-        initData();
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
     }
 
     @Override
@@ -139,25 +135,13 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
+    protected int getLayoutId() {
+        return R.layout.fragment_prepare_register;
     }
 
     @Override
-    protected void initData() {
+    protected void initLastCustom() {
 
     }
 
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_prepare_register, null);
-        ButterKnife.bind(this, root);
-        init();
-        return root;
-    }
 }

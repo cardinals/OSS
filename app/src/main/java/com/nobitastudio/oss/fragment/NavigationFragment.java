@@ -16,10 +16,11 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
-import com.nobitastudio.oss.decorator.GridDividerItemDecoration;
+import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.vo.ItemDescription;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
@@ -31,6 +32,26 @@ import butterknife.ButterKnife;
 
 public class NavigationFragment extends StandardWithTobBarLayoutFragment {
 
+    static class ItemRecyclerViewAdapter extends BaseRecyclerAdapter<ItemDescription> {
+
+        public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
+            super(ctx, data);
+        }
+
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recycleview_item_info;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, ItemDescription item) {
+            holder.getTextView(R.id.item_name).setText(item.getName());
+            if (item.getIconRes() != 0) {
+                holder.getImageView(R.id.item_icon).setImageResource(item.getIconRes());
+            }
+        }
+    }
+
     @BindView(R.id.hospital_out_navigation_solid_imageview)
     ImageView mHospitalOutNavigationSolidImageView;
     @BindView(R.id.hospital_inner_navigation_solid_imageview)
@@ -41,20 +62,6 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     RecyclerView mHospitalInnerNavigationRecyclerView;
     @BindView(R.id.scrollview)
     NestedScrollView scrollView;
-
-    @Override
-    protected void init() {
-        initSolidImage(mHospitalOutNavigationSolidImageView, mHospitalInnerNavigationSolidImageView);
-        initTopBar();
-        initRefreshLayout();
-        initData();
-    }
-
-    @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("导航导诊");
-    }
 
     @Override
     protected void initRefreshLayout() {
@@ -77,7 +84,6 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         });
     }
 
-    @Override
     protected void initData() {
         mEmptyView.hide();
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
@@ -118,11 +124,9 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         };
         adapter.setOnItemClickListener((itemView, pos) -> {
             Department department = departments.get(pos);
-            new QMUIDialog.MessageDialogBuilder(getContext())
-                    .setTitle(department.getName())
-                    .setMessage(generateDepartmentInfo(department))
-                    .addAction("关闭", (dialog, index) -> dialog.dismiss())
-                    .create(mCurrentDialogStyle).show();
+            showLongMessageDialog(department.getName(), generateDepartmentInfo(department),
+                    "关闭", (dialog, index) -> dialog.dismiss(),
+                    null, null);
         });
         mHospitalInnerNavigationRecyclerView.setAdapter(adapter);
     }
@@ -171,40 +175,29 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    static class ItemRecyclerViewAdapter extends BaseRecyclerAdapter<ItemDescription> {
-
-        public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
-            super(ctx, data);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_info;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, ItemDescription item) {
-            holder.getTextView(R.id.item_name).setText(item.getName());
-            if (item.getIconRes() != 0) {
-                holder.getImageView(R.id.item_icon).setImageResource(item.getIconRes());
-            }
-        }
-    }
-
-    @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_navigation, null);
-        ButterKnife.bind(this,frameLayout);
-        init();
-        return frameLayout;
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
+    }
+
+    @Override
+    protected void initTopBar() {
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+        mTopBar.setTitle("导航导诊");
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_navigation;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initSolidImage(mHospitalOutNavigationSolidImageView, mHospitalInnerNavigationSolidImageView);
+        initData();
     }
 }

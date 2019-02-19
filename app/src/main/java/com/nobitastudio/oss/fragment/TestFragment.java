@@ -13,28 +13,9 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.login_button})
     void onClick(View v) {
-        startFragment(new Test2Fragment());
-    }
-
-    @Override
-    protected void init() {
 
     }
 
-    @Override
-    protected void initTopBar() {
-        mTopBar.setTitle("1");
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
 
     @Override
     protected View.OnClickListener getEmptyViewRetryButtonListener() {
@@ -42,10 +23,17 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
-        ButterKnife.bind(this,frameLayout);
-        initTopBar();
-        return frameLayout;
+    protected void initTopBar() {
+        mTopBar.setTitle("test");
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_test;
+    }
+
+    @Override
+    protected void initLastCustom() {
+
     }
 }

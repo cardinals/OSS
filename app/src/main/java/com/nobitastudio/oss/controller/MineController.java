@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
@@ -41,6 +42,7 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUIGroupListView mGroupListView;
 
     ControllerClickHandler mHandler;
+    BottomSheetHelper mBottomSheetHelper;
 
     private void initTopBar() {
         mTopBar.setBackgroundDividerEnabled(false);
@@ -53,8 +55,9 @@ public class MineController extends QMUIWindowInsetLayout {
         initTopBar();
         initRefreshLayout();
         initGroupListView();
-        initData();
+        initLastCustom();
     }
+
 
     private void initGroupListView() {
 
@@ -148,22 +151,8 @@ public class MineController extends QMUIWindowInsetLayout {
         mPullRefreshLayout.setEnabled(false);
     }
 
-    protected void initData() {
+    protected void initLastCustom() {
         mEmptyView.hide();
-    }
-
-    protected void showSimpleBottomSheetGrid(Context context, List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
-        QMUIBottomSheet.BottomGridSheetBuilder builder = new QMUIBottomSheet.BottomGridSheetBuilder(context);
-        for (int i = 0; i < mipmaps.size(); i++) {
-            if (i < 4) {  // 控制每行的数量为4个
-                // 第一行
-                builder.addItem(mipmaps.get(i), titles.get(i), tags.get(i), QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE);
-            } else {
-                // 第二行
-                builder.addItem(mipmaps.get(i), titles.get(i), tags.get(i), QMUIBottomSheet.BottomGridSheetBuilder.SECOND_LINE);
-            }
-        }
-        builder.setOnSheetItemClickListener(itemClickListener).build().show();
     }
 
     public MineController(Context context, ControllerClickHandler mHandler) {

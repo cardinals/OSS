@@ -31,13 +31,6 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
-    @Override
-    protected void init() {
-        initTopBar();
-        initListView();
-        initRefreshLayout();
-    }
-
     private void initListView() {
         departments = new ArrayList<>();
         departments.add(new Department());
@@ -128,14 +121,6 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("科室列表");
-        mTopBar.addRightImageButton(R.mipmap.icon_topbar_setting, R.id.topbar_right_setting_button)
-                .setOnClickListener(view -> showInfoTipDialog("长按指定科室可查看详情", 2500l));
-    }
-
-    @Override
     protected void initRefreshLayout() {
         mPullRefreshLayout.setEnabled(true);
         mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
@@ -161,8 +146,8 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initData() {
-
+    public TransitionConfig onFetchTransitionConfig() {
+        return SCALE_TRANSITION_CONFIG;
     }
 
     @Override
@@ -171,15 +156,21 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    public TransitionConfig onFetchTransitionConfig() {
-        return SCALE_TRANSITION_CONFIG;
+    protected void initTopBar() {
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+        mTopBar.setTitle("科室列表");
+        mTopBar.addRightImageButton(R.mipmap.icon_topbar_setting, R.id.topbar_right_setting_button)
+                .setOnClickListener(view -> showInfoTipDialog("长按指定科室可查看详情", 2500l));
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_department, null);
-        ButterKnife.bind(this, frameLayout);
-        init();
-        return frameLayout;
+    protected int getLayoutId() {
+        return R.layout.fragment_department;
     }
+
+    @Override
+    protected void initLastCustom() {
+        initListView();
+    }
+
 }

@@ -24,6 +24,26 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment {
 
+    /**
+     * 初始化有哪些 pager
+     */
+    enum Pager {
+        HOME, INFO, MINE;
+
+        public static Pager getPagerFromPosition(int position) {
+            switch (position) {
+                case 0:
+                    return HOME;
+                case 1:
+                    return INFO;
+                case 2:
+                    return MINE;
+                default:
+                    return HOME;
+            }
+        }
+    }
+
     @BindView(R.id.pager)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
@@ -137,31 +157,6 @@ public class HomeFragment extends BaseFragment {
         mTabSegment.addTab(home)
                 .addTab(info)
                 .addTab(mine);
-    }
-
-    @Override
-    protected boolean canDragBack() {
-        return false;
-    }
-
-    /**
-     * 初始化有哪些 pager
-     */
-    enum Pager {
-        HOME, INFO, MINE;
-
-        public static Pager getPagerFromPosition(int position) {
-            switch (position) {
-                case 0:
-                    return HOME;
-                case 1:
-                    return INFO;
-                case 2:
-                    return MINE;
-                default:
-                    return HOME;
-            }
-        }
     }
 
     @Override

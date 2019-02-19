@@ -10,7 +10,7 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.decorator.GridDividerItemDecoration;
+import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
 import com.nobitastudio.oss.model.vo.ItemDescription;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;

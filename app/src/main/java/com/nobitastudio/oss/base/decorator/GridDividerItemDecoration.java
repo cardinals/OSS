@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss.decorator;
+package com.nobitastudio.oss.base.decorator;
 
 import android.content.Context;
 import android.content.res.TypedArray;

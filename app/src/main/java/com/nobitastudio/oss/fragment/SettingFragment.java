@@ -1,21 +1,22 @@
 package com.nobitastudio.oss.fragment;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUILoadingView;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,28 +34,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         // 清除所有fragment
         startFragment(new LoginFragment());
     }
-
-    @Override
-    protected void init() {
-        initGroupListItemListener();
-        initTopBar();
-        initRefreshLayout();
-        initData();
-    }
-
-    @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("设置");
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    protected void initData() {
+    protected void initGroupListView() {
 
         // ============================ 短信通知
         QMUICommonListItemView diagnosisRemindItem = mGroupListView.createItemView(
@@ -158,11 +138,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return v -> ToastUtils.showShort("点击了emptyView" + v);
-    }
-
-    @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
     }
@@ -175,10 +150,24 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_setting, null);
-        ButterKnife.bind(this, frameLayout);
-        init();
-        return frameLayout;
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return v -> ToastUtils.showShort("点击了emptyView" + v);
+    }
+
+    @Override
+    protected void initTopBar() {
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
+        mTopBar.setTitle("设置");
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_setting;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initGroupListItemListener();
+        initGroupListView();
     }
 }

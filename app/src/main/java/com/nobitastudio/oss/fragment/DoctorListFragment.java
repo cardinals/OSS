@@ -26,54 +26,6 @@ import butterknife.ButterKnife;
 
 public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
-
-    private float mShadowAlpha = 1.0f;
-    private int mShadowElevationDp = 10;
-    private int mRadius = 15;
-
-    @Override
-    protected void init() {
-        initTopBar();
-        initRecycleView();
-    }
-
-    private void initRecycleView() {
-        List<Doctor> doctors = new ArrayList<>();
-        doctors.add(new Doctor());
-        doctors.add(new Doctor());
-        doctors.add(new Doctor());
-        doctors.add(new Doctor());
-        doctors.add(new Doctor());
-        DoctorRecycleViewAdapter adapter = new DoctorRecycleViewAdapter(getContext(), doctors);
-        adapter.setOnItemClickListener((view, pos) -> startFragment(new DoctorDetailFragment()));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("医生列表");
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
     public class DoctorRecycleViewAdapter extends BaseRecyclerAdapter<Doctor> {
 
         public DoctorRecycleViewAdapter(Context ctx, List<Doctor> list) {
@@ -107,12 +59,53 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    private float mShadowAlpha = 1.0f;
+    private int mShadowElevationDp = 10;
+    private int mRadius = 15;
+
+    private void initRecycleView() {
+        List<Doctor> doctors = new ArrayList<>();
+        doctors.add(new Doctor());
+        doctors.add(new Doctor());
+        doctors.add(new Doctor());
+        doctors.add(new Doctor());
+        doctors.add(new Doctor());
+        DoctorRecycleViewAdapter adapter = new DoctorRecycleViewAdapter(getContext(), doctors);
+        adapter.setOnItemClickListener((view, pos) -> startFragment(new DoctorDetailFragment()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_doctor_list, null);
-        ButterKnife.bind(this, frameLayout);
-        init();
-        return frameLayout;
+    protected void initRefreshLayout() {
+        mPullRefreshLayout.setEnabled(true);
     }
+
+    @Override
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
+    }
+
+    @Override
+    protected void initTopBar() {
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+        mTopBar.setTitle("医生列表");
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_doctor_list;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initRecycleView();
+    }
+
 }

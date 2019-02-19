@@ -28,8 +28,7 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.cancel_register_button:
-                showMessageNegativeDialog(getContext(), "提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡，" +
-                                "挂号费将按照原支付方式进行退回。"
+                showMessageNegativeDialog("提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡，挂号费将按照原支付方式进行退回。"
                         , "取消挂号单", (dialog, index) -> {
                             ToastUtils.showShort("您已成功取消本次预约挂号");
                             dialog.dismiss();
@@ -43,11 +42,8 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void init() {
-        initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView, mWarmPromptSolidImageView);
-        initTopBar();
-        initRefreshLayout();
-        initData();
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
     }
 
     @Override
@@ -57,26 +53,13 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
+    protected int getLayoutId() {
+        return R.layout.fragment_register_success;
     }
 
     @Override
-    protected void initData() {
-
-
+    protected void initLastCustom() {
+        initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView, mWarmPromptSolidImageView);
     }
 
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_register_success, null);
-        ButterKnife.bind(this, root);
-        init();
-        return root;
-    }
 }

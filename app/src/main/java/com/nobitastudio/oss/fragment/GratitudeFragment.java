@@ -22,11 +22,16 @@ public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.copyright_textView)
     TextView mCopyrightTextView;
 
+    /**
+     * 初始化版权信息
+     */
+    private void initCopyRight() {
+        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
+    }
+
     @Override
-    protected void init() {
-        initTopBar();
-        initRefreshLayout();
-        initCopyRight();
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
     }
 
     /**
@@ -39,34 +44,18 @@ public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_gratitude;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initCopyRight();
+    }
+
+    @Override
     protected void initRefreshLayout() {
         mPullRefreshLayout.setEnabled(false);
     }
 
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    /**
-     * 初始化版权信息
-     */
-    private void initCopyRight() {
-        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
-    }
-
-
-
-    @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_gratitude, null);
-        ButterKnife.bind(this,frameLayout);
-        init();
-        return frameLayout;
-    }
 }

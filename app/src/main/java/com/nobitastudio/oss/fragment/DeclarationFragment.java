@@ -17,27 +17,9 @@ public class DeclarationFragment extends StandardWithTobBarLayoutFragment {
     ImageView solidImage;
 
     @Override
-    protected void init() {
-        initSolidImage(solidImage);
-        initTopBar();
-        initRefreshLayout();
-        initData();
-    }
-
-    @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
         mTopBar.setTitle("title");
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     @Override
@@ -45,12 +27,13 @@ public class DeclarationFragment extends StandardWithTobBarLayoutFragment {
         return v -> ToastUtils.showShort("点击了emptyView" + v);
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_standard;
+    }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_standard, null);
-        ButterKnife.bind(this,frameLayout);
-        init();
-        return frameLayout;
+    protected void initLastCustom() {
+        initSolidImage(solidImage);
     }
 }

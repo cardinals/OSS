@@ -14,14 +14,22 @@ import java.util.List;
  */
 public class BottomSheetHelper {
 
-    protected void showSimpleBottomSheetList(Context context, List<String> items, QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
-        QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(context);
+    Context mContext;
+
+    public BottomSheetHelper(Context mContext) {
+        this.mContext = mContext;
+    }
+
+    public void showSimpleBottomSheetList(List<String> items,
+                                             QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
+        QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(mContext);
         items.forEach(builder::addItem);
         builder.setOnSheetItemClickListener(itemClickListener).build().show();
     }
 
-    protected void showSimpleBottomSheetGrid(Context context, List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
-        QMUIBottomSheet.BottomGridSheetBuilder builder = new QMUIBottomSheet.BottomGridSheetBuilder(context);
+    public void showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags,
+                                             QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
+        QMUIBottomSheet.BottomGridSheetBuilder builder = new QMUIBottomSheet.BottomGridSheetBuilder(mContext);
         for (int i = 0; i < mipmaps.size(); i++) {
             if (i < 4) {  // 控制每行的数量为4个
                 // 第一行

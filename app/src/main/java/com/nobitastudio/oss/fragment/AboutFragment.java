@@ -31,37 +31,6 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.copyright_textView)
     TextView mCopyrightTextView;
 
-    @Override
-    protected void init() {
-        initTopBar();
-        initRefreshLayout();
-        initVersion();
-        initGroupList();
-        initCopyRight();
-        initData();
-    }
-
-    @Override
-    protected void initTopBar() {
-        mTopBar.setTitle("关于");
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
     /**
      * 初始化版本号信息
      */
@@ -107,11 +76,29 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_about, null);
-        ButterKnife.bind(this, frameLayout);
-        init();
-        return frameLayout;
+    protected void initTopBar() {
+        mTopBar.setTitle("关于");
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
     }
+
+    @Override
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return null;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_about;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initVersion();
+        initGroupList();
+        initCopyRight();
+    }
+
+
+
 
 }
