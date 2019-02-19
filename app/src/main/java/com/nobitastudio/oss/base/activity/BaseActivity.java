@@ -14,8 +14,28 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss.manager;
+package com.nobitastudio.oss.base.activity;
 
-public interface UpgradeTask {
-    void upgrade();
+import android.annotation.SuppressLint;
+
+import com.nobitastudio.oss.base.manager.QDUpgradeManager;
+import com.qmuiteam.qmui.arch.QMUIActivity;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+
+import static com.nobitastudio.oss.OSSApplication.getContext;
+
+@SuppressLint("Registered")
+public class BaseActivity extends QMUIActivity {
+
+    @Override
+    protected int backViewInitOffset() {
+        return QMUIDisplayHelper.dp2px(getContext(), 100);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        QDUpgradeManager.getInstance(getContext()).runUpgradeTipTaskIfExist(this);
+
+    }
 }

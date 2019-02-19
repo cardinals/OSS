@@ -1,6 +1,6 @@
 package com.nobitastudio.oss.base.inter;
 
-import com.nobitastudio.oss.fragment.BaseFragment;
+import com.nobitastudio.oss.base.fragment.BaseFragment;
 
 /**
  * @author chenxiong

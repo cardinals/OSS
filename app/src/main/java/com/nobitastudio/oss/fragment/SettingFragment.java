@@ -26,6 +26,8 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
 
+    View.OnClickListener listener;
+
     @OnClick({R.id.logout_button})
     void onClick(View v) {
         // 清除所有fragment
@@ -34,6 +36,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void init() {
+        initGroupListItemListener();
         initTopBar();
         initRefreshLayout();
         initData();
@@ -61,6 +64,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
+        diagnosisRemindItem.setId(R.id.diagnosis_remind_group_list_item);
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.drug),
@@ -104,7 +108,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 .addItemView(operationRemindItem, view -> startFragment(new AboutFragment()))
                 .addItemView(hospitalActivityRemindItem, view -> startFragment(new AboutFragment()))
                 .addTo(mGroupListView);
-
 
         // ============================ 常用设置 通知
         QMUICommonListItemView clearCacheItem = mGroupListView.createItemView(
@@ -164,10 +167,17 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         return SCALE_TRANSITION_CONFIG;
     }
 
+    private View.OnClickListener initGroupListItemListener() {
+        listener = v -> {
+            ToastUtils.showShort(v.getId() + "");
+        };
+        return listener;
+    }
+
     @Override
     protected View onCreateView() {
         FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_setting, null);
-        ButterKnife.bind(this,frameLayout);
+        ButterKnife.bind(this, frameLayout);
         init();
         return frameLayout;
     }

@@ -32,4 +32,6 @@
 
     <item name="qmui_arch_swipe_layout_in_back" type="id"/>
 
+    <item name="diagnosis_remind_group_list_item" type="id" />
+
 </resources>

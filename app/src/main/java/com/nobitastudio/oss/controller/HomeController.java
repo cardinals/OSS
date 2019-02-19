@@ -57,6 +57,48 @@ public class HomeController extends QMUIWindowInsetLayout {
     @BindView(R.id.tabs)
     QMUITabSegment mTabSegment;
 
+    @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout, R.id.navigation_linearLayout,
+            R.id.smart_linearLayout, R.id.consulting_linearLayout, R.id.coming_soon_linearLayout, R.id.test_linearLayout,
+            R.id.register_detail_linearLayout, R.id.case_history_linearLayout, R.id.article_linearLayout})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.register_linearLayout:
+                // 进入科室activity
+                mHandler.startFragment(new DepartmentFragment());
+                break;
+            case R.id.pay_linearLayout:
+                break;
+            case R.id.medical_card_linearLayout:
+                mHandler.startFragment(new MedicalCardFragment());
+                break;
+            case R.id.navigation_linearLayout:
+                mHandler.startFragment(new NavigationFragment());
+                break;
+            case R.id.smart_linearLayout:
+                break;
+            case R.id.consulting_linearLayout:
+                break;
+            case R.id.coming_soon_linearLayout:
+                break;
+            case R.id.test_linearLayout:
+                mHandler.startFragment(new TestFragment());
+                break;
+            case R.id.register_detail_linearLayout:
+                break;
+            case R.id.case_history_linearLayout:
+                break;
+            case R.id.article_linearLayout:
+                break;
+            case R.id.topbar_right_setting_button:
+                ToastUtils.showShort("进入天气预报");
+                break;
+            default:
+                showInfoTipDialog(NO_SUPPORT_VIEW_ID, 1500l);
+                break;
+        }
+    }
+
+
     QMUITipDialog mQmuiTipDialog;
     public HashMap<Pager, View> mPages;
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
@@ -102,53 +144,8 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     };
     HealthArticleRecycleViewAdapter recycleViewAdapter;
-
     ControllerClickHandler mHandler;
-
     List<HealthArticle> healthArticles;
-
-    @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout, R.id.navigation_linearLayout,
-            R.id.smart_linearLayout, R.id.consulting_linearLayout, R.id.coming_soon_linearLayout, R.id.test_linearLayout,
-            R.id.register_detail_linearLayout, R.id.case_history_linearLayout, R.id.article_linearLayout})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.register_linearLayout:
-                // 进入科室activity
-                mHandler.startFragment(new DepartmentFragment());
-//                mHandler.startFragment(new TestFragment());
-
-
-                break;
-            case R.id.pay_linearLayout:
-                break;
-            case R.id.medical_card_linearLayout:
-                mHandler.startFragment(new MedicalCardFragment());
-                break;
-            case R.id.navigation_linearLayout:
-                mHandler.startFragment(new NavigationFragment());
-                break;
-            case R.id.smart_linearLayout:
-                break;
-            case R.id.consulting_linearLayout:
-                break;
-            case R.id.coming_soon_linearLayout:
-                break;
-            case R.id.test_linearLayout:
-                break;
-            case R.id.register_detail_linearLayout:
-                break;
-            case R.id.case_history_linearLayout:
-                break;
-            case R.id.article_linearLayout:
-                break;
-            case R.id.topbar_right_setting_button:
-                ToastUtils.showShort("进入天气预报");
-                break;
-            default:
-                showInfoTipDialog(NO_SUPPORT_VIEW_ID, 1500l);
-                break;
-        }
-    }
 
     /**
      * 初始化方法

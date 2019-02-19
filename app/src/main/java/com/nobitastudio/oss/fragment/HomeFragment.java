@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.controller.HomeController;
 import com.nobitastudio.oss.controller.InfoController;

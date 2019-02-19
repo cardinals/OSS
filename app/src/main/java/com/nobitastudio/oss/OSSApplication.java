@@ -20,8 +20,8 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
-import com.nobitastudio.oss.manager.QDUpgradeManager;
-import com.nobitastudio.oss.manager.QMUISwipeBackActivityManager;
+import com.nobitastudio.oss.base.manager.QDUpgradeManager;
+import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.squareup.leakcanary.LeakCanary;
 
 /**

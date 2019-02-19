@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss;
+package com.nobitastudio.oss.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.nobitastudio.oss.activity.BaseFragmentActivity;
-import com.nobitastudio.oss.fragment.BaseFragment;
+import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
+import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.fragment.HomeFragment;
-import com.nobitastudio.oss.fragment.LoginFragment;
+import com.nobitastudio.oss.fragment.SettingFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 
 public class MainActivity extends BaseFragmentActivity {
@@ -54,6 +53,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected BaseFragment getFirstFragment() {
 //        return new TestFragment();
 //        return new LoginFragment();
+//        return new SettingFragment();
         return new HomeFragment();
     }
 

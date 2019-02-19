@@ -14,31 +14,13 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss.fragment;
+package com.nobitastudio.oss.base.activity;
 
-import com.nobitastudio.oss.manager.QDUpgradeManager;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 
 /**
  * Created by cgspine on 2018/1/7.
  */
 
-public abstract class BaseFragment extends QMUIFragment {
-
-
-    public BaseFragment() {
-    }
-
-    @Override
-    protected int backViewInitOffset() {
-        return QMUIDisplayHelper.dp2px(getContext(), 100);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        QDUpgradeManager.getInstance(getContext()).runUpgradeTipTaskIfExist(getActivity());
-
-    }
-
+public abstract class BaseFragmentActivity extends QMUIFragmentActivity {
 }

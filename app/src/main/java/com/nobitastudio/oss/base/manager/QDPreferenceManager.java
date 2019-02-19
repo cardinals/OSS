@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss.manager;
+package com.nobitastudio.oss.base.manager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
