@@ -16,12 +16,6 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     }
 
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
     @Override
     protected void initTopBar() {
         mTopBar.setTitle("test");

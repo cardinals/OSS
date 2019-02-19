@@ -17,11 +17,6 @@ public class TemplateFragment extends StandardWithTobBarLayoutFragment {
     ImageView solidImage;
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return v -> ToastUtils.showShort("点击了emptyView" + v);
-    }
-
-    @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
         mTopBar.setTitle("title");

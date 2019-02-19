@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
@@ -122,8 +123,10 @@ public abstract class StandardFragment extends BaseFragment {
         mPullRefreshLayout.setEnabled(Boolean.FALSE);
     }
 
-    // emptyView 展示加载失败时,点击重试的listener
-    protected abstract View.OnClickListener getEmptyViewRetryButtonListener();
+    // emptyView 展示加载失败时,点击重试的 listener 默认不重写 ,当需要时进行重写
+    protected View.OnClickListener getEmptyViewRetryButtonListener() {
+        return view -> ToastUtils.showShort("尚未初始化该点击事件,请重写getEmptyViewRetryButtonListener");
+    }
 
     //初始化topbar
     protected abstract void initTopBar();

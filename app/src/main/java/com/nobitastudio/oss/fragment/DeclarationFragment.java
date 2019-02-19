@@ -23,11 +23,6 @@ public class DeclarationFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return v -> ToastUtils.showShort("点击了emptyView" + v);
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_standard;
     }

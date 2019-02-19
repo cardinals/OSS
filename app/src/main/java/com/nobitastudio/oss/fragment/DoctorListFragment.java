@@ -80,16 +80,9 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         mRecyclerView.setAdapter(adapter);
     }
 
-
-
     @Override
     protected void initRefreshLayout() {
         mPullRefreshLayout.setEnabled(true);
-    }
-
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
     }
 
     @Override

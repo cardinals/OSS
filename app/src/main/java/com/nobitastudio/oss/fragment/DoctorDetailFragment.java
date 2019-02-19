@@ -248,11 +248,6 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
         mCollapsingTopBarLayout.setTitle("医生姓名2222");

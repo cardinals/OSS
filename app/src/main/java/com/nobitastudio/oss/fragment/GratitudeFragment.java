@@ -29,11 +29,6 @@ public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
         mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
     }
 
-    @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
     /**
      * 初始化 topbar
      */

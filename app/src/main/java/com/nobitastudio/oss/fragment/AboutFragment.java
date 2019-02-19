@@ -82,11 +82,6 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_about;
     }

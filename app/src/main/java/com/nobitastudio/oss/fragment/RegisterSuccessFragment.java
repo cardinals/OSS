@@ -42,11 +42,6 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return null;
-    }
-
-    @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
         mTopBar.setTitle("挂号成功");
