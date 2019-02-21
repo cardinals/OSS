@@ -15,6 +15,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
     static class MedicalCardItemAdapter extends BaseRecyclerAdapter<MedicalCard> {

@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class DateUtil {
 
     public static final String STANDARD_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";

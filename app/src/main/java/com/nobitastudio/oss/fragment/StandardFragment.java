@@ -31,6 +31,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public abstract class StandardFragment extends BaseFragment {
 
     @BindView(R.id.pull_to_refresh)

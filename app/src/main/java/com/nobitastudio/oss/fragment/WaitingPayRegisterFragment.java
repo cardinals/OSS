@@ -15,6 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.department_textview)

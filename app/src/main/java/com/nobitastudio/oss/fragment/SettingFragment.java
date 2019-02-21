@@ -3,14 +3,13 @@ package com.nobitastudio.oss.fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.widget.QMUIGroupListView;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUILoadingView;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
-import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -18,6 +17,12 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.groupListView)
@@ -39,6 +44,19 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
+        diagnosisRemindItem.getSwitch().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (diagnosisRemindItem.getAccessoryType() != QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM) {
+                // 只有当处于非loading状态时 才进行才做
+                ToastUtils.showShort(isChecked + "1111" + buttonView.getText());
+                diagnosisRemindItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
+                diagnosisRemindItem.addAccessoryCustomView(new QMUILoadingView(getActivity()));
+                mTopBar.postDelayed(() ->{
+                    diagnosisRemindItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
+                    diagnosisRemindItem.getSwitch().setChecked(isChecked);
+                    showSuccessTipDialog("开启成功");
+                },3000);
+            }
+        });
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.drug),
@@ -49,7 +67,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView checkRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
                 "检查提醒",
                 "检查前两小时推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -57,7 +75,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView operationRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.operation),
                 "手术提醒",
                 "手术前一天推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -65,7 +83,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView hospitalActivityRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_hot),
                 "医院活动",
                 "实时推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -73,21 +91,17 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
         hospitalActivityRemindItem.addAccessoryCustomView(new QMUILoadingView(getActivity()));
 
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v instanceof QMUICommonListItemView) {
-                    CharSequence text = ((QMUICommonListItemView) v).getText();
-                    Toast.makeText(getActivity(), text + " is Clicked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
         QMUIGroupListView.newSection(getContext())
                 .setTitle("消息推送：同时打开或关闭App推送与短信通知")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(diagnosisRemindItem, onClickListener)
-                .addItemView(eatDrugRemindItem, null)
+                .addItemView(diagnosisRemindItem, null)
+                .addItemView(eatDrugRemindItem, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showShort("!!!!");
+                        ((QMUICommonListItemView)v).getSwitch().setClickable(!((QMUICommonListItemView)v).getSwitch().isChecked());
+                    }
+                })
                 .addItemView(checkRemindItem, null)
                 .addItemView(operationRemindItem, null)
                 .addItemView(hospitalActivityRemindItem, null)

@@ -9,6 +9,12 @@ import com.nobitastudio.oss.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.login_button})

@@ -20,6 +20,12 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class AboutFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.topbar)

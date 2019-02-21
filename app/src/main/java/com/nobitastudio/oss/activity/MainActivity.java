@@ -26,6 +26,12 @@ import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 
+/**
+ * @author chenxiong
+ * @email nobita0522@qq.com
+ * @date 2019/01/29 16:08
+ * @description
+ */
 public class MainActivity extends BaseFragmentActivity {
 
     @Override
@@ -54,8 +60,8 @@ public class MainActivity extends BaseFragmentActivity {
     protected BaseFragment getFirstFragment() {
 //        return new TestFragment();
 //        return new LoginFragment();
-        return new SettingFragment();
-//        return new HomeFragment();
+//        return new SettingFragment();
+        return new HomeFragment();
     }
 
 }
