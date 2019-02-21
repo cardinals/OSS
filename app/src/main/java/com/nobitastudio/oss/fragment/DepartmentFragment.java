@@ -152,8 +152,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected View.OnClickListener getEmptyViewRetryButtonListener() {
-//        return view -> showLoadingEmptyView(null);
-        return null;
+        return view -> showLoadingEmptyView(null);
     }
 
     @Override

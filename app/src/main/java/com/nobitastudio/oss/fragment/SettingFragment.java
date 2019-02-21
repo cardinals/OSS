@@ -1,25 +1,21 @@
 package com.nobitastudio.oss.fragment;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUILoadingView;
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SettingFragment extends StandardWithTobBarLayoutFragment {
@@ -27,13 +23,12 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
 
-    View.OnClickListener listener;
-
     @OnClick({R.id.logout_button})
     void onClick(View v) {
         // 清除所有fragment
         startFragment(new LoginFragment());
     }
+
     protected void initGroupListView() {
 
         // ============================ 短信通知
@@ -44,7 +39,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
-        diagnosisRemindItem.setId(R.id.diagnosis_remind_group_list_item);
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.drug),
@@ -79,14 +73,24 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
         hospitalActivityRemindItem.addAccessoryCustomView(new QMUILoadingView(getActivity()));
 
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v instanceof QMUICommonListItemView) {
+                    CharSequence text = ((QMUICommonListItemView) v).getText();
+                    Toast.makeText(getActivity(), text + " is Clicked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+
         QMUIGroupListView.newSection(getContext())
                 .setTitle("消息推送：同时打开或关闭App推送与短信通知")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(diagnosisRemindItem, view -> startFragment(new AboutFragment()))
-                .addItemView(eatDrugRemindItem, view -> startFragment(new AboutFragment()))
-                .addItemView(checkRemindItem, view -> startFragment(new AboutFragment()))
-                .addItemView(operationRemindItem, view -> startFragment(new AboutFragment()))
-                .addItemView(hospitalActivityRemindItem, view -> startFragment(new AboutFragment()))
+                .addItemView(diagnosisRemindItem, onClickListener)
+                .addItemView(eatDrugRemindItem, null)
+                .addItemView(checkRemindItem, null)
+                .addItemView(operationRemindItem, null)
+                .addItemView(hospitalActivityRemindItem, null)
                 .addTo(mGroupListView);
 
         // ============================ 常用设置 通知
@@ -125,28 +129,33 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         QMUIGroupListView.newSection(getContext())
                 .setTitle("常用设置")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(clearCacheItem, view -> startFragment(new AboutFragment()))
-                .addItemView(updateInfoItem, view -> startFragment(new AboutFragment()))
+                .addItemView(clearCacheItem,
+                        view -> showMessagePositiveDialog("清除缓存", "确定清楚本地缓存数据吗?",
+                                "取消", (dialog, index) -> dialog.dismiss(),
+                                "确定", (dialog, index) -> {
+                                    dialog.dismiss();
+                                    // 清除本地缓存操作
+                                    showNetworkLoadingTipDialog("正在清除");
+                                    mEmptyView.postDelayed(() -> {
+                                        closeTipDialog();
+                                        showSuccessTipDialog("清除成功");
+                                    }, 3000l);
+                                })
+                )
+                .addItemView(updateInfoItem, view -> startFragment(new UserInfoFragment()))
                 .addItemView(aboutUsItem, view -> startFragment(new AboutFragment()))
                 .addItemView(shareItem, v -> showSimpleBottomSheetGrid(
                         getContext(),
                         Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),
                         Arrays.asList("微信", "朋友圈", "微博", "QQ", "QQ空间", "短信"),
                         Arrays.asList(1, 2, 3, 4, 5, 6),
-                        null))
+                        (dialog, index) -> dialog.dismiss()))
                 .addTo(mGroupListView);
     }
 
     @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
-    }
-
-    private View.OnClickListener initGroupListItemListener() {
-        listener = v -> {
-            ToastUtils.showShort(v.getId() + "");
-        };
-        return listener;
     }
 
     @Override
@@ -167,7 +176,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initGroupListItemListener();
         initGroupListView();
     }
 }

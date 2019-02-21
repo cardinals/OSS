@@ -110,9 +110,15 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
         mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
     }
 
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
+
     /**
      * 初始化 topbar
      */
+    @Override
     protected void initTopBar() {
         // 切换其他情况的按钮
         mTopBar.setTitle("登录");

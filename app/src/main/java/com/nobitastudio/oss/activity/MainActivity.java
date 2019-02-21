@@ -53,8 +53,8 @@ public class MainActivity extends BaseFragmentActivity {
      */
     protected BaseFragment getFirstFragment() {
 //        return new TestFragment();
-        return new LoginFragment();
-//        return new SettingFragment();
+//        return new LoginFragment();
+        return new SettingFragment();
 //        return new HomeFragment();
     }
 

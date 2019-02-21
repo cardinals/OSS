@@ -37,6 +37,7 @@ public class TipDialogHelper {
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                 .setTipWord(detailMsg == null ? "正在加载" : detailMsg)
                 .create();
+        mQmuiTipDialog.setCancelable(false);
         mQmuiTipDialog.show();
     }
 
