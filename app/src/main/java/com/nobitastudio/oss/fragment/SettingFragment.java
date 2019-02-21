@@ -12,7 +12,6 @@ import com.qmuiteam.qmui.widget.QMUILoadingView;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -40,23 +39,10 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         QMUICommonListItemView diagnosisRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.diagnosis),
                 "就诊提醒",
-                "就诊前两小时推送",
+                "已关闭",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
-        diagnosisRemindItem.getSwitch().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (diagnosisRemindItem.getAccessoryType() != QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM) {
-                // 只有当处于非loading状态时 才进行才做
-                ToastUtils.showShort(isChecked + "1111" + buttonView.getText());
-                diagnosisRemindItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
-                diagnosisRemindItem.addAccessoryCustomView(new QMUILoadingView(getActivity()));
-                mTopBar.postDelayed(() ->{
-                    diagnosisRemindItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
-                    diagnosisRemindItem.getSwitch().setChecked(isChecked);
-                    showSuccessTipDialog("开启成功");
-                },3000);
-            }
-        });
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.drug),
@@ -65,6 +51,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
+        eatDrugRemindItem.getSwitch().setChecked(true);
 
         QMUICommonListItemView checkRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
@@ -94,17 +81,11 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         QMUIGroupListView.newSection(getContext())
                 .setTitle("消息推送：同时打开或关闭App推送与短信通知")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(diagnosisRemindItem, null)
-                .addItemView(eatDrugRemindItem, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtils.showShort("!!!!");
-                        ((QMUICommonListItemView)v).getSwitch().setClickable(!((QMUICommonListItemView)v).getSwitch().isChecked());
-                    }
-                })
-                .addItemView(checkRemindItem, null)
-                .addItemView(operationRemindItem, null)
-                .addItemView(hospitalActivityRemindItem, null)
+                .addItemView(diagnosisRemindItem, getOnclickListener())
+                .addItemView(eatDrugRemindItem, getOnclickListener())
+                .addItemView(checkRemindItem, getOnclickListener())
+                .addItemView(operationRemindItem, getOnclickListener())
+                .addItemView(hospitalActivityRemindItem, getOnclickListener())
                 .addTo(mGroupListView);
 
         // ============================ 常用设置 通知
@@ -143,28 +124,69 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         QMUIGroupListView.newSection(getContext())
                 .setTitle("常用设置")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(clearCacheItem,
-                        view -> showMessagePositiveDialog("清除缓存", "确定清楚本地缓存数据吗?",
-                                "取消", (dialog, index) -> dialog.dismiss(),
-                                "确定", (dialog, index) -> {
-                                    dialog.dismiss();
-                                    // 清除本地缓存操作
-                                    showNetworkLoadingTipDialog("正在清除");
-                                    mEmptyView.postDelayed(() -> {
-                                        closeTipDialog();
-                                        showSuccessTipDialog("清除成功");
-                                    }, 3000l);
-                                })
-                )
-                .addItemView(updateInfoItem, view -> startFragment(new UserInfoFragment()))
-                .addItemView(aboutUsItem, view -> startFragment(new AboutFragment()))
-                .addItemView(shareItem, v -> showSimpleBottomSheetGrid(
+                .addItemView(clearCacheItem, getOnclickListener())
+                .addItemView(updateInfoItem, getOnclickListener())
+                .addItemView(aboutUsItem, getOnclickListener())
+                .addItemView(shareItem, getOnclickListener())
+                .addTo(mGroupListView);
+    }
+
+    private View.OnClickListener getOnclickListener() {
+        return v -> {
+            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
+            CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
+            if (itemViewText.equals("就诊提醒")) {
+                changeQMUICommonListItemViewState(itemView,!itemView.getSwitch().isChecked(),"正在开启");
+                // 模拟
+                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView,!itemView.getSwitch().isChecked(),"就诊前两小时推送"),1500);
+            } else if (itemViewText.equals("吃药提醒")) {
+                changeQMUICommonListItemViewState(itemView,false,"正在关闭");
+                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView,false,"已关闭"),1500);
+            } else if (itemViewText.equals("检查提醒")) {
+
+            } else if (itemViewText.equals("手术提醒")) {
+
+            } else if (itemViewText.equals("医院活动")) {
+
+            } else if (itemViewText.equals("清除缓存")) {
+                showMessagePositiveDialog("清除缓存", "确定清楚本地缓存数据吗?",
+                        "取消", (dialog, index) -> dialog.dismiss(),
+                        "确定", (dialog, index) -> {
+                            dialog.dismiss();
+                            // 清除本地缓存操作
+                            showNetworkLoadingTipDialog("正在清除");
+                            mEmptyView.postDelayed(() -> {
+                                closeTipDialog();
+                                showSuccessTipDialog("清除成功");
+                            }, 3000l);
+                        });
+            } else if (itemViewText.equals("修改资料")) {
+                startFragment(new UserInfoFragment());
+            } else if (itemViewText.equals("关于我们")) {
+                startFragment(new AboutFragment());
+            } else if (itemViewText.equals("分享")) {
+                showSimpleBottomSheetGrid(
                         getContext(),
                         Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),
                         Arrays.asList("微信", "朋友圈", "微博", "QQ", "QQ空间", "短信"),
                         Arrays.asList(1, 2, 3, 4, 5, 6),
-                        (dialog, index) -> dialog.dismiss()))
-                .addTo(mGroupListView);
+                        (dialog, index) -> dialog.dismiss());
+            }
+        };
+    }
+
+    // 改变gourplistitem的状态
+    private void changeQMUICommonListItemViewState(QMUICommonListItemView itemView,boolean isChecked,String msg) {
+        itemView.setDetailText(msg);
+        if (itemView.getAccessoryType() == QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM) {
+            // loading -> switch
+            itemView.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
+            itemView.getSwitch().setChecked(isChecked);
+        } else if (itemView.getAccessoryType() == QMUICommonListItemView.ACCESSORY_TYPE_SWITCH) {
+            // switch -> loading
+            itemView.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
+            itemView.addAccessoryCustomView(new QMUILoadingView(getActivity()));
+        }
     }
 
     @Override
