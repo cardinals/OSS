@@ -1,5 +1,6 @@
 package com.nobitastudio.oss.fragment;
 
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
@@ -14,8 +15,8 @@ import butterknife.BindView;
  */
 public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.solidImage)
-    ImageView solidImage;
+    @BindView(R.id.save_info_button)
+    Button button;
 
     @Override
     protected void initTopBar() {
@@ -25,11 +26,12 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_standard;
+        return R.layout.fragment_user_info;
     }
 
     @Override
     protected void initLastCustom() {
-        initSolidImage(solidImage);
+
+
     }
 }
