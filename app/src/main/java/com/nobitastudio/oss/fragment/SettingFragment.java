@@ -99,7 +99,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
         QMUICommonListItemView updateInfoItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.input),
-                "修改资料",
+                "个人资料",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -166,7 +166,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 startFragment(new AboutFragment());
             } else if (itemViewText.equals("分享")) {
                 showSimpleBottomSheetGrid(
-                        getContext(),
                         Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),
                         Arrays.asList("微信", "朋友圈", "微博", "QQ", "QQ空间", "短信"),
                         Arrays.asList(1, 2, 3, 4, 5, 6),

@@ -93,7 +93,7 @@ public class InfoController extends QMUIWindowInsetLayout {
     public InfoController(Context context, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
-        LayoutInflater.from(context).inflate(R.layout.pager_info, this);
+        LayoutInflater.from(context).inflate(R.layout.controller_info, this);
         ButterKnife.bind(this);
         init();
     }

@@ -260,7 +260,7 @@ public abstract class StandardFragment extends BaseFragment {
         mPopViewHelper.showNormalPopView(v, content, width, popViewDismissListener);
     }
 
-    protected void showListPopView(Context context, View v, List<String> items, Integer width, Integer height,
+    protected void showListPopView(View v, List<String> items, Integer width, Integer height,
                                    AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
         mPopViewHelper.showListPopView(v, items, width, height, itemClickListener, popViewDismissListener);
     }
@@ -271,7 +271,7 @@ public abstract class StandardFragment extends BaseFragment {
         mBottomSheetHelper.showSimpleBottomSheetList(items, itemClickListener);
     }
 
-    protected void showSimpleBottomSheetGrid(Context context, List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
+    protected void showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
         mBottomSheetHelper.showSimpleBottomSheetGrid(mipmaps, titles, tags, itemClickListener);
     }
 

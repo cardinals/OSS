@@ -28,7 +28,6 @@ import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
@@ -355,7 +354,7 @@ public class HomeController extends QMUIWindowInsetLayout {
     public HomeController(Context context, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
-        LayoutInflater.from(context).inflate(R.layout.pager_home, this);
+        LayoutInflater.from(context).inflate(R.layout.controller_home, this);
         ButterKnife.bind(this);
         init();
         //mViewPager.

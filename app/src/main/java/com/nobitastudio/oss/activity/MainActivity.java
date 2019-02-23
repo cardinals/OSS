@@ -25,6 +25,7 @@ import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
+import com.nobitastudio.oss.fragment.UserInfoFragment;
 
 /**
  * @author chenxiong
@@ -61,7 +62,8 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new TestFragment();
 //        return new LoginFragment();
 //        return new SettingFragment();
-        return new HomeFragment();
+//        return new HomeFragment();
+        return new UserInfoFragment();
     }
 
 }

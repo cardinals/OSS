@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="发表时间"
-                    android:textColor="@color/qmui_config_color_gray_7"
+                    android:textColor="@color/qmui_config_color_gray_5"
                     android:textSize="@dimen/textsize_normal" />
 
             </LinearLayout>

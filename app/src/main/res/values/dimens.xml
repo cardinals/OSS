@@ -67,5 +67,7 @@
     <dimen name="spece_left_right_button_minus_12">39dp</dimen>
     <dimen name="space_top_bottom_button">18dp</dimen>
     <dimen name="space_left_right_content">12dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
 
 </resources>

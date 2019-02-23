@@ -1,11 +1,24 @@
 package com.nobitastudio.oss.fragment;
 
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
+import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -15,8 +28,140 @@ import butterknife.BindView;
  */
 public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.save_info_button)
-    Button button;
+    @BindView(R.id.groupListView)
+    QMUIGroupListView mGroupListView;
+
+    QMUICommonListItemView mSexItemView;
+
+    @OnClick({R.id.user_img_linearLayout, R.id.save_info_button})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.user_img_linearLayout:
+                showSimpleBottomSheetList(Arrays.asList("拍照", "相簿相片"), (dialog, itemView, position, tag) -> {
+                    dialog.dismiss();
+                });
+                break;
+            case R.id.save_info_button:
+                showNetworkLoadingTipDialog("正在保存");
+                mTopBar.postDelayed(this::closeTipDialog, 1500l);
+                break;
+        }
+    }
+
+    private void initGroupListView() {
+        // 基本信息
+        QMUICommonListItemView mUsernameItemView = mGroupListView.createItemView(
+                null,
+                "用户名",
+                "nobita",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        mSexItemView = mGroupListView.createItemView(
+                null,
+                "性别",
+                "保密",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mModifyPasswordItemView = mGroupListView.createItemView(
+                null,
+                "修改密码",
+                "仅支持通过手机验证修改",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mIdCardItemView = mGroupListView.createItemView(
+                null,
+                "身份证号",
+                "511602199705220175",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUIGroupListView.newSection(getContext())
+                .setTitle("基本信息")
+                .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
+                .addItemView(mUsernameItemView, getOnclickListener())
+                .addItemView(mSexItemView, getOnclickListener())
+                .addItemView(mModifyPasswordItemView, getOnclickListener())
+                .addItemView(mIdCardItemView, getOnclickListener())
+                .addTo(mGroupListView);
+
+        //  绑定信息
+        QMUICommonListItemView mMobileItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.drawable.ic_phone),
+                "手机",
+                "15709932234",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mWechatItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.mipmap.wechat),
+                "微信",
+                "yebidaxiong233",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mQQItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.mipmap.qq),
+                "QQ",
+                "未绑定",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mWeiboItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.mipmap.weibo),
+                "微博",
+                "未绑定",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUICommonListItemView mAliPayItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_ali_pay),
+                "支付宝",
+                "未绑定",
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
+        QMUIGroupListView.newSection(getContext())
+                .setTitle("绑定信息:绑定后可进行登录")
+                .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
+                .addItemView(mMobileItemView, getOnclickListener())
+                .addItemView(mWechatItemView, getOnclickListener())
+                .addItemView(mQQItemView, getOnclickListener())
+                .addItemView(mWeiboItemView, getOnclickListener())
+                .addItemView(mAliPayItemView, getOnclickListener())
+                .addTo(mGroupListView);
+    }
+
+    private View.OnClickListener getOnclickListener() {
+        return v -> {
+            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
+            CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
+            if (itemViewText.equals("用户名")) {
+                showEditTextDialog("修改用户名", "请输入新用户名",
+                        "取消", (dialog, index) -> dialog.dismiss(),
+                        "确认修改", (dialog, index) -> dialog.dismiss());
+            } else if (itemViewText.equals("性别")) {
+                showListPopView(mSexItemView.getDetailTextView(), Arrays.asList("男", "女", "保密"), 120, 160, (parent, view, position, id) -> {
+                    popViewDismiss();
+                }, null);
+            } else if (itemViewText.equals("修改密码")) {
+
+            } else if (itemViewText.equals("身份证号")) {
+                showInfoTipDialog("身份证号不可修改");
+            }
+        };
+    }
 
     @Override
     protected void initTopBar() {
@@ -31,7 +176,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-
+        initGroupListView();
 
     }
 }

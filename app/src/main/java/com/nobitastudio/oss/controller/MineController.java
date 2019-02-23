@@ -14,12 +14,9 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -158,7 +155,7 @@ public class MineController extends QMUIWindowInsetLayout {
     public MineController(Context context, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
-        LayoutInflater.from(context).inflate(R.layout.pager_mine, this);
+        LayoutInflater.from(context).inflate(R.layout.controller_mine, this);
         ButterKnife.bind(this);
         init();
     }

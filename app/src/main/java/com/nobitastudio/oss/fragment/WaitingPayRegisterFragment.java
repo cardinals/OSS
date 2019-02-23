@@ -61,7 +61,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                         "再想想", (dialog, index) -> dialog.dismiss());
                 break;
             case R.id.pay_now_roundbutton:
-                showSimpleBottomSheetGrid(getContext(), Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
+                showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
                         Arrays.asList("支付宝", "微信", "云闪付", "QQ钱包"),
                         Arrays.asList(1, 2, 3, 4),
                         (dialog, itemView) -> {

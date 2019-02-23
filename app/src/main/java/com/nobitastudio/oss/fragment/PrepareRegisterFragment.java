@@ -72,7 +72,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
         if (Boolean.TRUE) {
             // 已有绑定的诊疗卡
             List<String> items = Arrays.asList("陈雄", "楚楚", "冯周", "陈雄陈雄", "陈雄陈雄陈雄");
-            showListPopView(getContext(), mChooseMedicalCardTextView, items, 120, 160,
+            showListPopView(mChooseMedicalCardTextView, items, 120, 160,
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
                         popViewDismiss();
@@ -142,7 +142,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-
+        initSolidImage(mRegisterBasicMsgSolidImageView);
     }
 
 }

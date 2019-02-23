@@ -45,7 +45,36 @@
                     android:orientation="vertical">
 
                     <!-- 头像 -->
+                    <LinearLayout
+                        android:id="@+id/user_img_linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/dp_16"
+                        android:paddingRight="@dimen/dp_16"
+                        android:background="?attr/qmui_s_list_item_bg_with_border_bottom_inset_left"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="left"
+                            android:text="头像"
+                            android:textColor="@color/qmui_config_color_gray_5" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/activity_personal_center_user_imageView"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:contentDescription="@string/nav_header_desc"
+                            android:paddingTop="@dimen/nav_header_vertical_spacing"
+                            android:src="@drawable/ic_user"
+                            app:civ_border_color="#00000000"
+                            app:civ_border_width="2dp" />
+                    </LinearLayout>
 
                     <!-- 常用信息 -->
                     <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
