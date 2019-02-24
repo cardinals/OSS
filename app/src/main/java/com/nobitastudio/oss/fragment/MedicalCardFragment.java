@@ -53,8 +53,10 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.create_medical_card_button:
+                startFragment(new CreateMedicalCardOneFragment());
                 break;
             case R.id.bind_medical_card_button:
+                startFragment(new BindMedicalCardOneFragment());
                 break;
         }
     }

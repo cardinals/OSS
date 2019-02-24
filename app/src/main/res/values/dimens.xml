@@ -69,5 +69,6 @@
     <dimen name="space_left_right_content">12dp</dimen>
     <dimen name="dp_8">8dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="px_1">1px</dimen>
 
 </resources>

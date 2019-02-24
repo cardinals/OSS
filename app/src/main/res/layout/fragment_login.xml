@@ -111,7 +111,7 @@ android:focusableInTouchMode="true">
                             android:src="@drawable/ic_phone" />
 
                         <EditText
-                            android:id="@+id/user_mobile_editText"
+                            android:id="@+id/user_mobile_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -124,7 +124,7 @@ android:focusableInTouchMode="true">
                             android:maxLength="11"
                             android:paddingBottom="6dp"
                             android:singleLine="true"
-                            android:textColor="@color/app_color_description"
+                            android:textColor="@color/qmui_config_color_gray_5"
                             android:textSize="16sp" />
 
                     </LinearLayout>

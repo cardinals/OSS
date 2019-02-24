@@ -120,6 +120,14 @@
                                 android:text="医院信息" />
                         </LinearLayout>
 
+                        <TextView
+                            style="@style/QDCommonDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:gravity="start"
+                            android:text="label 提示" />
+
                     </LinearLayout>
 
                     <Button

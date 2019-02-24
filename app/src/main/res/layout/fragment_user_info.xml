@@ -63,7 +63,7 @@
                             android:layout_marginBottom="0dp"
                             android:gravity="left"
                             android:text="头像"
-                            android:textColor="@color/qmui_config_color_gray_5" />
+                            android:textColor="@color/qmui_config_color_black" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/activity_personal_center_user_imageView"
@@ -80,7 +80,6 @@
                     <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
                         android:id="@+id/groupListView"
                         android:layout_width="match_parent"
-                        android:layout_marginBottom="8dp"
                         android:layout_height="wrap_content" />
 
                     <Button

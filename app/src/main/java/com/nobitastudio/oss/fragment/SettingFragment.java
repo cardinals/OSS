@@ -160,7 +160,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                                 showSuccessTipDialog("清除成功");
                             }, 3000l);
                         });
-            } else if (itemViewText.equals("修改资料")) {
+            } else if (itemViewText.equals("个人资料")) {
                 startFragment(new UserInfoFragment());
             } else if (itemViewText.equals("关于我们")) {
                 startFragment(new AboutFragment());

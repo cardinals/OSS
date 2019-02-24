@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 android:alpha="255"
                 android:gravity="center"
-                android:text="办理诊疗卡"
+                android:text="办理电子诊疗卡"
                 app:qmui_backgroundColor="@color/app_color_blue_full"
                 app:qmui_radiusBottomLeft="20dp"
                 app:qmui_radiusTopLeft="20dp" />

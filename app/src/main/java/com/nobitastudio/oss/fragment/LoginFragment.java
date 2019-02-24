@@ -1,15 +1,10 @@
 package com.nobitastudio.oss.fragment;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.LoginResult;
@@ -19,7 +14,6 @@ import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -45,14 +39,10 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     QMUIEmptyView mEmptyView;
     @BindView(R.id.copyright_textView)
     TextView mCopyrightTextView;
-    @BindView(R.id.user_mobile_editText)
+    @BindView(R.id.user_mobile_edittext)
     EditText userMobileEditText;
     @BindView(R.id.user_password_editText)
     EditText userPasswordEditText;
-    @BindView(R.id.forget_password_textView)
-    TextView forgetPasswordTextView;
-    @BindView(R.id.enroll_textView)
-    TextView enrollTextView;
     @BindView(R.id.login_button)
     Button loginButton;
 
@@ -63,6 +53,7 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
                 userClickLogin();
                 break;
             case R.id.forget_password_textView:
+                startFragment(new ForgetPasswordOneFragment());
                 break;
             case R.id.enroll_textView:
                 break;

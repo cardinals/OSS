@@ -156,7 +156,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                     popViewDismiss();
                 }, null);
             } else if (itemViewText.equals("修改密码")) {
-
+                startFragment(new ForgetPasswordTwoFragment());
             } else if (itemViewText.equals("身份证号")) {
                 showInfoTipDialog("身份证号不可修改");
             }
