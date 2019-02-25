@@ -1,10 +1,13 @@
 package com.nobitastudio.oss.fragment;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -13,6 +16,22 @@ import butterknife.BindView;
  * @description
  */
 public class BindMedicalCardTwoFragment extends StandardWithTobBarLayoutFragment {
+
+    @BindView(R.id.send_verification_code_button)
+    Button mSendVerificationCodeButton;
+
+    @OnClick({R.id.send_verification_code_button})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.send_verification_code_button:
+                showNetworkLoadingTipDialog("正在发送验证码");
+                mTopBar.postDelayed(() -> {
+                    closeTipDialog();
+                    showSuccessTipDialog("发送成功");
+                },1500l);
+                break;
+        }
+    }
 
     @Override
     protected void initTopBar() {
@@ -27,5 +46,10 @@ public class BindMedicalCardTwoFragment extends StandardWithTobBarLayoutFragment
 
     @Override
     protected void initLastCustom() {
+        showNetworkLoadingTipDialog("正在发送验证码");
+        mTopBar.postDelayed(() -> {
+            closeTipDialog();
+            showSuccessTipDialog("发送成功");
+        },1500l);
     }
 }

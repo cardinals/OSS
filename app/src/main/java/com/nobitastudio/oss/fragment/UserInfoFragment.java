@@ -31,7 +31,15 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
 
+    QMUICommonListItemView mUsernameItemView;
     QMUICommonListItemView mSexItemView;
+    QMUICommonListItemView mModifyPasswordItemView;
+    QMUICommonListItemView mIdCardItemView;
+    QMUICommonListItemView mMobileItemView;
+    QMUICommonListItemView mWechatItemView;
+    QMUICommonListItemView mQQItemView;
+    QMUICommonListItemView mWeiboItemView;
+    QMUICommonListItemView mAliPayItemView;
 
     @OnClick({R.id.user_img_linearLayout, R.id.save_info_button})
     void onClick(View v) {
@@ -50,7 +58,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
     private void initGroupListView() {
         // 基本信息
-        QMUICommonListItemView mUsernameItemView = mGroupListView.createItemView(
+        mUsernameItemView = mGroupListView.createItemView(
                 null,
                 "用户名",
                 "nobita",
@@ -66,7 +74,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mModifyPasswordItemView = mGroupListView.createItemView(
+        mModifyPasswordItemView = mGroupListView.createItemView(
                 null,
                 "修改密码",
                 "仅支持通过手机验证修改",
@@ -74,7 +82,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mIdCardItemView = mGroupListView.createItemView(
+        mIdCardItemView = mGroupListView.createItemView(
                 null,
                 "身份证号",
                 "511602199705220175",
@@ -100,7 +108,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mWechatItemView = mGroupListView.createItemView(
+        mWechatItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.wechat),
                 "微信",
                 "yebidaxiong233",
@@ -108,7 +116,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mQQItemView = mGroupListView.createItemView(
+        mQQItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.qq),
                 "QQ",
                 "未绑定",
@@ -116,7 +124,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mWeiboItemView = mGroupListView.createItemView(
+        mWeiboItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.weibo),
                 "微博",
                 "未绑定",
@@ -124,7 +132,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView mAliPayItemView = mGroupListView.createItemView(
+        mAliPayItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_ali_pay),
                 "支付宝",
                 "未绑定",

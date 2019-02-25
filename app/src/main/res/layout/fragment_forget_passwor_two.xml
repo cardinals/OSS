@@ -154,11 +154,12 @@
 
                         <EditText
                             android:id="@+id/verification_code_edittext"
-                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="6dp"
-                            android:layout_marginRight="56dp"
+                            android:layout_marginRight="@dimen/dp_16"
                             android:background="@drawable/qmui_divider_bottom_bitmap"
                             android:gravity="center"
                             android:hint="请输入收到的验证码"
@@ -168,6 +169,14 @@
                             android:singleLine="true"
                             android:textColor="@color/qmui_config_color_gray_5"
                             android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/send_verification_code_button"
+                            style="@style/AppQDRadiusButton"
+                            android:layout_width="100dp"
+                            android:layout_marginRight="48dp"
+                            android:layout_gravity="center_vertical"
+                            android:text="重新发送" />
                     </LinearLayout>
 
                     <!-- display the register button-->
