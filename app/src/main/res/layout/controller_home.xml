@@ -77,10 +77,12 @@
                                 android:background="@color/qmui_config_color_white"
                                 android:orientation="horizontal">
 
+                                <!-- show outpatient payment  -->
                                 <LinearLayout
                                     android:id="@+id/navigation_linearLayout"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
                                     android:layout_weight="1"
                                     android:background="?attr/qmui_s_list_item_bg_with_border_none"
                                     android:orientation="vertical">
