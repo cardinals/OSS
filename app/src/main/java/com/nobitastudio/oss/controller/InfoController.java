@@ -59,10 +59,10 @@ public class InfoController extends QMUIWindowInsetLayout {
     protected void initData() {
         mEmptyView.hide();
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
-                Arrays.asList(new ItemDescription("就诊提醒", R.mipmap.diagnosis), new ItemDescription("吃药提醒", R.mipmap.drug),
-                        new ItemDescription("检查提醒", R.mipmap.ic_check), new ItemDescription("手术提醒", R.mipmap.operation),
-                        new ItemDescription("缴费信息", R.mipmap.pay_big), new ItemDescription("公告栏", R.mipmap.ic_announcement),
-                        new ItemDescription("天气预报", R.mipmap.weather), new ItemDescription("更早消息", R.mipmap.refresh)
+                Arrays.asList(new ItemDescription("就诊提醒", R.mipmap.ic_remind), new ItemDescription("吃药提醒", R.mipmap.ic_drug),
+                        new ItemDescription("检查提醒", R.mipmap.ic_check), new ItemDescription("手术提醒", R.mipmap.ic_operation),
+                        new ItemDescription("缴费信息", R.mipmap.ic_pay), new ItemDescription("医院公告", R.mipmap.ic_hospital),
+                        new ItemDescription("天气预报", R.mipmap.ic_weather), new ItemDescription("更早消息", R.mipmap.refresh)
                 ));
         mItemAdapter.setOnItemClickListener((v, pos) -> ToastUtils.showShort(pos));
         mRecyclerView.setAdapter(mItemAdapter);

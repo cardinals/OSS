@@ -1,16 +1,10 @@
 package com.nobitastudio.oss.fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
-
 import com.nobitastudio.oss.R;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -18,7 +12,7 @@ import butterknife.OnClick;
  * @date 2019/01/29 16:08
  * @description
  */
-public class TestFragment extends StandardWithTobBarLayoutFragment {
+public class Test2Fragment extends StandardWithTobBarLayoutFragment {
 
     private float mShadowAlpha = 1.0f;
     private int mShadowElevationDp = 10;
@@ -34,7 +28,7 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_test;
+        return R.layout.fragment_test2;
     }
 
     @Override

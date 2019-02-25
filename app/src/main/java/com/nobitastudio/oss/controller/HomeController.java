@@ -24,6 +24,8 @@ import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.util.CommonUtil;
 import com.nobitastudio.oss.util.DateUtil;
+import com.qmuiteam.qmui.layout.QMUILinearLayout;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -94,10 +96,12 @@ public class HomeController extends QMUIWindowInsetLayout {
     ViewPager mViewPager;
     @BindView(R.id.tabs)
     QMUITabSegment mTabSegment;
+    @BindView(R.id.QMUILinearLayout)
+    QMUILinearLayout mQMUILinearLayout;
 
-    @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout, R.id.navigation_linearLayout,
-            R.id.smart_linearLayout, R.id.consulting_linearLayout, R.id.coming_soon_linearLayout, R.id.test_linearLayout,
-            R.id.register_detail_linearLayout, R.id.case_history_linearLayout, R.id.article_linearLayout})
+    @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
+            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_detail_linearLayout, R.id.case_history_linearLayout,
+            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.coming_soon_linearLayout, R.id.test_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_linearLayout:
@@ -112,20 +116,20 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.navigation_linearLayout:
                 mHandler.startFragment(new NavigationFragment());
                 break;
-            case R.id.smart_linearLayout:
-                break;
             case R.id.consulting_linearLayout:
-                break;
-            case R.id.coming_soon_linearLayout:
-                break;
-            case R.id.test_linearLayout:
-                mHandler.startFragment(new TestFragment());
                 break;
             case R.id.register_detail_linearLayout:
                 break;
             case R.id.case_history_linearLayout:
                 break;
             case R.id.article_linearLayout:
+                break;
+            case R.id.smart_linearLayout:
+                break;
+            case R.id.coming_soon_linearLayout:
+                break;
+            case R.id.test_linearLayout:
+                mHandler.startFragment(new TestFragment());
                 break;
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");
@@ -190,11 +194,20 @@ public class HomeController extends QMUIWindowInsetLayout {
     private void init() {
         initBasic();
         initTopBar();
+        initQMUILinearLayout();
         initPullFreshLayout();
         initUltraViewPager();
         initTabs();
         initData();
         initPagers();
+    }
+
+    private void initQMUILinearLayout() {
+        float mShadowAlpha = 1.0f;
+        int mShadowElevationDp = 10;
+        int mRadius = 15;
+        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
+                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
     }
 
     private void initBasic() {
@@ -264,14 +277,14 @@ public class HomeController extends QMUIWindowInsetLayout {
         mTabSegment.setIndicatorPosition(false);
         mTabSegment.setIndicatorWidthAdjustContent(true);
         QMUITabSegment.Tab healthArticle = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.tcm),
-                ContextCompat.getDrawable(getContext(), R.mipmap.tcm_selected),
-                "健康头条", true
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_crown),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_crown_selected),
+                "健康头条", false
         );
         QMUITabSegment.Tab doctorLecture = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.video),
-                ContextCompat.getDrawable(getContext(), R.mipmap.video_selected),
-                "名医讲堂", true
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_hat),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_hat_selected),
+                "名医讲堂", false
         );
         mTabSegment.addTab(healthArticle);
         mTabSegment.addTab(doctorLecture);

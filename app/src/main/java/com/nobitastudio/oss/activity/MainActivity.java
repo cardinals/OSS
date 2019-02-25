@@ -27,6 +27,7 @@ import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
+import com.nobitastudio.oss.fragment.Test2Fragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.fragment.UserInfoFragment;
 
@@ -62,18 +63,15 @@ public class MainActivity extends BaseFragmentActivity {
      * @return
      */
     protected BaseFragment getFirstFragment() {
-//        return new TestFragment();
+//        return new Test2Fragment();
 //        return new LoginFragment();
 //        return new SettingFragment();
-//        return new HomeFragment();
+        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
-        return new CreateMedicalCardThreeFragment();
-
-
-
-
+//        return new CreateMedicalCardThreeFragment();
+//        return new TestFragment();
     }
 
 }

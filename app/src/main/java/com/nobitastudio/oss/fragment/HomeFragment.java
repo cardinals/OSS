@@ -125,8 +125,26 @@ public class HomeFragment extends BaseFragment {
         int selectColor = QMUIResHelper.getAttrColor(getContext(), R.attr.qmui_config_color_blue);
         mTabSegment.setDefaultNormalColor(normalColor);
         mTabSegment.setDefaultSelectedColor(selectColor);
-//        mTabSegment.setDefaultTabIconPosition(QMUITabSegment.ICON_POSITION_BOTTOM);
+        QMUITabSegment.Tab home = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_home),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_home_selected),
+                getResources().getString(R.string.home), false
+        );
 
+        QMUITabSegment.Tab info = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_notification),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_notification_selected),
+                getResources().getString(R.string.msg), false
+        );
+        QMUITabSegment.Tab mine = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_mine),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_mine_selected),
+                getResources().getString(R.string.mine), false
+        );
+        mTabSegment.addTab(home)
+                .addTab(info)
+                .addTab(mine);
+//        mTabSegment.setDefaultTabIconPosition(QMUITabSegment.ICON_POSITION_BOTTOM);
 //        // 如果你的 icon 显示大小和实际大小不吻合:
 //        // 1. 设置icon 的 bounds
 //        // 2. Tab 使用拥有5个参数的构造器
@@ -143,26 +161,6 @@ public class HomeFragment extends BaseFragment {
 //                normalDrawable,
 //                "Components", false, false
 //        );
-
-        QMUITabSegment.Tab home = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.home),
-                ContextCompat.getDrawable(getContext(), R.mipmap.home_selected),
-                getResources().getString(R.string.home), false
-        );
-
-        QMUITabSegment.Tab info = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.msg),
-                ContextCompat.getDrawable(getContext(), R.mipmap.msg_selected),
-                getResources().getString(R.string.msg), false
-        );
-        QMUITabSegment.Tab mine = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.mine),
-                ContextCompat.getDrawable(getContext(), R.mipmap.mine_selected),
-                getResources().getString(R.string.mine), false
-        );
-        mTabSegment.addTab(home)
-                .addTab(info)
-                .addTab(mine);
     }
 
     @Override

@@ -55,6 +55,8 @@ configurations.all {
 }
 
 dependencies {
+
+    // C:\Users\Administrator\.gradle\caches\modules-2\files-2.1 包位置
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'

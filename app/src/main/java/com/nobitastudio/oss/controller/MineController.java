@@ -10,6 +10,7 @@ import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
+import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -37,6 +38,8 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUIEmptyView mEmptyView;
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
+    @BindView(R.id.QMUILinearLayout)
+    QMUILinearLayout mQMUILinearLayout;
 
     ControllerClickHandler mHandler;
     BottomSheetHelper mBottomSheetHelper;
@@ -50,11 +53,19 @@ public class MineController extends QMUIWindowInsetLayout {
 
     protected void init() {
         initTopBar();
+        initQMUILinearLayout();
         initRefreshLayout();
         initGroupListView();
         initLastCustom();
     }
 
+    private void initQMUILinearLayout() {
+        float mShadowAlpha = 1.0f;
+        int mShadowElevationDp = 10;
+        int mRadius = 15;
+        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
+                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+    }
 
     private void initGroupListView() {
 
