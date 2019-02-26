@@ -20,23 +20,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 后期做将主布局进行更换 -->
-    <!--<FrameLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="?attr/qmui_config_color_background">-->
-        <!---->
-    <!--</FrameLayout>-->
-
     <com.qmuiteam.qmui.widget.QMUIViewPager
-        android:id="@+id/pager"
+        android:id="@+id/fragment_pager"
         android:background="?attr/app_content_bg_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_marginBottom="@dimen/home_tab_height"/>
     <com.qmuiteam.qmui.widget.QMUITabSegment
-        android:id="@+id/tabs"
+        android:id="@+id/fragment_tabs"
         android:layout_gravity="bottom"
         android:background="?attr/qmui_list_item_bg_with_border_top"
         android:textSize="12sp"

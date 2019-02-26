@@ -94,7 +94,8 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.qmuiteam:qmui:1.1.12'  // widget
+//    implementation 'com.qmuiteam:qmui:1.1.12'  // widget
+    implementation 'com.qmuiteam:qmui:1.2.0'  // widget
 //    implementation 'com.qmuiteam:arch:0.3.1'   // fragment,activity 该版本存在返回动画异常异常
      implementation 'com.qmuiteam:arch:0.3.2'
 

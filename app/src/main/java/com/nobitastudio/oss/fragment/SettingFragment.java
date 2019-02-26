@@ -51,7 +51,6 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
-        eatDrugRemindItem.getSwitch().setChecked(true);
 
         QMUICommonListItemView checkRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),

@@ -188,7 +188,6 @@
                                     android:textColor="?attr/qmui_config_color_gray_5"
                                     android:textSize="11sp" />
                             </LinearLayout>
-
                         </com.qmuiteam.qmui.layout.QMUILinearLayout>
                     </FrameLayout>
                 </LinearLayout>

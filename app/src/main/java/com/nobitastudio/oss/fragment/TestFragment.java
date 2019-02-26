@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import com.nobitastudio.oss.R;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,10 +21,31 @@ import butterknife.OnClick;
  */
 public class TestFragment extends StandardWithTobBarLayoutFragment {
 
+    private float mShadowAlpha = 1.0f;
+    private int mShadowElevationDp = 10;
+    private int mRadius = 15;
+
+    @BindView(R.id.QMUILinearLayout)
+    QMUILinearLayout linearLayout;
+    @BindView(R.id.groupListView)
+    QMUIGroupListView mQMUIGroupListView;
+
+    @OnClick({R.id.register_remind_linearlayout,R.id.pay_info_linearlayout,R.id.hospital_announce_linearlayout})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.register_remind_linearlayout:
+                break;
+            case R.id.pay_info_linearlayout:
+                break;
+            case R.id.hospital_announce_linearlayout:
+                break;
+        }
+    }
+
 
     @Override
     protected void initTopBar() {
-        mTopBar.setTitle("test");
+        mTopBar.setTitle("消息");
     }
 
     @Override
@@ -33,6 +55,7 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-
+        linearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
+                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
     }
 }

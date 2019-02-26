@@ -147,6 +147,17 @@
                         android:text="111" />
 
                     <TextView
+                        style="@style/QDCommonDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="start"
+                        android:text="背景下的指示文字"
+                        android:textColor="@color/qmui_config_color_white" />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/qmui_s_list_item_bg_with_border_none"

@@ -92,16 +92,16 @@ public class HomeController extends QMUIWindowInsetLayout {
     QMUITopBarLayout mTopBar;
     @BindView(R.id.pull_to_refresh)
     QMUIPullRefreshLayout mPullRefreshLayout;
-    @BindView(R.id.pager)
+    @BindView(R.id.controller_pager)
     ViewPager mViewPager;
-    @BindView(R.id.tabs)
+    @BindView(R.id.controller_tabs)
     QMUITabSegment mTabSegment;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
             R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_detail_linearLayout, R.id.case_history_linearLayout,
-            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.coming_soon_linearLayout, R.id.test_linearLayout})
+            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout,R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_linearLayout:
@@ -126,10 +126,10 @@ public class HomeController extends QMUIWindowInsetLayout {
                 break;
             case R.id.smart_linearLayout:
                 break;
-            case R.id.coming_soon_linearLayout:
-                break;
-            case R.id.test_linearLayout:
+            case R.id.express_linearLayout:
                 mHandler.startFragment(new TestFragment());
+                break;
+            case R.id.coming_soon_linearLayout:
                 break;
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");
