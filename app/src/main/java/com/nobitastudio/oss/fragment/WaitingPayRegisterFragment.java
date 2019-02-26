@@ -39,10 +39,6 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     TextView mDiagnosisRoomTextView;
     @BindView(R.id.register_cost_textview)
     TextView mDiagnosisCostTextView;
-    @BindView(R.id.cancel_register_button)
-    QMUIRoundButton mCancelRegisterRoundButton;
-    @BindView(R.id.pay_now_roundbutton)
-    QMUIRoundButton mPayNowRoundButton;
 
     @BindView(R.id.hosipital_info_solid_imageview)
     ImageView mHospitalInfoSolidImageView;

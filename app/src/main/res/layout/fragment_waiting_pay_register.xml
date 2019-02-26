@@ -424,28 +424,19 @@
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/cancel_register_button"
+                style="@style/AppQMUIRoundButtonLeft"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="@dimen/spece_left_right_button"
+                android:layout_marginLeft="51dp"
                 android:layout_weight="1"
-                android:alpha="255"
-                android:gravity="center"
-                android:text="取消预约"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomLeft="20dp"
-                app:qmui_radiusTopLeft="20dp" />
+                android:text="取消预约" />
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/pay_now_roundbutton"
+                style="@style/AppQMUIRoundButtonRight"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="@dimen/spece_left_right_button"
+                android:layout_marginRight="51dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="立即支付"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomRight="20dp"
-                app:qmui_radiusTopRight="20dp" />
+                android:text="立即支付" />
         </LinearLayout>
     </FrameLayout>
 

@@ -20,12 +20,6 @@ import butterknife.OnClick;
  */
 public class TestFragment extends StandardWithTobBarLayoutFragment {
 
-    private float mShadowAlpha = 1.0f;
-    private int mShadowElevationDp = 10;
-    private int mRadius = 15;
-
-    @BindView(R.id.QMUILinearLayout)
-    QMUILinearLayout linearLayout;
 
     @Override
     protected void initTopBar() {
@@ -39,7 +33,6 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        linearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+
     }
 }

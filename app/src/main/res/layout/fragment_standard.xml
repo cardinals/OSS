@@ -138,11 +138,19 @@
                         android:layout_marginRight="51dp"
                         android:text="登          录" />
 
+                    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                        android:id="@+id/create_medical_card_button"
+                        style="@style/AppQMUIRoundButtonAll"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="51dp"
+                        android:layout_marginRight="51dp"
+                        android:text="111" />
+
                     <TextView
-                        android:text="响应式背景"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="?attr/qmui_s_list_item_bg_with_border_none" />
+                        android:background="?attr/qmui_s_list_item_bg_with_border_none"
+                        android:text="响应式背景" />
 
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>

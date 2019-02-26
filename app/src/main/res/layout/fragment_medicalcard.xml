@@ -65,8 +65,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
         android:paddingBottom="16dp">
 
         <LinearLayout
@@ -76,26 +74,19 @@
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/create_medical_card_button"
+                style="@style/AppQMUIRoundButtonLeft"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_marginLeft="51dp"
                 android:layout_weight="1"
-                android:alpha="255"
-                android:gravity="center"
-                android:text="办理电子诊疗卡"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomLeft="20dp"
-                app:qmui_radiusTopLeft="20dp" />
+                android:text="办理电子诊疗卡" />
 
             <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
                 android:id="@+id/bind_medical_card_button"
+                style="@style/AppQMUIRoundButtonRight"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_marginRight="51dp"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="绑定诊疗卡"
-                app:qmui_backgroundColor="@color/app_color_blue_full"
-                app:qmui_radiusBottomRight="20dp"
-                app:qmui_radiusTopRight="20dp" />
+                android:text="绑定诊疗卡" />
         </LinearLayout>
     </FrameLayout>
 
