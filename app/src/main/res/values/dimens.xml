@@ -63,8 +63,8 @@
     <!-- 椭圆柱的长宽 -->
     <dimen name="solid_image_common_width">4dp</dimen>
     <dimen name="solid_image_common_height">24dp</dimen>
-    <dimen name="spece_left_right_button">51dp</dimen>
-    <dimen name="spece_left_right_button_minus_12">39dp</dimen>
+    <dimen name="space_left_right_button">51dp</dimen>
+    <dimen name="space_left_right_button_minus_12">39dp</dimen>
     <dimen name="space_top_bottom_button">18dp</dimen>
     <dimen name="space_left_right_content">12dp</dimen>
 

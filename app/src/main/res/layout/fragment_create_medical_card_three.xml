@@ -211,9 +211,9 @@
                         android:id="@+id/confirm_modify_password"
                         style="@style/AppQDRadiusButton"
                         android:layout_width="match_parent"
-                        android:layout_marginLeft="@dimen/spece_left_right_button_minus_12"
+                        android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
                         android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginRight="@dimen/spece_left_right_button_minus_12"
+                        android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="确认修改" />
 
                 </LinearLayout>
