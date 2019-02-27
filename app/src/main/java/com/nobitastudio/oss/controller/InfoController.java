@@ -2,19 +2,14 @@ package com.nobitastudio.oss.controller;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
-import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.model.vo.ItemDescription;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -26,7 +21,6 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +34,7 @@ import butterknife.ButterKnife;
  */
 public class InfoController extends QMUIWindowInsetLayout {
 
-    static class ItemRecyclerViewAdapter extends BaseRecyclerAdapter<ItemDescription> {
+    static class ItemRecyclerViewAdapter extends BaseRecyclerViewAdapter<ItemDescription> {
 
         public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
             super(ctx, data);
@@ -87,7 +81,7 @@ public class InfoController extends QMUIWindowInsetLayout {
     }
 
     protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
+        mPullRefreshLayout.setEnabled(false);
     }
 
     private void initGroupListView() {
@@ -137,7 +131,7 @@ public class InfoController extends QMUIWindowInsetLayout {
         QMUICommonListItemView mWeatherItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_weather),
                 "天气信息",
-                "收藏的医生与资讯",
+                "可查看未来一周的天气信息",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -150,12 +144,21 @@ public class InfoController extends QMUIWindowInsetLayout {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
+        QMUICommonListItemView mOtherItemView = mGroupListView.createItemView(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_message),
+                "其他消息",
+                null,
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        );
+
         QMUIGroupListView.newSection(getContext())
-                .setTitle("其他消息")
+                .setTitle("常用消息")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
                 .addItemView(mExpressItemView, getOnclickListener())
                 .addItemView(mPreferenItemView,getOnclickListener())
                 .addItemView(mWeatherItemView, getOnclickListener())
+                .addItemView(mOtherItemView, getOnclickListener())
                 .addTo(mGroupListView);
     }
 

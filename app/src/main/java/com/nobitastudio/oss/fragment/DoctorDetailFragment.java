@@ -1,23 +1,18 @@
 package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.model.entity.Visit;
 import com.nobitastudio.oss.util.DateUtil;
@@ -31,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -60,7 +54,7 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         }
     }
 
-    public class VisitRecycleViewAdapter extends BaseRecyclerAdapter<Visit> {
+    public class VisitRecycleViewAdapter extends BaseRecyclerViewAdapter<Visit> {
         public VisitRecycleViewAdapter(Context ctx, List<Visit> list) {
             super(ctx, list);
         }

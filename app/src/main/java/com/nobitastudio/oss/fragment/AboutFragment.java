@@ -28,8 +28,6 @@ import butterknife.ButterKnife;
  */
 public class AboutFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.topbar)
-    QMUITopBarLayout mTopBar;
     @BindView(R.id.version_textView)
     TextView versionTextView;
     @BindView(R.id.about_list_groupList)

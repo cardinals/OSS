@@ -37,7 +37,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
         // ============================ 短信通知
         QMUICommonListItemView diagnosisRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.diagnosis),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_remind),
                 "就诊提醒",
                 "已关闭",
                 QMUICommonListItemView.HORIZONTAL,
@@ -45,7 +45,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug),
                 "吃药提醒",
                 "吃药时推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -61,7 +61,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView operationRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.operation),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation),
                 "手术提醒",
                 "手术前一天推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -69,8 +69,8 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView hospitalActivityRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_hot),
-                "医院活动",
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_preferen),
+                "优惠活动",
                 "实时推送",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM
@@ -89,7 +89,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
 
         // ============================ 常用设置 通知
         QMUICommonListItemView clearCacheItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.delete),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_delete),
                 "清除缓存",
                 "10.1M",
                 QMUICommonListItemView.HORIZONTAL,
@@ -97,7 +97,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView updateInfoItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.input),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_edit),
                 "个人资料",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -105,7 +105,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView aboutUsItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.info),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_info),
                 "关于我们",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -113,7 +113,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView shareItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.share),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_share),
                 "分享",
                 null,
                 QMUICommonListItemView.HORIZONTAL,

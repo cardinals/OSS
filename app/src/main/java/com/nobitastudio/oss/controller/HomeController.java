@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
@@ -66,7 +66,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    static class HealthArticleRecycleViewAdapter extends BaseRecyclerAdapter<HealthArticle> {
+    static class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
 
         public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
             super(ctx, list);
@@ -338,7 +338,7 @@ public class HomeController extends QMUIWindowInsetLayout {
      */
     private void initTopBar() {
         mTopBar.setTitle(getResources().getString(R.string.home));
-        mTopBar.addLeftImageButton(R.mipmap.qr_code, R.id.topbar_left_qr_code_button)
+        mTopBar.addLeftImageButton(R.mipmap.ic_qr_code, R.id.topbar_left_qr_code_button)
                 .setOnClickListener(view -> ToastUtils.showShort("程序员小哥哥已累死,请给我们点时间吧~"));
         mTopBar.addRightTextButton("多云转小雨 33℃", R.id.topbar_right_setting_button)
                 .setOnClickListener(v -> ToastUtils.showShort("进入天气预报"));

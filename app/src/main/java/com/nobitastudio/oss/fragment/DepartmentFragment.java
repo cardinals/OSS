@@ -1,26 +1,27 @@
 package com.nobitastudio.oss.fragment;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 
-import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
+import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author chenxiong
@@ -30,6 +31,44 @@ import butterknife.ButterKnife;
  */
 public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
+    class DepartmentRecyclerViewAdapter extends BaseRecyclerViewAdapter<Department> {
+
+        public DepartmentRecyclerViewAdapter(Context ctx, List<Department> list) {
+            super(ctx, list);
+        }
+
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recyclerview_item_department;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, Department item) {
+            holder.setText(R.id.textview, item.getName());
+            int imgResId = getImageDrawableId(item);
+            if (imgResId != 0) {
+
+            }
+        }
+    }
+
+    private int getImageDrawableId(Department item) {
+        int imgResId;
+        imgResId = item.hashCode() % 2 == 0 ? R.mipmap.ic_bone : R.mipmap.ic_brain;
+//        switch (item.getName()) {
+//            case "脑科":
+//                imgResId = R.mipmap.ic_brain;
+//                break;
+//            case "骨科":
+//                imgResId = R.mipmap.ic_bone;
+//                break;
+//            default:
+//                imgResId = 0;
+//                break;
+//        }
+        return imgResId;
+    }
+
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
@@ -37,7 +76,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
-    private void initListView() {
+    private void initRecyclerView() {
         departments = new ArrayList<>();
         departments.add(new Department());
         departments.add(new Department());
@@ -58,12 +97,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        SimpleRecycleViewAdapter<Department> adapter = new SimpleRecycleViewAdapter<Department>(getContext(), departments) {
-            @Override
-            public String display(int position, Department department) {
-                return department.toString();
-            }
-        };
+        DepartmentRecyclerViewAdapter adapter = new DepartmentRecyclerViewAdapter(getContext(), departments);
         adapter.setOnItemClickListener((itemView, pos) -> {
             startFragment(new DoctorListFragment());
         });
@@ -176,7 +210,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initListView();
+        initRecyclerView();
     }
 
 }

@@ -30,14 +30,14 @@ import java.util.List;
  * @date 2016-10-19
  */
 
-public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
+public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
     protected final List<T> mData;
     protected final Context mContext;
     private LayoutInflater mInflater;
     private OnItemClickListener mClickListener;
     private OnItemLongClickListener mLongClickListener;
 
-    public BaseRecyclerAdapter(Context ctx, List<T> list) {
+    public BaseRecyclerViewAdapter(Context ctx, List<T> list) {
         mData = (list != null) ? list : new ArrayList<T>();
         mContext = ctx;
         mInflater = LayoutInflater.from(ctx);
@@ -48,20 +48,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         final RecyclerViewHolder holder = new RecyclerViewHolder(mContext,
                 mInflater.inflate(getItemLayoutId(viewType), parent, false));
         if (mClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mClickListener.onItemClick(holder.itemView, holder.getLayoutPosition());
-                }
-            });
+            holder.itemView.setOnClickListener(v -> mClickListener.onItemClick(holder.itemView, holder.getLayoutPosition()));
         }
         if (mLongClickListener != null) {
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    mLongClickListener.onItemLongClick(holder.itemView, holder.getLayoutPosition());
-                    return true;
-                }
+            holder.itemView.setOnLongClickListener(v -> {
+                mLongClickListener.onItemLongClick(holder.itemView, holder.getLayoutPosition());
+                return true;
             });
         }
         return holder;

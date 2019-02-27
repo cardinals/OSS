@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_56"
+    android:background="?attr/qmui_s_list_item_bg_with_border_bottom_inset_left"
+    android:paddingLeft="?attr/qmui_content_padding_horizontal"
+    android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/dp_32"
+        android:layout_height="@dimen/dp_32"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/ic_gynaecology" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:paddingLeft="@dimen/dp_8"
+        android:text="康复科"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+</LinearLayout>

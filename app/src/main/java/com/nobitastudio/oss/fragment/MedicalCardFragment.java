@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 
@@ -23,7 +23,7 @@ import butterknife.OnClick;
  */
 public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
-    static class MedicalCardItemAdapter extends BaseRecyclerAdapter<MedicalCard> {
+    static class MedicalCardItemAdapter extends BaseRecyclerViewAdapter<MedicalCard> {
 
         public MedicalCardItemAdapter(Context ctx, List<MedicalCard> list) {
             super(ctx, list);

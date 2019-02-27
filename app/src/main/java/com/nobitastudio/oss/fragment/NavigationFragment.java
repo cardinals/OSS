@@ -5,22 +5,17 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
 import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.vo.ItemDescription;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
@@ -28,7 +23,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author chenxiong
@@ -38,7 +32,7 @@ import butterknife.ButterKnife;
  */
 public class NavigationFragment extends StandardWithTobBarLayoutFragment {
 
-    static class ItemRecyclerViewAdapter extends BaseRecyclerAdapter<ItemDescription> {
+    static class ItemRecyclerViewAdapter extends BaseRecyclerViewAdapter<ItemDescription> {
 
         public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
             super(ctx, data);

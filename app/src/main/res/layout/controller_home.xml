@@ -250,6 +250,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="1"
+                                    android:background="?attr/qmui_s_list_item_bg_with_border_none"
                                     android:orientation="vertical">
 
                                     <ImageView
@@ -456,7 +457,7 @@
                                     android:layout_height="66dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginBottom="4dp"
-                                    android:src="@mipmap/ic_card" />
+                                    android:src="@mipmap/ic_medical_card" />
 
                                 <TextView
                                     android:layout_width="wrap_content"

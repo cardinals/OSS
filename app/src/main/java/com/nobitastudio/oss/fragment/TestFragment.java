@@ -1,13 +1,23 @@
 package com.nobitastudio.oss.fragment;
 
+import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
+import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+
+import java.util.Collections;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,31 +31,34 @@ import butterknife.OnClick;
  */
 public class TestFragment extends StandardWithTobBarLayoutFragment {
 
-    private float mShadowAlpha = 1.0f;
-    private int mShadowElevationDp = 10;
-    private int mRadius = 15;
+    static class TestRecyclerViewAdapter extends BaseRecyclerViewAdapter<Department> {
 
-    @BindView(R.id.QMUILinearLayout)
-    QMUILinearLayout linearLayout;
-    @BindView(R.id.groupListView)
-    QMUIGroupListView mQMUIGroupListView;
+        public TestRecyclerViewAdapter(Context ctx, List<Department> list) {
+            super(ctx, list);
+        }
 
-    @OnClick({R.id.register_remind_linearlayout,R.id.pay_info_linearlayout,R.id.hospital_announce_linearlayout})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.register_remind_linearlayout:
-                break;
-            case R.id.pay_info_linearlayout:
-                break;
-            case R.id.hospital_announce_linearlayout:
-                break;
+        @Override
+        public int getItemLayoutId(int viewType) {
+            return R.layout.recyclerview_item_test;
+        }
+
+        @Override
+        public void bindData(RecyclerViewHolder holder, int position, Department item) {
+            // do nothing
+        }
+
+        @Override
+        public int getItemCount() {
+            return 20;
         }
     }
 
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void initTopBar() {
-        mTopBar.setTitle("消息");
+        mTopBar.setTitle("科室列表");
     }
 
     @Override
@@ -55,7 +68,14 @@ public class TestFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        linearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+        mRecyclerView.setAdapter(new TestRecyclerViewAdapter(getActivity(), Collections.EMPTY_LIST));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mEmptyView.hide();
     }
 }

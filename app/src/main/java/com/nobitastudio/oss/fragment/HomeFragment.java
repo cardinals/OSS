@@ -98,7 +98,7 @@ public class HomeFragment extends BaseFragment {
     };
 
     /**
-     * 初始化pagers  分别为 医院主页，服务，设置
+     * 初始化pagers  分别为 医院主页,消息,我的
      */
     private void initPagers() {
         mPages = new HashMap<>();
@@ -107,6 +107,7 @@ public class HomeFragment extends BaseFragment {
             public void startFragment(BaseFragment fragment) {
                 HomeFragment.this.startFragment(fragment);
             }
+
 
             @Override
             public void startFragmentAndDestroyCurrent(BaseFragment fragment) {
