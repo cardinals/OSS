@@ -47,7 +47,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
             holder.setText(R.id.textview, item.getName());
             int imgResId = getImageDrawableId(item);
             if (imgResId != 0) {
-
+                Glide.with(DepartmentFragment.this).load(getImageDrawableId(item)).into(holder.getImageView(R.id.imageview));
             }
         }
     }
