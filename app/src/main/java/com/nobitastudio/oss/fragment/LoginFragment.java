@@ -100,13 +100,6 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
         return ServiceResult.success(null);
     }
 
-    /**
-     * 初始化版权信息
-     */
-    private void initCopyRight() {
-        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
-    }
-
     @Override
     protected boolean canDragBack() {
         return false;
@@ -135,7 +128,7 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initCopyRight();
+        initCopyRight(mCopyrightTextView);
     }
 
 }

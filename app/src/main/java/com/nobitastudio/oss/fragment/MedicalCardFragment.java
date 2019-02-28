@@ -74,7 +74,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_medicalcard;
+        return R.layout.fragment_medical_card;
     }
 
     @Override
@@ -85,7 +85,9 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     protected void initMedicalCard() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         mMedicalCardRecyclerView.setLayoutManager(gridLayoutManager);
-        mMedicalCardRecyclerView.setAdapter(new MedicalCardItemAdapter(getBaseFragmentActivity(), null));
+        MedicalCardItemAdapter mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), null);
+        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> startFragment(new MedicalCardDetailFragment()));
+        mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
     }
 
 }

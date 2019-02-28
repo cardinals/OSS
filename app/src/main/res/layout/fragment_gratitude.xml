@@ -49,42 +49,35 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="25dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="25dp">
 
                         <TextView
-                            android:gravity="center_horizontal"
                             style="@style/QDCommonTitle"
                             android:layout_marginTop="10dp"
-                            android:text="致      谢"/>
+                            android:gravity="center_horizontal"
+                            android:text="致      谢" />
 
-                        <me.codeboy.android.aligntextview.AlignTextView
+                        <TextView
                             android:id="@+id/content_textView"
+                            style="@style/QDCommonDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
                             android:paddingLeft="24dp"
                             android:paddingRight="24dp"
-                            style="@style/QDCommonDescription"
-                            android:text="@string/gratitude_content"
-                            android:gravity="left"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-
+                            android:text="@string/app_gratitude_content" />
                     </LinearLayout>
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:background="@color/qmui_config_color_white"
                         android:layout_weight="1"/>
 
                     <!-- 版权,责任 -->
                     <TextView
                         android:id="@+id/copyright_textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="25dp"
-                        android:gravity="center_horizontal"
-                        android:text="Copyright © Nobita chen All rights reserved."
-                        android:textColor="?attr/qmui_config_color_gray_7"/>
+                        style="@style/AppCopyrightTextViw" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

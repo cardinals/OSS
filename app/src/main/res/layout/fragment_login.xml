@@ -241,19 +241,12 @@ android:focusableInTouchMode="true">
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/qmui_config_color_white" />
+                    android:layout_weight="1"/>
 
                 <!-- 版权,责任 -->
                 <TextView
                     android:id="@+id/copyright_textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
-                    android:gravity="center_horizontal"
-                    android:text="Copyright © Nobita chen All rights reserved."
-                    android:textColor="?attr/qmui_config_color_gray_7" />
+                    style="@style/AppCopyrightTextViw" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

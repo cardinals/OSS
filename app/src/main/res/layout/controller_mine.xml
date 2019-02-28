@@ -105,7 +105,6 @@
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="144dp"
                             android:layout_marginRight="20dp"
-                            android:fitsSystemWindows="true"
                             android:gravity="center"
                             android:orientation="horizontal"
                             app:qmui_borderColor="?attr/qmui_config_color_separator"

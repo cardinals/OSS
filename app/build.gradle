@@ -81,8 +81,8 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:3.8.1'
-    // 左右对齐textview
-    implementation 'me.codeboy.android:align-text-view:2.3.2'
+//    // 左右对齐textview  底部存在大量空白
+//    implementation 'me.codeboy.android:align-text-view:2.3.2'
     // https://mvnrepository.com/artifact/joda-time/joda-time
     // implementation 'joda-time:joda-time:2.10.1'
 

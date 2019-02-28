@@ -22,22 +22,13 @@ import butterknife.ButterKnife;
  */
 public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
 
-
-    @BindView(R.id.topbar)
-    QMUITopBarLayout mTopBar;
     @BindView(R.id.copyright_textView)
     TextView mCopyrightTextView;
 
     /**
-     * 初始化版权信息
-     */
-    private void initCopyRight() {
-        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
-    }
-
-    /**
      * 初始化 topbar
      */
+    @Override
     protected void initTopBar() {
         // 切换其他情况的按钮
         mTopBar.setTitle("致谢");
@@ -51,12 +42,7 @@ public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initCopyRight();
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(false);
+        initCopyRight(mCopyrightTextView);
     }
 
 }

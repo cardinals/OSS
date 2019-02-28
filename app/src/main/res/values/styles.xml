@@ -210,5 +210,15 @@
         <item name="qmui_radiusTopRight">20dp</item>
     </style>
 
+    <!-- 版权信息 textview -->
+    <style name="AppCopyrightTextViw">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="android:text">Copyright © Nobita chen All rights reserved.</item>
+        <item name="android:textColor">?attr/qmui_config_color_gray_7</item>
+    </style>
 
 </resources>

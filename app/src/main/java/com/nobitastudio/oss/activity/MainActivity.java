@@ -64,9 +64,9 @@ public class MainActivity extends BaseFragmentActivity {
      */
     protected BaseFragment getFirstFragment() {
 //        return new Test2Fragment();
-//        return new LoginFragment();
+        return new LoginFragment();
 //        return new SettingFragment();
-        return new HomeFragment();
+//        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();

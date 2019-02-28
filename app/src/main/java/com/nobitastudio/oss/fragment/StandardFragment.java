@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
@@ -19,6 +20,7 @@ import com.nobitastudio.oss.base.helper.PopViewHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.helper.ViewHelper;
+import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -280,6 +282,16 @@ public abstract class StandardFragment extends BaseFragment {
         mSolidImageHelper.initSolidImage(imageViews);
     }
 
+    // ============================= 版权信息
+
+    /**
+     * 初始化版权信息
+     */
+    protected void initCopyRight(TextView... mCopyrightTextView) {
+        for (TextView textView : mCopyrightTextView) {
+            textView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
+        }
+    }
 
     // ======================== viewTools
 

@@ -66,7 +66,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    static class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
+    class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
 
         public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
             super(ctx, list);

@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
@@ -19,22 +20,23 @@ import butterknife.ButterKnife;
  */
 public class DeclarationFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.solidImage)
-    ImageView solidImage;
+    @BindView(R.id.copyright_textView)
+    TextView mCopyrightTextView;
 
     @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("title");
+        mTopBar.setTitle("声明");
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_standard;
+        return R.layout.fragment_declaration;
     }
 
     @Override
     protected void initLastCustom() {
-        initSolidImage(solidImage);
+        initCopyRight(mCopyrightTextView);
+
     }
 }
