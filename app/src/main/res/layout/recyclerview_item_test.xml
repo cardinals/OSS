@@ -10,7 +10,7 @@
         android:layout_width="@dimen/dp_32"
         android:layout_height="@dimen/dp_32"
         android:layout_gravity="center_vertical"
-        android:src="@mipmap/ic_gynaecology" />
+        android:src="@mipmap/ic_woman" />
 
     <TextView
         android:id="@+id/text"

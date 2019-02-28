@@ -46,6 +46,7 @@ public class UpgradeTipTask implements UpgradeTask {
         throw new RuntimeException("please call upgrade(Activity ic_activity)");
     }
 
+    // 更新情况
     public void upgrade(Activity activity) {
         String title = String.format(activity.getString(R.string.app_upgrade_tip_title), QMUIPackageHelper.getAppVersion(activity));
         CharSequence message = getUpgradeWord(activity);

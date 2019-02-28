@@ -14,11 +14,12 @@ public class Department implements Serializable {
 
     private static final long serialVersionUID = -3712970229472760165L;
 
-    public interface DepartmentSimpleView {};
-    public interface DepartmentDetailView extends DepartmentSimpleView {};
-
     public Department() {
-        this(1,"name","address",1,1, Area.A,"introduction");
+        this("name");
+    }
+
+    public Department(String name) {
+        this(1,name,"address",1,1, Area.A,"introduction");
     }
 
     public Department(Integer id, String name, String address, Integer location, Integer floor, Area area, String introduction) {
