@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.constant;
+package com.nobitastudio.oss.container;
 
 import com.nobitastudio.oss.R;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/02/28 09:56
- * @description
+ * @description 常量工具类
  */
 public class Constant {
 

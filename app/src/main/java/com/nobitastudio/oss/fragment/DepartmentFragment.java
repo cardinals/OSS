@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.constant.Constant;
+import com.nobitastudio.oss.container.Constant;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
