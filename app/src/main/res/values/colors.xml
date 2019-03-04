@@ -25,8 +25,6 @@
     <color name="app_color_theme_8">#AC8FEF</color> <!-- Lavender -->
     <color name="app_color_theme_9">#EE85C1</color> <!-- Pink Rose -->
 
-    <color name="app_color_description">@color/qmui_config_color_gray_5</color>
-
     <color name="bar_divider">#D4D6D8</color>
     <color name="tab_panel_bg">#ffffff</color>
     <color name="tab_panel_divider">@color/bar_divider</color>
@@ -44,5 +42,15 @@
     <color name="colorHelper_square_to_ratio_background">@color/app_color_theme_3</color>
 
     <color name="app_color_orange">#F28159</color>
+
+    <!-- 自定义 -->
+    <color name="app_color_description">@color/qmui_config_color_gray_5</color>
+    <color name="app_color_icon_selected_full">#31BDF3</color>    <!-- icon选中时以及正常 的填充颜色 -->
+    <color name="app_color_icon_un_selected_full">#DBDBDB</color>
+
+    <!-- 阿里图标库的 icon 配色 -->
+    <color name="app_ali_icon_black">#444444</color>
+    <color name="app_ali_icon_green">#00D8A0</color>
+
 
 </resources>

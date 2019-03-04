@@ -139,8 +139,8 @@ public class CommonUtil {
         String hours = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY) > 9 ? calendar.get(Calendar.HOUR_OF_DAY) : "0" + calendar.get(Calendar.HOUR_OF_DAY));
         String minutes = String.valueOf(calendar.get(Calendar.MINUTE) > 9 ? calendar.get(Calendar.MINUTE) : "0" + calendar.get(Calendar.MINUTE));
         String second = String.valueOf(calendar.get(Calendar.SECOND) > 9 ? calendar.get(Calendar.SECOND) : "0" + calendar.get(Calendar.SECOND));
-        String currenTime = year + month + date + hours + minutes + second;
-        return currenTime;
+        String currentTime = year + month + date + hours + minutes + second;
+        return currentTime;
     }
 
     /**

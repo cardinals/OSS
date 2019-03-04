@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.controller;
+package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -66,7 +66,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
+    public static class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
 
         public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
             super(ctx, list);
@@ -140,7 +140,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    public HashMap<Pager, View> mPages;
+    HashMap<Pager, View> mPages;
     HealthArticleRecycleViewAdapter recycleViewAdapter;
     ControllerClickHandler mHandler;
     List<HealthArticle> healthArticles;

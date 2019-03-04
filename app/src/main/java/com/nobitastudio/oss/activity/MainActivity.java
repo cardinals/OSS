@@ -21,11 +21,13 @@ import android.os.Bundle;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.CreateMedicalCardThreeFragment;
 import com.nobitastudio.oss.fragment.ForgetPasswordOneFragment;
 import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
+import com.nobitastudio.oss.fragment.MyCollectFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
 import com.nobitastudio.oss.fragment.Test2Fragment;
 import com.nobitastudio.oss.fragment.TestFragment;
@@ -64,14 +66,15 @@ public class MainActivity extends BaseFragmentActivity {
      */
     protected BaseFragment getFirstFragment() {
 //        return new Test2Fragment();
-        return new LoginFragment();
+//        return new LoginFragment();
 //        return new SettingFragment();
-//        return new HomeFragment();
+        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
 //        return new CreateMedicalCardThreeFragment();
 //        return new TestFragment();
+//        return new MyCollectFragment();
     }
 
 }

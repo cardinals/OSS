@@ -87,28 +87,30 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     protected void initData() {
         mEmptyView.hide();
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
-                Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car_big), new ItemDescription("步行", R.mipmap.foot)));
+                Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
+                        new ItemDescription("步行", R.mipmap.ic_foot)));
         mItemAdapter.setOnItemClickListener((v, pos) -> ToastUtils.showShort(pos));
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
-        mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 2));
+        mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 3));
         initListView();
     }
 
     private void initListView() {
-        List<Department> departments = new ArrayList<>();
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
-        departments.add(new Department());
+        List<Department> mDepartments = new ArrayList<>();
+        mDepartments.add(new Department("脑科"));
+        mDepartments.add(new Department("内分泌科"));
+        mDepartments.add(new Department("肿瘤科"));
+        mDepartments.add(new Department("儿科"));
+        mDepartments.add(new Department("泌尿科"));
+        mDepartments.add(new Department("内科"));
+        mDepartments.add(new Department("外科"));
+        mDepartments.add(new Department("生殖科"));
+        mDepartments.add(new Department("中医科"));
+        mDepartments.add(new Department("康复科"));
+        mDepartments.add(new Department("病理科"));
+        mDepartments.add(new Department("男科"));
+        mDepartments.add(new Department("其他科"));
         mHospitalInnerNavigationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -116,14 +118,14 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        SimpleRecycleViewAdapter<Department> adapter = new SimpleRecycleViewAdapter<Department>(getContext(), departments) {
+        SimpleRecycleViewAdapter<Department> adapter = new SimpleRecycleViewAdapter<Department>(getContext(), mDepartments) {
             @Override
             public String display(int position, Department department) {
                 return department.toString();
             }
         };
         adapter.setOnItemClickListener((itemView, pos) -> {
-            Department department = departments.get(pos);
+            Department department = mDepartments.get(pos);
             showLongMessageDialog(department.getName(), generateDepartmentInfo(department),
                     "关闭", (dialog, index) -> dialog.dismiss(),
                     null, null);

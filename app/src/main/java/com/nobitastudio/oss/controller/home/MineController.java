@@ -1,15 +1,21 @@
-package com.nobitastudio.oss.controller;
+package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.fragment.AboutFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
+import com.nobitastudio.oss.fragment.MyCollectFragment;
+import com.nobitastudio.oss.fragment.OrderFragment;
+import com.nobitastudio.oss.fragment.RegisterRecordFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
+import com.nobitastudio.oss.fragment.UserInfoFragment;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -19,8 +25,11 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -42,6 +51,20 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUILinearLayout mQMUILinearLayout;
 
     ControllerClickHandler mHandler;
+
+    @OnClick({R.id.wait_diagnosis_linearlayout, R.id.order_linearlayout, R.id.my_collection_linearlayout})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.wait_diagnosis_linearlayout:
+                break;
+            case R.id.order_linearlayout:
+                mHandler.startFragment(new OrderFragment());
+                break;
+            case R.id.my_collection_linearlayout:
+                mHandler.startFragment(new MyCollectFragment());
+                break;
+        }
+    }
 
     private void initTopBar() {
         mTopBar.setBackgroundDividerEnabled(false);
@@ -104,10 +127,10 @@ public class MineController extends QMUIWindowInsetLayout {
         QMUIGroupListView.newSection(getContext())
                 .setTitle("常用工具")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(registerRecordItem, null)
-                .addItemView(electronicCaseHistory, null)
-                .addItemView(electronicPrescriptionItem, null)
-                .addItemView(finishDiagnosisItem, null)
+                .addItemView(registerRecordItem, getOnclickListener())
+                .addItemView(electronicCaseHistory, getOnclickListener())
+                .addItemView(electronicPrescriptionItem, getOnclickListener())
+                .addItemView(finishDiagnosisItem, getOnclickListener())
                 .addTo(mGroupListView);
 
         //  普通工具
@@ -130,9 +153,25 @@ public class MineController extends QMUIWindowInsetLayout {
         QMUIGroupListView.newSection(getContext())
                 .setTitle("普通工具")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
-                .addItemView(myConsultingItem, null)
-                .addItemView(myMedicalCardsItem, view -> mHandler.startFragment(new MedicalCardFragment()))
+                .addItemView(myConsultingItem, getOnclickListener())
+                .addItemView(myMedicalCardsItem, getOnclickListener())
                 .addTo(mGroupListView);
+    }
+
+    private View.OnClickListener getOnclickListener() {
+        return v -> {
+            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
+            CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
+            if (itemViewText.equals("挂号记录")) {
+                mHandler.startFragment(new RegisterRecordFragment());
+            } else if (itemView.equals("电子病历")) {
+            } else if (itemView.equals("电子处方")) {
+            } else if (itemView.equals("已就诊")) {
+            } else if (itemView.equals("我的咨询")) {
+            } else if (itemView.equals("我的诊疗卡")) {
+                mHandler.startFragment(new MedicalCardFragment());
+            }
+        };
     }
 
     protected void initRefreshLayout() {

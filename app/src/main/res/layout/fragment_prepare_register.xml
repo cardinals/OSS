@@ -243,7 +243,6 @@
                             android:gravity="start"
                             android:text="费用"
                             android:textColor="?attr/app_primary_color" />
-
                     </LinearLayout>
 
                     <!--Segmenting line-->

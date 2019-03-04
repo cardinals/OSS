@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.activity.MainActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.helper.DialogHelper;
@@ -302,4 +303,7 @@ public abstract class StandardFragment extends BaseFragment {
     public void unlockView(View... views) {
         mViewHelper.unlockView(views);
     }
+
+    // ========================  controller handler
+
 }

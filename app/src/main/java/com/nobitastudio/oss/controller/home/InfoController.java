@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.controller;
+package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -33,26 +33,6 @@ import butterknife.ButterKnife;
  * @description
  */
 public class InfoController extends QMUIWindowInsetLayout {
-
-    static class ItemRecyclerViewAdapter extends BaseRecyclerViewAdapter<ItemDescription> {
-
-        public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
-            super(ctx, data);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_info;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, ItemDescription item) {
-            holder.getTextView(R.id.item_name).setText(item.getName());
-            if (item.getIconRes() != 0) {
-                holder.getImageView(R.id.item_icon).setImageResource(item.getIconRes());
-            }
-        }
-    }
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;

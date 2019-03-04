@@ -95,7 +95,7 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
     QMUICollapsingTopBarLayout mCollapsingTopBarLayout;
     @BindView(R.id.fab)
     FloatingActionButton mFab;
-    @BindView(R.id.pager)
+    @BindView(R.id.pagers)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
     QMUITabSegment mTabSegment;

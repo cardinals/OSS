@@ -12,13 +12,13 @@ public interface ControllerClickHandler {
 
     /**
      * 打开fragment
-     * @param fragment
+     * @param targetFragment
      */
-    void startFragment(BaseFragment fragment);
+    void startFragment(BaseFragment targetFragment);
 
     /**
      * 打开fragment并关闭
-     * @param fragment
+     * @param targetFragment
      */
-    void startFragmentAndDestroyCurrent(BaseFragment fragment);
+    void startFragmentAndDestroyCurrent(BaseFragment targetFragment);
 }

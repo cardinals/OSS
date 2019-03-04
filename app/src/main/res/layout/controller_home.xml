@@ -309,7 +309,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/home_tab_height"
                                     android:layout_gravity="start"
-                                    android:background="?attr/qmui_list_item_bg_with_border_top"
+                                    android:background="?attr/qmui_list_item_bg_with_border_bottom"
                                     android:textSize="12sp"
                                     app:qmui_tab_icon_position="left" />
 
@@ -402,7 +402,7 @@
                                     android:layout_height="66dp"
                                     android:layout_gravity="center_horizontal"
                                     android:layout_marginBottom="4dp"
-                                    android:src="@mipmap/ic_doctor" />
+                                    android:src="@mipmap/ic_doctor_normal" />
 
                                 <TextView
                                     android:layout_width="wrap_content"

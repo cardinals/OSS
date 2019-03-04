@@ -11,9 +11,9 @@ import android.widget.FrameLayout;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.controller.HomeController;
-import com.nobitastudio.oss.controller.InfoController;
-import com.nobitastudio.oss.controller.MineController;
+import com.nobitastudio.oss.controller.home.HomeController;
+import com.nobitastudio.oss.controller.home.InfoController;
+import com.nobitastudio.oss.controller.home.MineController;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
@@ -104,14 +104,13 @@ public class HomeFragment extends BaseFragment {
         mPages = new HashMap<>();
         ControllerClickHandler mHandler = new ControllerClickHandler() {
             @Override
-            public void startFragment(BaseFragment fragment) {
-                HomeFragment.this.startFragment(fragment);
+            public void startFragment(BaseFragment target) {
+                HomeFragment.this.startFragment(target);
             }
 
-
             @Override
-            public void startFragmentAndDestroyCurrent(BaseFragment fragment) {
-                HomeFragment.this.startFragmentAndDestroyCurrent(fragment);
+            public void startFragmentAndDestroyCurrent(BaseFragment targetFragment) {
+                HomeFragment.this.startFragmentAndDestroyCurrent(targetFragment);
             }
         };
         mPages.put(Pager.HOME, new HomeController(getContext(), mHandler));
