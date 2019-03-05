@@ -58,7 +58,7 @@
                                 android:background="@color/qmui_config_color_white">
 
                                 <com.tmall.ultraviewpager.UltraViewPager
-                                    android:id="@+id/ultraviewpager"
+                                    android:id="@+id/ultraview_pager"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent" />
 

@@ -9,22 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.DepartmentFragment;
+import com.nobitastudio.oss.fragment.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.NavigationFragment;
 import com.nobitastudio.oss.fragment.RegisterRecordFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
-import com.nobitastudio.oss.util.CommonUtil;
-import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
@@ -32,6 +31,7 @@ import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
+import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,23 +67,45 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    public static class HealthArticleRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
+    public class HospitalActivityUltraPagerAdapter extends PagerAdapter {
+        List<HealthArticle> healthArticles;
 
-        public HealthArticleRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
-            super(ctx, list);
+        public HospitalActivityUltraPagerAdapter(List<HealthArticle> healthArticles) {
+            this.healthArticles = healthArticles;
         }
 
         @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_health_article;
+        public int getCount() {
+            return 6;
         }
 
         @Override
-        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
-            Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
-            holder.setText(R.id.title_textView, item.getTitle());
-            holder.setText(R.id.type_textView, item.getType().name());
-            holder.setText(R.id.publish_time_textView, CommonUtil.handleHealthNewsPublishTime(DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime())));
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
+//            if (healthArticles != null) {
+            ImageView imageView = root.findViewById(R.id.imageview);
+            if (position % 3 == 0) {
+                Glide.with(getContext()).load(R.drawable.t1).into(imageView);
+            } else if (position % 3 == 1){
+                Glide.with(getContext()).load(R.drawable.t4).into(imageView);
+            } else {
+                Glide.with(getContext()).load(R.drawable.t3).into(imageView);
+            }
+//            }
+
+            container.addView(root);
+            return root;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            LinearLayout view = (LinearLayout) object;
+            container.removeView(view);
         }
     }
 
@@ -99,10 +121,12 @@ public class HomeController extends QMUIWindowInsetLayout {
     QMUITabSegment mTabSegment;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
+    @BindView(R.id.ultraview_pager)
+    UltraViewPager mHospitalActivityUltraViewPager;
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
             R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.case_history_linearLayout,
-            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout,R.id.coming_soon_linearLayout})
+            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout, R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_linearLayout:
@@ -143,7 +167,8 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     HashMap<Pager, View> mPages;
-    HealthArticleRecycleViewAdapter recycleViewAdapter;
+    HealthArticleFragment.HealthArticleRecycleViewAdapter recycleViewAdapter;
+    HospitalActivityUltraPagerAdapter mUltraPagerAdapter;
     ControllerClickHandler mHandler;
     List<HealthArticle> healthArticles;
     TipDialogHelper mTipDialogHelper;
@@ -196,9 +221,9 @@ public class HomeController extends QMUIWindowInsetLayout {
     private void init() {
         initBasic();
         initTopBar();
+        initUltraViewPager();
         initQMUILinearLayout();
         initPullFreshLayout();
-        initUltraViewPager();
         initTabs();
         initData();
         initPagers();
@@ -236,7 +261,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         mPages = new HashMap<>();
         RecyclerView mHealthArticleRecyclerView = new RecyclerView(getContext());
         RecyclerView doctorLectureRecyclerView = new RecyclerView(getContext());
-        recycleViewAdapter = new HealthArticleRecycleViewAdapter(getContext(), healthArticles);
+        recycleViewAdapter = new HealthArticleFragment.HealthArticleRecycleViewAdapter(getContext(), healthArticles);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         mHealthArticleRecyclerView.setLayoutManager(gridLayoutManager);
         mHealthArticleRecyclerView.setAdapter(recycleViewAdapter);
@@ -293,10 +318,15 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     /**
-     * 初始化医院活动
+     * 初始化医院活动mUltraPager
      */
     private void initUltraViewPager() {
-
+        mHospitalActivityUltraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
+        mUltraPagerAdapter = new HospitalActivityUltraPagerAdapter( null);
+        mHospitalActivityUltraViewPager.setAdapter(mUltraPagerAdapter);
+//        mHospitalActivityUltraViewPager.setPageTransformer(false, new UltraScaleTransformer());  // 用于设置滑动动画 使用默认即可
+        mHospitalActivityUltraViewPager.setInfiniteLoop(true);
+        mHospitalActivityUltraViewPager.setAutoScroll(4000);
     }
 
     /**

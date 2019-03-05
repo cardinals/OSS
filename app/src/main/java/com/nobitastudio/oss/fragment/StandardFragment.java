@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.activity.MainActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.helper.DialogHelper;

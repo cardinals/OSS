@@ -146,7 +146,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     };
 
     CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
-    HomeController.HealthArticleRecycleViewAdapter mHealthArticleRecycleViewAdapter;
+    HealthArticleFragment.HealthArticleRecycleViewAdapter mHealthArticleRecycleViewAdapter;
     List<HealthArticle> healthArticles;
 
     private float mShadowAlpha = 1.0f;
@@ -178,7 +178,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
         initData();
         mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
         mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHealthArticleRecycleViewAdapter = new HomeController.HealthArticleRecycleViewAdapter(getActivity(),healthArticles);
+        mHealthArticleRecycleViewAdapter = new HealthArticleFragment.HealthArticleRecycleViewAdapter(getContext(),healthArticles);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
         mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
