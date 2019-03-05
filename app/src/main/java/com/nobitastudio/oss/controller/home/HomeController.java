@@ -20,6 +20,7 @@ import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.DepartmentFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.NavigationFragment;
+import com.nobitastudio.oss.fragment.RegisterRecordFragment;
 import com.nobitastudio.oss.fragment.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.util.CommonUtil;
@@ -100,7 +101,7 @@ public class HomeController extends QMUIWindowInsetLayout {
     QMUILinearLayout mQMUILinearLayout;
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
-            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_detail_linearLayout, R.id.case_history_linearLayout,
+            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.case_history_linearLayout,
             R.id.article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout,R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -118,7 +119,8 @@ public class HomeController extends QMUIWindowInsetLayout {
                 break;
             case R.id.consulting_linearLayout:
                 break;
-            case R.id.register_detail_linearLayout:
+            case R.id.register_record_linearLayout:
+                mHandler.startFragment(new RegisterRecordFragment());
                 break;
             case R.id.case_history_linearLayout:
                 break;

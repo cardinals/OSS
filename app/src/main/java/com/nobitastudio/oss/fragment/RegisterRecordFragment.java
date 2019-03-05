@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.controller.home.HomeController;
+import com.nobitastudio.oss.controller.home.InfoController;
+import com.nobitastudio.oss.controller.home.MineController;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -50,7 +53,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
-    public static class RegisterRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
+    class RegisterRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
 
         public RegisterRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
             super(ctx, list);
@@ -132,23 +135,9 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
         RecyclerView mCanceledRecyclerView = new RecyclerView(getContext());
         RecyclerView mAllRecyclerView = new RecyclerView(getContext());
 
-        mPages.put(Pager.WAIT, mWaitRecyclerView);
-        mPages.put(Pager.FINISHED, mFinishedRecyclerView);
-        mPages.put(Pager.CANCELED, mCanceledRecyclerView);
-        mPages.put(Pager.ALL, mAllRecyclerView);
+        RegisterRecordRecyclerViewAdapter adapter = new RegisterRecordRecyclerViewAdapter(getContext(),null);
 
-        RegisterRecordRecyclerViewAdapter mRegisterRecordRecyclerViewAdapter = new RegisterRecordRecyclerViewAdapter(getContext(), null);
-        RegisterRecordRecyclerViewAdapter mRegisterRecordRecyclerViewAdapter2 = new RegisterRecordRecyclerViewAdapter(getContext(), null);
-        RegisterRecordRecyclerViewAdapter mRegisterRecordRecyclerViewAdapter3 = new RegisterRecordRecyclerViewAdapter(getContext(), null);
-        RegisterRecordRecyclerViewAdapter mRegisterRecordRecyclerViewAdapter4 = new RegisterRecordRecyclerViewAdapter(getContext(), null);
-        // 跳到一个检查支付状态的fragment,
-        mRegisterRecordRecyclerViewAdapter.setOnItemClickListener((v, pos) -> startFragment(new RegisterSuccessFragment()));
-
-        mWaitRecyclerView.setAdapter(mRegisterRecordRecyclerViewAdapter);
-        mFinishedRecyclerView.setAdapter(mRegisterRecordRecyclerViewAdapter2);
-        mCanceledRecyclerView.setAdapter(mRegisterRecordRecyclerViewAdapter3);
-        mAllRecyclerView.setAdapter(mRegisterRecordRecyclerViewAdapter4);
-
+        mWaitRecyclerView.setAdapter(adapter);
         mWaitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -156,6 +145,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
+        mFinishedRecyclerView.setAdapter(adapter);
         mFinishedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -163,6 +153,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
+        mCanceledRecyclerView.setAdapter(adapter);
         mCanceledRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -170,6 +161,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
+        mAllRecyclerView.setAdapter(adapter);
         mAllRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -177,6 +169,11 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
+
+        mPages.put(Pager.WAIT,mWaitRecyclerView);
+        mPages.put(Pager.FINISHED,mFinishedRecyclerView);
+        mPages.put(Pager.CANCELED,mCanceledRecyclerView);
+        mPages.put(Pager.ALL,mAllRecyclerView);
 
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
@@ -211,13 +208,13 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
         QMUITabSegment.Tab mWaitRegisterRecord = new QMUITabSegment.Tab(
                 null,
                 null,
-                "待就诊", false
+                "待支付", false
         );
 
         QMUITabSegment.Tab mFinishedRegisterRecord = new QMUITabSegment.Tab(
                 null,
                 null,
-                "已完成", false
+                "已支付", false
         );
 
         QMUITabSegment.Tab mCanceledRegisterRecord = new QMUITabSegment.Tab(
