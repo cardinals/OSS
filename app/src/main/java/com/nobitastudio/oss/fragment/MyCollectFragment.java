@@ -16,7 +16,6 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.controller.collection.OtherController;
-import com.nobitastudio.oss.controller.home.HomeController;
 import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -146,25 +145,12 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     };
 
     CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
-    HealthArticleFragment.HealthArticleRecycleViewAdapter mHealthArticleRecycleViewAdapter;
+    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
     List<HealthArticle> healthArticles;
 
     private float mShadowAlpha = 1.0f;
     private int mShadowElevationDp = 10;
     private int mRadius = 15;
-
-    private void initData() {
-        healthArticles = new ArrayList<>();
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-    }
 
     private void initPagers() {
         mPages = new HashMap<>();
@@ -174,11 +160,9 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
         mPages.put(Pager.DOCTOR,mCollectDoctorRecyclerView);
         mPages.put(Pager.HEALTH_ARTICLE,mCollectArticleRecyclerView);
         mPages.put(Pager.OTHER,mOtherController);
-
-        initData();
         mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
         mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHealthArticleRecycleViewAdapter = new HealthArticleFragment.HealthArticleRecycleViewAdapter(getContext(),healthArticles);
+        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(),null);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
         mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
@@ -187,7 +171,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mCollectArticleRecyclerView.setAdapter(mHealthArticleRecycleViewAdapter);
+        mCollectArticleRecyclerView.setAdapter(mHeadlineRecycleViewAdapter);
         mCollectArticleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {

@@ -87,7 +87,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
-//            if (healthArticles != null) {
+//            if (mHealthArticles != null) {
             ImageView imageView = root.findViewById(R.id.imageview);
             if (position % 3 == 0) {
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
@@ -103,8 +103,7 @@ public class HomeController extends QMUIWindowInsetLayout {
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            LinearLayout view = (LinearLayout) object;
-            container.removeView(view);
+            container.removeView((View) object);
         }
     }
 
@@ -125,7 +124,7 @@ public class HomeController extends QMUIWindowInsetLayout {
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
             R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.case_history_linearLayout,
-            R.id.article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout, R.id.coming_soon_linearLayout})
+            R.id.health_article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout, R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_linearLayout:
@@ -147,7 +146,8 @@ public class HomeController extends QMUIWindowInsetLayout {
                 break;
             case R.id.case_history_linearLayout:
                 break;
-            case R.id.article_linearLayout:
+            case R.id.health_article_linearLayout:
+                mHandler.startFragment(new HealthArticleFragment());
                 break;
             case R.id.smart_linearLayout:
                 break;
@@ -166,10 +166,10 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     HashMap<Pager, View> mPages;
-    HealthArticleFragment.HealthArticleRecycleViewAdapter recycleViewAdapter;
+    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
     HospitalActivityUltraPagerAdapter mUltraPagerAdapter;
     ControllerClickHandler mHandler;
-    List<HealthArticle> healthArticles;
+    List<HealthArticle> mHealthArticles;
     TipDialogHelper mTipDialogHelper;
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
 
@@ -224,7 +224,6 @@ public class HomeController extends QMUIWindowInsetLayout {
         initQMUILinearLayout();
         initPullFreshLayout();
         initTabs();
-        initData();
         initPagers();
     }
 
@@ -240,19 +239,6 @@ public class HomeController extends QMUIWindowInsetLayout {
         mTipDialogHelper = new TipDialogHelper(getContext());
     }
 
-    private void initData() {
-        healthArticles = new ArrayList<>();
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-    }
-
     /**
      * 初始化健康头条，名医讲座  等等
      */
@@ -260,10 +246,10 @@ public class HomeController extends QMUIWindowInsetLayout {
         mPages = new HashMap<>();
         RecyclerView mHealthArticleRecyclerView = new RecyclerView(getContext());
         RecyclerView doctorLectureRecyclerView = new RecyclerView(getContext());
-        recycleViewAdapter = new HealthArticleFragment.HealthArticleRecycleViewAdapter(getContext(), healthArticles);
+        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(), null);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         mHealthArticleRecyclerView.setLayoutManager(gridLayoutManager);
-        mHealthArticleRecyclerView.setAdapter(recycleViewAdapter);
+        mHealthArticleRecyclerView.setAdapter(mHeadlineRecycleViewAdapter);
 
         View view2 = LayoutInflater.from(getContext()).inflate(R.layout.test, null);
 
@@ -346,11 +332,11 @@ public class HomeController extends QMUIWindowInsetLayout {
             @Override
             public void onRefresh() {
                 // 刷新操作
-                healthArticles.remove(0);
-                healthArticles.remove(1);
-                healthArticles.remove(2);
-                healthArticles.remove(3);
-                healthArticles.remove(4);
+                mHealthArticles.remove(0);
+                mHealthArticles.remove(1);
+                mHealthArticles.remove(2);
+                mHealthArticles.remove(3);
+                mHealthArticles.remove(4);
                 mPagerAdapter.notifyDataSetChanged();
                 // 完成后调用finishRefresh关闭
                 mPullRefreshLayout.postDelayed(new Runnable() {

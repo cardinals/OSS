@@ -190,7 +190,7 @@
 
                                 <!-- show smart hospital guide -->
                                 <LinearLayout
-                                    android:id="@+id/article_linearLayout"
+                                    android:id="@+id/health_article_linearLayout"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"

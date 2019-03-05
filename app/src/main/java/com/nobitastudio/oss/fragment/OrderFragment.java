@@ -16,7 +16,6 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.controller.collection.OtherController;
-import com.nobitastudio.oss.controller.home.HomeController;
 import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -146,7 +145,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
     };
 
     CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
-    HealthArticleFragment.HealthArticleRecycleViewAdapter mHealthArticleRecycleViewAdapter;
+    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
     List<HealthArticle> healthArticles;
 
     private float mShadowAlpha = 1.0f;
@@ -178,7 +177,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
         initData();
         mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
         mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHealthArticleRecycleViewAdapter = new HealthArticleFragment.HealthArticleRecycleViewAdapter(getContext(),healthArticles);
+        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(),healthArticles);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
         mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
@@ -187,7 +186,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mCollectArticleRecyclerView.setAdapter(mHealthArticleRecycleViewAdapter);
+        mCollectArticleRecyclerView.setAdapter(mHeadlineRecycleViewAdapter);
         mCollectArticleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {

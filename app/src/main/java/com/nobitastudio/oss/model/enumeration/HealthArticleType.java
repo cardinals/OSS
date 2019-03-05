@@ -7,7 +7,10 @@ package com.nobitastudio.oss.model.enumeration;
  * @description
  */
 public enum HealthArticleType {
-    HEALTH_HEADLINE,
-    PHYSICIAN_LECTURE,
+    // 健康头条
+    HEADLINE,
+    // 医生讲堂
+    DOCTOR_LECTURE,
+    // 医院活动信息
     HOSPITAL_ACTIVITY
 }

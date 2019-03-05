@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class HealthArticle implements Serializable {
 
     public HealthArticle() {
-        this(1,"id","tile", HealthArticleType.HEALTH_HEADLINE,LocalDateTime.now(),"publishMan","label","url");
+        this(1,"id","tile", HealthArticleType.HEADLINE,LocalDateTime.now(),"publishMan","label","url");
     }
 
     public HealthArticle(Integer id, String iconId, String title, HealthArticleType type, LocalDateTime publishTime, String publishMan, String label, String url) {
