@@ -2,11 +2,21 @@ package com.nobitastudio.oss.controller.boot;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.fragment.HomeFragment;
+import com.nobitastudio.oss.fragment.LoginFragment;
+import com.qmuiteam.qmui.util.QMUIDirection;
+import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -16,16 +26,45 @@ import butterknife.ButterKnife;
  */
 public class LastController extends QMUIWindowInsetLayout {
 
+    @BindView(R.id.linearlayout)
+    LinearLayout mLinearLayout;
 
+    ControllerClickHandler mHandler;
 
-    private void init() {
-
+    @OnClick({R.id.login_button, R.id.enroll_button})
+    void onClick(View v) {
+        // 记录点击事件.下次不再进入Boot Fragment
+        switch (v.getId()) {
+            case R.id.login_button:
+                mHandler.startFragment(new LoginFragment());
+                break;
+            case R.id.enroll_button:
+                // 注册
+                mHandler.startFragment(new HomeFragment());
+                break;
+        }
     }
 
-    public LastController(Context context) {
+    public LastController(Context context, int bootImageRes, ControllerClickHandler mHandler) {
         super(context);
+        this.mHandler = mHandler;
         LayoutInflater.from(context).inflate(R.layout.controller_last, this);
+        this.setBackground(getResources().getDrawable(bootImageRes, null));
         ButterKnife.bind(this);
-        init();
     }
+
+    // 滑动出现
+    public void SlideIn() {
+        if (mLinearLayout.getVisibility() == View.GONE) {
+            QMUIViewHelper.slideIn(mLinearLayout, 500, null, true, QMUIDirection.BOTTOM_TO_TOP);
+        }
+    }
+
+    // 滑动消失
+    public void SlideOut() {
+        if (mLinearLayout.getVisibility() != View.GONE) {
+            QMUIViewHelper.slideOut(mLinearLayout, 500, null, true, QMUIDirection.TOP_TO_BOTTOM);
+        }
+    }
+
 }

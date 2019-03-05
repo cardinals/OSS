@@ -90,14 +90,13 @@ public class HomeController extends QMUIWindowInsetLayout {
 //            if (healthArticles != null) {
             ImageView imageView = root.findViewById(R.id.imageview);
             if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.drawable.t1).into(imageView);
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
             } else if (position % 3 == 1){
-                Glide.with(getContext()).load(R.drawable.t4).into(imageView);
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
             } else {
-                Glide.with(getContext()).load(R.drawable.t3).into(imageView);
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
             }
 //            }
-
             container.addView(root);
             return root;
         }

@@ -1,6 +1,7 @@
 package com.nobitastudio.oss.fragment;
 
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.controller.boot.LastController;
 import com.nobitastudio.oss.controller.boot.SimpleController;
 import com.tmall.ultraviewpager.UltraViewPager;
@@ -37,7 +39,7 @@ public class BootFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
 
         @Override
@@ -60,11 +62,41 @@ public class BootFragment extends BaseFragment {
     }
 
     private void init() {
-        View oneController = new SimpleController(getContext(),R.drawable.ic_lock);
-        View twoController = new SimpleController(getContext(),R.drawable.ic_lock);
-        View threeController = new SimpleController(getContext(),R.drawable.ic_lock);
-        View fourController = new LastController(getContext());
-        views = Arrays.asList(oneController, twoController, threeController, fourController);
+        View mLastController = new LastController(getContext(), R.drawable.bg_boot_three, new ControllerClickHandler() {
+            @Override
+            public void startFragment(BaseFragment targetFragment) {
+                BootFragment.this.startFragment(targetFragment);
+            }
+
+            @Override
+            public void startFragmentAndDestroyCurrent(BaseFragment targetFragment) {
+                BootFragment.this.startFragmentAndDestroyCurrent(targetFragment);
+            }
+        });
+        views = Arrays.asList(new SimpleController(getContext(), R.drawable.bg_boot_one), new SimpleController(getContext(), R.drawable.bg_boot_two),
+                mLastController);
+        mBootUltraViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if (i == views.size() - 1) {
+                    // 进入
+                    ((LastController)views.get(views.size() - 1)).SlideIn();
+                }
+                if (i == views.size() - 2) {
+                    // 退出
+                    ((LastController)views.get(views.size() - 1)).SlideOut();
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
         mBootUltraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
         mBootUltraPagerAdapter = new BootUltraPagerAdapter();
         mBootUltraViewPager.setAdapter(mBootUltraPagerAdapter);

@@ -2,5 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_lock"
-    android:orientation="vertical" />
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="168dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/login_button"
+            style="@style/AppQDRadiusButton"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_36"
+            android:layout_marginRight="@dimen/dp_8"
+            android:layout_weight="1"
+            android:text="登录" />
+
+        <Button
+            android:id="@+id/enroll_button"
+            style="@style/AppQDRadiusButton"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_36"
+            android:layout_weight="1"
+            android:text="注册" />
+    </LinearLayout>
+</LinearLayout>
