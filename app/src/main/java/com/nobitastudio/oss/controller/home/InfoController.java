@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.TestFragment;
-import com.nobitastudio.oss.model.vo.ItemDescription;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -20,8 +17,6 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,7 +63,7 @@ public class InfoController extends QMUIWindowInsetLayout {
 
         // 提醒类消息
         QMUICommonListItemView mEatDrugRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug_big),
                 "吃药提醒",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -76,7 +71,7 @@ public class InfoController extends QMUIWindowInsetLayout {
         );
 
         QMUICommonListItemView mCheckRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_big),
                 "检查提醒",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -84,7 +79,7 @@ public class InfoController extends QMUIWindowInsetLayout {
         );
 
         QMUICommonListItemView mOperationRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation_big),
                 "手术提醒",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -101,7 +96,7 @@ public class InfoController extends QMUIWindowInsetLayout {
 
         //  其他消息
         QMUICommonListItemView mExpressItemView = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_express),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_express_big),
                 "报告邮寄",
                 null,
                 QMUICommonListItemView.HORIZONTAL,

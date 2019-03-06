@@ -8,22 +8,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.controller.collection.OtherController;
 import com.nobitastudio.oss.model.entity.Doctor;
-import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.model.entity.OSSOrder;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,59 +39,46 @@ import butterknife.BindView;
  */
 public class OrderFragment extends StandardWithTobBarLayoutFragment {
 
-    // 初始化有哪些 pager :收藏的医生 ,收藏的文章
+    // 初始化有哪些 pager :挂号订单  报告邮寄订单 开药订单 检查订单  手术订单  住院缴费订单
     enum Pager {
-        DOCTOR, HEALTH_ARTICLE,OTHER;
+        REGISTER, EXPRESS, DRUG, CHECK, OPERATION, HOSPITALIZE;
+
         public static Pager getPagerFromPosition(int position) {
             switch (position) {
                 case 0:
-                    return DOCTOR;
+                    return REGISTER;
                 case 1:
-                    return HEALTH_ARTICLE;
+                    return EXPRESS;
                 case 2:
-                    return OTHER;
+                    return DRUG;
+                case 3:
+                    return CHECK;
+                case 4:
+                    return OPERATION;
+                case 5:
+                    return HOSPITALIZE;
                 default:
-                    return DOCTOR;
+                    return REGISTER;
             }
         }
     }
 
-    class CollectionDoctorRecyclerViewAdapter extends BaseRecyclerViewAdapter<Doctor> {
+    class OrderRecyclerViewAdapter extends BaseRecyclerViewAdapter<OSSOrder> {
 
-        public CollectionDoctorRecyclerViewAdapter(Context ctx, List<Doctor> list) {
+        public OrderRecyclerViewAdapter(Context ctx, List<OSSOrder> list) {
             super(ctx, list);
         }
 
         @Override
         public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_collection_doctor;
+            return R.layout.recycleview_item_order;
         }
 
         @Override
-        public void bindData(RecyclerViewHolder holder, int position, Doctor item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.doctor_collect_linearLayout);
-            ImageView mDoctorImageView = holder.getImageView(R.id.doctor_imageView);
-            TextView mDoctorNameTextView = holder.getTextView(R.id.doctor_name_textview);
-            TextView mDoctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
-            TextView mDoctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);
-            TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textView);
-            TextView mSpecialityTextView = holder.getTextView(R.id.speciality_textView);
-            ImageView mCollectDoctorImageView = holder.getImageView(R.id.collect_doctor_imageview);
+        public void bindData(RecyclerViewHolder holder, int position, OSSOrder item) {
+            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.order_linearLayout);
             mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
                     QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
-            Glide.with(OrderFragment.this).load(R.drawable.bg_hospital_trademark).into(mDoctorImageView);
-            mDoctorNameTextView.setText("名字111");
-            mDoctorLevelTextView.setText("医生水平11");
-            mDoctorDepartmentTextView.setText("科室信息1111");
-            mSubMajorTextView.setText("亚专业11");
-            mSpecialityTextView.setText("擅长111");
-            mCollectDoctorImageView.setOnClickListener(view -> {
-                Glide.with(getContext()).load(R.drawable.ic_heart_white).into(mCollectDoctorImageView);
-                showNetworkLoadingTipDialog("正在取消收藏");
-                mTopBar.postDelayed(() -> {
-                    closeTipDialog();
-                },1500l);
-            });
         }
 
         @Override
@@ -144,50 +133,68 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
         }
     };
 
-    CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
-    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
-    List<HealthArticle> healthArticles;
-
     private float mShadowAlpha = 1.0f;
     private int mShadowElevationDp = 10;
     private int mRadius = 15;
 
-    private void initData() {
-        healthArticles = new ArrayList<>();
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-        healthArticles.add(new HealthArticle());
-    }
-
     private void initPagers() {
         mPages = new HashMap<>();
-        RecyclerView mCollectDoctorRecyclerView = new RecyclerView(getContext());// 医生
-        RecyclerView mCollectArticleRecyclerView = new RecyclerView(getContext()); // 健康资讯
-        OtherController mOtherController = new OtherController(getContext(),null);
-        mPages.put(Pager.DOCTOR,mCollectDoctorRecyclerView);
-        mPages.put(Pager.HEALTH_ARTICLE,mCollectArticleRecyclerView);
-        mPages.put(Pager.OTHER,mOtherController);
+        RecyclerView mRegisterOrderRecyclerView = new RecyclerView(getContext());
+        RecyclerView mExpressOrderRecyclerView = new RecyclerView(getContext());
+        RecyclerView mDrugOrderRecyclerView = new RecyclerView(getContext());
+        RecyclerView mCheckOrderRecyclerView = new RecyclerView(getContext());
+        RecyclerView mOperationOrderRecyclerView = new RecyclerView(getContext());
+        RecyclerView mHospitalizeOrderRecyclerView = new RecyclerView(getContext());
+        mPages.put(Pager.REGISTER, mRegisterOrderRecyclerView);
+        mPages.put(Pager.EXPRESS, mExpressOrderRecyclerView);
+        mPages.put(Pager.DRUG, mDrugOrderRecyclerView);
+        mPages.put(Pager.CHECK, mCheckOrderRecyclerView);
+        mPages.put(Pager.OPERATION, mOperationOrderRecyclerView);
+        mPages.put(Pager.HOSPITALIZE, mHospitalizeOrderRecyclerView);
 
-        initData();
-        mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
-        mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(),healthArticles);
-        mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
-        mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+        OrderRecyclerViewAdapter adapter = new OrderRecyclerViewAdapter(getContext(), null);
+        mRegisterOrderRecyclerView.setAdapter(adapter);
+        mRegisterOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
                 return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mCollectArticleRecyclerView.setAdapter(mHeadlineRecycleViewAdapter);
-        mCollectArticleRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+        mExpressOrderRecyclerView.setAdapter(adapter);
+        mExpressOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mDrugOrderRecyclerView.setAdapter(adapter);
+        mDrugOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mCheckOrderRecyclerView.setAdapter(adapter);
+        mCheckOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mOperationOrderRecyclerView.setAdapter(adapter);
+        mOperationOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mHospitalizeOrderRecyclerView.setAdapter(adapter);
+        mHospitalizeOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
                 return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -219,31 +226,57 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
     private void initTabs() {
         int normalColor = QMUIResHelper.getAttrColor(getContext(), R.attr.qmui_config_color_gray_6);
         int selectColor = QMUIResHelper.getAttrColor(getContext(), R.attr.qmui_config_color_blue);
+        int space = QMUIDisplayHelper.dp2px(getContext(), 42);
         mTabSegment.setDefaultNormalColor(normalColor);
         mTabSegment.setDefaultSelectedColor(selectColor);
         mTabSegment.setHasIndicator(true);
         mTabSegment.setIndicatorPosition(false);
         mTabSegment.setIndicatorWidthAdjustContent(true);
-        QMUITabSegment.Tab mCollectDoctor = new QMUITabSegment.Tab(
+        mTabSegment.setMode(QMUITabSegment.MODE_SCROLLABLE);  // 超出自动适应，且可滚动
+        mTabSegment.setItemSpaceInScrollMode(space);
+        mTabSegment.setPadding(space, 0, space, 0);
+        QMUITabSegment.Tab mRegisterOrder = new QMUITabSegment.Tab(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_doctor),
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_doctor_selected),
-                "医生", false
+                "挂号费", false
         );
 
-        QMUITabSegment.Tab mHealthArticle = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_article),
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_article_selected),
-                "健康资讯", false
+        QMUITabSegment.Tab mExpressOrder = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_express),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_express_selected),
+                "邮寄费", false
         );
 
-        QMUITabSegment.Tab mCategory = new QMUITabSegment.Tab(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_category),
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_category_selected),
-                "其他类别", false
+        QMUITabSegment.Tab mDrugOrder = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug_selected),
+                "药品费", false
         );
 
-        mTabSegment.addTab(mCollectDoctor)
-                .addTab(mHealthArticle);
+        QMUITabSegment.Tab mCheckOrder = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_selected),
+                "检查订费", false
+        );
+
+        QMUITabSegment.Tab mOperationOrder = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation_selected),
+                "手术费", false
+        );
+
+        QMUITabSegment.Tab mHospitalizeOrder = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_stretcher),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_stretcher_selected),
+                "住院缴费", false
+        );
+
+        mTabSegment.addTab(mRegisterOrder)
+                .addTab(mExpressOrder)
+                .addTab(mDrugOrder)
+                .addTab(mCheckOrder)
+                .addTab(mOperationOrder)
+                .addTab(mHospitalizeOrder);
     }
 
     @Override
@@ -254,7 +287,14 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("我的收藏");
+        mTopBar.setTitle("我的订单");
+        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
+                showListPopView(v, Arrays.asList("待支付订单", "已支付订单", "已取消订单", "全部订单"),
+                        (parent, view, position, id) -> {
+                            popViewDismiss();
+                            ToastUtils.showShort(position);
+                        },
+                        null));
     }
 
     @Override

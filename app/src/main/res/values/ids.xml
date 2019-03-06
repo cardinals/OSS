@@ -21,17 +21,17 @@
 
     <item name="empty_button" type="id"/>
 
+    <!-- topbar -->
     <item name="topbar_right_about_button" type="id"/>
     <item name="topbar_right_change_button" type="id"/>
-
-    <item name="layout_for_test" type="id"/>
-
     <item name="topbar_right_setting_button" type="id"/>
-
     <item name="topbar_left_qr_code_button" type="id"/>
+    <item name="topbar_right_plus_button" type="id"/>
 
     <item name="qmui_arch_swipe_layout_in_back" type="id"/>
 
     <item name="diagnosis_remind_group_list_item" type="id" />
+
+    <item name="layout_for_test" type="id"/>
 
 </resources>

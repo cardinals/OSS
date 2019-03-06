@@ -261,6 +261,11 @@ public abstract class StandardFragment extends BaseFragment {
         mPopViewHelper.showNormalPopView(v, content, width, popViewDismissListener);
     }
 
+    protected void showListPopView(View v, List<String> items,
+                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener){
+        showListPopView(v,items,120,160,itemClickListener,popViewDismissListener);
+    }
+
     protected void showListPopView(View v, List<String> items, Integer width, Integer height,
                                    AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
         mPopViewHelper.showListPopView(v, items, width, height, itemClickListener, popViewDismissListener);

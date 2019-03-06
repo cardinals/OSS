@@ -45,7 +45,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug_big),
                 "吃药提醒",
                 "吃药时推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -53,7 +53,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView checkRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_big),
                 "检查提醒",
                 "检查前两小时推送",
                 QMUICommonListItemView.HORIZONTAL,
@@ -61,7 +61,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
         );
 
         QMUICommonListItemView operationRemindItem = mGroupListView.createItemView(
-                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation_big),
                 "手术提醒",
                 "手术前一天推送",
                 QMUICommonListItemView.HORIZONTAL,

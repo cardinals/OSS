@@ -33,7 +33,7 @@ public class Constant {
         DEPARTMENT_MIPMAP.put("整形科", R.mipmap.ic_plastic);
         DEPARTMENT_MIPMAP.put("中医科", R.mipmap.ic_tcm);
         DEPARTMENT_MIPMAP.put("生殖科", R.mipmap.ic_reproduction);
-        DEPARTMENT_MIPMAP.put("外科", R.mipmap.ic_operation);
+        DEPARTMENT_MIPMAP.put("外科", R.mipmap.ic_operation_big);
         DEPARTMENT_MIPMAP.put("内科", R.mipmap.ic_internal_medicine);
         DEPARTMENT_MIPMAP.put("泌尿科", R.mipmap.ic_urinary);
         DEPARTMENT_MIPMAP.put("妇科", R.mipmap.ic_woman);

@@ -46,7 +46,8 @@
     <!-- 自定义 -->
     <color name="app_color_description">@color/qmui_config_color_gray_5</color>
     <color name="app_color_icon_selected_full">#31BDF3</color>    <!-- icon选中时以及正常 的填充颜色 -->
-    <color name="app_color_icon_un_selected_full">#DBDBDB</color>
+    <color name="app_color_icon_un_selected_full">#99A0AA</color>  <!-- 方案一 -->
+    <color name="app_color_icon_un_selected_full_2">#DBDBDB</color>  <!-- 方案二 -->
 
     <!-- 阿里图标库的 icon 配色 -->
     <color name="app_ali_icon_black">#444444</color>
