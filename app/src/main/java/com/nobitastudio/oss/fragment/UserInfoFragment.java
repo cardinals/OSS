@@ -100,7 +100,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                 .addTo(mGroupListView);
 
         //  绑定信息
-        QMUICommonListItemView mMobileItemView = mGroupListView.createItemView(
+        mMobileItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.drawable.ic_phone),
                 "手机",
                 "15709932234",
@@ -153,7 +153,6 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
 
     private View.OnClickListener getOnclickListener() {
         return v -> {
-            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
             CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
             if (itemViewText.equals("用户名")) {
                 showEditTextDialog("修改用户名", "请输入新用户名",

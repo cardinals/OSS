@@ -352,18 +352,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:background="@drawable/qmui_divider_top_bitmap" />
-
-                    <!-- dis play the alert inf-->
-                    <TextView
-                        style="@style/QDCommonTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginRight="12dp"
-                        android:gravity="start"
-                        android:text="注意事项：请在30分钟内支付，逾期作废。逾期超5次将会冻结就诊卡"
-                        android:textColor="@color/app_color_theme_1" />
-
                 </LinearLayout>
 
                 <!-- display the register button-->

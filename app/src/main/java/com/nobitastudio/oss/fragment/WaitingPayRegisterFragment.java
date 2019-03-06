@@ -49,7 +49,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.cancel_register_button:
-                showMessageNegativeDialog("提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡"
+                showMessageNegativeDialog("温馨提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡"
                         , "取消挂号单", (dialog, index) -> {
                             ToastUtils.showShort("您已成功取消本次预约挂号");
                             dialog.dismiss();

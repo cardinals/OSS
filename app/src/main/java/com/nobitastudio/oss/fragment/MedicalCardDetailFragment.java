@@ -27,7 +27,7 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     void OnClick(View v) {
         switch (v.getId()) {
             case R.id.unbind_medical_card_button:
-                showMessageNegativeDialog("温馨提示", getString(R.string.matters_needed_attention),
+                showMessageNegativeDialog("温馨提示", "1.\n2.\n3.",
                         "取消绑定", (dialog, pos) -> dialog.dismiss(),
                         "再想想", (dialog, pos) -> dialog.dismiss());
             default:

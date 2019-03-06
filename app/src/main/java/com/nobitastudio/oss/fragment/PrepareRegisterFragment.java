@@ -46,16 +46,21 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                 isBindMedicalCard();
                 break;
             case R.id.confirm_register_msg:
-                if (isChooseMedicalCard()) {
-                    // 选择了诊疗卡
-                    if (isInputVerificationCode()) {
-                        // 输入了验证码
-                        if (isVerificationCodeRight()) {
-                            // 验证码是正确的,进入准备支付的activity
-                            startFragment(new WaitingPayRegisterFragment());
-                        }
-                    }
-                }
+                showMessagePositiveDialog("温馨提示", "请在30分钟内支付，逾期作废\n逾期超5次将会冻结就诊卡",
+                        "取消", (dialog, index) -> dialog.dismiss(),
+                        "我知道了", (dialog, index) -> {
+                            dialog.dismiss();
+                            if (isChooseMedicalCard()) {
+                                // 选择了诊疗卡
+                                if (isInputVerificationCode()) {
+                                    // 输入了验证码
+                                    if (isVerificationCodeRight()) {
+                                        // 验证码是正确的,进入准备支付的activity
+                                        startFragment(new WaitingPayRegisterFragment());
+                                    }
+                                }
+                            }
+                        });
                 break;
             default:
                 showErrorTipDialog("不支持的点击事件");
@@ -81,7 +86,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     });
         } else {
             // 未绑定诊疗卡
-            showMessagePositiveDialog("提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
+            showMessagePositiveDialog("温馨提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
                     "取消", (dialog, index) -> {
                         ToastUtils.showShort("用户已经取消");
                         dialog.dismiss();
