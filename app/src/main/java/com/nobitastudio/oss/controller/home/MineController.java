@@ -16,6 +16,7 @@ import com.nobitastudio.oss.fragment.OrderFragment;
 import com.nobitastudio.oss.fragment.RegisterRecordFragment;
 import com.nobitastudio.oss.fragment.SettingFragment;
 import com.nobitastudio.oss.fragment.UserInfoFragment;
+import com.nobitastudio.oss.fragment.WaitDiagnosisFragment;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -61,6 +62,7 @@ public class MineController extends QMUIWindowInsetLayout {
                 mHandler.startFragment(new UserInfoFragment());
                 break;
             case R.id.wait_diagnosis_linearlayout:
+                mHandler.startFragment(new WaitDiagnosisFragment());
                 break;
             case R.id.order_linearlayout:
                 mHandler.startFragment(new OrderFragment());
