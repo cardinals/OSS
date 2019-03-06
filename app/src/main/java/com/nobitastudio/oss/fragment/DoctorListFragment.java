@@ -2,7 +2,9 @@ package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,8 +79,13 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         doctors.add(new Doctor());
         DoctorRecycleViewAdapter adapter = new DoctorRecycleViewAdapter(getContext(), doctors);
         adapter.setOnItemClickListener((view, pos) -> startFragment(new DoctorDetailFragment()));
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
         mRecyclerView.setAdapter(adapter);
     }
 

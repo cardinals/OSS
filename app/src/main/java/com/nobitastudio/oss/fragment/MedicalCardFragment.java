@@ -2,8 +2,10 @@ package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
@@ -83,8 +85,13 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     }
 
     protected void initMedicalCard() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        mMedicalCardRecyclerView.setLayoutManager(gridLayoutManager);
+        mMedicalCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
         MedicalCardItemAdapter mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), null);
         mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> startFragment(new MedicalCardDetailFragment()));
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);

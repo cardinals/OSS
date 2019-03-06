@@ -4,13 +4,12 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -48,64 +47,6 @@ import butterknife.OnClick;
  * @description
  */
 public class HomeController extends QMUIWindowInsetLayout {
-
-    /**
-     * 初始化有哪些 pager
-     */
-    enum Pager {
-        HEALTH_ARTICLE, DOCTOR_LECTURE;
-
-        public static Pager getPagerFromPosition(int position) {
-            switch (position) {
-                case 0:
-                    return HEALTH_ARTICLE;
-                case 1:
-                    return DOCTOR_LECTURE;
-                default:
-                    return HEALTH_ARTICLE;
-            }
-        }
-    }
-
-    public class HospitalActivityUltraPagerAdapter extends PagerAdapter {
-        List<HealthArticle> healthArticles;
-
-        public HospitalActivityUltraPagerAdapter(List<HealthArticle> healthArticles) {
-            this.healthArticles = healthArticles;
-        }
-
-        @Override
-        public int getCount() {
-            return 6;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
-            View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
-//            if (mHealthArticles != null) {
-            ImageView imageView = root.findViewById(R.id.imageview);
-            if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
-            } else if (position % 3 == 1){
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
-            } else {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
-            }
-//            }
-            container.addView(root);
-            return root;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    }
 
     static final String NO_SUPPORT_VIEW_ID = "不支持的点击事件";
 
@@ -165,12 +106,46 @@ public class HomeController extends QMUIWindowInsetLayout {
         }
     }
 
-    HashMap<Pager, View> mPages;
+    HashMap<HealthArticleFragment.Pager, View> mPages;
     HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
-    HospitalActivityUltraPagerAdapter mUltraPagerAdapter;
+    HealthArticleFragment.DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter;
     ControllerClickHandler mHandler;
     List<HealthArticle> mHealthArticles;
     TipDialogHelper mTipDialogHelper;
+    private PagerAdapter mUltraPagerAdapter = new PagerAdapter(){
+
+        @Override
+        public int getCount() {
+            return 6;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
+//            if (mHealthArticles != null) {
+            ImageView imageView = root.findViewById(R.id.imageview);
+            if (position % 3 == 0) {
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
+            } else if (position % 3 == 1){
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
+            } else {
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
+            }
+//            }
+            container.addView(root);
+            return root;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+    };
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
 
         private int mChildCount = 0;
@@ -187,7 +162,7 @@ public class HomeController extends QMUIWindowInsetLayout {
 
         @Override
         public Object instantiateItem(final ViewGroup container, int position) {
-            View page = mPages.get(Pager.getPagerFromPosition(position));
+            View page = mPages.get(HealthArticleFragment.Pager.getPagerFromPosition(position));
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             container.addView(page, params);
             return page;
@@ -244,17 +219,29 @@ public class HomeController extends QMUIWindowInsetLayout {
      */
     private void initPagers() {
         mPages = new HashMap<>();
-        RecyclerView mHealthArticleRecyclerView = new RecyclerView(getContext());
-        RecyclerView doctorLectureRecyclerView = new RecyclerView(getContext());
+        RecyclerView mHeadlineRecycleView = new RecyclerView(getContext());
+        RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
         mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(), null);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        mHealthArticleRecyclerView.setLayoutManager(gridLayoutManager);
-        mHealthArticleRecyclerView.setAdapter(mHeadlineRecycleViewAdapter);
+        mDoctorLectureRecyclerViewAdapter = new HealthArticleFragment.DoctorLectureRecyclerViewAdapter(getContext(), null);
+        mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mHeadlineRecycleView.setAdapter(mHeadlineRecycleViewAdapter);
+        mDoctorLectureRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mDoctorLectureRecyclerView.setAdapter(mDoctorLectureRecyclerViewAdapter);
 
-        View view2 = LayoutInflater.from(getContext()).inflate(R.layout.test, null);
-
-        mPages.put(Pager.HEALTH_ARTICLE, mHealthArticleRecyclerView);
-        mPages.put(Pager.DOCTOR_LECTURE, view2);
+        mPages.put(HealthArticleFragment.Pager.HEADLINE, mHeadlineRecycleView);
+        mPages.put(HealthArticleFragment.Pager.DOCTOR_LECTURE, mDoctorLectureRecyclerView);
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -307,7 +294,6 @@ public class HomeController extends QMUIWindowInsetLayout {
      */
     private void initUltraViewPager() {
         mHospitalActivityUltraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
-        mUltraPagerAdapter = new HospitalActivityUltraPagerAdapter( null);
         mHospitalActivityUltraViewPager.setAdapter(mUltraPagerAdapter);
 //        mHospitalActivityUltraViewPager.setPageTransformer(false, new UltraScaleTransformer());  // 用于设置滑动动画 使用默认即可
         mHospitalActivityUltraViewPager.setInfiniteLoop(true);

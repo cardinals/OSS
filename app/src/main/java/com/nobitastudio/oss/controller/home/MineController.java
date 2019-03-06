@@ -52,9 +52,14 @@ public class MineController extends QMUIWindowInsetLayout {
 
     ControllerClickHandler mHandler;
 
-    @OnClick({R.id.wait_diagnosis_linearlayout, R.id.order_linearlayout, R.id.my_collection_linearlayout})
+    @OnClick({R.id.head_imageview, R.id.username_textview,
+            R.id.wait_diagnosis_linearlayout, R.id.order_linearlayout, R.id.my_collection_linearlayout})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.head_imageview:
+            case R.id.username_textview:
+                mHandler.startFragment(new UserInfoFragment());
+                break;
             case R.id.wait_diagnosis_linearlayout:
                 break;
             case R.id.order_linearlayout:
@@ -160,15 +165,14 @@ public class MineController extends QMUIWindowInsetLayout {
 
     private View.OnClickListener getOnclickListener() {
         return v -> {
-            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
             CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
             if (itemViewText.equals("挂号记录")) {
                 mHandler.startFragment(new RegisterRecordFragment());
-            } else if (itemView.equals("电子病历")) {
-            } else if (itemView.equals("电子处方")) {
-            } else if (itemView.equals("已就诊")) {
-            } else if (itemView.equals("我的咨询")) {
-            } else if (itemView.equals("我的诊疗卡")) {
+            } else if (itemViewText.equals("电子病历")) {
+            } else if (itemViewText.equals("电子处方")) {
+            } else if (itemViewText.equals("已就诊")) {
+            } else if (itemViewText.equals("我的咨询")) {
+            } else if (itemViewText.equals("我的诊疗卡")) {
                 mHandler.startFragment(new MedicalCardFragment());
             }
         };

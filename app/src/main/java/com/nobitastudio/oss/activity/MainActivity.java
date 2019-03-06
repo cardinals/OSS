@@ -25,6 +25,7 @@ import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.BootFragment;
 import com.nobitastudio.oss.fragment.CreateMedicalCardThreeFragment;
 import com.nobitastudio.oss.fragment.ForgetPasswordOneFragment;
+import com.nobitastudio.oss.fragment.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
@@ -77,6 +78,8 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new TestFragment();
 //        return new MyCollectFragment();
         return new BootFragment();
+//        return new HealthArticleFragment();
     }
+
 
 }

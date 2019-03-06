@@ -56,7 +56,7 @@ public class LastController extends QMUIWindowInsetLayout {
     // 滑动出现
     public void SlideIn() {
         if (mLinearLayout.getVisibility() == View.GONE) {
-            QMUIViewHelper.slideIn(mLinearLayout, 1500, null, true, QMUIDirection.BOTTOM_TO_TOP);
+            QMUIViewHelper.slideIn(mLinearLayout, 1000, null, true, QMUIDirection.BOTTOM_TO_TOP);
         }
     }
 

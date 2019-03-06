@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/doctor_lecture_linearlayout"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="200dp"
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
@@ -23,7 +23,7 @@
         <FrameLayout
             android:id="@+id/doctor_lecture_framelayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="160dp"
             android:background="@mipmap/bg_video_test">
             <!-- 标题 -->
             <TextView
@@ -62,6 +62,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
+            android:background="@color/qmui_config_color_white"
             android:orientation="horizontal">
 
             <TextView

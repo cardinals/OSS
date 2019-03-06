@@ -60,7 +60,7 @@
                                 android:orientation="vertical">
 
                                 <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/activity_personal_center_user_imageView"
+                                    android:id="@+id/head_imageview"
                                     android:layout_width="96dp"
                                     android:layout_height="96dp"
                                     android:layout_gravity="center_horizontal"
@@ -72,6 +72,7 @@
                                     app:civ_border_width="2dp" />
 
                                 <TextView
+                                    android:id="@+id/username_textview"
                                     style="@style/QDCommonDescription"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

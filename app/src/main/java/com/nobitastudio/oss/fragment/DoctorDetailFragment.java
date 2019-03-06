@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -203,11 +204,21 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         });
 
         VisitRecycleViewAdapter allVisitRecycleViewAdapter = new VisitRecycleViewAdapter(getContext(), visits2);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 1);
-        availableVisitRecycleView.setLayoutManager(gridLayoutManager);
+        availableVisitRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
         availableVisitRecycleView.setAdapter(availableVisitRecycleViewAdapter);
-        allVisitRecycleView.setLayoutManager(gridLayoutManager2);
+        allVisitRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
         allVisitRecycleView.setAdapter(allVisitRecycleViewAdapter);
         mPages.put(Pager.AVAILABLE_VISIT, availableVisitRecycleView);
         mPages.put(Pager.ALL_VISIT, allVisitRecycleView);
