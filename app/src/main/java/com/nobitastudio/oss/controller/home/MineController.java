@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.helper.BottomSheetHelper;
+import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.AboutFragment;
+import com.nobitastudio.oss.fragment.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.MyCollectFragment;
 import com.nobitastudio.oss.fragment.OrderFragment;
@@ -25,8 +25,6 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
-
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +50,8 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUILinearLayout mQMUILinearLayout;
 
     ControllerClickHandler mHandler;
+    DialogHelper mDialogHelper;
+    Context mContext;
 
     @OnClick({R.id.head_imageview, R.id.username_textview,
             R.id.wait_diagnosis_linearlayout, R.id.order_linearlayout, R.id.my_collection_linearlayout})
@@ -110,7 +110,7 @@ public class MineController extends QMUIWindowInsetLayout {
         QMUICommonListItemView electronicCaseHistory = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_electronic_case),
                 "电子病历",
-                "需要密码方可查看",
+                "验证密码后方可查看",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -171,6 +171,12 @@ public class MineController extends QMUIWindowInsetLayout {
             if (itemViewText.equals("挂号记录")) {
                 mHandler.startFragment(new RegisterRecordFragment());
             } else if (itemViewText.equals("电子病历")) {
+                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
+                        "取消", (dialog, index) -> dialog.dismiss(),
+                        "确定", (dialog, index) -> {
+                            dialog.dismiss();
+                            mHandler.startFragment(new ElectronicCaseFragment());
+                        });
             } else if (itemViewText.equals("电子处方")) {
             } else if (itemViewText.equals("已就诊")) {
             } else if (itemViewText.equals("我的咨询")) {
@@ -188,11 +194,13 @@ public class MineController extends QMUIWindowInsetLayout {
         mEmptyView.hide();
     }
 
-    public MineController(Context context, ControllerClickHandler mHandler) {
-        super(context);
+    public MineController(Context mContext, ControllerClickHandler mHandler) {
+        super(mContext);
         this.mHandler = mHandler;
-        LayoutInflater.from(context).inflate(R.layout.controller_mine, this);
+        this.mContext = mContext;
+        LayoutInflater.from(mContext).inflate(R.layout.controller_mine, this);
         ButterKnife.bind(this);
+        mDialogHelper = new DialogHelper(mContext);
         init();
     }
 }

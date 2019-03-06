@@ -112,6 +112,7 @@ public class HomeController extends QMUIWindowInsetLayout {
     ControllerClickHandler mHandler;
     List<HealthArticle> mHealthArticles;
     TipDialogHelper mTipDialogHelper;
+    Context mContext;
     private PagerAdapter mUltraPagerAdapter = new PagerAdapter(){
 
         @Override
@@ -130,7 +131,7 @@ public class HomeController extends QMUIWindowInsetLayout {
 //            if (mHealthArticles != null) {
             ImageView imageView = root.findViewById(R.id.imageview);
             if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t4).into(imageView);
             } else if (position % 3 == 1){
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
             } else {
@@ -370,6 +371,7 @@ public class HomeController extends QMUIWindowInsetLayout {
     public HomeController(Context context, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
+        this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.controller_home, this);
         ButterKnife.bind(this);
         init();

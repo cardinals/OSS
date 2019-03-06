@@ -125,7 +125,7 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
 //            if (mHealthArticles != null) {
             ImageView imageView = root.findViewById(R.id.imageview);
             if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t1).into(imageView);
+                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t4).into(imageView);
             } else if (position % 3 == 1) {
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
             } else {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUILinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/doctor_collect_linearLayout"
+    android:id="@+id/hospitalize_linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="168dp"
+    android:layout_height="192dp"
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
@@ -30,7 +31,7 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
-            android:text="医生简介" />
+            android:text="住院概况" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,7 +78,6 @@
 
         </android.support.v7.widget.CardView>
 
-        <!-- 中间医生信息 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -93,13 +93,19 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主治医生: "
+                    android:textColor="?attr/qmui_config_color_gray_3"
+                    android:textSize="16sp"/>
+
+                <TextView
                     android:id="@+id/doctor_name_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="医生姓名"
+                    android:text="陈陈陈"
                     android:textColor="?attr/qmui_config_color_gray_3"
-                    android:textSize="16sp"
-                    android:visibility="visible" />
+                    android:textSize="16sp"/>
 
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
@@ -128,16 +134,29 @@
             </LinearLayout>
 
             <!-- 门诊科室 -->
-            <TextView
-                android:id="@+id/deparment_textView"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="科室描述"
-                android:textColor="?attr/qmui_config_color_gray_5"
-                android:textSize="13sp" />
+                android:layout_marginTop="@dimen/dp_12"
+                android:orientation="horizontal">
 
-            <!-- 亚专业 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="科室:"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/department_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="脑科"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,7 +166,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="亚专业:"
+                    android:text="床位:"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="13sp" />
 
@@ -156,12 +175,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:text="亚专业描述"
+                    android:text="302病房A床位"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="13sp" />
             </LinearLayout>
 
-            <!-- 擅长 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,7 +189,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="擅长:"
+                    android:text="入院时间:"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="2018-11-12 12:11:11"
+                    android:textColor="?attr/qmui_config_color_gray_5"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出院时间:"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="13sp" />
 
@@ -180,20 +220,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:text="擅长"
+                    android:text="2018-11-12 12:11:11"
                     android:textColor="?attr/qmui_config_color_gray_5"
                     android:textSize="13sp" />
             </LinearLayout>
-
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/collect_doctor_imageview"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="end|bottom"
-            android:layout_marginRight="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_8"
-            android:src="@drawable/ic_heart_red" />
     </LinearLayout>
 </com.qmuiteam.qmui.layout.QMUILinearLayout>

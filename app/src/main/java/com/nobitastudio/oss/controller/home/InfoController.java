@@ -41,6 +41,7 @@ public class InfoController extends QMUIWindowInsetLayout {
     QMUIGroupListView mGroupListView;
 
     ControllerClickHandler mHandler;
+    Context mContext;
 
     private void initQMUILinearLayout() {
         float mShadowAlpha = 1.0f;
@@ -159,6 +160,7 @@ public class InfoController extends QMUIWindowInsetLayout {
     public InfoController(Context context, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
+        this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.controller_info, this);
         ButterKnife.bind(this);
         init();

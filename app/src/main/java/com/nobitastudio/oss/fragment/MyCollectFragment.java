@@ -23,7 +23,6 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
         @Override
         public void bindData(RecyclerViewHolder holder, int position, Doctor item) {
             QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.doctor_collect_linearLayout);
-            ImageView mDoctorImageView = holder.getImageView(R.id.doctor_imageView);
+            ImageView mDoctorImageView = holder.getImageView(R.id.doctor_imageview);
             TextView mDoctorNameTextView = holder.getTextView(R.id.doctor_name_textview);
             TextView mDoctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
             TextView mDoctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);

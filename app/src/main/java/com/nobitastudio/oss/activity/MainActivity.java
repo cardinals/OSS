@@ -70,14 +70,14 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new Test2Fragment();
 //        return new LoginFragment();
 //        return new SettingFragment();
-//        return new HomeFragment();
+        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
 //        return new CreateMedicalCardThreeFragment();
 //        return new TestFragment();
 //        return new MyCollectFragment();
-        return new BootFragment();
+//        return new BootFragment();
 //        return new HealthArticleFragment();
     }
 

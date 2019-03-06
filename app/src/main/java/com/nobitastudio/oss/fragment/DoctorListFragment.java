@@ -1,7 +1,6 @@
 package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         @Override
         public void bindData(RecyclerViewHolder holder, int position, Doctor doctor) {
             QMUILinearLayout linearLayout = (QMUILinearLayout) holder.getView(R.id.doctor_linearLayout);
-            ImageView imageView = holder.getImageView(R.id.doctor_imageView);
+            ImageView imageView = holder.getImageView(R.id.doctor_imageview);
             TextView doctorNameTextView = holder.getTextView(R.id.doctor_name_textview);
             TextView doctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
             TextView doctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);

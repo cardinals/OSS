@@ -71,7 +71,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("挂号成功");
+        mTopBar.setTitle("我的诊疗卡");
     }
 
     @Override
