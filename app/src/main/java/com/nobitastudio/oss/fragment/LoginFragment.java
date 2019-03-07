@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -57,7 +59,16 @@ public class LoginFragment extends BaseFragment {
                 mBottomSheetHelper.showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_enroll, R.mipmap.ic_lock, R.mipmap.ic_app_icon),
                         Arrays.asList("注册", "找回密码", "关于我们"),
                         Arrays.asList(1, 2, 3),
-                        (dialog, itemView) -> dialog.dismiss());
+                        (dialog, itemView) -> {
+                            if (itemView.getTag().equals(1)) {
+                                Toasty.info(getContext(), "注册", Toast.LENGTH_SHORT, true).show();
+                            } else if (itemView.getTag().equals(2)) {
+                                Toasty.info(getContext(), "找回密码",Toast.LENGTH_SHORT, true).show();
+                            } else if (itemView.getTag().equals(3)) {
+                                startFragment(new AboutFragment());
+                            }
+                            dialog.dismiss();
+                        });
                 break;
         }
     }
