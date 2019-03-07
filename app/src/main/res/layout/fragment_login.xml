@@ -1,261 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:focusable="true"
-android:focusableInTouchMode="true">
-
-<com.qmuiteam.qmui.widget.QMUIEmptyView
-    android:id="@+id/emptyView"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/qmui_topbar_height"
-    android:background="@color/qmui_config_color_white"
-    android:fitsSystemWindows="true"
-    android:visibility="gone"
-    app:qmui_detail_text="正在加载"
-    app:qmui_show_loading="true" />
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-<FrameLayout
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="?attr/qmui_topbar_height"
-    android:background="?attr/qmui_config_color_background"
-    android:fitsSystemWindows="true">
-
-    <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
-        android:id="@+id/pull_to_refresh"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/scrollview"
+        <ImageView
+            android:id="@+id/login_gif_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:fillViewport="true">
+            android:scaleType="fitXY"
+            android:src="@mipmap/bg_login_init" />
 
-            <!-- 除去 toobar 的全部布局 -->
-            <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_overlay">
+
+            <ImageView
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="@dimen/dp_72"
+                android:layout_alignTop="@id/cardview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-116dp"
+                android:src="@mipmap/ic_app_icon_round" />
+
+            <TextView
+                android:id="@+id/version_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cardview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-42dp"
+                android:text="2.1.0"
+                android:textColor="@color/qmui_config_color_white"
+                android:textSize="16sp" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/qmui_config_color_white"
-                android:orientation="vertical">
+                android:layout_height="340dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="32dp"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <!--the main layout-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/login_bg"
                     android:orientation="vertical">
 
-                    <!--display APP icon-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:paddingTop="40dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="10dp">
 
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:gravity="center"
-                            android:src="@mipmap/ic_app_icon" />
-
-                    </LinearLayout>
-
-                    <!-- 展示标题 -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:orientation="vertical">
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:background="@color/app_color_blue" />
 
                         <TextView
-                            android:id="@+id/empty_view_title"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:gravity="center_horizontal"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="50dp"
                             android:text="门诊服务系统"
-                            android:textColor="?attr/qmui_config_color_gray_3"
-                            android:textSize="18sp" />
+                            android:textColor="@color/app_color_theme_4"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/empty_view_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:gravity="center_horizontal"
-                            android:text="Outpatient Service System"
-                            android:textColor="?attr/qmui_config_color_gray_3"
-                            android:textSize="16sp" />
-
-                    </LinearLayout>
-
-                    <!-- 用户手机号 -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:orientation="horizontal">
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="50dp"
+                        android:paddingEnd="30dp">
 
-                        <ImageView
-                            android:layout_width="32dp"
-                            android:layout_height="48dp"
-                            android:layout_marginLeft="48dp"
-                            android:gravity="center"
-                            android:src="@drawable/ic_phone" />
-
-                        <EditText
-                            android:id="@+id/user_mobile_edittext"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="56dp"
-                            android:background="@drawable/qmui_divider_bottom_bitmap"
-                            android:gravity="center"
-                            android:hint="请输入您的登录账号"
-                            android:inputType="number"
-                            android:maxLength="11"
-                            android:paddingBottom="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/qmui_config_color_gray_5"
-                            android:textSize="16sp" />
+                            android:textColorHint="#c5c5c5"
+                            app:hintTextAppearance="@style/app_edittext">
 
+                            <EditText
+                                android:id="@+id/user_mobile_edittext"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_bg_edit"
+                                android:hint="手机号"
+                                android:inputType="number"
+                                android:maxLength="11"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/app_color_blue"
+                                android:textCursorDrawable="@drawable/bg_input_cursor"
+                                android:textSize="15sp" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!--  用户密码 -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:orientation="horizontal">
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="50dp"
+                        android:paddingEnd="30dp">
 
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="48dp"
-                            android:layout_marginLeft="48dp"
-                            android:layout_marginRight="4dp"
-                            android:gravity="center"
-                            android:src="@drawable/ic_lock" />
-
-                        <EditText
-                            android:id="@+id/user_password_editText"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="56dp"
-                            android:background="@drawable/qmui_divider_bottom_bitmap"
-                            android:gravity="center"
-                            android:hint="请输入您的登录密码"
-                            android:inputType="textPassword"
-                            android:maxLength="16"
-                            android:paddingBottom="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/app_color_description"
-                            android:textSize="16sp" />
+                            android:textColorHint="#c5c5c5"
+                            app:hintTextAppearance="@style/app_edittext">
 
+                            <EditText
+                                android:id="@+id/user_password_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/selector_bg_edit"
+                                android:hint="密码"
+                                android:inputType="textPassword"
+                                android:maxLength="16"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/app_color_blue"
+                                android:textCursorDrawable="@drawable/bg_input_cursor"
+                                android:textSize="15sp" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!-- 登录按钮 -->
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <!--<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton-->
-                        <!--android:id="@+id/login_button"-->
-                        <!--style="@style/QMUI.RoundButton"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:layout_marginLeft="51dp"-->
-                        <!--android:layout_marginRight="51dp"-->
-                        <!--android:text="登          录"-->
-                        <!--app:qmui_backgroundColor="@color/app_color_blue_btn_bg" />-->
+                        android:layout_height="60dp"
+                        android:layout_marginTop="25dp"
+                        android:gravity="center"
+                        android:paddingStart="50dp"
+                        android:paddingEnd="30dp">
 
                         <Button
                             android:id="@+id/login_button"
-                            style="@style/AppQDRadiusButton"
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="@dimen/space_left_right_button"
-                            android:layout_marginRight="@dimen/space_left_right_button"
-                            android:text="登          录" />
+                            android:layout_height="40dp"
+                            android:background="@drawable/bt_shape"
+                            android:stateListAnimator="@drawable/state_list_animator_z"
+                            android:text="登            录"
+                            android:textColor="@color/app_color_blue" />
+                    </RelativeLayout>
 
-                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="9dp"
+                        android:text="其他登录方式"
+                        android:textColor="#9a9a9a"
+                        android:textSize="12sp" />
 
-                    <!-- 忘记密码,注册账号 -->
+                    <!-- 登录方式 -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="left">
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                            <TextView
-                                android:id="@+id/forget_password_textView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="51dp"
-                                android:layout_marginBottom="16dp"
-                                android:gravity="center_horizontal"
-                                android:text="忘记密码"
-                                android:textColor="?attr/qmui_config_color_gray_3"
-                                android:textSize="16sp" />
+                        <ImageView
+                            android:id="@+id/qq_login_imageview"
+                            android:layout_width="@dimen/dp_36"
+                            android:layout_height="@dimen/dp_36"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/ic_qq_round" />
 
-                        </LinearLayout>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right">
+                        <ImageView
+                            android:id="@+id/wechat_login_imageview"
+                            android:layout_width="@dimen/dp_36"
+                            android:layout_height="@dimen/dp_36"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/ic_wechat_round" />
 
-                            <TextView
-                                android:id="@+id/enroll_textView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="51dp"
-                                android:layout_marginBottom="16dp"
-                                android:gravity="center_horizontal"
-                                android:text="注册"
-                                android:textColor="?attr/app_primary_color"
-                                android:textSize="16sp" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                        </LinearLayout>
+                        <ImageView
+                            android:id="@+id/weibo_login_imageview"
+                            android:layout_width="@dimen/dp_36"
+                            android:layout_height="@dimen/dp_36"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/ic_weibo_round" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
                     </LinearLayout>
-
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+            <!-- 版权,责任 -->
+            <TextView
+                android:id="@+id/copyright_textView"
+                style="@style/AppCopyrightTextViw"
+                android:layout_alignParentBottom="true" />
 
-                <!-- 版权,责任 -->
-                <TextView
-                    android:id="@+id/copyright_textView"
-                    style="@style/AppCopyrightTextViw" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
-</FrameLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/chioces_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/cardview"
+                android:layout_alignEnd="@id/cardview"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="-24dp"
+                android:src="@mipmap/ic_plus"
+                android:transitionName="loginFab"
+                app:backgroundTint="@color/app_color_blue" />
 
-<com.qmuiteam.qmui.widget.QMUITopBarLayout
-    android:id="@+id/topbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="true" />
-
+            <com.github.glomadrian.grav.GravView
+                android:id="@+id/grav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                app:animationGenerators="@array/BubbleAnimations"
+                app:array_colors="@array/bubble"
+                app:ball_from_size="10dp"
+                app:ball_to_size="20dp"
+                app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+                app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+                app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+                app:regular_cell_size="300"
+                app:regular_variance="200"
+                app:shake_direction="vertical"
+                app:shake_max_duration="20000"
+                app:shake_min_duration="10000"
+                app:shake_variance="500dp"
+                app:side_to_side_direction="leftToRight"
+                app:side_to_side_max_duration="10000"
+                app:side_to_side_min_duration="10000" />
+        </RelativeLayout>
+    </FrameLayout>
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
+

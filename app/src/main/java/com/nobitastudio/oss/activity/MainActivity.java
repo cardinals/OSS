@@ -21,19 +21,9 @@ import android.os.Bundle;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
-import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.BootFragment;
-import com.nobitastudio.oss.fragment.CreateMedicalCardThreeFragment;
-import com.nobitastudio.oss.fragment.ForgetPasswordOneFragment;
-import com.nobitastudio.oss.fragment.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.HomeFragment;
 import com.nobitastudio.oss.fragment.LoginFragment;
-import com.nobitastudio.oss.fragment.MedicalCardFragment;
-import com.nobitastudio.oss.fragment.MyCollectFragment;
-import com.nobitastudio.oss.fragment.SettingFragment;
-import com.nobitastudio.oss.fragment.Test2Fragment;
 import com.nobitastudio.oss.fragment.TestFragment;
-import com.nobitastudio.oss.fragment.UserInfoFragment;
 
 /**
  * @author chenxiong
@@ -68,9 +58,9 @@ public class MainActivity extends BaseFragmentActivity {
      */
     protected BaseFragment getFirstFragment() {
 //        return new Test2Fragment();
-//        return new LoginFragment();
+//        return new LoginOldFragment();
 //        return new SettingFragment();
-        return new HomeFragment();
+//        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
@@ -79,6 +69,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
+        return new LoginFragment();
     }
 
 

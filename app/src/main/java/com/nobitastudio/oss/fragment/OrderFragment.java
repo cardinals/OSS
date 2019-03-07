@@ -8,17 +8,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.OSSOrder;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -288,7 +282,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
         mTopBar.setTitle("我的订单");
-        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
+        mTopBar.addRightImageButton(R.mipmap.ic_plus_round, R.id.topbar_right_plus_button).setOnClickListener(v ->
                 showListPopView(v, Arrays.asList("待支付订单", "已支付订单", "已取消订单", "全部订单"),
                         (parent, view, position, id) -> {
                             popViewDismiss();

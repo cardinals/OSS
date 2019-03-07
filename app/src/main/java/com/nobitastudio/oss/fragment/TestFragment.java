@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -29,53 +30,12 @@ import butterknife.OnClick;
  * @date 2019/01/29 16:08
  * @description
  */
-public class TestFragment extends StandardWithTobBarLayoutFragment {
-
-    static class TestRecyclerViewAdapter extends BaseRecyclerViewAdapter<Department> {
-
-        public TestRecyclerViewAdapter(Context ctx, List<Department> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recyclerview_item_test;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Department item) {
-            // do nothing
-        }
-
-        @Override
-        public int getItemCount() {
-            return 20;
-        }
-    }
-
-    @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+public class TestFragment extends BaseFragment {
 
     @Override
-    protected void initTopBar() {
-        mTopBar.setTitle("科室列表");
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_test;
-    }
-
-    @Override
-    protected void initLastCustom() {
-        mRecyclerView.setAdapter(new TestRecyclerViewAdapter(getActivity(), Collections.EMPTY_LIST));
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
-            @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-        });
-        mEmptyView.hide();
+    protected View onCreateView() {
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.test, null);
+        ButterKnife.bind(this, root);
+        return root;
     }
 }

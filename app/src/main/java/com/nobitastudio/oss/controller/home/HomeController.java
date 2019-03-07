@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -18,6 +19,7 @@ import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.DepartmentFragment;
 import com.nobitastudio.oss.fragment.HealthArticleFragment;
+import com.nobitastudio.oss.fragment.LoginFragment;
 import com.nobitastudio.oss.fragment.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.NavigationFragment;
 import com.nobitastudio.oss.fragment.RegisterRecordFragment;
@@ -32,13 +34,13 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import com.tmall.ultraviewpager.UltraViewPager;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -93,9 +95,14 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.smart_linearLayout:
                 break;
             case R.id.express_linearLayout:
-                mHandler.startFragment(new TestFragment());
+                mHandler.startFragment(new LoginFragment());
                 break;
             case R.id.coming_soon_linearLayout:
+                Toasty.error(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
+                mHandler.startFragment(new TestFragment());
+//                Toasty.success(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
+//                Toasty.info(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
+//                Toasty.warning(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
                 break;
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");

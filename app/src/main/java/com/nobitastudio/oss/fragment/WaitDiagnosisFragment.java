@@ -1,7 +1,6 @@
 package com.nobitastudio.oss.fragment;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -239,7 +238,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
         mTopBar.setTitle("我的就诊");
-        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
+        mTopBar.addRightImageButton(R.mipmap.ic_plus_round, R.id.topbar_right_plus_button).setOnClickListener(v ->
                 showListPopView(v, Arrays.asList("挂号单项", "检查项", "手术项", "全部"),
                         (parent, view, position, id) -> {
                             popViewDismiss();

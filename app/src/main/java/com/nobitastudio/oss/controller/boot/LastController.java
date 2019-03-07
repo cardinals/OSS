@@ -3,13 +3,12 @@ package com.nobitastudio.oss.controller.boot;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.HomeFragment;
-import com.nobitastudio.oss.fragment.LoginFragment;
+import com.nobitastudio.oss.fragment.LoginOldFragment;
 import com.qmuiteam.qmui.util.QMUIDirection;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
@@ -36,7 +35,7 @@ public class LastController extends QMUIWindowInsetLayout {
         // 记录点击事件.下次不再进入Boot Fragment
         switch (v.getId()) {
             case R.id.login_button:
-                mHandler.startFragment(new LoginFragment());
+                mHandler.startFragment(new LoginOldFragment());
                 break;
             case R.id.enroll_button:
                 // 注册
