@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.TestFragment;
+import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;

@@ -12,7 +12,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.fragment.StandardFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;

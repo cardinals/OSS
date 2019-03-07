@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.fragment;
+package com.nobitastudio.oss.fragment.home;
 
 import android.widget.ImageView;
 
@@ -11,9 +11,9 @@ import butterknife.BindView;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description
+ * @description 邮寄报告
  */
-public class TemplateFragment extends StandardWithTobBarLayoutFragment {
+public class ExpressFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.solidImage)
     ImageView solidImage;

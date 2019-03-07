@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.HomeFragment;
-import com.nobitastudio.oss.fragment.LoginOldFragment;
+import com.nobitastudio.oss.fragment.home.HomeFragment;
+import com.nobitastudio.oss.fragment.old.LoginOldFragment;
 import com.qmuiteam.qmui.util.QMUIDirection;
 import com.qmuiteam.qmui.util.QMUIViewHelper;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;

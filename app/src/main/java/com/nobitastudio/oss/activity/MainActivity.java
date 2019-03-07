@@ -21,9 +21,7 @@ import android.os.Bundle;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
-import com.nobitastudio.oss.fragment.HomeFragment;
-import com.nobitastudio.oss.fragment.LoginFragment;
-import com.nobitastudio.oss.fragment.TestFragment;
+import com.nobitastudio.oss.fragment.login.LoginFragment;
 
 /**
  * @author chenxiong

@@ -1,6 +1,6 @@
-package com.nobitastudio.oss.fragment;
+package com.nobitastudio.oss.fragment.about;
 
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
@@ -13,24 +13,25 @@ import butterknife.BindView;
  * @date 2019/01/29 16:08
  * @description
  */
-public class TemplateFragment extends StandardWithTobBarLayoutFragment {
+public class LicenseAgreementFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.solidImage)
-    ImageView solidImage;
+    @BindView(R.id.copyright_textView)
+    TextView mCopyrightTextView;
 
     @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("title");
+        mTopBar.setTitle("许可协议");
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_standard;
+        return R.layout.fragment_license_agreement;
     }
 
     @Override
     protected void initLastCustom() {
-        initSolidImage(solidImage);
+        initCopyRight(mCopyrightTextView);
     }
+
 }

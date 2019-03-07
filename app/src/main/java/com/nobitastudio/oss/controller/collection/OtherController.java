@@ -1,21 +1,14 @@
 package com.nobitastudio.oss.controller.collection;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
-import com.nobitastudio.oss.fragment.TestFragment;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
-import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

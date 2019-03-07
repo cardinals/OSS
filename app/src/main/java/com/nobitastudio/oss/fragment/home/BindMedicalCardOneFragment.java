@@ -1,11 +1,11 @@
-package com.nobitastudio.oss.fragment;
+package com.nobitastudio.oss.fragment.home;
 
-import android.widget.ImageView;
+import android.view.View;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
-import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -13,24 +13,27 @@ import butterknife.BindView;
  * @date 2019/01/29 16:08
  * @description
  */
-public class TemplateFragment extends StandardWithTobBarLayoutFragment {
+public class BindMedicalCardOneFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.solidImage)
-    ImageView solidImage;
+    @OnClick({R.id.next_step_button})
+    void onClick(View v) {
+        // clearAllFragment();
+        startFragment(new BindMedicalCardTwoFragment());
+    }
 
     @Override
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("title");
+        mTopBar.setTitle("输入诊疗卡卡号");
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_standard;
+        return R.layout.fragment_bind_medical_card_one;
     }
 
     @Override
     protected void initLastCustom() {
-        initSolidImage(solidImage);
+
     }
 }
