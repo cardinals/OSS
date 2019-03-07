@@ -16,7 +16,7 @@ import butterknife.OnClick;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description
+ * @description 老版登录界面
  */
 public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
 
