@@ -283,7 +283,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
     protected void initTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
         mTopBar.setTitle("我的订单");
-        mTopBar.addRightImageButton(R.mipmap.ic_plus_round, R.id.topbar_right_plus_button).setOnClickListener(v ->
+        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
                 showListPopView(v, Arrays.asList("待支付订单", "已支付订单", "已取消订单", "全部订单"),
                         (parent, view, position, id) -> {
                             popViewDismiss();

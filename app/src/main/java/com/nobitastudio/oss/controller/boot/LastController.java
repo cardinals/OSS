@@ -47,7 +47,7 @@ public class LastController extends QMUIWindowInsetLayout {
     public LastController(Context context, int bootImageRes, ControllerClickHandler mHandler) {
         super(context);
         this.mHandler = mHandler;
-        LayoutInflater.from(context).inflate(R.layout.controller_last, this);
+        LayoutInflater.from(context).inflate(R.layout.controller_boot_last, this);
         this.setBackground(getResources().getDrawable(bootImageRes, null));
         ButterKnife.bind(this);
     }

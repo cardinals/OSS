@@ -118,7 +118,7 @@ public class MineController extends QMUIWindowInsetLayout {
         QMUICommonListItemView electronicPrescriptionItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_tcm),
                 "电子处方",
-                null,
+                "验证密码后方可查看",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );

@@ -22,6 +22,7 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
+import com.nobitastudio.oss.fragment.mine.ElectronicCaseDetailFragment;
 
 /**
  * @author chenxiong
@@ -67,7 +68,8 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
-        return new LoginFragment();
+//        return new LoginFragment();
+        return new ElectronicCaseDetailFragment();
     }
 
 
