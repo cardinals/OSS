@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.home.DepartmentFragment;
@@ -22,6 +23,7 @@ import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.home.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.NavigationFragment;
+import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.mine.RegisterRecordFragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
@@ -65,8 +67,10 @@ public class HomeController extends QMUIWindowInsetLayout {
     @BindView(R.id.ultraview_pager)
     UltraViewPager mHospitalActivityUltraViewPager;
 
+    DialogHelper mDialogHelper;
+
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
-            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.case_history_linearLayout,
+            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.electronic_case_linearLayout,
             R.id.health_article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout, R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -87,7 +91,13 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.register_record_linearLayout:
                 mHandler.startFragment(new RegisterRecordFragment());
                 break;
-            case R.id.case_history_linearLayout:
+            case R.id.electronic_case_linearLayout:
+                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
+                        "取消", (dialog, index) -> dialog.dismiss(),
+                        "确定", (dialog, index) -> {
+                            dialog.dismiss();
+                            mHandler.startFragment(new ElectronicCaseFragment());
+                        });
                 break;
             case R.id.health_article_linearLayout:
                 mHandler.startFragment(new HealthArticleFragment());
@@ -200,8 +210,8 @@ public class HomeController extends QMUIWindowInsetLayout {
     /**
      * 初始化方法
      */
-    private void init() {
-        initBasic();
+    private void init(Context context) {
+        initBasic(context);
         initTopBar();
         initUltraViewPager();
         initQMUILinearLayout();
@@ -218,8 +228,9 @@ public class HomeController extends QMUIWindowInsetLayout {
                 QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
     }
 
-    private void initBasic() {
-        mTipDialogHelper = new TipDialogHelper(getContext());
+    private void initBasic(Context context) {
+        mTipDialogHelper = new TipDialogHelper(context);
+        mDialogHelper = new DialogHelper(context);
     }
 
     /**
@@ -381,7 +392,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         this.mContext = context;
         LayoutInflater.from(context).inflate(R.layout.controller_home, this);
         ButterKnife.bind(this);
-        init();
+        init(context);
         //mViewPager.
     }
 }

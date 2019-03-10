@@ -15,6 +15,7 @@ import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Collections;

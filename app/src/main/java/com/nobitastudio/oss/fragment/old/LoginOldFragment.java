@@ -39,7 +39,7 @@ public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.user_password_editText)
     EditText userPasswordEditText;
 
-    @OnClick({R.id.login_button, R.id.enroll_button})
+    @OnClick({R.id.login_button, R.id.enroll_textView})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_button:

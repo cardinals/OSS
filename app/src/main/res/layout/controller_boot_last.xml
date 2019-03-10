@@ -20,19 +20,9 @@
         <Button
             android:id="@+id/login_button"
             style="@style/AppQDRadiusButton"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_marginLeft="@dimen/dp_36"
-            android:layout_marginRight="@dimen/dp_8"
-            android:layout_weight="1"
-            android:text="登录" />
-
-        <Button
-            android:id="@+id/enroll_button"
-            style="@style/AppQDRadiusButton"
-            android:layout_width="0dp"
-            android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginRight="@dimen/dp_36"
-            android:layout_weight="1"
-            android:text="注册" />
+            android:text="进入门诊服务系统" />
     </LinearLayout>
 </LinearLayout>

@@ -94,10 +94,6 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
         }
     };
 
-    private float mShadowAlpha = 1.0f;
-    private int mShadowElevationDp = 10;
-    private int mRadius = 15;
-
     private void initPagers() {
         mPages = new HashMap<>();
 
