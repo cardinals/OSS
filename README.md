@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./md/ic_app_icon.png" width="200" height="160" alt="Banner" />
+  <img src="./art/ic_app_icon.png" width="200" height="160" alt="Banner" />
 </p>
 
 # OSS 门诊服务系统 2.0
@@ -28,17 +28,17 @@
 这里仅展示了很少部分功能，该app还包含了很多其他功能,有兴趣的小伙伴可以查看源码.
 
 ## 功能预览
-<img src="./md/preview_1.png" width="30%"/>
-<img src="./md/preview_2.png" width="30%"/>
-<img src="./md/preview_3.png" width="30%"/>
+<img src="./art/preview_1.png" width="33%"/>
+<img src="./art/preview_2.png" width="33%"/>
+<img src="./art/preview_3.png" width="33%"/>
 
 #### 预约挂号
-<img src="./md/register.gif" width="100%"/>
+<img src="./art/register.gif" width="100%"/>
 
 ### 其他功能
-<img src="./md/mine.gif" width="100%"/>
+<img src="./art/mine.gif" width="100%"/>
 
 ### 其他功能2
-<img src="./md/other.gif" width="100%"/>
+<img src="./art/other.gif" width="100%"/>
 
 ### 该版本仍在持续更新中
