@@ -28,9 +28,9 @@
 这里仅展示了很少部分功能，该app还包含了很多其他功能,有兴趣的小伙伴可以查看源码.
 
 ## 功能预览
-<img src="./md/preview_1.png" width="100%"/>
-<img src="./md/preview_2.png" width="100%"/>
-<img src="./md/preview_3.png" width="100%"/>
+<img src="./md/preview_1.png" width="30%"/>
+<img src="./md/preview_2.png" width="30%"/>
+<img src="./md/preview_3.png" width="30%"/>
 
 #### 预约挂号
 <img src="./md/register.gif" width="100%"/>
