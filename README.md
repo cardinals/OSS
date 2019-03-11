@@ -28,17 +28,17 @@
 这里仅展示了很少部分功能，该app还包含了很多其他功能,有兴趣的小伙伴可以查看源码.
 
 ## 功能预览
-<img src="./art/preview_1.png" width="33%"/>
-<img src="./art/preview_2.png" width="33%"/>
-<img src="./art/preview_3.png" width="33%"/>
+<img src="./art/preview_1.png" width="320" height="640"/>
+<img src="./art/preview_2.png" width="320" height="640"/>
+<img src="./art/preview_3.png" width="320" height="640"/>
 
 #### 预约挂号
-<img src="./art/register.gif" width="100%"/>
+<img src="./art/register.gif" width="320" height="640"/>
 
 ### 其他功能
-<img src="./art/mine.gif" width="100%"/>
+<img src="./art/mine.gif" width="320" height="640"/>
 
 ### 其他功能2
-<img src="./art/other.gif" width="100%"/>
+<img src="./art/other.gif" width="320" height="640"/>
 
 ### 该版本仍在持续更新中
