@@ -359,6 +359,7 @@ public class HomeController extends QMUIWindowInsetLayout {
      * 初始化tobBar
      */
     private void initTopBar() {
+        mTopBar.setBackgroundDividerEnabled(false);
         mTopBar.setTitle(getResources().getString(R.string.home));
         mTopBar.addLeftImageButton(R.mipmap.ic_qr_code, R.id.topbar_left_qr_code_button)
                 .setOnClickListener(view -> ToastUtils.showShort("程序员小哥哥已累死,请给我们点时间吧~"));
