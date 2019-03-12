@@ -36,6 +36,5 @@ public class BaseActivity extends QMUIActivity {
     public void onResume() {
         super.onResume();
         QDUpgradeManager.getInstance(getContext()).runUpgradeTipTaskIfExist(this);
-
     }
 }

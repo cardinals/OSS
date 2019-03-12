@@ -110,6 +110,8 @@ dependencies {
 
     implementation 'com.github.glomadrian:Grav:1.1' // 泡沫背景
 
+    implementation 'com.shuyu:GSYVideoPlayer:6.0.0-beta'  // 视频播放器
+
     // 汉字转拼音
 //    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
 //    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3' // 可选，适用于Android的中国地区词典

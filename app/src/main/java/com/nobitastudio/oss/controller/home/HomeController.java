@@ -1,6 +1,7 @@
 package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
@@ -108,11 +111,12 @@ public class HomeController extends QMUIWindowInsetLayout {
                 mHandler.startFragment(new LoginFragment());
                 break;
             case R.id.coming_soon_linearLayout:
-                Toasty.error(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
-                mHandler.startFragment(new TestFragment());
+//                Toasty.error(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
 //                Toasty.success(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
 //                Toasty.info(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
 //                Toasty.warning(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
+                mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
+//                ActivityUtils.startActivity(new Intent(mContext, PlayVideoActivity.class));
                 break;
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");
@@ -130,7 +134,7 @@ public class HomeController extends QMUIWindowInsetLayout {
     List<HealthArticle> mHealthArticles;
     TipDialogHelper mTipDialogHelper;
     Context mContext;
-    private PagerAdapter mUltraPagerAdapter = new PagerAdapter(){
+    private PagerAdapter mUltraPagerAdapter = new PagerAdapter() {
 
         @Override
         public int getCount() {
@@ -149,7 +153,7 @@ public class HomeController extends QMUIWindowInsetLayout {
             ImageView imageView = root.findViewById(R.id.imageview);
             if (position % 3 == 0) {
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t4).into(imageView);
-            } else if (position % 3 == 1){
+            } else if (position % 3 == 1) {
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
             } else {
                 Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
@@ -242,6 +246,7 @@ public class HomeController extends QMUIWindowInsetLayout {
         RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
         mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(), null);
         mDoctorLectureRecyclerViewAdapter = new HealthArticleFragment.DoctorLectureRecyclerViewAdapter(getContext(), null);
+        mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> mContext.startActivity(new Intent(mContext, PlayVideoActivity.class)));
         mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {

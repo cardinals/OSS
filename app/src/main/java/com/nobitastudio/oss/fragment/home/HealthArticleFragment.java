@@ -1,6 +1,7 @@
 package com.nobitastudio.oss.fragment.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
@@ -207,6 +210,7 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
         RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), null);
         mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), null);
+        mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> ActivityUtils.startActivity(new Intent(getContext(), PlayVideoActivity.class)));
         mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
