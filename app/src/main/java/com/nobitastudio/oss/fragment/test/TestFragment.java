@@ -16,6 +16,8 @@ import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
+import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Collections;
@@ -33,10 +35,19 @@ import butterknife.OnClick;
  */
 public class TestFragment extends BaseFragment {
 
+    @BindView(R.id.topbar)
+    QMUITopBarLayout mTopBar;
+
+    private void init() {
+        mTopBar.setTitle("1111");
+        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null));
+    }
+
     @Override
     protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.test, null);
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
         ButterKnife.bind(this, root);
+        init();
         return root;
     }
 }

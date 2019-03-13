@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.nobitastudio.oss.activity;
+package com.nobitastudio.oss;
 
 import android.os.Bundle;
 
@@ -25,6 +25,7 @@ import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.BootFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseDetailFragment;
+import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
  * @author chenxiong

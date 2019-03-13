@@ -54,7 +54,7 @@
     <color name="app_ali_icon_green">#00D8A0</color>
 
     <!-- 登录界面 -->
-    <color name="black_overlay">#11000000</color> <!-- 透明蒙版  调节前两位 11.22.33.44 ... ff -->
+    <color name="app_black_overlay">#11000000</color> <!-- 透明蒙版  调节前两位 11.22.33.44 ... ff -->
     <color name="login_bg">#424242</color>  <!-- 暗黑背景 -->
 
 </resources>

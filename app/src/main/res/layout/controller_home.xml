@@ -11,9 +11,7 @@
         android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
         android:background="@color/qmui_config_color_white"
-        android:fitsSystemWindows="true"
         android:visibility="gone"
         app:qmui_detail_text="正在加载"
         app:qmui_show_loading="true" />
@@ -22,9 +20,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
-        android:background="?attr/qmui_config_color_background"
-        android:fitsSystemWindows="true">
+        android:background="?attr/qmui_config_color_background">
 
         <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
             android:id="@+id/pull_to_refresh"
@@ -54,7 +50,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="132dp"
+                                android:layout_height="160dp"
                                 android:background="@color/qmui_config_color_white">
 
                                 <com.tmall.ultraviewpager.UltraViewPager
@@ -379,7 +375,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="20dp"
-                            android:layout_marginTop="116dp"
+                            android:layout_marginTop="144dp"
                             android:layout_marginRight="20dp"
                             android:gravity="center"
                             android:orientation="horizontal"

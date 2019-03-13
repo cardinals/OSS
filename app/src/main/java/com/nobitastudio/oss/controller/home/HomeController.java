@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -34,6 +35,7 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
+import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
@@ -368,8 +370,12 @@ public class HomeController extends QMUIWindowInsetLayout {
         mTopBar.setTitle(getResources().getString(R.string.home));
         mTopBar.addLeftImageButton(R.mipmap.ic_qr_code, R.id.topbar_left_qr_code_button)
                 .setOnClickListener(view -> ToastUtils.showShort("程序员小哥哥已累死,请给我们点时间吧~"));
+        TextView textView = new TextView(mContext);
+        textView.setText("这是搜索");
+//        mTopBar.setCenterView(textView);  // 传入搜索的view
         mTopBar.addRightTextButton("多云转小雨 33℃", R.id.topbar_right_setting_button)
                 .setOnClickListener(v -> ToastUtils.showShort("进入天气预报"));
+        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null));
     }
 
     protected void showNetworkLoadingTipDialog(String detailMsg) {
