@@ -19,9 +19,8 @@ public class LicenseAgreementFragment extends StandardWithTobBarLayoutFragment {
     TextView mCopyrightTextView;
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("许可协议");
+    protected String getTopBarTitle() {
+        return "许可协议";
     }
 
     @Override

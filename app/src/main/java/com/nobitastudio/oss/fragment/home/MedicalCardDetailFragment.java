@@ -41,9 +41,8 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("诊疗卡持有者姓名");
+    protected String getTopBarTitle() {
+        return "诊疗卡持有者姓名";
     }
 
     @Override

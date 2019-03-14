@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.mukesh.OnOtpCompletionListener;
+import com.mukesh.OtpView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
@@ -26,6 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -37,10 +40,14 @@ public class TestFragment extends BaseFragment {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
+    @BindView(R.id.otp_view)
+    OtpView mOtpView;
 
     private void init() {
-        mTopBar.setTitle("1111");
-        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null));
+        mTopBar.setTitle("验证");
+        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
+        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent, null));
+        mOtpView.setOtpCompletionListener((value) -> Toasty.success(getContext(), value));
     }
 
     @Override
@@ -50,4 +57,6 @@ public class TestFragment extends BaseFragment {
         init();
         return root;
     }
+
+
 }

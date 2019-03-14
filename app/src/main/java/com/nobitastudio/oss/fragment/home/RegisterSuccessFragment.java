@@ -46,9 +46,8 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("挂号成功");
+    protected String getTopBarTitle() {
+        return "挂号成功";
     }
 
     @Override

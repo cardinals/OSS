@@ -116,9 +116,8 @@ public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFrag
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("确认办理");
+    protected String getTopBarTitle() {
+        return "确认办理";
     }
 
     @Override

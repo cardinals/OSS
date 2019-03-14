@@ -45,9 +45,8 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("反馈");
+    protected String getTopBarTitle() {
+        return "反馈";
     }
 
     @Override

@@ -63,9 +63,8 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.setTitle("关于");
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+    protected String getTopBarTitle() {
+        return "关于";
     }
 
     @Override

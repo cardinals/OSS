@@ -186,7 +186,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         HospitalizeRecordRecyclerViewAdapter mHospitalizeRecordRecyclerViewAdapter = new HospitalizeRecordRecyclerViewAdapter(getContext(), null);
         EmergencyRecyclerViewAdapter mEmergencyRecyclerViewAdapter = new EmergencyRecyclerViewAdapter(getContext(), null);
 
-        mOutpatientRecordRecyclerViewAdapter.setOnItemClickListener((view,pos) -> startFragment(new ElectronicCaseDetailFragment()));// 进入电子病历详情
+        mOutpatientRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> startFragment(new ElectronicCaseDetailFragment()));// 进入电子病历详情
 
         mOutpatientRecyclerView.setAdapter(mOutpatientRecordRecyclerViewAdapter);
         mOutpatientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
@@ -276,10 +276,13 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.setBackgroundDividerEnabled(false);
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("电子病历");
+    protected Boolean topBarHavDivider() {
+        return Boolean.FALSE;
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return "电子病历";
     }
 
     @Override

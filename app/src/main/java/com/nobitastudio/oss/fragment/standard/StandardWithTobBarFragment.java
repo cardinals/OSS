@@ -17,7 +17,22 @@ public abstract class StandardWithTobBarFragment extends StandardFragment {
     @BindView(R.id.topbar)
     protected QMUITopBar mTopBar;
 
-
-
-
+    @Override
+    protected void initTopBar() {
+        if (isSpecialTopBar()) {
+            // 特殊topbar 特殊处理
+            handleSpecialTopBar();
+        } else {
+            // 正常情况
+            if (canDragBack()) {
+                mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+            }
+            mTopBar.setBackgroundDividerEnabled(topBarHavDivider());
+            mTopBar.setTitle(getTopBarTitle());
+            if (topBarIsTransparent()) {
+                mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent, null));
+            }
+            initTopBarLast();
+        }
+    }
 }

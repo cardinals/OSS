@@ -19,9 +19,8 @@ public class DeclarationFragment extends StandardWithTobBarLayoutFragment {
     TextView mCopyrightTextView;
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("声明");
+    protected String getTopBarTitle() {
+        return "声明";
     }
 
     @Override

@@ -34,9 +34,8 @@ public class BindMedicalCardTwoFragment extends StandardWithTobBarLayoutFragment
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("确认绑定");
+    protected String getTopBarTitle() {
+        return "确认绑定";
     }
 
     @Override

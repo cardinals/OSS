@@ -132,9 +132,8 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("预约挂号");
+    protected String getTopBarTitle() {
+        return "预约挂号";
     }
 
     @Override

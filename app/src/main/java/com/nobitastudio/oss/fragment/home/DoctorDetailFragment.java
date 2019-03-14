@@ -259,9 +259,19 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
     }
 
     @Override
-    protected void initTopBar() {
+    protected Boolean isSpecialTopBar() {
+        return Boolean.TRUE;
+    }
+
+    @Override
+    protected void handleSpecialTopBar() {
         mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mCollapsingTopBarLayout.setTitle("医生姓名2222");
+        mCollapsingTopBarLayout.setTitle(getTopBarTitle());
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return "医生姓名2222";
     }
 
     @Override

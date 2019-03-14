@@ -18,14 +18,9 @@ public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.copyright_textView)
     TextView mCopyrightTextView;
 
-    /**
-     * 初始化 topbar
-     */
     @Override
-    protected void initTopBar() {
-        // 切换其他情况的按钮
-        mTopBar.setTitle("致谢");
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
+    protected String getTopBarTitle() {
+        return "致谢";
     }
 
     @Override

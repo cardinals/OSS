@@ -95,16 +95,20 @@ public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
         return false;
     }
 
-    /**
-     * 初始化 topbar
-     */
     @Override
-    protected void initTopBar() {
-        // 切换其他情况的按钮
-        mTopBar.setBackgroundDividerEnabled(false);
-        mTopBar.setTitle("登录");
+    protected void initTopBarLast() {
         mTopBar.addRightImageButton(R.mipmap.icon_topbar_about, R.id.topbar_right_about_button)
                 .setOnClickListener(view -> startFragment(new AboutFragment()));
+    }
+
+    @Override
+    protected Boolean topBarHavDivider() {
+        return Boolean.FALSE;
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return "登录";
     }
 
     @Override

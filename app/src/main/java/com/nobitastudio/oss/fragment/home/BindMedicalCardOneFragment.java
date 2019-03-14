@@ -22,9 +22,8 @@ public class BindMedicalCardOneFragment extends StandardWithTobBarLayoutFragment
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("输入诊疗卡卡号");
+    protected String getTopBarTitle() {
+        return "输入诊疗卡卡号";
     }
 
     @Override

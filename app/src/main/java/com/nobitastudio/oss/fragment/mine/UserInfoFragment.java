@@ -167,9 +167,8 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("个人资料");
+    protected String getTopBarTitle() {
+        return "个人资料";
     }
 
     @Override

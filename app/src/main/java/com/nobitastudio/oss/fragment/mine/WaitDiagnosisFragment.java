@@ -236,9 +236,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("我的就诊");
+    protected void initTopBarLast() {
         mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
                 showListPopView(v, Arrays.asList("挂号单项", "检查项", "手术项", "全部"),
                         (parent, view, position, id) -> {
@@ -246,6 +244,11 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                             ToastUtils.showShort(position);
                         },
                         null));
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return "我的就诊";
     }
 
     @Override

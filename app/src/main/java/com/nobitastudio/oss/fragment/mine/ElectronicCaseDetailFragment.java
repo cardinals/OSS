@@ -167,9 +167,8 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("病历详情");
+    protected String getTopBarTitle() {
+        return "病历详情";
     }
 
     @Override

@@ -239,9 +239,8 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("挂号记录");
+    protected String getTopBarTitle() {
+        return "挂号记录";
     }
 
     @Override

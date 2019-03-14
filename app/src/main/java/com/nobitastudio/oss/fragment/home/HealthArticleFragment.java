@@ -299,11 +299,18 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.setBackgroundDividerEnabled(false);
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("健康资讯");
-        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null));
+    protected Boolean topBarHavDivider() {
+        return Boolean.FALSE;
+    }
+
+    @Override
+    protected Boolean topBarIsTransparent() {
+        return Boolean.TRUE;
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return "健康资讯";
     }
 
     @Override

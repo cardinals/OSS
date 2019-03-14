@@ -19,9 +19,8 @@ public class ExpressFragment extends StandardWithTobBarLayoutFragment {
     ImageView solidImage;
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("title");
+    protected String getTopBarTitle() {
+        return "title";
     }
 
     @Override

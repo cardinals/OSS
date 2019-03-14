@@ -24,7 +24,9 @@ import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.BootFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
+import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseDetailFragment;
+import com.nobitastudio.oss.fragment.test.Test2Fragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
@@ -68,6 +70,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MedicalCardFragment();
 //        return new CreateMedicalCardThreeFragment();
 //        return new TestFragment();
+//        return new VerificationCodeFragment();
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();

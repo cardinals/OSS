@@ -58,59 +58,64 @@ dependencies {
 
     // C:\Users\Administrator\.gradle\caches\modules-2\files-2.1 包位置
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'// 圆形头像
+    implementation 'com.github.bumptech.glide:glide:4.7.1'// 图片加载
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1' // 图片加载
+    implementation 'com.android.support:cardview-v7:28.0.0'// cardview
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'// 网络通信
+    implementation 'com.google.code.gson:gson:2.8.5' // 序列化
+
+    // 测试
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    // 轮播图
     implementation files('libs/paysdk-release-1.2.2.jar')
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+
     implementation 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
-    // 混淆依赖
+    // 工具，混淆依赖
     implementation "com.blankj:free-proguard:0.0.10"
     implementation 'com.blankj:utilcode:1.23.0'
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    implementation 'org.apache.commons:commons-lang3:3.8.1'
-//    // 左右对齐textview  底部存在大量空白
-//    implementation 'me.codeboy.android:align-text-view:2.3.2'
-    // https://mvnrepository.com/artifact/joda-time/joda-time
-    // implementation 'joda-time:joda-time:2.10.1'
 
-//    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-//    implementation "org.projectlombok:lombok:1.18.4"
+    implementation 'org.greenrobot:eventbus:3.1.1' // eventbus
+
+    implementation 'org.apache.commons:commons-lang3:3.8.1' // apache 工具
+
+//    implementation 'me.codeboy.android:align-text-view:2.3.2' // 左右对齐textview  底部存在大量空白
+
+//    implementation "org.projectlombok:lombok:1.18.4"  // lombok
 
     implementation "com.android.support:support-v4:$supportVersion"
     implementation "com.android.support:design:$supportVersion"
     implementation "com.android.support:appcompat-v7:$supportVersion"
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
-//    implementation 'com.qmuiteam:qmui:1.1.12'  // widget
-    implementation 'com.qmuiteam:qmui:1.2.0'  // widget
+//    implementation 'com.qmuiteam:qmui:1.1.12'  // qmui widget
+    implementation 'com.qmuiteam:qmui:1.2.0'  // qmui widget
 //    implementation 'com.qmuiteam:arch:0.3.1'   // fragment,activity 该版本存在返回动画异常异常
-     implementation 'com.qmuiteam:arch:0.3.2'
+    implementation 'com.qmuiteam:arch:0.3.2'
 
     //leak
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'  // adapter
 
     implementation 'com.github.GrenderG:Toasty:1.4.0'  // material 风格的toast
 
     implementation 'com.github.glomadrian:Grav:1.1' // 泡沫背景
 
     implementation 'com.shuyu:GSYVideoPlayer:6.0.0-beta'  // 视频播放器
+
+    // https://jitpack.io/#mukeshsolanki/android-otpview-pinview 最新版本号
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3' // 短信验证码界面
 
     // 汉字转拼音
 //    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB

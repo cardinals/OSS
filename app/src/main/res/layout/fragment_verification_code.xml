@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <com.qmuiteam.qmui.widget.QMUIEmptyView
         android:id="@+id/emptyView"
@@ -45,24 +47,25 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
                             style="@style/QDCommonTitle"
-                            android:layout_marginTop="-108dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/otp_view"
+                            android:layout_alignTop="@id/otp_view"
+                            android:layout_marginTop="-108dp"
                             android:gravity="start"
-                            android:textSize="@dimen/textsize_mostlarge"
-                            android:textStyle="normal"
+                            android:text="请输入验证码"
                             android:textColor="@color/qmui_config_color_white"
-                            android:text="请输入验证码" />
+                            android:textSize="@dimen/textsize_mostlarge"
+                            android:textStyle="normal" />
 
                         <TextView
+                            android:id="@+id/send_to_mobile_textview"
                             style="@style/QDCommonDescription"
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/otp_view"
+                            android:layout_alignTop="@id/otp_view"
                             android:layout_marginTop="-48dp"
                             android:text="验证码已发送至 +86 1234567890"
                             android:textColor="@color/qmui_config_color_white"
@@ -70,9 +73,9 @@
 
                         <com.mukesh.OtpView
                             android:id="@+id/otp_view"
-                            android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
                             android:inputType="number"
                             android:itemBackground="@drawable/bg_otp_item"
                             android:textColor="@android:color/white"
@@ -84,18 +87,17 @@
                             app:viewType="none" />
 
                         <TextView
+                            android:id="@+id/resend_textview"
                             style="@style/QDCommonDescription"
-                            android:layout_alignBottom="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignLeft="@id/otp_view"
+                            android:layout_alignBottom="@id/otp_view"
                             android:layout_marginBottom="-48dp"
                             android:text="50秒后重新获取验证码/重新发送"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
-
                     </RelativeLayout>
-
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

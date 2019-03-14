@@ -95,9 +95,8 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("医生列表");
+    protected String getTopBarTitle() {
+        return "医生列表";
     }
 
     @Override

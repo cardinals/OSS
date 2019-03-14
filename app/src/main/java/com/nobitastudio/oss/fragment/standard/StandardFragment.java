@@ -135,10 +135,41 @@ public abstract class StandardFragment extends BaseFragment {
         return view -> ToastUtils.showShort("尚未初始化该点击事件,请重写getEmptyViewRetryButtonListener");
     }
 
+    // ==================== topbar
     //初始化topbar
     protected abstract void initTopBar();
 
-    // root view 的id
+    // topbar 是否是透明的.默认是不透明的
+    protected Boolean topBarIsTransparent() {
+        return Boolean.FALSE;
+    }
+
+    // tob是否具有分割线 默认有
+    protected Boolean topBarHavDivider() {
+        return Boolean.TRUE;
+    }
+
+    // 获取topbar 的title
+    // todo 更改为返回在values的id.
+    protected abstract String getTopBarTitle();
+
+    // 除去基本操作,最后还需要初始化topbar做的事情,
+    protected void initTopBarLast() {
+        // 默认没有其他操作
+        return;
+    }
+
+    // 是否是特殊的TopBar.采取特殊的处理策略.医生详情界面的topbar为特殊 topbar.默认不是
+    protected Boolean isSpecialTopBar() {
+        return Boolean.FALSE;
+    }
+
+    // 当topbar 是特殊类型的时候.进行特殊处理
+    protected void handleSpecialTopBar() {
+        // 特殊处理
+    }
+
+    // ================ view
     protected abstract int getLayoutId();
 
     // 用户最后进行初始化，进行大部分的初始化工作
@@ -262,8 +293,8 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     protected void showListPopView(View v, List<String> items,
-                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener){
-        showListPopView(v,items,120,160,itemClickListener,popViewDismissListener);
+                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
+        showListPopView(v, items, 120, 160, itemClickListener, popViewDismissListener);
     }
 
     protected void showListPopView(View v, List<String> items, Integer width, Integer height,

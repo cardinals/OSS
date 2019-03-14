@@ -201,9 +201,8 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("设置");
+    protected String getTopBarTitle() {
+        return "设置";
     }
 
     @Override

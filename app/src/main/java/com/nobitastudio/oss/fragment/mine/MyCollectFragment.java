@@ -240,9 +240,8 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("我的收藏");
+    protected String getTopBarTitle() {
+        return "我的收藏";
     }
 
     @Override

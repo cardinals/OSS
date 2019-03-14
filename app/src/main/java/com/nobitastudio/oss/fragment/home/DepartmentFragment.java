@@ -48,7 +48,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
         }
 
         int getImageDrawableId(Department item) {
-            return Constant.getDepartmentMipmap().getOrDefault(item.getName(),R.mipmap.ic_transparent);
+            return Constant.getDepartmentMipmap().getOrDefault(item.getName(), R.mipmap.ic_transparent);
         }
     }
 
@@ -174,9 +174,12 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("科室列表");
+    protected String getTopBarTitle() {
+        return "科室列表";
+    }
+
+    @Override
+    protected void initTopBarLast() {
         mTopBar.addRightImageButton(R.mipmap.icon_topbar_setting, R.id.topbar_right_setting_button)
                 .setOnClickListener(view -> showInfoTipDialog("长按指定科室可查看详情", 2500l));
     }

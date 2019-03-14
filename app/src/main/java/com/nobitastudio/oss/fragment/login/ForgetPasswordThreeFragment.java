@@ -31,9 +31,8 @@ public class ForgetPasswordThreeFragment extends StandardWithTobBarLayoutFragmen
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("确认修改");
+    protected String getTopBarTitle() {
+        return "确认修改";
     }
 
     @Override

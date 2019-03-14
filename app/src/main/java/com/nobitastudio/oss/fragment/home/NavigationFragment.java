@@ -183,9 +183,8 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> popBackStack());
-        mTopBar.setTitle("导航导诊");
+    protected String getTopBarTitle() {
+        return "导航导诊";
     }
 
     @Override

@@ -43,9 +43,8 @@ public class CreateMedicalCardTwoFragment extends StandardWithTobBarLayoutFragme
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("请输入验证码");
+    protected String getTopBarTitle() {
+        return "请输入验证码";
     }
 
     @Override

@@ -26,9 +26,8 @@ public class ForgetPasswordOneFragment extends StandardWithTobBarLayoutFragment 
     }
 
     @Override
-    protected void initTopBar() {
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setTitle("请输入手机号");
+    protected String getTopBarTitle() {
+        return "请输入手机号";
     }
 
     @Override
