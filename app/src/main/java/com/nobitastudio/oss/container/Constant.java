@@ -1,5 +1,9 @@
 package com.nobitastudio.oss.container;
 
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Poi;
+import com.amap.api.navi.AmapNaviParams;
+import com.amap.api.navi.AmapNaviType;
 import com.nobitastudio.oss.R;
 
 import java.util.HashMap;
@@ -14,7 +18,7 @@ import java.util.Map;
 public class Constant {
 
     // 科室图片相关
-    private static Map<String, Integer> DEPARTMENT_MIPMAP;
+    public static Map<String, Integer> DEPARTMENT_MIPMAP;
 
     public static Map<String, Integer> getDepartmentMipmap() {
         return DEPARTMENT_MIPMAP == null ? initDepartmentMipmap() : DEPARTMENT_MIPMAP;
@@ -50,5 +54,32 @@ public class Constant {
         DEPARTMENT_MIPMAP.put("传染科", R.mipmap.ic_infect);
         DEPARTMENT_MIPMAP.put("康复科", R.mipmap.ic_rehabilitation);
         return DEPARTMENT_MIPMAP;
+    }
+
+    // 高德地图导航
+    // 石河子大学附属医院坐标：经度：86.059641,纬度：44.299419,注意构造函数是 LatLng（纬度，经度）
+    public static final LatLng SHZ_UNIVERSITY_FIRST_AFFILIATED_HOSPITAL_LATLNG = new LatLng(44.299419, 86.059641);
+
+    // 驾车
+    public static final AmapNaviParams AMAP_NAVI_DRIVER_PARAM = new AmapNaviParams(null, null,
+            new Poi("石河子大学医学院第一附属医院", SHZ_UNIVERSITY_FIRST_AFFILIATED_HOSPITAL_LATLNG, ""), AmapNaviType.DRIVER);
+    // 骑行
+    public static final AmapNaviParams AMAP_NAVI_RIDE_PARAM = new AmapNaviParams(null, null,
+            new Poi("石河子大学医学院第一附属医院", SHZ_UNIVERSITY_FIRST_AFFILIATED_HOSPITAL_LATLNG, ""), AmapNaviType.RIDE);
+    // 走路
+    public static final AmapNaviParams AMAP_NAVI_WALK_PARAM = new AmapNaviParams(null, null,
+            new Poi("石河子大学医学院第一附属医院", SHZ_UNIVERSITY_FIRST_AFFILIATED_HOSPITAL_LATLNG, ""), AmapNaviType.WALK);
+
+    public static AmapNaviParams getAmapNaviParamByIndex(int index) {
+        switch (index) {
+            case 0:
+                return AMAP_NAVI_DRIVER_PARAM;
+            case 1:
+                return AMAP_NAVI_RIDE_PARAM;
+            case 2:
+                return AMAP_NAVI_WALK_PARAM;
+            default:
+                return AMAP_NAVI_DRIVER_PARAM;
+        }
     }
 }

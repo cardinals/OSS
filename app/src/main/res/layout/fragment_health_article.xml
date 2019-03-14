@@ -87,6 +87,4 @@
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
     </FrameLayout>
-
-
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

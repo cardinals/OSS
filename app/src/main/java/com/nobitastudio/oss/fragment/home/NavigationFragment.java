@@ -5,9 +5,13 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.amap.api.navi.AmapNaviPage;
+import com.amap.api.navi.INaviInfoCallback;
+import com.amap.api.navi.model.AMapNaviLocation;
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
@@ -24,6 +28,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+
+import static com.nobitastudio.oss.container.Constant.getAmapNaviParamByIndex;
 
 /**
  * @author chenxiong
@@ -53,6 +59,78 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
+    private INaviInfoCallback mINaviInfoCallback = new INaviInfoCallback() {
+        @Override
+        public void onInitNaviFailure() {
+
+        }
+
+        @Override
+        public void onGetNavigationText(String s) {
+
+        }
+
+        @Override
+        public void onLocationChange(AMapNaviLocation aMapNaviLocation) {
+
+        }
+
+        @Override
+        public void onArriveDestination(boolean b) {
+
+        }
+
+        @Override
+        public void onStartNavi(int i) {
+
+        }
+
+        @Override
+        public void onCalculateRouteSuccess(int[] ints) {
+
+        }
+
+        @Override
+        public void onCalculateRouteFailure(int i) {
+
+        }
+
+        @Override
+        public void onStopSpeaking() {
+
+        }
+
+        @Override
+        public void onReCalculateRoute(int i) {
+
+        }
+
+        @Override
+        public void onExitPage(int i) {
+
+        }
+
+        @Override
+        public void onStrategyChanged(int i) {
+
+        }
+
+        @Override
+        public View getCustomNaviBottomView() {
+            return null;
+        }
+
+        @Override
+        public View getCustomNaviView() {
+            return null;
+        }
+
+        @Override
+        public void onArrivedWayPoint(int i) {
+
+        }
+    };
+
     @BindView(R.id.hospital_out_navigation_solid_imageview)
     ImageView mHospitalOutNavigationSolidImageView;
     @BindView(R.id.hospital_inner_navigation_solid_imageview)
@@ -63,6 +141,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     RecyclerView mHospitalInnerNavigationRecyclerView;
     @BindView(R.id.scrollview)
     NestedScrollView scrollView;
+
 
     @Override
     protected void initRefreshLayout() {
@@ -90,7 +169,9 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
                 Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
                         new ItemDescription("步行", R.mipmap.ic_foot)));
-        mItemAdapter.setOnItemClickListener((v, pos) -> ToastUtils.showShort(pos));
+        mItemAdapter.setOnItemClickListener((v, index) -> {
+            AmapNaviPage.getInstance().showRouteActivity(getContext(), getAmapNaviParamByIndex(index), mINaviInfoCallback);
+        });
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
         mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 3));

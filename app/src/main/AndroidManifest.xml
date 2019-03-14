@@ -22,6 +22,10 @@
         tools:targetApi="n">
 
         <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="cabddaa5ce3abf4a1abf417b5c24027c" />
+
+        <meta-data
             android:name="android.notch_support"
             android:value="true"/>
 
