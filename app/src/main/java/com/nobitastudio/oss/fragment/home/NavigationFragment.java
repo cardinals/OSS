@@ -12,12 +12,12 @@ import android.widget.ImageView;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
 import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
+import com.nobitastudio.oss.controller.amap.AmapTTSController;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.vo.ItemDescription;
@@ -67,7 +67,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void onGetNavigationText(String s) {
-
+            amapTTSController.onGetNavigationText(s);
         }
 
         @Override
@@ -97,7 +97,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void onStopSpeaking() {
-
+            amapTTSController.stopSpeaking();
         }
 
         @Override
@@ -142,6 +142,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.scrollview)
     NestedScrollView scrollView;
 
+    AmapTTSController amapTTSController; // 语音合成
 
     @Override
     protected void initRefreshLayout() {
@@ -215,6 +216,11 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         mHospitalInnerNavigationRecyclerView.setAdapter(adapter);
     }
 
+    private void initTTS() {
+        amapTTSController = AmapTTSController.getInstance(getContext());
+        amapTTSController.init();
+    }
+
     /**
      * 在科室列表生成科室基本信息
      *
@@ -259,6 +265,12 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        amapTTSController.destroy();
+    }
+
+    @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
     }
@@ -277,5 +289,6 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     protected void initLastCustom() {
         initSolidImage(mHospitalOutNavigationSolidImageView, mHospitalInnerNavigationSolidImageView);
         initData();
+        initTTS();
     }
 }
