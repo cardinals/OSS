@@ -464,16 +464,15 @@
                             </LinearLayout>
 
                         </com.qmuiteam.qmui.layout.QMUILinearLayout>
+
+                        <com.qmuiteam.qmui.widget.QMUITopBarLayout
+                            android:id="@+id/topbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fitsSystemWindows="true" />
                     </FrameLayout>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
     </FrameLayout>
-
-    <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true" />
-
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
