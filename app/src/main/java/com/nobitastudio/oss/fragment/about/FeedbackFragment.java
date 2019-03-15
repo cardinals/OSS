@@ -2,9 +2,11 @@ package com.nobitastudio.oss.fragment.about;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
@@ -23,6 +25,8 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
     EditText mFeedbackEditText;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
+    @BindView(R.id.copyright_textView)
+    TextView mCopyrightTextView;
 
     @OnClick({R.id.feedback_button})
     void onClick(View v) {
@@ -57,6 +61,7 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initQMUILinearLayout();
+        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
     }
 
 }

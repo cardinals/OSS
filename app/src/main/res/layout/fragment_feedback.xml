@@ -50,9 +50,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/dp_16"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:layout_margin="@dimen/dp_16"
                         app:qmui_borderColor="?attr/qmui_config_color_separator"
                         app:qmui_outerNormalColor="?attr/qmui_config_color_background"
                         app:qmui_showBorderOnlyBeforeL="true">
@@ -80,6 +80,16 @@
                         android:layout_marginRight="@dimen/space_left_right_button"
                         android:text="提交反馈" />
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <!-- 版权,责任 -->
+                    <TextView
+                        android:layout_gravity="bottom"
+                        android:id="@+id/copyright_textView"
+                        style="@style/AppCopyrightTextViw" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
@@ -90,5 +100,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true" />
-
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
