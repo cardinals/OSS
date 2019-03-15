@@ -170,9 +170,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
                 Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
                         new ItemDescription("步行", R.mipmap.ic_foot)));
-        mItemAdapter.setOnItemClickListener((v, index) -> {
-            AmapNaviPage.getInstance().showRouteActivity(getContext(), getAmapNaviParamByIndex(index), mINaviInfoCallback);
-        });
+        mItemAdapter.setOnItemClickListener((v, index) -> AmapNaviPage.getInstance().showRouteActivity(getContext(), getAmapNaviParamByIndex(index), mINaviInfoCallback));
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
         mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 3));

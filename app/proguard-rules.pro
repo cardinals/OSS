@@ -96,3 +96,25 @@
 -keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
      <init>(...);
 }
+
+# trpay
+-keepattributes Exceptions,InnerClasses
+-ignorewarnings
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
+-keep class com.alipay.sdk.app.PayTask{ public *;}
+-keep class com.alipay.sdk.app.AuthTask{ public *;}
+-dontwarn com.alipay.**
+
+-keep class com.base.bj.paysdk.domain.*{ *;}
+-keep class com.base.bj.paysdk.listener.*{*;}
+-keep class com.base.bj.paysdk.utils.TrPay{
+*;
+}
+#如果是jar方式引入的请加下如下混淆
+-keep class **.R$* { *; }
+-keep public class **.R$*{
+   public static final int *;
+}

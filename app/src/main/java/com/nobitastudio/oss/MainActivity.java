@@ -18,16 +18,11 @@ package com.nobitastudio.oss;
 
 import android.os.Bundle;
 
-import com.nobitastudio.oss.R;
+import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
-import com.nobitastudio.oss.fragment.login.BootFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
-import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
-import com.nobitastudio.oss.fragment.mine.ElectronicCaseDetailFragment;
-import com.nobitastudio.oss.fragment.test.Test2Fragment;
-import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
  * @author chenxiong
@@ -46,6 +41,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
+            initPay();
             BaseFragment fragment = getFirstFragment();
 
             getSupportFragmentManager()
@@ -54,6 +50,11 @@ public class MainActivity extends BaseFragmentActivity {
                     .addToBackStack(fragment.getClass().getSimpleName())
                     .commit();
         }
+    }
+
+    // 初始化支付功能
+    private void initPay() {
+        TrPay.getInstance(this).initPaySdk("appkey", "mychannel");
     }
 
     /**

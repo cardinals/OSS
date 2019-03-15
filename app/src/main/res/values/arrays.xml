@@ -93,6 +93,11 @@
     <item>com.github.glomadrian.grav.generator.animation.AlphaAnimator</item>
   </string-array>
 
+  <string-array name="array_reference">
+    <item>com.github.glomadrian.grav.generator.animation.PathAnimator</item>
+    <item>com.github.glomadrian.grav.generator.animation.BallSizeAnimator</item>
+  </string-array>
+
   <integer-array name="walla_points_percent_points">
     <item>10</item>
     <item>60</item>

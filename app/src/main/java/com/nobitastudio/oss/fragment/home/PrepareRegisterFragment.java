@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.fragment.mine.WaitingPayRegisterFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import java.util.Arrays;
