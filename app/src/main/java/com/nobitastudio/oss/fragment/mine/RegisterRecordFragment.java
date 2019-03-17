@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -64,9 +65,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.register_record_linearLayout);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            initQMUILinearLayout(holder.getView(R.id.register_record_linearLayout));
         }
 
         @Override
@@ -121,10 +120,6 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
         }
     };
 
-    private static float mShadowAlpha = 1.0f;
-    private static int mShadowElevationDp = 10;
-    private static int mRadius = 15;
-
     private void initPagers() {
         mPages = new HashMap<>();
 
@@ -133,7 +128,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
         RecyclerView mCanceledRecyclerView = new RecyclerView(getContext());
         RecyclerView mAllRecyclerView = new RecyclerView(getContext());
 
-        RegisterRecordRecyclerViewAdapter adapter = new RegisterRecordRecyclerViewAdapter(getContext(),null);
+        RegisterRecordRecyclerViewAdapter adapter = new RegisterRecordRecyclerViewAdapter(getContext(), null);
 
         mWaitRecyclerView.setAdapter(adapter);
         mWaitRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
@@ -168,10 +163,10 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
             }
         });
 
-        mPages.put(Pager.WAIT,mWaitRecyclerView);
-        mPages.put(Pager.FINISHED,mFinishedRecyclerView);
-        mPages.put(Pager.CANCELED,mCanceledRecyclerView);
-        mPages.put(Pager.ALL,mAllRecyclerView);
+        mPages.put(Pager.WAIT, mWaitRecyclerView);
+        mPages.put(Pager.FINISHED, mFinishedRecyclerView);
+        mPages.put(Pager.CANCELED, mCanceledRecyclerView);
+        mPages.put(Pager.ALL, mAllRecyclerView);
 
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);

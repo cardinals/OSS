@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -51,7 +52,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     }
 
     // 门诊记录
-    public static class OutpatientRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
+    public class OutpatientRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
 
         public OutpatientRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
             super(ctx, list);
@@ -64,9 +65,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.outpatient_linearLayout);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            initQMUILinearLayout(holder.getView(R.id.outpatient_linearLayout));
         }
 
         @Override
@@ -76,7 +75,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     }
 
     // 住院记录
-    public static class HospitalizeRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
+    public class HospitalizeRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
 
         public HospitalizeRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
             super(ctx, list);
@@ -89,9 +88,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.hospitalize_linearLayout);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            initQMUILinearLayout(holder.getView(R.id.hospitalize_linearLayout));
         }
 
         @Override
@@ -101,7 +98,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     }
 
     // 急诊记录
-    public static class EmergencyRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
+    public class EmergencyRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
 
         public EmergencyRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
             super(ctx, list);
@@ -114,9 +111,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.emergency_linearLayout);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            initQMUILinearLayout(holder.getView(R.id.emergency_linearLayout));
         }
 
         @Override

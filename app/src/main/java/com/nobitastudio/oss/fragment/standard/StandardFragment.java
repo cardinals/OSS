@@ -16,10 +16,13 @@ import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.EmptyViewHelper;
 import com.nobitastudio.oss.base.helper.PopViewHelper;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.helper.ViewHelper;
 import com.nobitastudio.oss.util.DateUtil;
+import com.qmuiteam.qmui.layout.QMUILinearLayout;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -55,6 +58,7 @@ public abstract class StandardFragment extends BaseFragment {
     SolidImageHelper mSolidImageHelper;
     TipDialogHelper mTipDialogHelper;
     ViewHelper mViewHelper;
+    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     // SLIDE_TRANSITION_CONFIG  左右滑动
     // SCALE_TRANSITION_CONFIG  从中间出
@@ -100,6 +104,7 @@ public abstract class StandardFragment extends BaseFragment {
         mSolidImageHelper = new SolidImageHelper(getContext());
         mTipDialogHelper = new TipDialogHelper(getContext());
         mViewHelper = new ViewHelper();
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(getContext());
 
 //        executorService = Executors.newCachedThreadPool();
         inited = Boolean.TRUE;
@@ -339,5 +344,19 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     // ========================  controller handler
+
+
+    // ========================= QMUILinearLayout
+    public void initQMUILinearLayout(View v) {
+        if (v instanceof QMUILinearLayout) {
+            mQMUILinearLayoutHelper.init(v);
+        }
+    }
+
+    public void initQMUILinearLayout(View v, float alpha, int elevation, int radius) {
+        if (v instanceof QMUILinearLayout) {
+            mQMUILinearLayoutHelper.init(v, alpha, elevation, radius);
+        }
+    }
 
 }

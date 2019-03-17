@@ -84,7 +84,7 @@ public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFrag
             QMUICommonListItemView itemView = (QMUICommonListItemView) v;
             CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
             if (itemViewText.equals("姓名")) {
-                showAutoDialog("请输入诊疗卡持有者姓名", getString(R.string.matters_needed_attention),
+                showAutoDialog("请输入诊疗卡持有者姓名", getString(R.string.create_medical_card_attention),
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
@@ -96,7 +96,7 @@ public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFrag
                     popViewDismiss();
                 }, null);
             } else if (itemViewText.equals("身份证号")) {
-                showAutoDialog("请输入诊疗卡持有者身份证号", getString(R.string.matters_needed_attention),
+                showAutoDialog("请输入诊疗卡持有者身份证号", getString(R.string.create_medical_card_attention),
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
@@ -104,7 +104,7 @@ public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFrag
                             dialog.dismiss();
                         });
             } else if (itemViewText.equals("联系地址")) {
-                showAutoDialog("请输入诊疗卡持有者联系地址", getString(R.string.matters_needed_attention),
+                showAutoDialog("请输入诊疗卡持有者联系地址", getString(R.string.create_medical_card_attention),
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },

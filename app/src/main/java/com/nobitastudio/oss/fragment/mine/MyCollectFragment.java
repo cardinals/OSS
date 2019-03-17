@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.controller.collection.OtherController;
 import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.home.DoctorDetailFragment;
@@ -77,8 +78,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
             TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textView);
             TextView mSpecialityTextView = holder.getTextView(R.id.speciality_textView);
             ImageView mCollectDoctorImageView = holder.getImageView(R.id.collect_doctor_imageview);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            initQMUILinearLayout(holder.getView(R.id.doctor_collect_linearLayout));
             Glide.with(MyCollectFragment.this).load(R.drawable.bg_hospital_trademark).into(mDoctorImageView);
             mDoctorNameTextView.setText("名字111");
             mDoctorLevelTextView.setText("医生水平11");

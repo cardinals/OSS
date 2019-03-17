@@ -5,6 +5,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -44,8 +45,7 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
         float mShadowAlpha = 1.0f;
         int mShadowElevationDp = 0;
         int mRadius = 6;
-        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+        initQMUILinearLayout(mQMUILinearLayout,mShadowAlpha,mShadowElevationDp,mRadius);
     }
 
     @Override
@@ -60,7 +60,6 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initQMUILinearLayout();
         mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
     }
 

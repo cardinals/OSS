@@ -20,9 +20,11 @@ import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.base.helper.DialogHelper;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.home.DepartmentFragment;
+import com.nobitastudio.oss.fragment.home.ExpressFragment;
 import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.home.MedicalCardFragment;
@@ -75,8 +77,8 @@ public class HomeController extends QMUIWindowInsetLayout {
     DialogHelper mDialogHelper;
 
     @OnClick({R.id.register_linearLayout, R.id.pay_linearLayout, R.id.medical_card_linearLayout,
-            R.id.navigation_linearLayout, R.id.consulting_linearLayout, R.id.register_record_linearLayout, R.id.electronic_case_linearLayout,
-            R.id.health_article_linearLayout, R.id.smart_linearLayout, R.id.express_linearLayout, R.id.coming_soon_linearLayout})
+            R.id.navigation_linearLayout, R.id.express_linearLayout, R.id.register_record_linearLayout, R.id.electronic_case_linearLayout,
+            R.id.health_article_linearLayout, R.id.smart_linearLayout, R.id.consulting_linearLayout, R.id.coming_soon_linearLayout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.register_linearLayout:
@@ -91,7 +93,8 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.navigation_linearLayout:
                 mHandler.startFragment(new NavigationFragment());
                 break;
-            case R.id.consulting_linearLayout:
+            case R.id.express_linearLayout:
+                mHandler.startFragment(new ExpressFragment());
                 break;
             case R.id.register_record_linearLayout:
                 mHandler.startFragment(new RegisterRecordFragment());
@@ -109,8 +112,7 @@ public class HomeController extends QMUIWindowInsetLayout {
                 break;
             case R.id.smart_linearLayout:
                 break;
-            case R.id.express_linearLayout:
-                mHandler.startFragment(new LoginFragment());
+            case R.id.consulting_linearLayout:
                 break;
             case R.id.coming_soon_linearLayout:
 //                Toasty.error(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
@@ -212,6 +214,7 @@ public class HomeController extends QMUIWindowInsetLayout {
             super.notifyDataSetChanged();
         }
     };
+    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     /**
      * 初始化方法
@@ -227,11 +230,8 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     private void initQMUILinearLayout() {
-        float mShadowAlpha = 1.0f;
-        int mShadowElevationDp = 10;
-        int mRadius = 15;
-        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
+        mQMUILinearLayoutHelper.init(mQMUILinearLayout);
     }
 
     private void initBasic(Context context) {
@@ -375,7 +375,7 @@ public class HomeController extends QMUIWindowInsetLayout {
 //        mTopBar.setCenterView(textView);  // 传入搜索的view
         mTopBar.addRightTextButton("多云转小雨 33℃", R.id.topbar_right_setting_button)
                 .setOnClickListener(v -> ToastUtils.showShort("进入天气预报"));
-        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null));
+        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent, null));
     }
 
     protected void showNetworkLoadingTipDialog(String detailMsg) {

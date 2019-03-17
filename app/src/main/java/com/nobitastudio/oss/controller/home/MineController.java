@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.helper.DialogHelper;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.home.MedicalCardFragment;
@@ -52,6 +53,7 @@ public class MineController extends QMUIWindowInsetLayout {
     ControllerClickHandler mHandler;
     DialogHelper mDialogHelper;
     Context mContext;
+    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     @OnClick({R.id.head_imageview, R.id.username_textview,
             R.id.wait_diagnosis_linearlayout, R.id.order_linearlayout, R.id.my_collection_linearlayout})
@@ -89,11 +91,8 @@ public class MineController extends QMUIWindowInsetLayout {
     }
 
     private void initQMUILinearLayout() {
-        float mShadowAlpha = 1.0f;
-        int mShadowElevationDp = 10;
-        int mRadius = 15;
-        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
+        mQMUILinearLayoutHelper.init(mQMUILinearLayout);
     }
 
     private void initGroupListView() {
@@ -192,6 +191,7 @@ public class MineController extends QMUIWindowInsetLayout {
 
     protected void initLastCustom() {
         mEmptyView.hide();
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
     }
 
     public MineController(Context mContext, ControllerClickHandler mHandler) {

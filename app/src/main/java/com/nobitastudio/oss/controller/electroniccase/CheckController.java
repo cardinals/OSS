@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.model.entity.Drug;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -40,11 +41,9 @@ public class CheckController extends QMUIWindowInsetLayout {
     @BindView(R.id.drug_detail_recyclerview)
     RecyclerView mDrugDetailRecyclerView;
 
-    private static float mShadowAlpha = 1.0f;
-    private static int mShadowElevationDp = 10;
-    private static int mRadius = 15;
+    private QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
-    public static class DrugDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter<Drug> {
+    public class DrugDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter<Drug> {
 
         public DrugDetailRecyclerViewAdapter(Context ctx, List<Drug> list) {
             super(ctx, list);
@@ -57,9 +56,7 @@ public class CheckController extends QMUIWindowInsetLayout {
 
         @Override
         public void bindData(RecyclerViewHolder holder, int position, Drug item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.check_linearLayout);
-            mLinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
+            mQMUILinearLayoutHelper.init(holder.getView(R.id.check_linearLayout));
         }
 
         @Override
@@ -78,6 +75,7 @@ public class CheckController extends QMUIWindowInsetLayout {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(context);
     }
 
     public CheckController(Context context) {

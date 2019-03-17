@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -42,13 +43,11 @@ public class InfoController extends QMUIWindowInsetLayout {
 
     ControllerClickHandler mHandler;
     Context mContext;
+    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     private void initQMUILinearLayout() {
-        float mShadowAlpha = 1.0f;
-        int mShadowElevationDp = 10;
-        int mRadius = 15;
-        mQMUILinearLayout.setRadiusAndShadow(QMUIDisplayHelper.dp2px(getContext(), mRadius),
-                QMUIDisplayHelper.dp2px(getContext(), mShadowElevationDp), mShadowAlpha);
+        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
+        mQMUILinearLayoutHelper.init(mQMUILinearLayout);
     }
 
     protected void initTopBar() {
@@ -132,7 +131,7 @@ public class InfoController extends QMUIWindowInsetLayout {
                 .setTitle("常用消息")
                 .setLeftIconSize(QMUIDisplayHelper.dp2px(getContext(), 28), ViewGroup.LayoutParams.WRAP_CONTENT)
                 .addItemView(mExpressItemView, getOnclickListener())
-                .addItemView(mPreferenItemView,getOnclickListener())
+                .addItemView(mPreferenItemView, getOnclickListener())
                 .addItemView(mWeatherItemView, getOnclickListener())
                 .addItemView(mOtherItemView, getOnclickListener())
                 .addTo(mGroupListView);

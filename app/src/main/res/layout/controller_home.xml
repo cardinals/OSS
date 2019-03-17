@@ -98,9 +98,8 @@
 
                                 </LinearLayout>
 
-                                <!-- show outpatient payment  -->
                                 <LinearLayout
-                                    android:id="@+id/consulting_linearLayout"
+                                    android:id="@+id/express_linearLayout"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -112,16 +111,15 @@
                                         android:layout_height="36dp"
                                         android:layout_gravity="center_horizontal"
                                         android:layout_marginBottom="4dp"
-                                        android:src="@mipmap/ic_consulting" />
+                                        android:src="@mipmap/ic_express_big" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
-                                        android:text="在线咨询"
+                                        android:text="邮寄报告"
                                         android:textColor="?attr/qmui_config_color_gray_5"
                                         android:textSize="11sp" />
-
                                 </LinearLayout>
 
                                 <!-- show medical card  -->
@@ -240,11 +238,13 @@
 
                                 </LinearLayout>
 
+                                <!-- show outpatient payment  -->
                                 <LinearLayout
-                                    android:id="@+id/express_linearLayout"
+                                    android:id="@+id/consulting_linearLayout"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
+                                    android:layout_marginBottom="8dp"
                                     android:layout_weight="1"
                                     android:background="?attr/qmui_s_list_item_bg_with_border_none"
                                     android:orientation="vertical">
@@ -254,15 +254,16 @@
                                         android:layout_height="36dp"
                                         android:layout_gravity="center_horizontal"
                                         android:layout_marginBottom="4dp"
-                                        android:src="@mipmap/ic_express_big" />
+                                        android:src="@mipmap/ic_consulting" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
-                                        android:text="报告邮寄"
+                                        android:text="在线咨询"
                                         android:textColor="?attr/qmui_config_color_gray_5"
                                         android:textSize="11sp" />
+
                                 </LinearLayout>
 
                                 <LinearLayout
