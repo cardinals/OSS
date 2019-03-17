@@ -94,7 +94,7 @@
                             android:layout_alignLeft="@id/otp_view"
                             android:layout_alignBottom="@id/otp_view"
                             android:layout_marginBottom="-48dp"
-                            android:text="50秒后重新获取验证码/接收不到验证码点我"
+                            android:text="50秒后重新获取验证码/收不到验证码点这里"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
                     </RelativeLayout>

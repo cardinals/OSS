@@ -6,6 +6,9 @@ import android.widget.TextView;
 import com.mukesh.OtpView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,13 +31,18 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.resend_textview:
-                showSuccessTipDialog("发送成功");
+                showSimpleBottomSheetList(Arrays.asList("重新获取验证码", "接听语音验证码"),
+                        (dialog, itemView, position, tag) -> {
+                            dialog.dismiss();
+                            Toasty.success(getContext(), position + tag).show();
+                        });
+                break;
         }
     }
 
     private void initOptView() {
         mOtpView.setOtpCompletionListener((value) -> {
-            Toasty.success(getContext(),value);
+            Toasty.success(getContext(), value);
         });
     }
 
