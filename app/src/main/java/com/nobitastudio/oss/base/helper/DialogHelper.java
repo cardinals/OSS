@@ -33,6 +33,12 @@ public class DialogHelper {
 
     int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
+    QMUIDialog dialog;
+
+    public interface MultiChoiceDialogConfirmListener {
+        void onClick(QMUIDialog dialog, int index, int[] selectedIndexes);
+    }
+
     public DialogHelper(Context mContext) {
         this.mContext = mContext;
     }
@@ -47,15 +53,17 @@ public class DialogHelper {
      * @param cancelListener  点击取消的监听器
      * @param confirmListener 点击确认的监听器
      */
-    public void showMessagePositiveDialog(String title, String content,
-                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                             String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        new QMUIDialog.MessageDialogBuilder(mContext)
+    public QMUIDialog showMessagePositiveDialog(String title, String content,
+                                                String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        dialog = new QMUIDialog.MessageDialogBuilder(mContext)
                 .setTitle(title)
                 .setMessage(content)
                 .addAction(cancelMsg, cancelListener)
                 .addAction(confirmMsg, confirmListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -68,15 +76,17 @@ public class DialogHelper {
      * @param cancelListener  点击取消的监听器
      * @param confirmListener 点击确认的监听器
      */
-    public void showMessageNegativeDialog(String title, String content,
-                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                             String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        new QMUIDialog.MessageDialogBuilder(mContext)
+    public QMUIDialog showMessageNegativeDialog(String title, String content,
+                                                String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        dialog = new QMUIDialog.MessageDialogBuilder(mContext)
                 .setTitle(title)
                 .setMessage(content)
                 .addAction(0, cancelMsg, QMUIDialogAction.ACTION_PROP_NEGATIVE, cancelListener)
                 .addAction(confirmMsg, confirmListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -87,13 +97,16 @@ public class DialogHelper {
      * @param cancelListener  点击取消的监听器  暂时未使用,可以传入null
      * @param confirmListener 点击确认的监听器  暂时未使用,客串日null
      */
-    public void showLongMessageDialog(String title, String content, String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                      String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        new QMUIDialog.MessageDialogBuilder(mContext)
+    public QMUIDialog showLongMessageDialog(String title, String content,
+                                            String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                            String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        dialog = new QMUIDialog.MessageDialogBuilder(mContext)
                 .setTitle(title)
                 .setMessage(content)
                 .addAction(confirmMsg, confirmListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -102,10 +115,12 @@ public class DialogHelper {
      * @param itemClickListener 选中某一个时的监听器
      * @param items             可供选择的子项名称
      */
-    public void showMenuDialog(List<String> items, DialogInterface.OnClickListener itemClickListener) {
-        new QMUIDialog.MenuDialogBuilder(mContext)
+    public QMUIDialog showMenuDialog(List<String> items, DialogInterface.OnClickListener itemClickListener) {
+        dialog = new QMUIDialog.MenuDialogBuilder(mContext)
                 .addItems(items.toArray(new String[0]), itemClickListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
 
@@ -120,17 +135,19 @@ public class DialogHelper {
      * @param confirmListener 点击确认的监听器
      * @param checked         默认是否选中
      */
-    public void showConfirmMessageDialog(String title, String content,
-                                            String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                            String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
-                                            Boolean checked) {
-        new QMUIDialog.CheckBoxMessageDialogBuilder(mContext)
+    public QMUIDialog showConfirmMessageDialog(String title, String content,
+                                               String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                               String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
+                                               Boolean checked) {
+        dialog = new QMUIDialog.CheckBoxMessageDialogBuilder(mContext)
                 .setTitle(title)
                 .setMessage(content)
                 .setChecked(checked == null ? Boolean.TRUE : checked)
                 .addAction(cancelMsg, cancelListener)
                 .addAction(confirmMsg, confirmListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -140,11 +157,13 @@ public class DialogHelper {
      * @param items
      * @param checkedIndex
      */
-    public void showSingleChoiceDialog(List<String> items, DialogInterface.OnClickListener listener, int checkedIndex) {
-        new QMUIDialog.CheckableDialogBuilder(mContext)
+    public QMUIDialog showSingleChoiceDialog(List<String> items, DialogInterface.OnClickListener listener, int checkedIndex) {
+        dialog = new QMUIDialog.CheckableDialogBuilder(mContext)
                 .setCheckedIndex(checkedIndex)
                 .addItems(items.toArray(new String[0]), listener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -158,15 +177,20 @@ public class DialogHelper {
      * @param items             可供选择的子项
      * @param checkedItems      哪些子项默认被选中
      */
-    public void showMultiChoiceDialog(String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                         String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
-                                         List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
-        final QMUIDialog.MultiCheckableDialogBuilder builder = new QMUIDialog.MultiCheckableDialogBuilder(mContext)
+    public QMUIDialog showMultiChoiceDialog(String title,
+                                            String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                            String confirmMsg, MultiChoiceDialogConfirmListener confirmListener,
+                                            List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
+        QMUIDialog.MultiCheckableDialogBuilder builder = new QMUIDialog.MultiCheckableDialogBuilder(mContext);
+        dialog = builder
+                .setTitle(title)
                 .setCheckedItems(checkedItems)
-                .addItems(items.toArray(new String[0]), itemClickListener);
-        builder.addAction(cancelMsg, cancelListener);
-        builder.addAction(confirmMsg, confirmListener);
-        builder.create(mCurrentDialogStyle).show();
+                .addItems(items.toArray(new String[0]), itemClickListener)
+                .addAction(cancelMsg, cancelListener)
+                .addAction(confirmMsg, (dialog, index) -> confirmListener.onClick(dialog, index, builder.getCheckedItemIndexes()))
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -180,15 +204,20 @@ public class DialogHelper {
      * @param confirmListener   点击确认的监听器
      * @param itemClickListener item被点击时的监听器
      */
-    public void showNumerousMultiChoiceDialog(String cancelMsg,QMUIDialogAction.ActionListener cancelListener,
-                                                 String confirmMsg,QMUIDialogAction.ActionListener confirmListener,
-                                                 List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
-        final QMUIDialog.MultiCheckableDialogBuilder builder = new QMUIDialog.MultiCheckableDialogBuilder(mContext)
+    public QMUIDialog showNumerousMultiChoiceDialog(String title,
+                                                    String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                    String confirmMsg, MultiChoiceDialogConfirmListener confirmListener,
+                                                    List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
+        QMUIDialog.MultiCheckableDialogBuilder builder = new QMUIDialog.MultiCheckableDialogBuilder(mContext);
+        dialog = builder
+                .setTitle(title)
                 .setCheckedItems(checkedItems)
-                .addItems(items.toArray(new String[0]), itemClickListener);
-        builder.addAction(cancelMsg, cancelListener);
-        builder.addAction(confirmMsg, confirmListener);
-        builder.create(mCurrentDialogStyle).show();
+                .addItems(items.toArray(new String[0]), itemClickListener)
+                .addAction(cancelMsg, cancelListener)
+                .addAction(confirmMsg, (dialog, index) -> confirmListener.onClick(dialog, index, builder.getCheckedItemIndexes()))
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -201,16 +230,18 @@ public class DialogHelper {
      * @param cancelListener  点击取消的监听器
      * @param confirmListener 点击确认的监听器
      */
-    public void showEditTextDialog(String title, String placeHolder,
-                                      String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                      String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(mContext);
-        builder.setTitle(title)
+    public QMUIDialog showEditTextDialog(String title, String placeHolder,
+                                         String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                         String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        dialog = new QMUIDialog.EditTextDialogBuilder(mContext)
+                .setTitle(title)
                 .setPlaceholder(placeHolder)
                 .setInputType(InputType.TYPE_CLASS_TEXT)
                 .addAction(cancelMsg, cancelListener)
                 .addAction(confirmMsg, confirmListener)
-                .create(mCurrentDialogStyle).show();
+                .create(mCurrentDialogStyle);
+        dialog.show();
+        return dialog;
     }
 
     /**
@@ -223,14 +254,16 @@ public class DialogHelper {
      * @param cancelListener  点击取消的监听器
      * @param confirmListener 点击确认的监听器
      */
-    public void showAutoDialog(String hintText, String content,
-                                  String cancelMsg,QMUIDialogAction.ActionListener cancelListener,
-                                  String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+    public QMUIDialog showAutoDialog(String hintText, String content,
+                                     String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                     String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
         QMAutoTestDialogBuilder autoTestDialogBuilder = (QMAutoTestDialogBuilder) new QMAutoTestDialogBuilder(mContext, hintText, content)
                 .addAction(cancelMsg, cancelListener)
                 .addAction(confirmMsg, confirmListener);
-        autoTestDialogBuilder.create(mCurrentDialogStyle).show();
+        dialog = autoTestDialogBuilder.create(mCurrentDialogStyle);
+        dialog.show();
         QMUIKeyboardHelper.showKeyboard(autoTestDialogBuilder.getEditText(), true);
+        return dialog;
     }
 
     class QMAutoTestDialogBuilder extends QMUIDialog.AutoResizeDialogBuilder {
@@ -243,7 +276,7 @@ public class DialogHelper {
             this(mContext, "请输入", "内容正文");
         }
 
-        public QMAutoTestDialogBuilder(Context mContext,String hintText, String content) {
+        public QMAutoTestDialogBuilder(Context mContext, String hintText, String content) {
             super(mContext);
             this.mContext = mContext;
             this.hintText = hintText;

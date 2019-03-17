@@ -16,19 +16,23 @@ public class BottomSheetHelper {
 
     Context mContext;
 
+    QMUIBottomSheet mQMUIBottomSheet;
+
     public BottomSheetHelper(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void showSimpleBottomSheetList(List<String> items,
-                                             QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
+    public QMUIBottomSheet showSimpleBottomSheetList(List<String> items,
+                                                     QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
         QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(mContext);
         items.forEach(builder::addItem);
-        builder.setOnSheetItemClickListener(itemClickListener).build().show();
+        mQMUIBottomSheet = builder.setOnSheetItemClickListener(itemClickListener).build();
+        mQMUIBottomSheet.show();
+        return mQMUIBottomSheet;
     }
 
-    public void showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags,
-                                             QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
+    public QMUIBottomSheet showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags,
+                                                     QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
         QMUIBottomSheet.BottomGridSheetBuilder builder = new QMUIBottomSheet.BottomGridSheetBuilder(mContext);
         for (int i = 0; i < mipmaps.size(); i++) {
             if (i < 4) {  // 控制每行的数量为4个
@@ -39,6 +43,8 @@ public class BottomSheetHelper {
                 builder.addItem(mipmaps.get(i), titles.get(i), tags.get(i), QMUIBottomSheet.BottomGridSheetBuilder.SECOND_LINE);
             }
         }
-        builder.setOnSheetItemClickListener(itemClickListener).build().show();
+        mQMUIBottomSheet = builder.setOnSheetItemClickListener(itemClickListener).build();
+        mQMUIBottomSheet.show();
+        return mQMUIBottomSheet;
     }
 }

@@ -25,7 +25,11 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.qmuiteam.qmui.widget.popup.QMUIListPopup;
+import com.qmuiteam.qmui.widget.popup.QMUIPopup;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.List;
@@ -107,7 +111,6 @@ public abstract class StandardFragment extends BaseFragment {
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(getContext());
 
 //        executorService = Executors.newCachedThreadPool();
-        inited = Boolean.TRUE;
     }
 
     // 初始化方法
@@ -118,6 +121,7 @@ public abstract class StandardFragment extends BaseFragment {
         initTopBar();
         initRefreshLayout();
         initLastCustom();
+        inited = Boolean.TRUE;
     }
 
     // 当需要在最开始进行初始化，重写该方法
@@ -158,7 +162,7 @@ public abstract class StandardFragment extends BaseFragment {
     // todo 更改为返回在values的id.
     protected abstract String getTopBarTitle();
 
-    // 除去基本操作,最后还需要初始化topbar做的事情,
+    // 除去基本操作,最后还需要初始化topbar做的事情,比如增加右侧菜单
     protected void initTopBarLast() {
         // 默认没有其他操作
         return;
@@ -196,95 +200,103 @@ public abstract class StandardFragment extends BaseFragment {
 
     // ===================================tipDialog
 
-    protected void closeTipDialog() {
-        mTipDialogHelper.closeTipDialog();
+    protected QMUITipDialog closeTipDialog() {
+        return mTipDialogHelper.closeTipDialog();
     }
 
-    protected void showNetworkLoadingTipDialog(String detailMsg) {
-        mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg);
+    protected QMUITipDialog showNetworkLoadingTipDialog(String detailMsg) {
+        return mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg);
     }
 
-    protected void showErrorTipDialog(String errorMsg) {
-        mTipDialogHelper.showErrorTipDialog(errorMsg, mEmptyView);
+    protected QMUITipDialog showErrorTipDialog(String errorMsg) {
+        return mTipDialogHelper.showErrorTipDialog(errorMsg, mEmptyView);
     }
 
-    protected void showInfoTipDialog(String infoMsg) {
-        mTipDialogHelper.showInfoTipDialog(infoMsg, mEmptyView);
+    protected QMUITipDialog showInfoTipDialog(String infoMsg) {
+        return mTipDialogHelper.showInfoTipDialog(infoMsg, mEmptyView);
     }
 
-    protected void showSuccessTipDialog(String successMsg) {
-        mTipDialogHelper.showSuccessTipDialog(successMsg, mEmptyView);
+    protected QMUITipDialog showSuccessTipDialog(String successMsg) {
+        return mTipDialogHelper.showSuccessTipDialog(successMsg, mEmptyView);
     }
 
-    protected void showErrorTipDialog(String errorMsg, Long delayMills) {
-        mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, mEmptyView);
+    protected QMUITipDialog showErrorTipDialog(String errorMsg, Long delayMills) {
+        return mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, mEmptyView);
     }
 
-    protected void showInfoTipDialog(String infoMsg, Long delayMills) {
-        mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, mEmptyView);
+    protected QMUITipDialog showInfoTipDialog(String infoMsg, Long delayMills) {
+        return mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, mEmptyView);
     }
 
-    protected void showSuccessTipDialog(String successMsg, Long delayMills) {
-        mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, mEmptyView);
+    protected QMUITipDialog showSuccessTipDialog(String successMsg, Long delayMills) {
+        return mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, mEmptyView);
     }
 
     // ================================ 不同类型的对话框 dialog
 
-    protected void showMessagePositiveDialog(String title, String content,
-                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                             String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        mDialogHelper.showMessagePositiveDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
+    protected QMUIDialog showMessagePositiveDialog(String title, String content,
+                                                   String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                   String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        return mDialogHelper.showMessagePositiveDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
-    protected void showMessageNegativeDialog(String title, String content,
-                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                             String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        mDialogHelper.showMessageNegativeDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
+    protected QMUIDialog showMessageNegativeDialog(String title, String content,
+                                                   String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                   String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        return mDialogHelper.showMessageNegativeDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
-    protected void showLongMessageDialog(String title, String content,
-                                         String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                         String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        mDialogHelper.showLongMessageDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
+    protected QMUIDialog showLongMessageDialog(String title, String content,
+                                               String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                               String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        return mDialogHelper.showLongMessageDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
-    protected void showMenuDialog(List<String> items, DialogInterface.OnClickListener itemClickListener) {
-        mDialogHelper.showMenuDialog(items, itemClickListener);
+    protected QMUIDialog showMenuDialog(List<String> items, DialogInterface.OnClickListener itemClickListener) {
+        return mDialogHelper.showMenuDialog(items, itemClickListener);
     }
 
-    protected void showConfirmMessageDialog(String title, String content,
+    protected QMUIDialog showConfirmMessageDialog(String title, String content,
+                                                  String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                  String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
+                                                  Boolean checked) {
+        return mDialogHelper.showConfirmMessageDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener, checked);
+    }
+
+    protected QMUIDialog showSingleChoiceDialog(DialogInterface.OnClickListener listener, List<String> items, int checkedIndex) {
+        return mDialogHelper.showSingleChoiceDialog(items, listener, checkedIndex);
+    }
+
+    protected QMUIDialog showMultiChoiceDialog(String title,
+                                               String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                               String confirmMsg, DialogHelper.MultiChoiceDialogConfirmListener confirmListener,
+                                               List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
+        return mDialogHelper.showMultiChoiceDialog(title,
+                cancelMsg, cancelListener,
+                confirmMsg, confirmListener,
+                items, checkedItems, itemClickListener);
+    }
+
+    protected QMUIDialog showNumerousMultiChoiceDialog(String title,
+                                                       String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                                       String confirmMsg, DialogHelper.MultiChoiceDialogConfirmListener confirmListener,
+                                                       List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
+        return mDialogHelper.showNumerousMultiChoiceDialog(title,
+                cancelMsg, cancelListener,
+                confirmMsg, confirmListener,
+                items, checkedItems, itemClickListener);
+    }
+
+    protected QMUIDialog showEditTextDialog(String title, String placeHolder,
                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                            String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
-                                            Boolean checked) {
-        mDialogHelper.showConfirmMessageDialog(title, content, cancelMsg, cancelListener, confirmMsg, confirmListener, checked);
+                                            String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        return mDialogHelper.showEditTextDialog(title, placeHolder, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
-    protected void showSingleChoiceDialog(DialogInterface.OnClickListener listener, List<String> items, int checkedIndex) {
-        mDialogHelper.showSingleChoiceDialog(items, listener, checkedIndex);
-    }
-
-    protected void showMultiChoiceDialog(String cancelMsg, DialogInterface.OnClickListener itemClickListener,
-                                         String confirmMsg, QMUIDialogAction.ActionListener cancelListener, QMUIDialogAction.ActionListener confirmListener,
-                                         List<String> items, int[] checkedItems) {
-        mDialogHelper.showMultiChoiceDialog(cancelMsg, cancelListener, confirmMsg, confirmListener, items, checkedItems, itemClickListener);
-    }
-
-    protected void showNumerousMultiChoiceDialog(String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                                 String confirmMsg, QMUIDialogAction.ActionListener confirmListener,
-                                                 List<String> items, int[] checkedItems, DialogInterface.OnClickListener itemClickListener) {
-        mDialogHelper.showNumerousMultiChoiceDialog(cancelMsg, cancelListener, confirmMsg, confirmListener, items, checkedItems, itemClickListener);
-    }
-
-    protected void showEditTextDialog(String title, String placeHolder,
-                                      String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                      String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        mDialogHelper.showEditTextDialog(title, placeHolder, cancelMsg, cancelListener, confirmMsg, confirmListener);
-    }
-
-    protected void showAutoDialog(String hintText, String content,
-                                  String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                  String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        mDialogHelper.showAutoDialog(hintText, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
+    protected QMUIDialog showAutoDialog(String hintText, String content,
+                                        String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                        String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+        return mDialogHelper.showAutoDialog(hintText, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
     // ============================== 展示 popView
@@ -293,28 +305,28 @@ public abstract class StandardFragment extends BaseFragment {
         mPopViewHelper.popViewDismiss();
     }
 
-    protected void showNormalPopView(View v, String content, Integer width, PopupWindow.OnDismissListener popViewDismissListener) {
-        mPopViewHelper.showNormalPopView(v, content, width, popViewDismissListener);
+    protected QMUIPopup showNormalPopView(View v, String content, Integer width, PopupWindow.OnDismissListener popViewDismissListener) {
+        return mPopViewHelper.showNormalPopView(v, content, width, popViewDismissListener);
     }
 
-    protected void showListPopView(View v, List<String> items,
-                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
-        showListPopView(v, items, 120, 160, itemClickListener, popViewDismissListener);
+    protected QMUIListPopup showListPopView(View v, List<String> items,
+                                            AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
+        return showListPopView(v, items, 120, 160, itemClickListener, popViewDismissListener);
     }
 
-    protected void showListPopView(View v, List<String> items, Integer width, Integer height,
-                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
-        mPopViewHelper.showListPopView(v, items, width, height, itemClickListener, popViewDismissListener);
+    protected QMUIListPopup showListPopView(View v, List<String> items, Integer width, Integer height,
+                                            AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
+        return mPopViewHelper.showListPopView(v, items, width, height, itemClickListener, popViewDismissListener);
     }
 
     // ============================== bottomSheet
 
-    protected void showSimpleBottomSheetList(List<String> items, QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
-        mBottomSheetHelper.showSimpleBottomSheetList(items, itemClickListener);
+    protected QMUIBottomSheet showSimpleBottomSheetList(List<String> items, QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener itemClickListener) {
+        return mBottomSheetHelper.showSimpleBottomSheetList(items, itemClickListener);
     }
 
-    protected void showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
-        mBottomSheetHelper.showSimpleBottomSheetGrid(mipmaps, titles, tags, itemClickListener);
+    protected QMUIBottomSheet showSimpleBottomSheetGrid(List<Integer> mipmaps, List<String> titles, List<Integer> tags, QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener itemClickListener) {
+        return mBottomSheetHelper.showSimpleBottomSheetGrid(mipmaps, titles, tags, itemClickListener);
     }
 
     // ============================= solidImgeView

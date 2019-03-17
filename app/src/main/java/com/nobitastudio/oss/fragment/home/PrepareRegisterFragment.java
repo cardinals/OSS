@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -77,9 +78,8 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
                         popViewDismiss();
-                    }, () -> {
-                        ToastUtils.showShort("dismiss");
-                    });
+                    },
+                    null);
         } else {
             // 未绑定诊疗卡
             showMessagePositiveDialog("温馨提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",

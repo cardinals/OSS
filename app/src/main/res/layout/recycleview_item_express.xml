@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.layout.QMUILinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/express_linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="208dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
@@ -31,13 +30,13 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginBottom="0dp"
             android:layout_weight="1"
-            android:text="订单详情" />
+            android:text="患者姓名" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="详情"
+            android:text="选择需要寄送的检查报告"
             android:textColor="?attr/qmui_config_color_gray_5"
             android:textSize="13sp" />
 
@@ -48,7 +47,6 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_arrow_right" />
-
     </LinearLayout>
 
     <!-- 分割线 -->
@@ -72,30 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="订单号:"
-                android:textColor="?attr/qmui_config_color_gray_5"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/order_id_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="1111111111111"
-                android:textColor="?attr/qmui_config_color_gray_5"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="支付状态:"
+                android:text="科室:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
@@ -104,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="支付状态"
+                android:text="脑科"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -118,17 +93,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="金额:"
+                android:text="医生:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/order_cost_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="11 元"
-                android:textColor="?attr/app_primary_color"
+                android:text="呈现出现场向"
+                android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -141,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="创建时间:"
+                android:text="开具时间:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
@@ -159,35 +133,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="@dimen/dp_8"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="支付时间:"
-                android:textColor="?attr/qmui_config_color_gray_5"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/pay_time_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="2019-11-12 12:11:22"
-                android:textColor="?attr/qmui_config_color_gray_5"
-                android:textSize="13sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="支付方式:"
+                android:text="检查项:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
@@ -196,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="支付宝"
+                android:text="输血;血细胞分析;彩超;"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>

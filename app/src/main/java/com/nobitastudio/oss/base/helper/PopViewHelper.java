@@ -42,7 +42,7 @@ public class PopViewHelper {
      * @param width                  宽度
      * @param popViewDismissListener dialog消失时的监听器
      */
-    public void showNormalPopView(View v, String content, Integer width, PopupWindow.OnDismissListener popViewDismissListener) {
+    public QMUIPopup showNormalPopView(View v, String content, Integer width, PopupWindow.OnDismissListener popViewDismissListener) {
         mNormalPopup = new QMUIPopup(mContext, QMUIPopup.DIRECTION_NONE);
         TextView textView = new TextView(mContext);
         textView.setLayoutParams(mNormalPopup.generateLayoutParam(
@@ -61,6 +61,7 @@ public class PopViewHelper {
         mNormalPopup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
         mNormalPopup.setPreferredDirection(QMUIPopup.DIRECTION_TOP);
         mNormalPopup.show(v);
+        return mNormalPopup;
     }
 
     /**
@@ -73,8 +74,8 @@ public class PopViewHelper {
      * @param itemClickListener      item点击的监听器
      * @param popViewDismissListener Popview消失时的监听器
      */
-    public void showListPopView(View v, List<String> items, Integer width, Integer height,
-                                   AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
+    public QMUIListPopup showListPopView(View v, List<String> items, Integer width, Integer height,
+                                         AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
         ArrayAdapter adapter = new ArrayAdapter<>(mContext, R.layout.recyclerview_simple_item, items);
         mListPopup = new QMUIListPopup(mContext, QMUIPopup.DIRECTION_NONE, adapter);
         mListPopup.create(QMUIDisplayHelper.dp2px(mContext, width == null ? 250 : width),
@@ -85,6 +86,7 @@ public class PopViewHelper {
         mListPopup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
         mListPopup.setPreferredDirection(QMUIPopup.DIRECTION_TOP);
         mListPopup.show(v);
+        return mListPopup;
     }
 
     public void popViewDismiss() {

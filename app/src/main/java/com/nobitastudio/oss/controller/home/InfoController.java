@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.fragment.home.ExpressFragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -97,7 +98,7 @@ public class InfoController extends QMUIWindowInsetLayout {
         //  其他消息
         QMUICommonListItemView mExpressItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_express_big),
-                "报告邮寄",
+                "邮寄报告",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -141,11 +142,11 @@ public class InfoController extends QMUIWindowInsetLayout {
         return v -> {
             QMUICommonListItemView itemView = (QMUICommonListItemView) v;
             CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
-            if (itemViewText.equals("")) {
-
+            if (itemViewText.equals("邮寄报告")) {
+                mHandler.startFragment(new ExpressFragment());
+            } else {
+                mHandler.startFragment(new TestFragment());
             }
-
-            mHandler.startFragment(new TestFragment());
         };
     }
 

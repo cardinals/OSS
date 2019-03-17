@@ -25,13 +25,14 @@ public class TipDialogHelper {
         this.mContext = mContext;
     }
 
-    public void closeTipDialog() {
+    public QMUITipDialog closeTipDialog() {
         if (mQmuiTipDialog != null && mQmuiTipDialog.isShowing()) {
             mQmuiTipDialog.hide();
         }
+        return mQmuiTipDialog;
     }
 
-    public void showNetworkLoadingTipDialog(String detailMsg) {
+    public QMUITipDialog showNetworkLoadingTipDialog(String detailMsg) {
         closeTipDialog();
         mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
@@ -39,21 +40,25 @@ public class TipDialogHelper {
                 .create();
         mQmuiTipDialog.setCancelable(false);
         mQmuiTipDialog.show();
+        return mQmuiTipDialog;
     }
 
-    public void showErrorTipDialog(String errorMsg, View viewToPostDelayed) {
+    public QMUITipDialog showErrorTipDialog(String errorMsg, View viewToPostDelayed) {
         showErrorTipDialog(errorMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
+        return mQmuiTipDialog;
     }
 
-    public void showInfoTipDialog(String infoMsg, View viewToPostDelayed) {
+    public QMUITipDialog showInfoTipDialog(String infoMsg, View viewToPostDelayed) {
         showInfoTipDialog(infoMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
+        return mQmuiTipDialog;
     }
 
-    public void showSuccessTipDialog(String successMsg, View viewToPostDelayed) {
+    public QMUITipDialog showSuccessTipDialog(String successMsg, View viewToPostDelayed) {
         showSuccessTipDialog(successMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
+        return mQmuiTipDialog;
     }
 
-    public void showErrorTipDialog(String errorMsg, Long delayMills, View viewToPostDelayed) {
+    public QMUITipDialog showErrorTipDialog(String errorMsg, Long delayMills, View viewToPostDelayed) {
         closeTipDialog();
         mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
@@ -61,9 +66,10 @@ public class TipDialogHelper {
                 .create();
         mQmuiTipDialog.show();
         viewToPostDelayed.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        return mQmuiTipDialog;
     }
 
-    public void showInfoTipDialog(String infoMsg, Long delayMills, View viewToPostDelayed) {
+    public QMUITipDialog showInfoTipDialog(String infoMsg, Long delayMills, View viewToPostDelayed) {
         closeTipDialog();
         mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_INFO)
@@ -71,9 +77,10 @@ public class TipDialogHelper {
                 .create();
         mQmuiTipDialog.show();
         viewToPostDelayed.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        return mQmuiTipDialog;
     }
 
-    public void showSuccessTipDialog(String successMsg, Long delayMills, View viewToPostDelayed) {
+    public QMUITipDialog showSuccessTipDialog(String successMsg, Long delayMills, View viewToPostDelayed) {
         closeTipDialog();
         mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
@@ -81,5 +88,6 @@ public class TipDialogHelper {
                 .create();
         mQmuiTipDialog.show();
         viewToPostDelayed.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        return mQmuiTipDialog;
     }
 }
