@@ -21,6 +21,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.Constant;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -31,7 +32,7 @@ import com.qmuiteam.qmui.widget.webview.QMUIWebViewContainer;
 public class QDWebViewFixFragment extends QDWebExplorerFragment {
 
     public QDWebViewFixFragment() {
-        String url = "http://www.nobitastudio.cn/swagger-ui.html";
+        String url = Constant.OSS_SERVER_LOCAL + "/swagger-ui.html";
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_URL, url);
         bundle.putString(EXTRA_TITLE, "浏览器fragment");
