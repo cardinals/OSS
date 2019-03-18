@@ -170,10 +170,10 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected View onCreateView() {
-        FrameLayout frameLayout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
-        ButterKnife.bind(this, frameLayout);
+        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
+        ButterKnife.bind(this, root);
         initTabs();
         initPagers();
-        return frameLayout;
+        return root;
     }
 }
