@@ -76,7 +76,7 @@ public class PopViewHelper {
      */
     public QMUIListPopup showListPopView(View v, List<String> items, Integer width, Integer height,
                                          AdapterView.OnItemClickListener itemClickListener, PopupWindow.OnDismissListener popViewDismissListener) {
-        ArrayAdapter adapter = new ArrayAdapter<>(mContext, R.layout.recyclerview_simple_item, items);
+        ArrayAdapter adapter = new ArrayAdapter<>(mContext, R.layout.recyclerview_item_simple, items);
         mListPopup = new QMUIListPopup(mContext, QMUIPopup.DIRECTION_NONE, adapter);
         mListPopup.create(QMUIDisplayHelper.dp2px(mContext, width == null ? 250 : width),
                 QMUIDisplayHelper.dp2px(mContext, height == null ? 200 : height), itemClickListener);

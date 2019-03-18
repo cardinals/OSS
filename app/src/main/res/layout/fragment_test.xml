@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <com.qmuiteam.qmui.widget.QMUIEmptyView
         android:id="@+id/emptyView"
@@ -37,65 +39,193 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/app_black_overlay_normal2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_120">
 
-
-                    <RelativeLayout
+                    <LinearLayout
+                        android:id="@+id/medical_card_ownername_linearlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_patient_white" />
 
                         <TextView
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
-                            style="@style/QDCommonTitle"
-                            android:layout_marginTop="-108dp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textSize="@dimen/textsize_mostlarge"
-                            android:textStyle="normal"
-                            android:textColor="@color/qmui_config_color_white"
-                            android:text="请输入验证码" />
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="姓名"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
 
                         <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
+                            android:id="@+id/medical_card_ownername_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="-48dp"
-                            android:text="验证码已发送至 +86 1234567890"
-                            android:textColor="@color/qmui_config_color_white"
-                            android:textStyle="normal" />
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入姓名"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
 
-                        <com.mukesh.OtpView
-                            android:id="@+id/otp_view"
-                            android:layout_centerInParent="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:itemBackground="@drawable/bg_otp_item"
-                            android:textColor="@android:color/white"
-                            app:hideLineWhenFilled="true"
-                            app:itemCount="6"
-                            app:itemSpacing="6dp"
-                            app:lineColor="@color/otp_item_state"
-                            app:state_filled="true"
-                            app:viewType="none" />
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/medical_card_owner_sex_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_sex_white" />
 
                         <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_alignBottom="@id/otp_view"
-                            android:layout_alignLeft="@id/otp_view"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="性别"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_owner_sex_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="-48dp"
-                            android:text="50秒后重新获取验证码/重新发送"
-                            android:textColor="@color/qmui_config_color_white"
-                            android:textStyle="normal" />
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请选择性别"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
 
-                    </RelativeLayout>
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/medical_card_owner_idcard_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_card_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="身份证号"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_owner_idcard_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入身份证号"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/medical_card_owner_address_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_location_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="联系地址"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_owner_address_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入有效联系地址"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/confirm_modify_password"
+                        style="@style/AppTransparentQDRadiusButton"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginRight="@dimen/space_left_right_button_minus_12"
+                        android:text="确认办理" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

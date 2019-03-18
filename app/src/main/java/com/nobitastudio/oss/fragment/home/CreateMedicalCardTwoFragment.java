@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.fragment.home.CreateMedicalCardThreeFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import butterknife.BindView;

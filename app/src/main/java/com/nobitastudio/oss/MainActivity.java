@@ -27,6 +27,7 @@ import com.nobitastudio.oss.fragment.home.ExpressFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
+import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
  * @author chenxiong
@@ -69,11 +70,11 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new Test2Fragment();
 //        return new LoginOldFragment();
 //        return new SettingFragment();
-        return new QDWebViewFixFragment();
+        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
-//        return new CreateMedicalCardThreeFragment();
+//        return new CreateMedicalCardThreeOldFragment();
 //        return new TestFragment();
 //        return new VerificationCodeFragment();
 //        return new MyCollectFragment();

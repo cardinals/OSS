@@ -5,11 +5,17 @@
     <color name="app_color_blue_pressed">#c000A8E1</color>
 
     <color name="app_color_blue_2">#31BDF3</color>    <!-- icon 的填充颜色 -->
+    <color name="app_color_black_full">@color/app_ali_icon_black</color>
     <color name="app_color_blue_2_disabled">#7F31BDF3</color>
     <color name="app_color_blue_2_pressed">#7F31BDF3</color>
 
     <!-- 透明 -->
     <color name="app_color_blue_btn_bg">#7FEBF9FF</color>
+    <color name="app_color_blue_btn_bg2">#FFEBF9FF</color>
+
+    <!-- 透明按钮 -->
+    <color name="app_color_blue_transparent">#9FEBF9FF</color>
+    <color name="app_color_blue_transparent_pressed">#7FEBF9FF</color>
 
     <!-- 不透明 -->
     <color name="app_color_blue_full">#EBF9FF</color>

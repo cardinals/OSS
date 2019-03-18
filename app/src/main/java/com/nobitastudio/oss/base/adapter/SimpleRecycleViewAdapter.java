@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class SimpleRecycleViewAdapter<T> extends BaseRecyclerViewAdapter<T> {
 
-    private final static int SIMPLE_LAYOUT = R.layout.recyclerview_simple_item;
+    private final static int SIMPLE_LAYOUT = R.layout.recyclerview_item_simple;
     private final static int SIMPLE_LAYOUT_TEXTVIEW_ID = R.id.text;
 
     public SimpleRecycleViewAdapter(Context ctx, List<T> list) {

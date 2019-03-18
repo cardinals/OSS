@@ -38,16 +38,8 @@ import es.dmoral.toasty.Toasty;
  */
 public class TestFragment extends BaseFragment {
 
-    @BindView(R.id.topbar)
-    QMUITopBarLayout mTopBar;
-    @BindView(R.id.otp_view)
-    OtpView mOtpView;
-
     private void init() {
-        mTopBar.setTitle("验证");
-        mTopBar.addLeftBackImageButton().setOnClickListener(view -> this.popBackStack());
-        mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent, null));
-        mOtpView.setOtpCompletionListener((value) -> Toasty.success(getContext(), value));
+
     }
 
     @Override

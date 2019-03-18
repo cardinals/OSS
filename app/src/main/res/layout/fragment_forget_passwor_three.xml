@@ -11,9 +11,7 @@
         android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
         android:background="@color/qmui_config_color_white"
-        android:fitsSystemWindows="true"
         android:visibility="gone"
         app:qmui_detail_text="正在加载"
         app:qmui_show_loading="true" />
@@ -22,9 +20,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
-        android:background="?attr/qmui_config_color_background"
-        android:fitsSystemWindows="true">
+        android:background="@mipmap/bg_login_init2">
 
         <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
             android:id="@+id/pull_to_refresh"
@@ -42,119 +38,194 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/qmui_config_color_white"
-                    android:orientation="vertical">
+                    android:background="@color/app_black_overlay_normal2"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_120">
 
-                    <!-- text instruction -->
                     <LinearLayout
+                        android:id="@+id/medical_card_ownername_linearlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:orientation="horizontal">
-                        <!-- input phonenumber -->
-                        <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="1 绑定手机号" />
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
 
-                        <!-- input verificationcode -->
-                        <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="2 输入验证码" />
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_patient_white" />
 
-                        <!-- confirm update -->
                         <TextView
-                            style="@style/QDCommonDescription"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="3 确认办理" />
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="姓名"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_ownername_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入姓名"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
                     </LinearLayout>
 
-                    <!-- line instruction -->
                     <LinearLayout
+                        android:id="@+id/medical_card_owner_sex_linearlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
 
-                        <!-- line -->
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_sex_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:layout_weight="1"
-                            android:background="@color/app_color_blue" />
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="性别"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
 
-                        <!-- point -->
-                        <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
+                        <TextView
+                            android:id="@+id/medical_card_owner_sex_textview"
                             android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="2"
-                            android:background="@color/app_color_blue" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请选择性别"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
 
-                        <!-- point -->
                         <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="2"
-                            android:background="@color/app_color_blue" />
-
-                        <!-- point -->
-                        <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="1"
-                            android:background="@color/qmui_config_color_gray_7" />
-
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
                     </LinearLayout>
 
-                    <!-- 常用信息 -->
-                    <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:id="@+id/groupListView"
+                    <LinearLayout
+                        android:id="@+id/medical_card_owner_idcard_linearlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
 
-                    <!-- display the register button-->
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_card_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="身份证号"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_owner_idcard_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入身份证号"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/medical_card_owner_address_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_location_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="联系地址"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_owner_address_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入有效联系地址"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
                     <Button
                         android:id="@+id/confirm_modify_password"
-                        style="@style/AppQDRadiusButton"
+                        style="@style/AppTransparentQDRadiusButton"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
                         android:layout_marginTop="@dimen/dp_16"
                         android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="确认办理" />
-
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
