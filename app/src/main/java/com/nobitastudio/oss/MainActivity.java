@@ -78,7 +78,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
-        return new InputMobileFragment();
+        return new LoginFragment();
 //        return new ElectronicCaseDetailFragment();
 //        return new FeedbackFragment();
     }
