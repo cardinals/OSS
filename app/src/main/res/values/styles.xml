@@ -412,9 +412,14 @@ C68.5809,277.075,273.832,71.8233,527.023,71.8233 Z
     </style>
 
     <!-- edit style -->
-    <style name="app_edittext">
+    <style name="app_login_edittext">
         <item name="android:textColor">@color/app_color_blue</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="app_transparent_edittext">
+        <item name="android:textColor">@color/qmui_config_color_white</item>
+        <item name="android:textSize">32sp</item>
     </style>
 
     <!-- 透明的topbar 只是不带有透明效果，还是需要调用setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent,null))实现透明-->

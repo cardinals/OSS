@@ -1,10 +1,10 @@
-package com.nobitastudio.oss.fragment.login;
+package com.nobitastudio.oss.fragment.old;
 
 import android.view.View;
 import android.widget.EditText;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.fragment.login.ForgetPasswordThreeFragment;
+import com.nobitastudio.oss.fragment.login.ForgetPasswordFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import butterknife.BindView;
@@ -15,7 +15,7 @@ import butterknife.OnClick;
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
  * @description 用户输入验证码 再验证成功后可以视为用户通过验证码登录成功,应当收到 accessToken.
- * 再通过accessToken 在 ForgetPasswordThreeFragment 中调用修改密码的接口.
+ * 再通过accessToken 在 ForgetPasswordFragment 中调用修改密码的接口.
  */
 public class ForgetPasswordTwoFragment extends StandardWithTobBarLayoutFragment {
 
@@ -24,7 +24,7 @@ public class ForgetPasswordTwoFragment extends StandardWithTobBarLayoutFragment 
 
     @OnClick({R.id.next_step_button})
     void onClick(View v) {
-        startFragmentAndDestroyCurrent(new ForgetPasswordThreeFragment());
+        startFragmentAndDestroyCurrent(new ForgetPasswordFragment());
     }
 
     @Override

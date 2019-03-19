@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.fragment.home.BindMedicalCardOneFragment;
-import com.nobitastudio.oss.fragment.home.CreateMedicalCardOneFragment;
-import com.nobitastudio.oss.fragment.home.MedicalCardDetailFragment;
+import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 
@@ -58,7 +56,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.create_medical_card_button:
-                startFragment(new CreateMedicalCardOneFragment());
+                startFragment(new InputMobileFragment());
                 break;
             case R.id.bind_medical_card_button:
                 startFragment(new BindMedicalCardOneFragment());

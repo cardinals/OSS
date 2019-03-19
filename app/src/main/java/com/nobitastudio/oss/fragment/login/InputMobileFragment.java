@@ -1,15 +1,10 @@
-package com.nobitastudio.oss.fragment.home;
+package com.nobitastudio.oss.fragment.login;
 
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
-import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -18,9 +13,17 @@ import butterknife.OnClick;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description 用户输入新密码 以及 确认密码
+ * @description 用户输入需要修改密码的手机号
  */
-public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFragment {
+public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
+
+    @BindView(R.id.mobile_edittext)
+    EditText mMobileEditText;
+
+    @OnClick({R.id.next_step_button})
+    void onClick(View v) {
+        startFragment(new VerificationCodeFragment());
+    }
 
     @Override
     protected Boolean topBarIsTransparent() {
@@ -29,12 +32,12 @@ public class CreateMedicalCardThreeFragment extends StandardWithTobBarLayoutFrag
 
     @Override
     protected String getTopBarTitle() {
-        return "确认办理";
+        return "输入手机号";
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_forget_passwor_three;
+        return R.layout.fragment_input_mobile;
     }
 
     @Override

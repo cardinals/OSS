@@ -21,13 +21,8 @@ import android.os.Bundle;
 import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
-import com.nobitastudio.oss.base.lab.fragment.QDWebViewFixFragment;
-import com.nobitastudio.oss.fragment.about.FeedbackFragment;
-import com.nobitastudio.oss.fragment.home.ExpressFragment;
-import com.nobitastudio.oss.fragment.home.HomeFragment;
-import com.nobitastudio.oss.fragment.login.LoginFragment;
-import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
-import com.nobitastudio.oss.fragment.test.TestFragment;
+import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
+import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 
 /**
  * @author chenxiong
@@ -70,7 +65,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new Test2Fragment();
 //        return new LoginOldFragment();
 //        return new SettingFragment();
-        return new HomeFragment();
+        return new InputMobileFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();

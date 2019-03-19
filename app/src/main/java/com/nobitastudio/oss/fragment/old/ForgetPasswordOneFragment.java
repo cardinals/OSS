@@ -1,9 +1,10 @@
-package com.nobitastudio.oss.fragment.login;
+package com.nobitastudio.oss.fragment.old;
 
 import android.view.View;
 import android.widget.EditText;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.fragment.old.ForgetPasswordTwoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import butterknife.BindView;

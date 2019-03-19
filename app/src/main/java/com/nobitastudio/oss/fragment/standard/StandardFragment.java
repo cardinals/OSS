@@ -178,6 +178,9 @@ public abstract class StandardFragment extends BaseFragment {
         // 特殊处理
     }
 
+    // 得到topbar 因为类型不同.使用view
+    protected abstract View getTopBar();
+
     // ================ view
     protected abstract int getLayoutId();
 
@@ -208,28 +211,32 @@ public abstract class StandardFragment extends BaseFragment {
         return mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg);
     }
 
+    protected QMUITipDialog showNetworkLoadingTipDialog(String detailMsg, long delayTime) {
+        return mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg, delayTime, getTopBar());
+    }
+
     protected QMUITipDialog showErrorTipDialog(String errorMsg) {
-        return mTipDialogHelper.showErrorTipDialog(errorMsg, mEmptyView);
+        return mTipDialogHelper.showErrorTipDialog(errorMsg, getTopBar());
     }
 
     protected QMUITipDialog showInfoTipDialog(String infoMsg) {
-        return mTipDialogHelper.showInfoTipDialog(infoMsg, mEmptyView);
+        return mTipDialogHelper.showInfoTipDialog(infoMsg, getTopBar());
     }
 
     protected QMUITipDialog showSuccessTipDialog(String successMsg) {
-        return mTipDialogHelper.showSuccessTipDialog(successMsg, mEmptyView);
+        return mTipDialogHelper.showSuccessTipDialog(successMsg, getTopBar());
     }
 
     protected QMUITipDialog showErrorTipDialog(String errorMsg, Long delayMills) {
-        return mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, mEmptyView);
+        return mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, getTopBar());
     }
 
     protected QMUITipDialog showInfoTipDialog(String infoMsg, Long delayMills) {
-        return mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, mEmptyView);
+        return mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, getTopBar());
     }
 
     protected QMUITipDialog showSuccessTipDialog(String successMsg, Long delayMills) {
-        return mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, mEmptyView);
+        return mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, getTopBar());
     }
 
     // ================================ 不同类型的对话框 dialog

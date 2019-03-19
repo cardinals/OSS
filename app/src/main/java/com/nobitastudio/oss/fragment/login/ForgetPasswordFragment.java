@@ -16,7 +16,7 @@ import butterknife.OnClick;
  * @date 2019/01/29 16:08
  * @description 用户输入新密码 以及 确认密码
  */
-public class ForgetPasswordThreeFragment extends StandardWithTobBarLayoutFragment {
+public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.new_password_editText)
     EditText mNewPasswordEditText;
@@ -37,7 +37,7 @@ public class ForgetPasswordThreeFragment extends StandardWithTobBarLayoutFragmen
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_forget_passwor_three;
+        return R.layout.fragment_forget_passwor;
     }
 
     @Override

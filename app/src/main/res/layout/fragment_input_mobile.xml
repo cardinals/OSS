@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <com.qmuiteam.qmui.widget.QMUIEmptyView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white"
+        android:visibility="gone"
+        app:qmui_detail_text="正在加载"
+        app:qmui_show_loading="true" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_login_init2">
+
+        <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
+            android:id="@+id/pull_to_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/app_black_overlay_normal2"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_100">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/dp_54"
+                            android:layout_marginRight="@dimen/dp_54"
+                            android:textColorHint="@color/qmui_config_color_white"
+                            app:hintTextAppearance="@style/app_transparent_edittext">
+
+                            <EditText
+                                android:id="@+id/mobile_edittext"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/bg_transparent_selector_edit"
+                                android:hint="请输入手机号"
+                                android:inputType="number"
+                                android:maxLength="11"
+                                android:textColor="@color/qmui_config_color_white"
+                                android:textCursorDrawable="@drawable/bg_transparent_input_cursor"
+                                android:textSize="25sp"
+                                android:textStyle="normal" />
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/next_step_button"
+                        style="@style/AppTransparentQDRadiusButton"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginRight="@dimen/space_left_right_button_minus_12"
+                        android:text="下一步" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
+    </FrameLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

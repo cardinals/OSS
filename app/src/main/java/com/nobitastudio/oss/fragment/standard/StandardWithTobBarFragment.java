@@ -1,5 +1,7 @@
 package com.nobitastudio.oss.fragment.standard;
 
+import android.view.View;
+
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardFragment;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -34,5 +36,10 @@ public abstract class StandardWithTobBarFragment extends StandardFragment {
             }
             initTopBarLast();
         }
+    }
+
+    @Override
+    protected View getTopBar() {
+        return mTopBar;
     }
 }

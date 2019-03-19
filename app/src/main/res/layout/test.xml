@@ -91,19 +91,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="#c5c5c5"
-                            app:hintTextAppearance="@style/app_edittext">
+                            app:hintTextAppearance="@style/app_login_edittext">
 
                             <EditText
                                 android:id="@+id/user_mobile_edittext"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/selector_bg_edit"
+                                android:background="@drawable/bg_login_selector_edit"
                                 android:hint="手机号"
                                 android:inputType="number"
                                 android:maxLength="11"
                                 android:paddingBottom="2dp"
                                 android:textColor="@color/app_color_blue"
-                                android:textCursorDrawable="@drawable/bg_input_cursor"
+                                android:textCursorDrawable="@drawable/bg_login_input_cursor"
                                 android:textSize="15sp" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
@@ -119,19 +119,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="#c5c5c5"
-                            app:hintTextAppearance="@style/app_edittext">
+                            app:hintTextAppearance="@style/app_login_edittext">
 
                             <EditText
                                 android:id="@+id/user_password_editText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/selector_bg_edit"
+                                android:background="@drawable/bg_login_selector_edit"
                                 android:hint="密码"
                                 android:inputType="textPassword"
                                 android:maxLength="16"
                                 android:paddingBottom="2dp"
                                 android:textColor="@color/app_color_blue"
-                                android:textCursorDrawable="@drawable/bg_input_cursor"
+                                android:textCursorDrawable="@drawable/bg_login_input_cursor"
                                 android:textSize="15sp" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>

@@ -123,7 +123,7 @@ public class CreateMedicalCardThreeOldFragment extends StandardWithTobBarLayoutF
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_forget_passwor_three;
+        return R.layout.fragment_forget_passwor;
     }
 
     @Override

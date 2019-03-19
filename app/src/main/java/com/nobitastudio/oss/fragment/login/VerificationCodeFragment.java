@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.mukesh.OtpView;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 
@@ -42,7 +43,7 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
 
     private void initOptView() {
         mOtpView.setOtpCompletionListener((value) -> {
-            Toasty.success(getContext(), value);
+            startFragmentAndDestroyCurrent(new CreateMedicalCardFragment());
         });
     }
 

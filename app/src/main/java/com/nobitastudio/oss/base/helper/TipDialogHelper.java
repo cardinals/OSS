@@ -43,6 +43,13 @@ public class TipDialogHelper {
         return mQmuiTipDialog;
     }
 
+    // 指定时间消失
+    public QMUITipDialog showNetworkLoadingTipDialog(String detailMsg, long delayTime, View viewToPostDelayed) {
+        mQmuiTipDialog = showNetworkLoadingTipDialog(detailMsg);
+        viewToPostDelayed.postDelayed(() -> closeTipDialog(), delayTime);
+        return mQmuiTipDialog;
+    }
+
     public QMUITipDialog showErrorTipDialog(String errorMsg, View viewToPostDelayed) {
         showErrorTipDialog(errorMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
         return mQmuiTipDialog;
