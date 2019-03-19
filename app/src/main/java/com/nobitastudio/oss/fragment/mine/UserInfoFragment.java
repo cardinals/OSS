@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
 import com.nobitastudio.oss.fragment.old.ForgetPasswordTwoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -159,7 +160,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                     popViewDismiss();
                 }, null);
             } else if (itemViewText.equals("修改密码")) {
-                startFragment(new ForgetPasswordTwoFragment());
+                startFragment(new VerificationCodeFragment());
             } else if (itemViewText.equals("身份证号")) {
                 showInfoTipDialog("身份证号不可修改");
             }

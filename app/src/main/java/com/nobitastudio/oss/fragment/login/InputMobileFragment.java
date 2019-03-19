@@ -2,6 +2,7 @@ package com.nobitastudio.oss.fragment.login;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
@@ -19,6 +20,8 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.mobile_edittext)
     EditText mMobileEditText;
+    @BindView(R.id.copyright_textview)
+    TextView mCopyrightTextView;
 
     @OnClick({R.id.next_step_button})
     void onClick(View v) {
@@ -42,6 +45,6 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-
+        initCopyRight(mCopyrightTextView);
     }
 }

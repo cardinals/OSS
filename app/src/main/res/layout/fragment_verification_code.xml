@@ -39,20 +39,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/app_black_overlay_normal2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_120">
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
 
                         <TextView
                             style="@style/QDCommonTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignLeft="@id/otp_view"
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_marginTop="-108dp"
                             android:gravity="start"
                             android:text="请输入验证码"
                             android:textColor="@color/qmui_config_color_white"
@@ -64,9 +63,8 @@
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignLeft="@id/otp_view"
-                            android:layout_alignTop="@id/otp_view"
-                            android:layout_marginTop="-48dp"
+                            android:layout_marginTop="@dimen/dp_12"
+                            android:layout_marginBottom="@dimen/dp_0"
                             android:text="验证码已发送至 +86 1234567890"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
@@ -75,7 +73,7 @@
                             android:id="@+id/otp_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/dp_20"
                             android:inputType="number"
                             android:itemBackground="@drawable/bg_otp_item"
                             android:textColor="@android:color/white"
@@ -91,13 +89,20 @@
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignLeft="@id/otp_view"
-                            android:layout_alignBottom="@id/otp_view"
-                            android:layout_marginBottom="-48dp"
+                            android:layout_marginTop="@dimen/dp_20"
                             android:text="50秒后重新获取验证码/收不到验证码点这里"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
-                    </RelativeLayout>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/copyright_textview"
+                        style="@style/AppTransparentCopyrightTextViw" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

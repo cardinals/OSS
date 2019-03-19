@@ -40,7 +40,7 @@ public class LoginFragment extends BaseFragment {
     static final String DONT_INPUT_PASSWORD = "请输入密码";
     static final String MOBILE_OR_PASSWORD_ERROR = "账号或密码错误";
 
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
     @BindView(R.id.user_mobile_edittext)
     EditText userMobileEditText;
@@ -62,9 +62,9 @@ public class LoginFragment extends BaseFragment {
                         Arrays.asList(1, 2, 3),
                         (dialog, itemView) -> {
                             if (itemView.getTag().equals(1)) {
-                                Toasty.info(getContext(), "注册", Toast.LENGTH_SHORT, true).show();
+                                startFragment(new InputMobileFragment());
                             } else if (itemView.getTag().equals(2)) {
-                                Toasty.info(getContext(), "找回密码",Toast.LENGTH_SHORT, true).show();
+                                startFragment(new InputMobileFragment());
                             } else if (itemView.getTag().equals(3)) {
                                 startFragment(new AboutFragment());
                             }

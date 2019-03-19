@@ -19,7 +19,7 @@ import es.dmoral.toasty.Toasty;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description 验证码fragment
+ * @description 验证码fragment  根据情况跳转至更改密码界面，注册界面.创建诊疗卡界面
  */
 public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
 
@@ -27,6 +27,8 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
     TextView mSendToMobileTextView;
     @BindView(R.id.otp_view)
     OtpView mOtpView;
+    @BindView(R.id.copyright_textview)
+    TextView mCopyrightTextView;
 
     @OnClick({R.id.resend_textview})
     void onClick(View v) {
@@ -65,5 +67,6 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initOptView();
+        initCopyRight(mCopyrightTextView);
     }
 }

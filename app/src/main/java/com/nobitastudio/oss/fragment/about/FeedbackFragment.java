@@ -5,11 +5,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,15 +23,14 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
     EditText mFeedbackEditText;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
 
     @OnClick({R.id.feedback_button})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.feedback_button:
-                showNetworkLoadingTipDialog("正在发送您的反馈");
-                mTopBar.postDelayed(() -> showSuccessTipDialog("感谢您的反馈"),1500);
+                showNetworkLoadingTipDialog("正在发送您的反馈",1500);
                 break;
             default:
                 break;
@@ -60,7 +56,8 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
+        initCopyRight(mCopyrightTextView);
+        initQMUILinearLayout();
     }
 
 }

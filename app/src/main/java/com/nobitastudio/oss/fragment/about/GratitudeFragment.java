@@ -15,7 +15,7 @@ import butterknife.BindView;
  */
 public class GratitudeFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
 
     @Override

@@ -27,6 +27,8 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
     TextView mMedicalCardOwnerIdCardTextView;
     @BindView(R.id.medical_card_owner_address_textview)
     TextView mMedicalCardOwnerAddressTextView;
+    @BindView(R.id.copyright_textview)
+    TextView mCopyrightTextView;
 
 
     @OnClick({R.id.medical_card_owner_name_linearlayout, R.id.medical_card_owner_sex_linearlayout,
@@ -89,6 +91,6 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
 
     @Override
     protected void initLastCustom() {
-
+        initCopyRight(mCopyrightTextView);
     }
 }

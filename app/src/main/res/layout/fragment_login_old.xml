@@ -245,7 +245,7 @@
 
                     <!-- 版权,责任 -->
                     <TextView
-                        android:id="@+id/copyright_textView"
+                        android:id="@+id/copyright_textview"
                         style="@style/AppCopyrightTextViw" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>

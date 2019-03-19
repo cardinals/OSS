@@ -32,7 +32,7 @@ public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
     static final String MOBILE_OR_PASSWORD_ERROR = "账号或密码错误";
     static final String ACCESS_TIMEOUT = "网络连接超时";
 
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
     @BindView(R.id.user_mobile_edittext)
     EditText userMobileEditText;

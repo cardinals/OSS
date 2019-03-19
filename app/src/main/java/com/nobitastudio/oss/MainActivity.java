@@ -25,6 +25,7 @@ import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.ForgetPasswordFragment;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
+import com.nobitastudio.oss.fragment.login.LoginFragment;
 
 /**
  * @author chenxiong
@@ -67,7 +68,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new Test2Fragment();
 //        return new LoginOldFragment();
 //        return new SettingFragment();
-        return new HomeFragment();
+//        return new HomeFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();
@@ -77,7 +78,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
-//        return new LoginFragment();
+        return new InputMobileFragment();
 //        return new ElectronicCaseDetailFragment();
 //        return new FeedbackFragment();
     }

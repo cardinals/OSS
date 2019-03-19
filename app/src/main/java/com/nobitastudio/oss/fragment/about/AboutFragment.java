@@ -22,7 +22,7 @@ public class AboutFragment extends StandardWithTobBarLayoutFragment {
     TextView versionTextView;
     @BindView(R.id.about_list_groupList)
     QMUIGroupListView aboutListQMUIGroupListView;
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
 
     /**

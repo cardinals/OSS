@@ -216,8 +216,8 @@
 
             <!-- 版权,责任 -->
             <TextView
-                android:id="@+id/copyright_textView"
-                style="@style/AppCopyrightTextViw"
+                android:id="@+id/copyright_textview"
+                style="@style/AppTransparentCopyrightTextViw"
                 android:layout_alignParentBottom="true" />
 
             <android.support.design.widget.FloatingActionButton

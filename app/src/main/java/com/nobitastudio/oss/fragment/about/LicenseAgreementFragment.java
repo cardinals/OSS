@@ -15,7 +15,7 @@ import butterknife.BindView;
  */
 public class LicenseAgreementFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.copyright_textView)
+    @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
 
     @Override

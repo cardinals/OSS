@@ -111,6 +111,15 @@
                         android:layout_marginTop="@dimen/dp_24"
                         android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="确认修改" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/copyright_textview"
+                        style="@style/AppTransparentCopyrightTextViw" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

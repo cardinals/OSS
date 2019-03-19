@@ -2,6 +2,7 @@ package com.nobitastudio.oss.fragment.login;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
@@ -22,6 +23,8 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
     EditText mNewPasswordEditText;
     @BindView(R.id.confirm_password_editText)
     EditText mConfirmPasswordEditText;
+    @BindView(R.id.copyright_textview)
+    TextView mCopyrightTextView;
 
     @OnClick({R.id.confirm_modify_password})
     void onClick(View v) {
@@ -47,6 +50,6 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-
+        initCopyRight(mCopyrightTextView);
     }
 }
