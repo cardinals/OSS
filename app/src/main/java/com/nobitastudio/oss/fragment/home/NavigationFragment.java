@@ -29,7 +29,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static com.nobitastudio.oss.container.Constant.getAmapNaviParamByIndex;
+import static com.nobitastudio.oss.container.ConstantContainer.getAmapNaviParamByIndex;
 
 /**
  * @author chenxiong

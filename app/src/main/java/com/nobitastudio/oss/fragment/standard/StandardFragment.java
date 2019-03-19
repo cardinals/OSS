@@ -52,7 +52,7 @@ public abstract class StandardFragment extends BaseFragment {
     @BindView(R.id.emptyView)
     protected QMUIEmptyView mEmptyView;
 
-    Gson mGson;
+//    Gson mGson;
     OkHttpClient mOkHttpClient;
 
     BottomSheetHelper mBottomSheetHelper;
@@ -95,7 +95,7 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     public StandardFragment() {
-        mGson = new Gson();
+//        mGson = new Gson();
         mOkHttpClient = new OkHttpClient();
     }
 

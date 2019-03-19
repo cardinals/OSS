@@ -13,10 +13,11 @@ import java.util.Map;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/02/28 09:56
- * @description 常量工具类
+ * @description 常量容器
  */
-public class Constant {
+public class ConstantContainer {
 
+    // 客户端
     public static final String LOCAL_HOST_IP = "10.0.2.2";  // Android 虚拟机内置访问本地服务地址 -> localhost
     public static final String OSS_SERVER_ONLINE = "http://www.nobitastudio.cn";  // 线上地址
     public static final String OSS_SERVER_LOCAL = "http://10.0.2.2";  // 本地服务

@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.container.Constant;
+import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -48,7 +48,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
         }
 
         int getImageDrawableId(Department item) {
-            return Constant.getDepartmentMipmap().getOrDefault(item.getName(), R.mipmap.ic_transparent);
+            return ConstantContainer.getDepartmentMipmap().getOrDefault(item.getName(), R.mipmap.ic_transparent);
         }
     }
 
