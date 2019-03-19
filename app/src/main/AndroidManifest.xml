@@ -41,7 +41,8 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
         <!-- 进入的activity -->
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">  <!-- 键盘弹起不会使其消失 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

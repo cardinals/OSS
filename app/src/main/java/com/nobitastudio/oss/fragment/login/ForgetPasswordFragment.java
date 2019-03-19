@@ -31,6 +31,11 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
+    protected Boolean topBarIsTransparent() {
+        return Boolean.TRUE;
+    }
+
+    @Override
     protected String getTopBarTitle() {
         return "确认修改";
     }

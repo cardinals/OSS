@@ -11,9 +11,7 @@
         android:id="@+id/emptyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
         android:background="@color/qmui_config_color_white"
-        android:fitsSystemWindows="true"
         android:visibility="gone"
         app:qmui_detail_text="正在加载"
         app:qmui_show_loading="true" />
@@ -22,9 +20,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/qmui_topbar_height"
-        android:background="?attr/qmui_config_color_background"
-        android:fitsSystemWindows="true">
+        android:background="@mipmap/bg_login_init2">
 
         <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
             android:id="@+id/pull_to_refresh"
@@ -42,180 +38,79 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/qmui_config_color_white"
-                    android:orientation="vertical">
+                    android:background="@color/app_black_overlay_normal2"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dp_100">
 
-                    <!-- text instruction -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:orientation="horizontal">
-                        <!-- input phonenumber -->
-                        <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="1 输入手机号" />
-
-                        <!-- input verificationcode -->
-                        <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="2 输入验证码" />
-
-                        <!-- confirm update -->
-                        <TextView
-                            style="@style/QDCommonDescription"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="0dp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="3 确认修改" />
-
-                    </LinearLayout>
-
-                    <!-- line instruction -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
+                        android:layout_height="@dimen/dp_72"
+                        android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="1"
-                            android:background="@color/app_color_blue" />
-
-                        <!-- point -->
-                        <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="2"
-                            android:background="@color/app_color_blue" />
-
-                        <!-- point -->
-                        <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="2"
-                            android:background="@color/app_color_blue" />
-
-                        <!-- point -->
-                        <ImageView
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:src="@drawable/ic_point_blue" />
-
-                        <!-- line -->
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/px_1"
-                            android:layout_weight="1"
-                            android:background="@color/qmui_config_color_gray_7" />
-
-                    </LinearLayout>
-
-                    <!--  新密码 -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="48dp"
-                            android:layout_marginLeft="48dp"
-                            android:layout_marginRight="4dp"
-                            android:gravity="center"
-                            android:src="@drawable/ic_lock" />
-
-                        <EditText
-                            android:id="@+id/new_password_editText"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="56dp"
-                            android:background="@drawable/qmui_divider_bottom_bitmap"
-                            android:gravity="center"
-                            android:hint="请输入新密码"
-                            android:inputType="textPassword"
-                            android:maxLength="16"
-                            android:paddingBottom="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/app_color_description"
-                            android:textSize="16sp" />
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/dp_54"
+                            android:layout_marginRight="@dimen/dp_54"
+                            android:textColorHint="@color/qmui_config_color_white"
+                            app:hintTextAppearance="@style/app_transparent_edittext">
 
+                            <EditText
+                                android:id="@+id/new_password_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/bg_transparent_selector_edit"
+                                android:hint="请输入新密码"
+                                android:inputType="textPassword"
+                                android:maxLength="16"
+                                android:textColor="@color/qmui_config_color_white"
+                                android:textCursorDrawable="@drawable/bg_transparent_input_cursor"
+                                android:textSize="25sp"
+                                android:textStyle="normal" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
 
-                    <!--  确认新密码 -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
+                        android:layout_height="@dimen/dp_72"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="48dp"
-                            android:layout_marginLeft="48dp"
-                            android:layout_marginRight="4dp"
-                            android:gravity="center"
-                            android:src="@drawable/ic_lock" />
-
-                        <EditText
-                            android:id="@+id/confirm_password_editText"
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="6dp"
-                            android:layout_marginRight="56dp"
-                            android:background="@drawable/qmui_divider_bottom_bitmap"
-                            android:gravity="center"
-                            android:hint="请再次确认密码"
-                            android:inputType="textPassword"
-                            android:maxLength="16"
-                            android:paddingBottom="6dp"
-                            android:singleLine="true"
-                            android:textColor="@color/app_color_description"
-                            android:textSize="16sp" />
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="@dimen/dp_54"
+                            android:layout_marginRight="@dimen/dp_54"
+                            android:textColorHint="@color/qmui_config_color_white"
+                            app:hintTextAppearance="@style/app_transparent_edittext">
 
+                            <EditText
+                                android:id="@+id/confirm_password_editText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/bg_transparent_selector_edit"
+                                android:hint="请再次输入密码"
+                                android:inputType="textPassword"
+                                android:maxLength="16"
+                                android:textColor="@color/qmui_config_color_white"
+                                android:textCursorDrawable="@drawable/bg_transparent_input_cursor"
+                                android:textSize="25sp"
+                                android:textStyle="normal" />
+                        </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
-                    <!-- display the register button-->
+
                     <Button
                         android:id="@+id/confirm_modify_password"
-                        style="@style/AppQDRadiusButton"
+                        style="@style/AppTransparentQDRadiusButton"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
-                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_24"
                         android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="确认修改" />
-
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>
