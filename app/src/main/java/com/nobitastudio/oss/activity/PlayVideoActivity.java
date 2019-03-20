@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseActivity;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
@@ -75,6 +76,7 @@ public class PlayVideoActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        NormalContainer.container.put(NormalContainer.SELECTED_ACTIVITY,this);
         mVideoPlayer.onVideoResume();
     }
 

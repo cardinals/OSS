@@ -1,7 +1,13 @@
 package com.nobitastudio.oss.model.entity;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author chenxiong
@@ -9,95 +15,35 @@ import java.time.LocalDateTime;
  * @date 2019/01/03 11:26
  * @description 挂号的号源
  */
+@Data
+@Entity
+@Table(name = "visit")
+@Getter
+@Setter
 public class Visit implements Serializable {
 
     private static final long serialVersionUID = -8300723782462137747L;
 
-    public Visit() {
-        this(1,1,1.0,LocalDateTime.now(),1,1,1);
-    }
-
-    public Visit(Integer id, Integer doctorId, Double cost, LocalDateTime diagnosisTime, Integer amount, Integer leftAmount, Integer diagnosisRoomId) {
-        this.id = id;
-        this.doctorId = doctorId;
-        this.cost = cost;
-        this.diagnosisTime = diagnosisTime;
-        this.amount = amount;
-        this.leftAmount = leftAmount;
-        this.diagnosisRoomId = diagnosisRoomId;
-    }
-
+    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "doctor_id")
     private Integer doctorId;
 
+    @Column(name = "cost")
     private Double cost;
 
+    @Column(name = "diagnosis_time")
     private LocalDateTime diagnosisTime;
 
+    @Column(name = "amount")
     private Integer amount;
 
+    @Column(name = "left_amount")
     private Integer leftAmount;
 
+    @Column(name = "diagnosis_room_id")
     private Integer diagnosisRoomId;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public LocalDateTime getDiagnosisTime() {
-        return diagnosisTime;
-    }
-
-    public void setDiagnosisTime(LocalDateTime diagnosisTime) {
-        this.diagnosisTime = diagnosisTime;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public Integer getLeftAmount() {
-        return leftAmount;
-    }
-
-    public void setLeftAmount(Integer leftAmount) {
-        this.leftAmount = leftAmount;
-    }
-
-    public Integer getDiagnosisRoomId() {
-        return diagnosisRoomId;
-    }
-
-    public void setDiagnosisRoomId(Integer diagnosisRoomId) {
-        this.diagnosisRoomId = diagnosisRoomId;
-    }
 }

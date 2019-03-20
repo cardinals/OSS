@@ -2,6 +2,11 @@ package com.nobitastudio.oss.model.entity;
 
 import com.nobitastudio.oss.model.enumeration.HealthArticleType;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -11,106 +16,41 @@ import java.time.LocalDateTime;
  * @date 2019/01/02 17:00
  * @description 健康资讯实例
  */
+@Data
+@Entity
+@Table(name = "health_article")
+@Getter
+@Setter
 public class HealthArticle implements Serializable {
-
-    public HealthArticle() {
-        this(1,"id","tile", HealthArticleType.HEADLINE,LocalDateTime.now(),"publishMan","label","url");
-    }
-
-    public HealthArticle(Integer id, String iconId, String title, HealthArticleType type, LocalDateTime publishTime, String publishMan, String label, String url) {
-        this.id = id;
-        this.iconId = iconId;
-        this.title = title;
-        this.type = type;
-        this.publishTime = publishTime;
-        this.publishMan = publishMan;
-        this.label = label;
-        this.url = url;
-    }
 
     private static final long serialVersionUID = -7258563717193340205L;
 
+    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "icon_id")
     private String iconId;
 
+    @Column(name = "title")
     private String title;
 
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private HealthArticleType type;
 
+    @Column(name = "publish_time")
     private LocalDateTime publishTime;
 
+    @Column(name = "publish_man")
     private String publishMan;
 
+    @Column(name = "label")
     private String label;
 
+    @Column(name = "url")
     private String url;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getIconId() {
-        return iconId;
-    }
-
-    public void setIconId(String iconId) {
-        this.iconId = iconId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public HealthArticleType getType() {
-        return type;
-    }
-
-    public void setType(HealthArticleType type) {
-        this.type = type;
-    }
-
-    public LocalDateTime getPublishTime() {
-        return publishTime;
-    }
-
-    public void setPublishTime(LocalDateTime publishTime) {
-        this.publishTime = publishTime;
-    }
-
-    public String getPublishMan() {
-        return publishMan;
-    }
-
-    public void setPublishMan(String publishMan) {
-        this.publishMan = publishMan;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

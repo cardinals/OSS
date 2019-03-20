@@ -21,11 +21,13 @@ import android.os.Bundle;
 import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.ForgetPasswordFragment;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
+import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
  * @author chenxiong
@@ -55,6 +57,12 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NormalContainer.container.put(NormalContainer.SELECTED_ACTIVITY,this);
+    }
+
     // 初始化支付功能
     private void initPay() {
         TrPay.getInstance(this).initPaySdk("appkey", "mychannel");
@@ -78,7 +86,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
-        return new LoginFragment();
+        return new TestFragment();
 //        return new ElectronicCaseDetailFragment();
 //        return new FeedbackFragment();
     }

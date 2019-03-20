@@ -1,8 +1,10 @@
 package com.nobitastudio.oss.model.entity;
 
-
 import com.nobitastudio.oss.model.enumeration.DoctorLevel;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -11,35 +13,38 @@ import java.io.Serializable;
  * @date 2019/01/02 13:40
  * @description 医生实例
  */
+@Data
+@Entity
+@Table(name = "doctor")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Doctor implements Serializable {
 
     private static final long serialVersionUID = -1767052683247139655L;
 
-    public Doctor() {
-        this(1, "1", "1", "1", "1", DoctorLevel.ASSOCIATE_PROFESSOR, 1);
-    }
-
-    public Doctor(Integer id, String name, String specialty, String subMajor, String introduction, DoctorLevel level, Integer departmentId) {
-        this.id = id;
-        this.name = name;
-        this.specialty = specialty;
-        this.subMajor = subMajor;
-        this.introduction = introduction;
-        this.level = level;
-        this.departmentId = departmentId;
-    }
-
+    @Column(name = "id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "specialty")
     private String specialty;
 
+    @Column(name = "subMajor")
     private String subMajor;
 
+    @Column(name = "introduction")
     private String introduction;
 
+    @Column(name = "level")
+    @Enumerated(EnumType.STRING)
     private DoctorLevel level;
 
+    @Column(name = "department_id")
     private Integer departmentId;
 }

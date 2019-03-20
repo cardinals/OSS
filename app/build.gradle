@@ -72,7 +72,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'// cardview
 //    implementation 'com.squareup.okhttp3:okhttp:3.12.0'// 网络通信
     implementation 'com.squareup.okhttp3:okhttp:3.14.0'// 网络通信
-//    implementation 'com.google.code.gson:gson:2.8.5' // 序列化 暂时不启用 使用AliBaba的 FastJson代替
+    implementation 'com.google.code.gson:gson:2.8.5' // 序列化 暂时不启用 使用AliBaba的 FastJson代替
     implementation 'com.alibaba:fastjson:1.2.56' // 序列化 反序列化
 
     // 测试
@@ -127,4 +127,13 @@ dependencies {
 
     // https://jitpack.io/#mukeshsolanki/android-otpview-pinview 最新版本号
     implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3' // 短信验证码界面
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+
+    // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+
+
 }
