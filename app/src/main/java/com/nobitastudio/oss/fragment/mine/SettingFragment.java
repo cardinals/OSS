@@ -157,7 +157,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                             dialog.dismiss();
                             // 清除本地缓存操作
                             showNetworkLoadingTipDialog("正在清除");
-                            mEmptyView.postDelayed(() -> {
+                            mTopBar.postDelayed(() -> {
                                 closeTipDialog();
                                 showSuccessTipDialog("清除成功");
                             }, 3000l);

@@ -74,9 +74,9 @@ public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
                 // 登录失败
                 closeTipDialog();
                 showErrorTipDialog(MOBILE_OR_PASSWORD_ERROR);
-                mEmptyView.postDelayed(() -> {
-                    closeTipDialog();
-                }, 1500);
+//                mEmptyView.postDelayed(() -> {
+//                    closeTipDialog();
+//                }, 1500);
             }
         }
     }

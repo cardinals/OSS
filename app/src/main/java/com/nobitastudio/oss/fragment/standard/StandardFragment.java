@@ -53,8 +53,6 @@ public abstract class StandardFragment extends BaseFragment {
 
     @BindView(R.id.pull_to_refresh)
     protected QMUIPullRefreshLayout mPullRefreshLayout;
-    @BindView(R.id.emptyView)
-    protected QMUIEmptyView mEmptyView;
 
     //    Gson mGson;
     OkHttpClient mOkHttpClient;
@@ -193,15 +191,15 @@ public abstract class StandardFragment extends BaseFragment {
 
     // =============================  EmptyView
 
-    protected void showLoadingEmptyView(String detailMsg) {
+    protected void showLoadingEmptyView(String detailMsg,QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.showLoadingEmptyView(mEmptyView, detailMsg);
     }
 
-    protected void showLoadingFailEmptyView(String titleText, String buttonText) {
+    protected void showLoadingFailEmptyView(String titleText, String buttonText,QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.showLoadingFailEmptyView(mEmptyView, titleText, buttonText);
     }
 
-    protected void closeLoadingEmptyView() {
+    protected void closeLoadingEmptyView(QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.closeLoadingEmptyView(mEmptyView);
     }
 

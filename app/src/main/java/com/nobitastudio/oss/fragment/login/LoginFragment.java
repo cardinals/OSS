@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
@@ -32,12 +33,6 @@ import es.dmoral.toasty.Toasty;
  */
 public class LoginFragment extends BaseFragment {
 
-    static final int PHONE_NUM_LENGTH = 11;
-    static final String PASSWORD_LENGTH_LESS = "密码长度太短";
-    static final String PASSWORD_LENGTH_MORE = "密码长度过长";
-    static final String ACCOUNT_IS_LESS = "请输入正确手机号";
-    static final String DONT_INPUT_ACCOUNT = "请输入手机号";
-    static final String DONT_INPUT_PASSWORD = "请输入密码";
     static final String MOBILE_OR_PASSWORD_ERROR = "账号或密码错误";
 
     @BindView(R.id.copyright_textview)
@@ -77,20 +72,14 @@ public class LoginFragment extends BaseFragment {
     private void userClickLogin() {
         String mobile = userMobileEditText.getText().toString();
         String password = userPasswordEditText.getText().toString();
-        if (mobile.length() == 0) {
-            mTipDialogHelper.showInfoTipDialog(DONT_INPUT_ACCOUNT, mCopyrightTextView);
-        } else if (password.length() == 0) {
-            mTipDialogHelper.showInfoTipDialog(DONT_INPUT_PASSWORD, mCopyrightTextView);
-        } else if (mobile.length() != PHONE_NUM_LENGTH) {
-            mTipDialogHelper.showInfoTipDialog(ACCOUNT_IS_LESS, mCopyrightTextView);
-        } else if (password.length() < 6) {
-            mTipDialogHelper.showInfoTipDialog(PASSWORD_LENGTH_LESS, mCopyrightTextView);
-        } else if (password.length() > 16) {
-            mTipDialogHelper.showInfoTipDialog(PASSWORD_LENGTH_MORE, mCopyrightTextView);
+        if (!RegexUtils.isMobileExact(mobile.trim())) {
+            mTipDialogHelper.showInfoTipDialog("请输入正确手机号", mCopyrightTextView);
+        } else if (password.trim().length() < 6 || password.trim().length() > 16) {
+            mTipDialogHelper.showInfoTipDialog("密码格式错误,请重新输入", mCopyrightTextView);
         } else {
             mTipDialogHelper.showNetworkLoadingTipDialog("正在验证");
             //give the user information to the server,get necessary information,if right go to mainactivity,otherwise,ack user to reinput
-            if (userLogin(new User(mobile, password)).getState() != ServiceResult.STATE_APP_EXCEPTION) {
+            if (userLogin(new User(mobile, password))) {
                 // 登陆成功
                 mTipDialogHelper.closeTipDialog();
                 startFragmentAndDestroyCurrent(new HomeFragment());
@@ -105,8 +94,9 @@ public class LoginFragment extends BaseFragment {
         }
     }
 
-    private ServiceResult<LoginResult> userLogin(User user) {
-        return ServiceResult.success(null);
+    private Boolean userLogin(User user) {
+
+        return Boolean.FALSE;
     }
 
     @Override

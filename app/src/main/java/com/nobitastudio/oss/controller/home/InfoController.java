@@ -35,8 +35,6 @@ public class InfoController extends QMUIWindowInsetLayout {
     QMUITopBarLayout mTopBar;
     @BindView(R.id.pull_to_refresh)
     QMUIPullRefreshLayout mPullRefreshLayout;
-    @BindView(R.id.emptyView)
-    QMUIEmptyView mEmptyView;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
     @BindView(R.id.groupListView)

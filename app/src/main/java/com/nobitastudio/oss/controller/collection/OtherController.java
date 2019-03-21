@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  */
 public class OtherController extends QMUIWindowInsetLayout {
 
-    @BindView(R.id.emptyView)
+    @BindView(R.id.emptyview)
     QMUIEmptyView mEmptyView;
 
     ControllerClickHandler mHandler;

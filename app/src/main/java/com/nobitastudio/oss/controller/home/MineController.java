@@ -43,8 +43,6 @@ public class MineController extends QMUIWindowInsetLayout {
     QMUITopBarLayout mTopBar;
     @BindView(R.id.pull_to_refresh)
     QMUIPullRefreshLayout mPullRefreshLayout;
-    @BindView(R.id.emptyView)
-    QMUIEmptyView mEmptyView;
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
     @BindView(R.id.QMUILinearLayout)
@@ -190,7 +188,6 @@ public class MineController extends QMUIWindowInsetLayout {
     }
 
     protected void initLastCustom() {
-        mEmptyView.hide();
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
     }
 

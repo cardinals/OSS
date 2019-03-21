@@ -160,13 +160,13 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
 
             @Override
             public void onRefresh() {
-                mEmptyView.postDelayed(() -> mPullRefreshLayout.finishRefresh(), 1500l);
+                mTopBar.postDelayed(() -> mPullRefreshLayout.finishRefresh(), 1500l);
             }
         });
     }
 
     protected void initData() {
-        mEmptyView.hide();
+//        mEmptyView.hide();
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
                 Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
                         new ItemDescription("步行", R.mipmap.ic_foot)));

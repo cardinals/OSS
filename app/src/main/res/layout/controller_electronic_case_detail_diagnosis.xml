@@ -6,15 +6,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <com.qmuiteam.qmui.widget.QMUIEmptyView
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/qmui_config_color_white"
-        android:visibility="gone"
-        app:qmui_detail_text="暂无其他医嘱"
-        app:qmui_show_loading="false" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"

@@ -7,15 +7,6 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <com.qmuiteam.qmui.widget.QMUIEmptyView
-        android:id="@+id/emptyView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/qmui_config_color_white"
-        android:visibility="gone"
-        app:qmui_detail_text="正在加载"
-        app:qmui_show_loading="true" />
-
     <com.qmuiteam.qmui.widget.QMUIAppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"

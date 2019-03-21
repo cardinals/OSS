@@ -14,6 +14,7 @@ import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.Department;
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
@@ -54,6 +55,8 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+    @BindView(R.id.emptyview)
+    QMUIEmptyView mEmptyView;
 
     List<Department> mDepartments;
 
@@ -92,7 +95,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
                     .create(mCurrentDialogStyle).show();
         });
         mRecyclerView.setAdapter(adapter);
-        mTopBar.postDelayed(this::closeLoadingEmptyView, 1000);
+        mTopBar.postDelayed(() -> closeLoadingEmptyView(mEmptyView), 1000);
     }
 
     /**
@@ -170,7 +173,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected View.OnClickListener getEmptyViewRetryButtonListener() {
-        return view -> showLoadingEmptyView(null);
+        return view -> showLoadingEmptyView(null, mEmptyView);
     }
 
     @Override
