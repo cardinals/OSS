@@ -5,12 +5,14 @@ import android.app.Activity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.GetParam;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.Bind;
 import com.nobitastudio.oss.model.entity.User;
 
@@ -39,6 +41,10 @@ public class OkHttpUtil {
     // 请求方式  get.post.put.delete
     public enum METHOD {
         GET, POST, PUT, DELETE
+    }
+
+    public interface NetworkUnavailableHandler {
+        void handle();
     }
 
     // 连接失败.超时.未得到结果  一般采取默认处理
@@ -70,9 +76,11 @@ public class OkHttpUtil {
     // 默认最长的读时长
     public static final int DEFAULT_READ_TIME = 20;
     // 请求的传递类型.默认Json
-    public static final MediaType mMediaType = MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 
     public static OkHttpClient mOkHttpClient; // 请求client
+
+    public static Callback mCallback; // 默认callBack.不做任何操作
 
     // 获取当前处于哪一个activity
     public static Activity getSelectedActivity() {
@@ -97,11 +105,34 @@ public class OkHttpUtil {
         }
     }
 
+    public synchronized static void initCallback() {
+        if (mCallback == null) {
+            mCallback = new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+
+                }
+            };
+        }
+    }
+
     public static OkHttpClient getOkHttpClient() {
         if (mOkHttpClient == null) {
             initClient();
         }
         return mOkHttpClient;
+    }
+
+    public static Callback getCallback() {
+        if (mCallback == null) {
+            initCallback();
+        }
+        return mCallback;
     }
 
     // url ->  server_ip + restfulParam + getParam 返回 /xx/xx
@@ -128,107 +159,91 @@ public class OkHttpUtil {
         return getParamFormatted;
     }
 
+    // 获取请求
+    public static Request generateRequest(METHOD method, List<String> restParams, List<GetParam> getParams, Object requestBody) {
+        Request.Builder mBuilder = new Request.Builder().url(OSS_SERVER_ADDRESS + generateRestParam(restParams) + generateGetParam(getParams));
+        switch (method) {
+            case GET:
+                return mBuilder.get().build();
+            case DELETE:
+                return mBuilder.delete().build();
+            case POST:
+                if (requestBody != null) {
+                    mBuilder.post(RequestBody.create(MEDIA_TYPE, JSON.toJSONString(requestBody)));
+                }
+                return mBuilder.build();
+            case PUT:
+                if (requestBody != null) {
+                    mBuilder.put(RequestBody.create(MEDIA_TYPE, JSON.toJSONString(requestBody)));
+                }
+                return mBuilder.build();
+            default:
+                return mBuilder.get().build();
+        }
+    }
     // ============== 异步 ==============
 
-    // get请求
-    public static <T> Call get(List<String> restParams, List<GetParam> getParams, Class<T> tClass,
-                               ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler, FailHandler<T> failureHandler, ErrorHandler errorHandler) {
-        Request request = new Request.Builder().url(OSS_SERVER_ADDRESS + generateRestParam(restParams) + generateGetParam(getParams)).get().build();
-        Call call = getOkHttpClient().newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // 服务器未返回.未联网.超时等
-                runOnUiThread(() -> connectFailHandler.handle(call, e));
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                // 服务器返回了数据
-                if (response.isSuccessful()) {
-                    // 请求返回码 200 - 300 即返回成功
-                    if (response.code() == 200) {
-                        ServiceResult<T> result = JSON.parseObject(response.body().string(), ServiceResult.class);
-                        if (result.getResult() instanceof JSONObject) {
-                            T t = ((JSONObject) result.getResult()).toJavaObject(tClass);
-                            result.setResult(t);
-                        } else {
-                            return;
-                        }
-                        if (result.getState() == 0) {
-                            // 成功
-                            runOnUiThread(() -> successHandler.handle(result.getResult()));
-                        } else {
-                            // 失败
-                            runOnUiThread(() -> failureHandler.handle(result));
-                        }
-                    }
-                } else {
-                    // 未授权.500 404 等
-                    runOnUiThread(() -> errorHandler.handle(call, response));
+    public static <T> Call asyn(METHOD method,
+                                Boolean needHandle, List<String> restParams, List<GetParam> getParams, Object requestBody,
+                                ReflectStrategy<T> reflectStrategy,
+                                NetworkUnavailableHandler networkUnavailableHandler, ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler,
+                                FailHandler<T> failureHandler, ErrorHandler errorHandler) {
+        if (!NetworkUtils.isConnected() || (!NetworkUtils.getMobileDataEnabled() && !NetworkUtils.isWifiConnected())) {
+            // 网络未开启  NetworkUtils.isAvailableByPing() 阻塞线程 不可用
+            runOnUiThread(networkUnavailableHandler::handle);
+            return null;
+        } else {
+            Request request = generateRequest(method, restParams, getParams, requestBody);
+            Call call = getOkHttpClient().newCall(request);
+            call.enqueue(needHandle ? new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    // 服务器未返回.未联网.超时等
+                    runOnUiThread(() -> connectFailHandler.handle(call, e));
                 }
-            }
-        });
-        return call;  //返回,用于取消网络请求
-    }
 
-    // get请求  type = new TypeReference<List<String>>() {}.getType()
-    public static <T> Call get(List<String> restParams, List<GetParam> getParams, TypeReference<T> typeReference,
-                               ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler, FailHandler<T> failureHandler, ErrorHandler errorHandler) {
-        Request request = new Request.Builder().url(OSS_SERVER_ADDRESS + generateRestParam(restParams) + generateGetParam(getParams)).get().build();
-        Call call = getOkHttpClient().newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // 服务器未返回.未联网.超时等
-                runOnUiThread(() -> connectFailHandler.handle(call, e));
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                // 服务器返回了数据
-                if (response.isSuccessful()) {
-                    // 请求返回码 200 - 300 即返回成功
-                    if (response.code() == 200) {
-                        ServiceResult<T> result = JSON.parseObject(response.body().string(), ServiceResult.class);
-                        if (result.getResult() instanceof JSONObject) {
-                            T t = ((JSONObject) result.getResult()).toJavaObject(typeReference);
-                            result.setResult(t);
-                        } else {
-                            return;
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    // 服务器返回了数据
+                    if (response.isSuccessful()) {
+                        // 请求返回码 200 - 300 即返回成功
+                        if (response.code() == 200) {
+                            ServiceResult<T> result = JSON.parseObject(response.body().string(), ServiceResult.class);
+                            if (result.getState() == 0) {
+                                // 成功
+                                if (result.getResult() instanceof JSONObject) {
+                                    T t;
+                                    if (reflectStrategy.isClass()) {
+                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass());
+                                    } else {
+                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTypeReference());
+                                    }
+                                    result.setResult(t);
+                                } else {
+                                    return;
+                                }
+                                runOnUiThread(() -> successHandler.handle(result.getResult()));
+                            } else {
+                                // 失败
+                                runOnUiThread(() -> failureHandler.handle(result));
+                            }
                         }
-                        if (result.getState() == 0) {
-                            // 成功
-                            runOnUiThread(() -> successHandler.handle(result.getResult()));
-                        } else {
-                            // 失败
-                            runOnUiThread(() -> failureHandler.handle(result));
-                        }
+                    } else {
+                        // 未授权.500 404 等
+                        runOnUiThread(() -> errorHandler.handle(call, response));
                     }
-                } else {
-                    // 未授权.500 404 等
-                    runOnUiThread(() -> errorHandler.handle(call, response));
                 }
-            }
-        });
-        return call;  //返回,用于取消网络请求
+            } : getCallback());
+            return call;  //返回,用于取消网络请求
+        }
     }
-//    public Call post(Object requestBody, List<String> restParams, List<GetParam> getParams,
-//                     ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler, FailHandler<T> failureHandler, ErrorHandler errorHandler) {
-//
-//        Request request = new Request.Builder().url(OSS_SERVER_ADDRESS + generateRestParam(restParams) + generateGetParam(getParams)).get().build();
-//        Call call = getOkHttpClient().newCall(request);
-//
-//
-//        return call;
-//    }
-
-    // post 请求
-
-    // delete 请求
-
-    // put请求
-
 
     // ============== 同步 ==============  暂时不需要
+    public static <T> Call sync(METHOD method,
+                                Boolean needHandle, List<String> restParams, List<GetParam> getParams, Object requestBody,
+                                ReflectStrategy<T> reflectStrategy,
+                                ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler,
+                                FailHandler<T> failureHandler, ErrorHandler errorHandler) {
+        return null;
+    }
 }

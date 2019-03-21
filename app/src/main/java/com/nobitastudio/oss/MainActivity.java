@@ -27,6 +27,7 @@ import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.ForgetPasswordFragment;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
+import com.nobitastudio.oss.fragment.test.Test4Fragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 
 /**
@@ -86,7 +87,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new MyCollectFragment();
 //        return new BootFragment();
 //        return new HealthArticleFragment();
-        return new TestFragment();
+        return new Test4Fragment();
 //        return new ElectronicCaseDetailFragment();
 //        return new FeedbackFragment();
     }

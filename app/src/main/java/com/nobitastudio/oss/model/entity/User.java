@@ -50,9 +50,18 @@ public class User implements Serializable {
 
     public interface UserLoginView extends UserMobileView,UserPasswordView {} // 用户登录时的调用
 
+    // todo 测试
     public User(String mobile, String password) {
         this.mobile = mobile;
         this.password = password;
+    }
+
+    //todo 测试
+    public User(String mobile,String password,String name,String idCard) {
+        this.mobile = mobile;
+        this.password = password;
+        this.name = name;
+        this.idCard = idCard;
     }
 
     @Column(name = "id")

@@ -48,20 +48,21 @@ public class TestFragment extends BaseFragment {
 
     @OnClick(R.id.confirm_modify_password)
     void onClick(View v) {
-        OkHttpUtil.get(Arrays.asList("user", "1"), null, User.class,
-                (call, e) -> {
-                    Toasty.error(getContext(), e.getMessage()).show();
-                },
-                user -> {
-                    Toasty.success(getContext(), user.getMobile()).show();
-                },
-                (serviceResult) -> {
-                    Toasty.error(getContext(), serviceResult.getErrorCode()).show();
-                },
-                (call, response) -> {
-                    Toasty.success(getContext(), response.code()).show();
-                }
-        );
+
+//        OkHttpUtil.get(Arrays.asList("user", "1"), null, User.class,
+//                (call, e) -> {
+//                    Toasty.error(getContext(), e.getMessage()).show();
+//                },
+//                user -> {
+//                    Toasty.success(getContext(), user.getMobile()).show();
+//                },
+//                (serviceResult) -> {
+//                    Toasty.error(getContext(), serviceResult.getErrorCode()).show();
+//                },
+//                (call, response) -> {
+//                    Toasty.success(getContext(), response.code()).show();
+//                }
+//        );
     }
 
     private void init() {

@@ -2,12 +2,17 @@ package com.nobitastudio.oss.model.dto;
 
 import com.alibaba.fastjson.TypeReference;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/03/20 15:12
  * @description 用于映射为指定类型的策略
  */
+@Getter
+@Setter
 public class ReflectStrategy<T> {
 
     // class 类型
@@ -26,7 +31,6 @@ public class ReflectStrategy<T> {
 
     // 是否简单的class类型
     public boolean isClass() {
-        return tClass == null;
+        return tClass != null;
     }
-
 }

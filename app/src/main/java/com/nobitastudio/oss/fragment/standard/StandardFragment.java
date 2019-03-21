@@ -20,7 +20,10 @@ import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.helper.ViewHelper;
+import com.nobitastudio.oss.model.dto.GetParam;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.util.DateUtil;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -37,6 +40,7 @@ import java.util.concurrent.ExecutorService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 /**
@@ -52,7 +56,7 @@ public abstract class StandardFragment extends BaseFragment {
     @BindView(R.id.emptyView)
     protected QMUIEmptyView mEmptyView;
 
-//    Gson mGson;
+    //    Gson mGson;
     OkHttpClient mOkHttpClient;
 
     BottomSheetHelper mBottomSheetHelper;
@@ -377,5 +381,82 @@ public abstract class StandardFragment extends BaseFragment {
             mQMUILinearLayoutHelper.init(v, alpha, elevation, radius);
         }
     }
+
+    // 当网络不可用时,的处理策略.默认显示.当前网络不可用tipdialog .若需要改变.重写该方法
+    public OkHttpUtil.NetworkUnavailableHandler getNetworkUnavailableHandler() {
+        return () -> showInfoTipDialog("当前网络不可用");
+    }
+
+    // ===================== okHttpUtil
+    // 获取默认的连接失败处理器.默认显示 服务器开小差了  如果需要改变展示方式，重写该方法
+    public OkHttpUtil.ConnectFailHandler getConnectFailHandler() {
+        return (call, e) -> showInfoTipDialog("服务器开小差了,请稍后再试");
+    }
+
+    // 服务器发生错误. 如果需要改变展示方式，重写该方法
+    public OkHttpUtil.ErrorHandler getErrorHandler() {
+        return (call, response) -> showErrorTipDialog("服务器发生错误,请联系系统管理员");
+    }
+
+    // get请求
+    public <T> Call getAsyn(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.GET,
+                Boolean.TRUE, restParams, getParams, null, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    // 只调用 .不需要处理返回结果
+    public Call getAsyn(List<String> restParams, List<GetParam> getParams) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.GET,
+                Boolean.FALSE, restParams, getParams, null, null,
+                getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
+    // delete请求
+    public <T> Call deleteAsyn(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.DELETE,
+                Boolean.TRUE, restParams, getParams, null, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    // 只调用 .不需要处理返回结果
+    public Call deleteAsyn(List<String> restParams, List<GetParam> getParams) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.DELETE,
+                Boolean.FALSE, restParams, getParams, null, null,
+                getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
+    // post 请求
+    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, T t, ReflectStrategy<T> reflectStrategy,
+                             OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
+                Boolean.TRUE, restParams, getParams, t, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    // post 请求 不处理返回结果
+    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, T t) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
+                Boolean.FALSE, restParams, getParams, t, null,
+                getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
+    // put 请求
+    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, T t, ReflectStrategy<T> reflectStrategy,
+                             OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
+                Boolean.TRUE, restParams, getParams, t, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    // put 请求 不处理返回结果
+    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, T t) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
+                Boolean.FALSE, restParams, getParams, t, null,
+                getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
 
 }
