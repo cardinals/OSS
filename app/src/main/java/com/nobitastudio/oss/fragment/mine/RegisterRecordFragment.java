@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.RegisterRecordRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -49,28 +50,6 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return WAIT;
             }
-        }
-    }
-
-    class RegisterRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
-
-        public RegisterRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_register_history;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            initQMUILinearLayout(holder.getView(R.id.register_record_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
         }
     }
 

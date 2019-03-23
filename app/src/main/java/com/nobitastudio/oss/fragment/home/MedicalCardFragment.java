@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.MedicalCardItemAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
@@ -25,29 +26,6 @@ import butterknife.OnClick;
  * @description
  */
 public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
-
-    static class MedicalCardItemAdapter extends BaseRecyclerViewAdapter<MedicalCard> {
-
-        public MedicalCardItemAdapter(Context ctx, List<MedicalCard> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_medical_card;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, MedicalCard item) {
-            holder.getTextView(R.id.owner_name_textview).setText("持卡人" + position);
-            holder.getTextView(R.id.medical_card_no_textview).setText("卡号" + position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-    }
 
     @BindView(R.id.recyclerview)
     RecyclerView mMedicalCardRecyclerView;

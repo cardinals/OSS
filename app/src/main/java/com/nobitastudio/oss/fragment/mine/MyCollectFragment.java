@@ -13,17 +13,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
+import com.nobitastudio.oss.adapter.CollectionDoctorRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.controller.collection.OtherController;
 import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.home.DoctorDetailFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
@@ -54,49 +50,6 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return DOCTOR;
             }
-        }
-    }
-
-    class CollectionDoctorRecyclerViewAdapter extends BaseRecyclerViewAdapter<Doctor> {
-
-        public CollectionDoctorRecyclerViewAdapter(Context ctx, List<Doctor> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_collection_doctor;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Doctor item) {
-            QMUILinearLayout mLinearLayout = (QMUILinearLayout) holder.getView(R.id.doctor_collect_linearLayout);
-            ImageView mDoctorImageView = holder.getImageView(R.id.doctor_imageview);
-            TextView mDoctorNameTextView = holder.getTextView(R.id.doctor_name_textview);
-            TextView mDoctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
-            TextView mDoctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);
-            TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textView);
-            TextView mSpecialityTextView = holder.getTextView(R.id.speciality_textView);
-            ImageView mCollectDoctorImageView = holder.getImageView(R.id.collect_doctor_imageview);
-            initQMUILinearLayout(holder.getView(R.id.doctor_collect_linearLayout));
-            Glide.with(MyCollectFragment.this).load(R.drawable.bg_hospital_trademark).into(mDoctorImageView);
-            mDoctorNameTextView.setText("名字111");
-            mDoctorLevelTextView.setText("医生水平11");
-            mDoctorDepartmentTextView.setText("科室信息1111");
-            mSubMajorTextView.setText("亚专业11");
-            mSpecialityTextView.setText("擅长111");
-            mCollectDoctorImageView.setOnClickListener(view -> {
-                Glide.with(getContext()).load(R.drawable.ic_heart_white).into(mCollectDoctorImageView);
-                showNetworkLoadingTipDialog("正在取消收藏");
-                mTopBar.postDelayed(() -> {
-                    closeTipDialog();
-                },1500l);
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
         }
     }
 
@@ -147,7 +100,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     };
 
     CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
-    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
+    HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
     List<HealthArticle> healthArticles;
 
     private float mShadowAlpha = 1.0f;
@@ -164,7 +117,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
         mPages.put(Pager.OTHER,mOtherController);
         mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
         mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(),null);
+        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(),null);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
         mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override

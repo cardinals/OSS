@@ -61,7 +61,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        NormalContainer.container.put(NormalContainer.SELECTED_ACTIVITY,this);
+        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY,this);
     }
 
     // 初始化支付功能

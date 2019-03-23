@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.EmergencyRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.HospitalizeRecordRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.OutpatientRecordRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -48,75 +51,6 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return OUTPATIENT;
             }
-        }
-    }
-
-    // 门诊记录
-    public class OutpatientRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
-
-        public OutpatientRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_outpatient;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            initQMUILinearLayout(holder.getView(R.id.outpatient_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-    }
-
-    // 住院记录
-    public class HospitalizeRecordRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
-
-        public HospitalizeRecordRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_hospitalize;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            initQMUILinearLayout(holder.getView(R.id.hospitalize_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-    }
-
-    // 急诊记录
-    public class EmergencyRecyclerViewAdapter extends BaseRecyclerViewAdapter<RegistrationRecord> {
-
-        public EmergencyRecyclerViewAdapter(Context ctx, List<RegistrationRecord> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_emergency;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, RegistrationRecord item) {
-            initQMUILinearLayout(holder.getView(R.id.emergency_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
         }
     }
 

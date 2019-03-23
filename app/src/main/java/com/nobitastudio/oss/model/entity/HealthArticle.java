@@ -30,8 +30,8 @@ public class HealthArticle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "icon_id")
-    private String iconId;
+    @Column(name = "icon_url")
+    private String iconUrl;
 
     @Column(name = "title")
     private String title;

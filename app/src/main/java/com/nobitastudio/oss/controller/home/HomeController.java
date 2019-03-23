@@ -19,6 +19,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
+import com.nobitastudio.oss.adapter.DoctorLectureRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
@@ -43,6 +45,7 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import com.tmall.ultraviewpager.UltraViewPager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -132,10 +135,14 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     HashMap<HealthArticleFragment.Pager, View> mPages;
-    HealthArticleFragment.HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
-    HealthArticleFragment.DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter;
+    HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
+    DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter;
     ControllerClickHandler mHandler;
-    List<HealthArticle> mHealthArticles;
+    List<HealthArticle> mHealthArticles;// 医院活动.健康头条.名医讲堂  全部
+    List<HealthArticle> mHospitalActivities;// 医院活动
+    List<HealthArticle> mHeadLines;// 健康头条
+    List<HealthArticle> mDoctorLectures;// 名医讲堂
+
     TipDialogHelper mTipDialogHelper;
     Context mContext;
     private PagerAdapter mUltraPagerAdapter = new PagerAdapter() {
@@ -237,6 +244,12 @@ public class HomeController extends QMUIWindowInsetLayout {
     private void initBasic(Context context) {
         mTipDialogHelper = new TipDialogHelper(context);
         mDialogHelper = new DialogHelper(context);
+
+        // 初始化数据
+        mHealthArticles = new ArrayList<>();
+        mHospitalActivities = new ArrayList<>();
+        mHeadLines = new ArrayList<>();
+        mDoctorLectures = new ArrayList<>();
     }
 
     /**
@@ -246,8 +259,8 @@ public class HomeController extends QMUIWindowInsetLayout {
         mPages = new HashMap<>();
         RecyclerView mHeadlineRecycleView = new RecyclerView(getContext());
         RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
-        mHeadlineRecycleViewAdapter = new HealthArticleFragment.HeadlineRecycleViewAdapter(getContext(), null);
-        mDoctorLectureRecyclerViewAdapter = new HealthArticleFragment.DoctorLectureRecyclerViewAdapter(getContext(), null);
+        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
+        mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
         mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> mContext.startActivity(new Intent(mContext, PlayVideoActivity.class)));
         mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override

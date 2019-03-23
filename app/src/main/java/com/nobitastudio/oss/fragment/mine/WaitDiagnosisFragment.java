@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.DiagnosisRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -51,28 +52,6 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return WAIT;
             }
-        }
-    }
-
-    class DiagnosisRecyclerViewAdapter extends BaseRecyclerViewAdapter<OSSOrder> {
-
-        public DiagnosisRecyclerViewAdapter(Context ctx, List<OSSOrder> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_diagnosis;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, OSSOrder item) {
-            initQMUILinearLayout(holder.getView(R.id.diagnosis_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
         }
     }
 

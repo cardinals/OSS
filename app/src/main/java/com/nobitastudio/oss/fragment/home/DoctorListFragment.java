@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.DoctorRecycleViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -30,37 +31,6 @@ import butterknife.BindView;
  * @description
  */
 public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
-
-    public class DoctorRecycleViewAdapter extends BaseRecyclerViewAdapter<Doctor> {
-
-        public DoctorRecycleViewAdapter(Context ctx, List<Doctor> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_doctor;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Doctor doctor) {
-            initQMUILinearLayout(holder.getView(R.id.doctor_linearLayout));
-            ImageView imageView = holder.getImageView(R.id.doctor_imageview);
-            TextView doctorNameTextView = holder.getTextView(R.id.doctor_name_textview);
-            TextView doctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
-            TextView doctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);
-            TextView subMajorTextView = holder.getTextView(R.id.submajor_textView);
-            TextView specialityTextView = holder.getTextView(R.id.speciality_textView);
-            Button button = holder.getButton(R.id.roundButton);
-            Glide.with(DoctorListFragment.this).load(R.drawable.bg_hospital_trademark).into(imageView);
-            doctorNameTextView.setText("名字111");
-            doctorLevelTextView.setText("医生水平11");
-            doctorDepartmentTextView.setText("科室信息1111");
-            subMajorTextView.setText("亚专业11");
-            specialityTextView.setText("擅长111");
-            button.setText("有号");
-        }
-    }
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;

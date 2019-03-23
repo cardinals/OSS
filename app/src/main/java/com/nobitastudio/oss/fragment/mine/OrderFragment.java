@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.OrderRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -56,28 +57,6 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return REGISTER;
             }
-        }
-    }
-
-    class OrderRecyclerViewAdapter extends BaseRecyclerViewAdapter<OSSOrder> {
-
-        public OrderRecyclerViewAdapter(Context ctx, List<OSSOrder> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_order;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, OSSOrder item) {
-            initQMUILinearLayout(holder.getView(R.id.order_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
         }
     }
 

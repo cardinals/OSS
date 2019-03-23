@@ -54,9 +54,6 @@ public abstract class StandardFragment extends BaseFragment {
     @BindView(R.id.pull_to_refresh)
     protected QMUIPullRefreshLayout mPullRefreshLayout;
 
-    //    Gson mGson;
-    OkHttpClient mOkHttpClient;
-
     BottomSheetHelper mBottomSheetHelper;
     DialogHelper mDialogHelper;
     EmptyViewHelper mEmptyViewHelper;
@@ -97,8 +94,7 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     public StandardFragment() {
-//        mGson = new Gson();
-        mOkHttpClient = new OkHttpClient();
+        // donothing
     }
 
     // 初始化基本变量
@@ -191,11 +187,11 @@ public abstract class StandardFragment extends BaseFragment {
 
     // =============================  EmptyView
 
-    protected void showLoadingEmptyView(String detailMsg,QMUIEmptyView mEmptyView) {
+    protected void showLoadingEmptyView(String detailMsg, QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.showLoadingEmptyView(mEmptyView, detailMsg);
     }
 
-    protected void showLoadingFailEmptyView(String titleText, String buttonText,QMUIEmptyView mEmptyView) {
+    protected void showLoadingFailEmptyView(String titleText, String buttonText, QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.showLoadingFailEmptyView(mEmptyView, titleText, buttonText);
     }
 
@@ -413,7 +409,7 @@ public abstract class StandardFragment extends BaseFragment {
 
     // delete请求
     public <T> Call deleteAsyn(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
-                            OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+                               OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.DELETE,
                 Boolean.TRUE, restParams, getParams, null, reflectStrategy,
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
@@ -427,32 +423,32 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     // post 请求
-    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, T t, ReflectStrategy<T> reflectStrategy,
+    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody, ReflectStrategy<T> reflectStrategy,
                              OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
-                Boolean.TRUE, restParams, getParams, t, reflectStrategy,
+                Boolean.TRUE, restParams, getParams, requestBody, reflectStrategy,
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
     }
 
     // post 请求 不处理返回结果
-    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, T t) {
+    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
-                Boolean.FALSE, restParams, getParams, t, null,
+                Boolean.FALSE, restParams, getParams, requestBody, null,
                 getNetworkUnavailableHandler(), null, null, null, null);
     }
 
     // put 请求
-    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, T t, ReflectStrategy<T> reflectStrategy,
-                             OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
-                Boolean.TRUE, restParams, getParams, t, reflectStrategy,
+                Boolean.TRUE, restParams, getParams, requestBody, reflectStrategy,
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
     }
 
     // put 请求 不处理返回结果
-    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, T t) {
+    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
-                Boolean.FALSE, restParams, getParams, t, null,
+                Boolean.FALSE, restParams, getParams, requestBody, null,
                 getNetworkUnavailableHandler(), null, null, null, null);
     }
 

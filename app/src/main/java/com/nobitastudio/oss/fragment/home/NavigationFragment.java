@@ -13,6 +13,7 @@ import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.ItemRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
@@ -38,26 +39,6 @@ import static com.nobitastudio.oss.container.ConstantContainer.getAmapNaviParamB
  * @description
  */
 public class NavigationFragment extends StandardWithTobBarLayoutFragment {
-
-    static class ItemRecyclerViewAdapter extends BaseRecyclerViewAdapter<ItemDescription> {
-
-        public ItemRecyclerViewAdapter(Context ctx, List<ItemDescription> data) {
-            super(ctx, data);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_info;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, ItemDescription item) {
-            holder.getTextView(R.id.item_name).setText(item.getName());
-            if (item.getIconRes() != 0) {
-                holder.getImageView(R.id.item_icon).setImageResource(item.getIconRes());
-            }
-        }
-    }
 
     private INaviInfoCallback mINaviInfoCallback = new INaviInfoCallback() {
         @Override

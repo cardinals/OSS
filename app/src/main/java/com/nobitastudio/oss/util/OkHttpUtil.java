@@ -84,7 +84,7 @@ public class OkHttpUtil {
 
     // 获取当前处于哪一个activity
     public static Activity getSelectedActivity() {
-        return (Activity) NormalContainer.container.get(NormalContainer.SELECTED_ACTIVITY);
+        return NormalContainer.get(NormalContainer.SELECTED_ACTIVITY);
     }
 
     // 跑在UI线程上

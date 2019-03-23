@@ -2,9 +2,11 @@ package com.nobitastudio.oss.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +24,8 @@ public class DateUtil {
     public static final String SIMPLE_DATE_FORMAT = "yyyyMMdd";
     public static final String SIMPLE_DATE_FORMAT_2 = "yyyy-MM-dd";
 
+    // 将20190101121212 按照指定格式进行转换
+    // 由string  类型时间 格式化为指定格式
     public static String convertDate(String dateStr, String sourceFormat, String targetFormat) {
         if (StringUtils.isBlank(targetFormat)) {
             return null;
@@ -29,20 +33,30 @@ public class DateUtil {
         if (StringUtils.isBlank(sourceFormat)) {
             sourceFormat = STANDARD_DATE_FORMAT;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat(sourceFormat);
+        SimpleDateFormat sourceSdf = new SimpleDateFormat(sourceFormat);
+        SimpleDateFormat targetSdf = new SimpleDateFormat(targetFormat);
         try {
-            Date date = sdf.parse(dateStr);
-            if (date == null) {
+            Date sourceDate = sourceSdf.parse(dateStr);
+            if (sourceDate == null) {
                 return null;
             }
-            SimpleDateFormat targetSdf = new SimpleDateFormat(targetFormat);
-
-            return targetSdf.format(date);
+            return targetSdf.format(sourceDate);
         } catch (ParseException ex) {
-            ex.printStackTrace();
             return null;
         }
+    }
 
+    // 将时间戳转换为指定格式时间
+    public static String convertTimeStamp(Timestamp timestamp, String targetFormat) {
+        if (StringUtils.isBlank(targetFormat)) {
+            return null;
+        }
+        SimpleDateFormat targetSdf = new SimpleDateFormat(targetFormat);
+        Date date = new Date(timestamp.getTime());
+        if (date == null) {
+            return null;
+        }
+        return targetSdf.format(date);
     }
 
     public static Date formatDate(String dateStr, String format) {
@@ -67,6 +81,17 @@ public class DateUtil {
 
     /**
      * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static String formatLocalDateTimeToStandardString(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_DATE_FORMAT));
+    }
+
+    /**
+     * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     *
      * @param localDateTime
      * @return
      */
@@ -76,6 +101,7 @@ public class DateUtil {
 
     /**
      * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     *
      * @param localDateTime
      * @return
      */
@@ -83,7 +109,15 @@ public class DateUtil {
         return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.SIMPLE_DATE_FORMAT_2));
     }
 
-
+    /**
+     * 格式化LocalDateTime 为 Date 类型
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static Date formatLocalDateTimeToDate(LocalDateTime localDateTime) {
+        return new Date(localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli());
+    }
 
     public static void main(String[] args) {
         String str = convertDate("2018-07-21", "yyyy-MM-dd", "yyyyMMdd");

@@ -11,10 +11,15 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.about.AboutFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
+import com.nobitastudio.oss.fragment.standard.StandardFragment;
+import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.LoginResult;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.User;
 import com.nobitastudio.oss.util.DateUtil;
 
@@ -31,9 +36,7 @@ import es.dmoral.toasty.Toasty;
  * @date 2019/01/29 16:08
  * @description
  */
-public class LoginFragment extends BaseFragment {
-
-    static final String MOBILE_OR_PASSWORD_ERROR = "账号或密码错误";
+public class LoginFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
@@ -42,9 +45,6 @@ public class LoginFragment extends BaseFragment {
     @BindView(R.id.user_password_editText)
     EditText userPasswordEditText;
 
-    TipDialogHelper mTipDialogHelper;
-    BottomSheetHelper mBottomSheetHelper;
-
     @OnClick({R.id.login_button, R.id.chioces_button})
     void onClick(View view) {
         switch (view.getId()) {
@@ -52,15 +52,15 @@ public class LoginFragment extends BaseFragment {
                 userClickLogin();
                 break;
             case R.id.chioces_button:
-                mBottomSheetHelper.showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_enroll, R.mipmap.ic_lock, R.mipmap.ic_app_icon),
+                showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_enroll, R.mipmap.ic_lock, R.mipmap.ic_app_icon),
                         Arrays.asList("注册", "找回密码", "关于我们"),
-                        Arrays.asList(1, 2, 3),
+                        Arrays.asList(0, 1, 2),
                         (dialog, itemView) -> {
-                            if (itemView.getTag().equals(1)) {
+                            if (itemView.getTag().equals(0)) {
+                                startFragment(new InputMobileFragment());
+                            } else if (itemView.getTag().equals(1)) {
                                 startFragment(new InputMobileFragment());
                             } else if (itemView.getTag().equals(2)) {
-                                startFragment(new InputMobileFragment());
-                            } else if (itemView.getTag().equals(3)) {
                                 startFragment(new AboutFragment());
                             }
                             dialog.dismiss();
@@ -72,43 +72,39 @@ public class LoginFragment extends BaseFragment {
     private void userClickLogin() {
         String mobile = userMobileEditText.getText().toString();
         String password = userPasswordEditText.getText().toString();
-        if (!RegexUtils.isMobileExact(mobile.trim())) {
-            mTipDialogHelper.showInfoTipDialog("请输入正确手机号", mCopyrightTextView);
+        if (mobile.trim().length() == 0) {
+            showInfoTipDialog("请输入手机号");
+        } else if (password.trim().length() == 0) {
+            showInfoTipDialog("请输入密码");
+        } else if (!RegexUtils.isMobileExact(mobile.trim())) {
+            showInfoTipDialog("请输入正确手机号");
         } else if (password.trim().length() < 6 || password.trim().length() > 16) {
-            mTipDialogHelper.showInfoTipDialog("密码格式错误,请重新输入", mCopyrightTextView);
+            showInfoTipDialog("密码格式错误,请重新输入");
         } else {
-            mTipDialogHelper.showNetworkLoadingTipDialog("正在验证");
+            showNetworkLoadingTipDialog("正在验证");
             //give the user information to the server,get necessary information,if right go to mainactivity,otherwise,ack user to reinput
-            if (userLogin(new User(mobile, password))) {
-                // 登陆成功
-                mTipDialogHelper.closeTipDialog();
-                startFragmentAndDestroyCurrent(new HomeFragment());
-            } else {
-                // 登录失败
-                mTipDialogHelper.closeTipDialog();
-                mTipDialogHelper.showErrorTipDialog(MOBILE_OR_PASSWORD_ERROR, mCopyrightTextView);
-                mCopyrightTextView.postDelayed(() -> {
-                    mTipDialogHelper.closeTipDialog();
-                }, 1500);
-            }
+            userLogin(new User(mobile, password));
         }
     }
 
-    private Boolean userLogin(User user) {
-
-        return Boolean.FALSE;
+    // 将 手机号 密码发送至服务器端进行验证.返回全部user信息
+    private void userLogin(User user) {
+        showNetworkLoadingTipDialog("正在验证");
+        postAsyn(Arrays.asList("test", "test-login"), null, user, new ReflectStrategy<>(User.class),
+                (userResult) -> {
+                    closeTipDialog();
+                    NormalContainer.put(NormalContainer.USER, userResult);
+                    startFragmentAndDestroyCurrent(new HomeFragment());
+                },
+                (serviceResult) -> {
+                    NormalContainer.remove(NormalContainer.USER);
+                    showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+                });
     }
 
     @Override
     protected boolean canDragBack() {
         return false;
-    }
-
-    protected void initLastCustom() {
-        mTipDialogHelper = new TipDialogHelper(getContext());
-        mBottomSheetHelper = new BottomSheetHelper(getContext());
-        mCopyrightTextView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
-        // 通过glide 加载gif 到背景中
     }
 
     @Override
@@ -117,11 +113,24 @@ public class LoginFragment extends BaseFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_login, null);
-        ButterKnife.bind(this, root);
-        initLastCustom();
-        return root;
+    protected Boolean topBarIsTransparent() {
+        return Boolean.TRUE;
+    }
+
+    @Override
+    protected String getTopBarTitle() {
+        return null;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_login;
+    }
+
+    @Override
+    protected void initLastCustom() {
+        initCopyRight(mCopyrightTextView);
+        // 通过glide 加载gif 到背景中
     }
 
 }

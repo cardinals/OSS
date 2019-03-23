@@ -43,7 +43,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/department_textview"
+                    android:id="@+id/label_textview"
                     style="@style/QDCommonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

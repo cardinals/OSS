@@ -76,7 +76,7 @@ public class PlayVideoActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        NormalContainer.container.put(NormalContainer.SELECTED_ACTIVITY,this);
+        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY,this);
         mVideoPlayer.onVideoResume();
     }
 

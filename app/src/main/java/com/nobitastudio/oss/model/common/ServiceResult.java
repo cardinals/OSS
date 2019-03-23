@@ -1,5 +1,7 @@
 package com.nobitastudio.oss.model.common;
 
+import com.nobitastudio.oss.model.common.error.ErrorCode;
+
 /**
  * @author chenxiong
  * @email nobita0522@qq.com
@@ -81,7 +83,7 @@ public class ServiceResult<T> {
 
     public static <T> ServiceResult<T> failure(Object result) {
         ServiceResult<T> f = new ServiceResult<>(null, STATE_APP_EXCEPTION);
-        f.setError(result).setErrorCode(Constant.NORMAL_ERROR);
+        f.setError(result).setErrorCode(ErrorCode.UNDEFINED_ERROR);
         return f;
     }
 

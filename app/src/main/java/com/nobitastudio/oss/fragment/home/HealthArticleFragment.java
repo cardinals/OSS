@@ -16,10 +16,14 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
+import com.nobitastudio.oss.adapter.DoctorLectureRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.util.CommonUtil;
+import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
@@ -53,56 +57,6 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
                 default:
                     return HEADLINE;
             }
-        }
-    }
-
-    // 健康头条
-    public static class HeadlineRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
-
-        public HeadlineRecycleViewAdapter(Context ctx, List<HealthArticle> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_headline;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
-            Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
-//            holder.setText(R.id.title_textView, item.getTitle());
-//            holder.setText(R.id.type_textView, item.getType().name());
-//            holder.setText(R.id.publish_time_textView, CommonUtil.handleHealthNewsPublishTime(DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime())));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-    }
-
-    // 名师讲堂
-    public static class DoctorLectureRecyclerViewAdapter extends BaseRecyclerViewAdapter<HealthArticle> {
-
-        public DoctorLectureRecyclerViewAdapter(Context ctx, List<HealthArticle> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_doctor_lecture;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
-            ((QMUILinearLayout) holder.getView(R.id.doctor_lecture_linearlayout)).setRadiusAndShadow(QMUIDisplayHelper.dp2px(mContext, mRadius),
-                    QMUIDisplayHelper.dp2px(mContext, mShadowElevationDp), mShadowAlpha);
-        }
-
-        @Override
-        public int getItemCount() {
-            return 20;
         }
     }
 
@@ -196,10 +150,6 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
     Map<Pager, View> mPages;
     HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
     DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter;
-
-    private static float mShadowAlpha = 1.0f;
-    private static int mShadowElevationDp = 10;
-    private static int mRadius = 15;
 
     /**
      * 初始化健康头条，名医讲座  等等

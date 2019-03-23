@@ -6,6 +6,13 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
+    <!-- 仅仅是为了满足standard fragment -->
+    <com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -255,5 +262,11 @@
                 app:side_to_side_min_duration="10000" />
         </RelativeLayout>
     </FrameLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
 

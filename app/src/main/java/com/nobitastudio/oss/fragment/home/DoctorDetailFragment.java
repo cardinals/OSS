@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.VisitRecycleViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarFragment;
@@ -51,43 +52,6 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
                     return ALL_VISIT;
                 default:
                     return AVAILABLE_VISIT;
-            }
-        }
-    }
-
-    public class VisitRecycleViewAdapter extends BaseRecyclerViewAdapter<Visit> {
-        public VisitRecycleViewAdapter(Context ctx, List<Visit> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_visit;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Visit item) {
-            TextView mDateTextView = holder.getTextView(R.id.date_textview);
-            TextView mWeekTextView = holder.getTextView(R.id.week_textview);
-            TextView mTimeSlotTextView = holder.getTextView(R.id.time_slot_textview);
-            TextView mHospitalNameTextView = holder.getTextView(R.id.hospital_name_textview);
-            TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textview);
-            TextView mAreaTextView = holder.getTextView(R.id.area_textview);
-            QMUIRoundButton mGreenRoundButton = (QMUIRoundButton) holder.getView(R.id.green_roundbutton);
-            QMUIRoundButton mRedRoundButton = (QMUIRoundButton) holder.getView(R.id.red_roundbutton);
-
-            mDateTextView.setText(DateUtil.formatLocalDateTimeToSimpleString2(item.getDiagnosisTime()));
-            mWeekTextView.setText(item.getDiagnosisTime().getDayOfWeek().name());
-            mTimeSlotTextView.setText("上午");
-            mHospitalNameTextView.setText("石河子大学医学院");
-            mSubMajorTextView.setText("这是医生的亚专业");
-            mAreaTextView.setText("A区");
-            if (position > 3) {
-                mGreenRoundButton.setVisibility(View.GONE);
-                mRedRoundButton.setVisibility(View.VISIBLE);
-            } else {
-                mGreenRoundButton.setVisibility(View.VISIBLE);
-                mRedRoundButton.setVisibility(View.GONE);
             }
         }
     }

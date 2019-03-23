@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.ExpressRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.DialogHelper;
@@ -35,29 +36,6 @@ public class ExpressFragment extends StandardWithTobBarLayoutFragment {
     RecyclerView mExpressRecyclerView;
 
     QMUIDialog dialog;
-
-    // 将object -> 邮寄实体类   报告邮寄
-    public class ExpressRecyclerViewAdapter extends BaseRecyclerViewAdapter<Object> {
-
-        public ExpressRecyclerViewAdapter(Context ctx, List<Object> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_express;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Object item) {
-            initQMUILinearLayout(holder.getView(R.id.express_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-    }
 
     private void initRecyclerView() {
         ExpressRecyclerViewAdapter adapter = new ExpressRecyclerViewAdapter(getContext(), null);
