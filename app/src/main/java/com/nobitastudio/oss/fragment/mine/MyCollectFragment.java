@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment.mine;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -8,15 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.CollectionDoctorRecyclerViewAdapter;
-import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.CollectionDoctorRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.controller.collection.OtherController;
-import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
 import com.nobitastudio.oss.fragment.home.DoctorDetailFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;

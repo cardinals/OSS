@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment.mine;
 
-import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,20 +10,14 @@ import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.OrderRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
+import com.nobitastudio.oss.adapter.recyclerview.OrderRecyclerViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.entity.OSSOrder;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 

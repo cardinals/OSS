@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +12,7 @@ import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.ItemRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.adapter.recyclerview.ItemRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
 import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
 import com.nobitastudio.oss.controller.amap.AmapTTSController;

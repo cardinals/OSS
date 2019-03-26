@@ -23,11 +23,18 @@
         <FrameLayout
             android:id="@+id/doctor_lecture_framelayout"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@mipmap/bg_video_test">
+            android:layout_height="160dp">
+
+            <ImageView
+                android:id="@+id/cover_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/qmui_config_color_gray_9"
+                android:scaleType="fitXY" />
+
             <!-- 标题 -->
             <TextView
-                android:id="@+id/title_textView"
+                android:id="@+id/title_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -54,7 +61,7 @@
                 android:layout_marginRight="@dimen/dp_8"
                 android:layout_marginBottom="@dimen/dp_8"
                 android:gravity="start"
-                android:text="14:20"
+                android:text="--:--"
                 android:textColor="@color/qmui_config_color_white" />
         </FrameLayout>
 
@@ -79,7 +86,7 @@
                 android:textColor="?attr/qmui_config_color_gray_1" />
 
             <TextView
-                android:id="@+id/department_textview"
+                android:id="@+id/label_textview"
                 style="@style/QDCommonDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,7 +99,7 @@
                 android:textColor="?attr/app_primary_color" />
 
             <TextView
-                android:id="@+id/publish_time_textView"
+                android:id="@+id/publish_time_textview"
                 style="@style/QDCommonDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -106,7 +113,5 @@
 
 
         </LinearLayout>
-
-
     </LinearLayout>
 </com.qmuiteam.qmui.layout.QMUILinearLayout>

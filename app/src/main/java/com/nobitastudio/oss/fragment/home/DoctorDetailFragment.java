@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -9,19 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.VisitRecycleViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.adapter.recyclerview.VisitRecycleViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarFragment;
 import com.nobitastudio.oss.model.entity.Visit;
-import com.nobitastudio.oss.util.DateUtil;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUICollapsingTopBarLayout;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
-import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;

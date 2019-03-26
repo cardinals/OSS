@@ -1,23 +1,13 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.DoctorRecycleViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
+import com.nobitastudio.oss.adapter.recyclerview.DoctorRecycleViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.Doctor;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,15 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
-import com.nobitastudio.oss.adapter.DoctorLectureRecyclerViewAdapter;
-import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
+import com.nobitastudio.oss.adapter.pager.UltraPagerAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.DoctorLectureRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
@@ -28,22 +27,19 @@ import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.home.DepartmentFragment;
 import com.nobitastudio.oss.fragment.home.ExpressFragment;
 import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
-import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.home.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.NavigationFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.mine.RegisterRecordFragment;
-import com.nobitastudio.oss.fragment.test.TestFragment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
-import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import com.tmall.ultraviewpager.UltraViewPager;
+import com.tmall.ultraviewpager.UltraViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +48,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -61,8 +56,6 @@ import es.dmoral.toasty.Toasty;
  * @description
  */
 public class HomeController extends QMUIWindowInsetLayout {
-
-    static final String NO_SUPPORT_VIEW_ID = "不支持的点击事件";
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
@@ -128,9 +121,6 @@ public class HomeController extends QMUIWindowInsetLayout {
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");
                 break;
-            default:
-                showInfoTipDialog(NO_SUPPORT_VIEW_ID, 1500l);
-                break;
         }
     }
 
@@ -145,43 +135,9 @@ public class HomeController extends QMUIWindowInsetLayout {
 
     TipDialogHelper mTipDialogHelper;
     Context mContext;
-    private PagerAdapter mUltraPagerAdapter = new PagerAdapter() {
+    private PagerAdapter mUltraPagerAdapter; // 医院活动
 
-        @Override
-        public int getCount() {
-            return 6;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
-            View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
-//            if (mHealthArticles != null) {
-            ImageView imageView = root.findViewById(R.id.imageview);
-            if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t4).into(imageView);
-            } else if (position % 3 == 1) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
-            } else {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
-            }
-//            }
-            container.addView(root);
-            return root;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    };
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
-
-        private int mChildCount = 0;
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
@@ -217,10 +173,9 @@ public class HomeController extends QMUIWindowInsetLayout {
 
         @Override
         public void notifyDataSetChanged() {
-            mChildCount = getCount();
             super.notifyDataSetChanged();
         }
-    };
+    };  // 健康资讯
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     /**
@@ -234,6 +189,15 @@ public class HomeController extends QMUIWindowInsetLayout {
         initPullFreshLayout();
         initTabs();
         initPagers();
+
+        refresh();
+    }
+
+    // 刷新操作
+    private void refresh() {
+        // 获取 healthArticle
+
+
     }
 
     private void initQMUILinearLayout() {
@@ -250,6 +214,11 @@ public class HomeController extends QMUIWindowInsetLayout {
         mHospitalActivities = new ArrayList<>();
         mHeadLines = new ArrayList<>();
         mDoctorLectures = new ArrayList<>();
+
+        // 初始化 adapter
+        mUltraPagerAdapter = new UltraPagerAdapter(mContext, mHospitalActivities);
+        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
+        mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
     }
 
     /**
@@ -259,8 +228,6 @@ public class HomeController extends QMUIWindowInsetLayout {
         mPages = new HashMap<>();
         RecyclerView mHeadlineRecycleView = new RecyclerView(getContext());
         RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
-        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
-        mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
         mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> mContext.startActivity(new Intent(mContext, PlayVideoActivity.class)));
         mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override

@@ -1,20 +1,14 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.MedicalCardItemAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.adapter.recyclerview.MedicalCardItemAdapter;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.entity.MedicalCard;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -52,5 +52,6 @@ public class HealthArticle implements Serializable {
     @Column(name = "url")
     private String url;
 
-
+    @Column(name = "other_data")
+    private String otherData;
 }

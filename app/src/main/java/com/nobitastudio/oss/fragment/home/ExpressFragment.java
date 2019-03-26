@@ -1,24 +1,15 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.adapter.ExpressRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.base.helper.DialogHelper;
+import com.nobitastudio.oss.adapter.recyclerview.ExpressRecyclerViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import butterknife.BindView;

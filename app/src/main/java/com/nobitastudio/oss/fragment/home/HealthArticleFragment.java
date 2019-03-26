@@ -1,6 +1,5 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -16,22 +15,15 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
-import com.nobitastudio.oss.adapter.DoctorLectureRecyclerViewAdapter;
-import com.nobitastudio.oss.adapter.HeadlineRecycleViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.adapter.pager.UltraPagerAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.DoctorLectureRecyclerViewAdapter;
+import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.entity.HealthArticle;
-import com.nobitastudio.oss.util.CommonUtil;
-import com.nobitastudio.oss.util.DateUtil;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.tmall.ultraviewpager.UltraViewPager;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -61,40 +53,7 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
     }
 
     // 轮播图
-    private PagerAdapter mUltraPagerAdapter = new PagerAdapter() {
-
-        @Override
-        public int getCount() {
-            return 6;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
-            View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
-//            if (mHealthArticles != null) {
-            ImageView imageView = root.findViewById(R.id.imageview);
-            if (position % 3 == 0) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t4).into(imageView);
-            } else if (position % 3 == 1) {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t2).into(imageView);
-            } else {
-                Glide.with(getContext()).load(R.mipmap.bg_ulpager_t3).into(imageView);
-            }
-//            }
-            container.addView(root);
-            return root;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    };
+    private PagerAdapter mUltraPagerAdapter;
 
     // 健康头条,名师讲堂
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
@@ -232,6 +191,7 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
      * 初始化医院活动mUltraPager
      */
     private void initUltraViewPager() {
+        mUltraPagerAdapter = new UltraPagerAdapter(getContext(), null);
         mUltraViewPager.setScrollMode(UltraViewPager.ScrollMode.HORIZONTAL);
         mUltraViewPager.setAdapter(mUltraPagerAdapter);
         mUltraViewPager.setInfiniteLoop(true);

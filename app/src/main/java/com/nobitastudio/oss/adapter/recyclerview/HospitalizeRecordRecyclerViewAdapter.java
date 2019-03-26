@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.adapter;
+package com.nobitastudio.oss.adapter.recyclerview;
 
 import android.content.Context;
 

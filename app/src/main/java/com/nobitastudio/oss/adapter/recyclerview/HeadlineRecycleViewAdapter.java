@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.adapter;
+package com.nobitastudio.oss.adapter.recyclerview;
 
 import android.content.Context;
 
@@ -30,10 +30,10 @@ public class HeadlineRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthAr
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, HealthArticle item) {
-        Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageView));
-        holder.setText(R.id.title_textView, item.getTitle());
+        Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(holder.getImageView(R.id.cover_imageview));
+        holder.setText(R.id.title_textview, item.getTitle());
         holder.setText(R.id.label_textview, item.getLabel());
-        holder.setText(R.id.publish_time_textView, DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime()));
+        holder.setText(R.id.publish_time_textview, DateUtil.formatLocalDateTimeToSimpleString(item.getPublishTime()));
     }
 
     @Override
