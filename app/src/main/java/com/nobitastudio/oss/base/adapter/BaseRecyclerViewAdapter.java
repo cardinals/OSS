@@ -63,10 +63,11 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         if (mData.size() > 0) {
             bindData(holder, position, mData.get(position));  // 生产
-        } else {
-            // todo 上线前去除
-            bindData(holder, position, null); // 测试使用
         }
+//        else {
+//            // todo 上线前去除
+//            bindData(holder, position, null); // 测试使用
+//        }
     }
 
     public T getItem(int pos) {
