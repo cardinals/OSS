@@ -1,7 +1,6 @@
 package com.nobitastudio.oss.adapter.pager;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -22,9 +21,6 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-import static com.nobitastudio.oss.base.lab.fragment.QDWebExplorerFragment.EXTRA_TITLE;
-import static com.nobitastudio.oss.base.lab.fragment.QDWebExplorerFragment.EXTRA_URL;
-
 /**
  * @author chenxiong
  * @email nobita0522@qq.com
@@ -34,18 +30,18 @@ import static com.nobitastudio.oss.base.lab.fragment.QDWebExplorerFragment.EXTRA
 public class UltraPagerAdapter extends PagerAdapter {
 
     Context mContext;
-    List<HealthArticle> healthArticles;
+    List<HealthArticle> mHospitalActivities;
 
     ControllerClickHandler mHandler;
 
-    public UltraPagerAdapter(Context mContext, List<HealthArticle> healthArticles) {
+    public UltraPagerAdapter(Context mContext, List<HealthArticle> mHospitalActivities) {
         this.mContext = mContext;
-        this.healthArticles = healthArticles;
+        this.mHospitalActivities = mHospitalActivities;
     }
 
     @Override
     public int getCount() {
-        return healthArticles.size();
+        return mHospitalActivities.size();
     }
 
     @Override
@@ -57,7 +53,7 @@ public class UltraPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
         View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
         ImageView imageView = root.findViewById(R.id.imageview);
-        HealthArticle selectedHospitalActivity = healthArticles.get(position);
+        HealthArticle selectedHospitalActivity = mHospitalActivities.get(position);
         Log.i("tag:", ConstantContainer.OSS_SERVER_RUNTIME + selectedHospitalActivity.getIconUrl());
         Glide.with(mContext).load(ConstantContainer.OSS_SERVER_RUNTIME + selectedHospitalActivity.getIconUrl()).into(imageView);
         container.addView(root);

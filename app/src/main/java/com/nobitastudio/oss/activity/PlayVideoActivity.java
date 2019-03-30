@@ -8,7 +8,9 @@ import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseActivity;
+import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
+import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
@@ -43,9 +45,9 @@ public class PlayVideoActivity extends BaseActivity {
 
     private void init() {
 
-        String url = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
-        mVideoPlayer.setUp(url, true, "这是title");
-        // 设置title
+        String url = ConstantContainer.OSS_SERVER_RUNTIME + "/video/test-video.mp4"; // 视频源.采用测试视频
+
+        mVideoPlayer.setUp(url, true, NormalContainer.get(NormalContainer.SELECTED_DOCTOR_LECTURE, HealthArticle.class).getTitle()); // 设置title
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(R.mipmap.bg_video_test);
@@ -54,8 +56,8 @@ public class PlayVideoActivity extends BaseActivity {
         //增加title  设置padding
         mVideoPlayer.getTitleTextView().setVisibility(View.VISIBLE);
         mVideoPlayer.getBackButton().setVisibility(View.VISIBLE);
-        mVideoPlayer.getTitleTextView().setPadding(0, QMUIStatusBarHelper.getStatusbarHeight(getContext()),0,0);
-        mVideoPlayer.getBackButton().setPadding(0, QMUIStatusBarHelper.getStatusbarHeight(getContext()),0,0);
+        mVideoPlayer.getTitleTextView().setPadding(0, QMUIStatusBarHelper.getStatusbarHeight(getContext()), 0, 0);
+        mVideoPlayer.getBackButton().setPadding(0, QMUIStatusBarHelper.getStatusbarHeight(getContext()), 0, 0);
 
         //设置旋转
         mOrientationUtils = new OrientationUtils(this, mVideoPlayer);
@@ -76,7 +78,7 @@ public class PlayVideoActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY,this);
+        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY, this);
         mVideoPlayer.onVideoResume();
     }
 

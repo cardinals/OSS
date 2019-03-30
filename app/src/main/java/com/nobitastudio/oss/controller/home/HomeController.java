@@ -23,11 +23,14 @@ import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.adapter.pager.UltraPagerAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.DoctorLectureRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
+import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.base.lab.fragment.QDWebViewFixFragment;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.home.DepartmentFragment;
 import com.nobitastudio.oss.fragment.home.ExpressFragment;
 import com.nobitastudio.oss.fragment.home.HealthArticleFragment;
@@ -59,6 +62,7 @@ import java.util.stream.Collectors;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -203,7 +207,19 @@ public class HomeController extends BaseController {
             }
         }; // pager
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
+        mHeadlineRecycleViewAdapter.setOnItemClickListener((itemView, pos) -> {
+            HealthArticle mSelectedHeadline = mHeadLines.get(pos);
+            NormalContainer.put(NormalContainer.SELECTED_HEADLINE,mSelectedHeadline);
+            Toasty.info(mContext,"id:" + mSelectedHeadline.getId() + ",url：" + mSelectedHeadline.getUrl()).show();
+            mHandler.startFragment(new QDWebViewFixFragment());
+        });
         mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
+        mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> {
+            HealthArticle mSelectedLecture = mDoctorLectures.get(pos);
+            NormalContainer.put(NormalContainer.SELECTED_DOCTOR_LECTURE,mSelectedLecture);
+            Toasty.info(mContext,"id:" + mSelectedLecture.getId() + ",url：" + mSelectedLecture.getUrl()).show();
+            mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
+        });
     }
 
     /**
@@ -213,7 +229,6 @@ public class HomeController extends BaseController {
         mPages = new HashMap<>();
         RecyclerView mHeadlineRecycleView = new RecyclerView(getContext());
         RecyclerView mDoctorLectureRecyclerView = new RecyclerView(getContext());
-        mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> mContext.startActivity(new Intent(mContext, PlayVideoActivity.class)));
         mHeadlineRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {

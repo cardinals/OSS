@@ -119,6 +119,23 @@ public class DateUtil {
         return new Date(localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli());
     }
 
+    public static String formatSecondsToStandardString(String seconds) {
+        Integer s = Integer.valueOf(seconds);
+        // 小时
+        int hour = s / 3600;
+//        String hour = s / 3600 < 10 ? "0" + s / 3600 : s / 3600 + "";
+        // 分钟
+        int minute = (s % 3600) / 60;
+        // 秒
+        int sec = (s % 3600) % 60;
+        if (hour != 0) {
+
+        } else {
+
+        }
+        return (hour > 9 ? hour + ":" : (hour == 0 ? "" : "0" + hour + ":")) + (minute < 10 ? "0" + minute : minute + "") + ":" + (sec < 10 ? "0" + sec : sec + "");
+    }
+
     public static void main(String[] args) {
         String str = convertDate("2018-07-21", "yyyy-MM-dd", "yyyyMMdd");
         System.out.println(str);
