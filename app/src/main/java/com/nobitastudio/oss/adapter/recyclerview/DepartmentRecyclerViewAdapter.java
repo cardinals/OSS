@@ -35,7 +35,7 @@ public class DepartmentRecyclerViewAdapter extends BaseRecyclerViewAdapter<Depar
         Glide.with(mContext).load(getImageDrawableId(item)).into(holder.getImageView(R.id.imageview));
     }
 
-    int getImageDrawableId(Department item) {
+    private int getImageDrawableId(Department item) {
         return ConstantContainer.getDepartmentMipmap().getOrDefault(item.getName(), R.mipmap.ic_transparent);
     }
 }

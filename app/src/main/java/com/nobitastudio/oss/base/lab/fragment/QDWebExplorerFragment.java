@@ -78,6 +78,16 @@ public class QDWebExplorerFragment extends BaseFragment {
     private boolean mNeedDecodeUrl = false;
 
     @Override
+    protected void init() {
+        // donothing
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_webview_explorer;
+    }
+
+    @Override
     protected View onCreateView() {
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -91,7 +101,7 @@ public class QDWebExplorerFragment extends BaseFragment {
 
         mProgressHandler = new ProgressHandler();
 
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_webview_explorer, null);
+        View view = LayoutInflater.from(getContext()).inflate(getLayoutId(), null);
         ButterKnife.bind(this, view);
         initTopbar();
         initWebView();

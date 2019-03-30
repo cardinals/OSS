@@ -113,14 +113,11 @@ public class HomeFragment extends BaseFragment {
                 HomeFragment.this.startFragmentAndDestroyCurrent(targetFragment);
             }
         };
-        HomeController homeController = new HomeController(getContext(), mHandler);
-        mPages.put(Pager.HOME, homeController);
+        mPages.put(Pager.HOME, new HomeController(getContext(), mHandler));
         mPages.put(Pager.INFO, new InfoController(getContext(), mHandler));
         mPages.put(Pager.MINE, new MineController(getContext(), mHandler));
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
-
-        homeController.refresh(false);
     }
 
     private void initTabs() {
@@ -172,11 +169,21 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
-        ButterKnife.bind(this, root);
+    protected void refresh(Boolean isCancelPull) {
+        ((HomeController) mPages.get(Pager.HOME)).refresh(false);
+    }
+
+    @Override
+    protected void init() {
         initTabs();
         initPagers();
-        return root;
+        refresh(Boolean.FALSE);
     }
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
 }

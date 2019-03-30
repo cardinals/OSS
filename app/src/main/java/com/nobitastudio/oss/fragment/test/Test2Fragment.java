@@ -21,9 +21,12 @@ import butterknife.ButterKnife;
 public class Test2Fragment extends BaseFragment {
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test2, null);
-        ButterKnife.bind(this, root);
-        return root;
+    protected void init() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_test2;
     }
 }

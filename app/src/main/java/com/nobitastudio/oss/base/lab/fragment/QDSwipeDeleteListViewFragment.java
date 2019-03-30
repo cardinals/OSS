@@ -59,12 +59,14 @@ public class QDSwipeDeleteListViewFragment extends BaseFragment {
     boolean mItemPressed = false;
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_swipe_delete_listview, null);
-        ButterKnife.bind(this, root);
+    protected void init() {
         initTopBar();
         initListView();
-        return root;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_swipe_delete_listview;
     }
 
     private void initTopBar() {

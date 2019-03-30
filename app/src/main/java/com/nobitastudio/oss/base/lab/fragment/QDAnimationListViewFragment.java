@@ -49,12 +49,14 @@ public class QDAnimationListViewFragment extends BaseFragment {
     private List<String> mData = new ArrayList<>();
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getContext()).inflate(R.layout.fragment_animation_listview, null);
-        ButterKnife.bind(this, root);
+    protected void init() {
         initTopBar();
         initListView();
-        return root;
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_animation_listview;
     }
 
     private void initTopBar() {

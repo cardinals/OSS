@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.DepartmentRecyclerViewAdapter;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.entity.Department;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
@@ -23,7 +24,7 @@ import butterknife.BindView;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description
+ * @description 展示科室详情.
  */
 public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
@@ -38,19 +39,6 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
 
     private void initRecyclerView() {
         mDepartments = new ArrayList<>();
-        mDepartments.add(new Department("脑科"));
-        mDepartments.add(new Department("内分泌科"));
-        mDepartments.add(new Department("肿瘤科"));
-        mDepartments.add(new Department("儿科"));
-        mDepartments.add(new Department("泌尿科"));
-        mDepartments.add(new Department("内科"));
-        mDepartments.add(new Department("外科"));
-        mDepartments.add(new Department("生殖科"));
-        mDepartments.add(new Department("中医科"));
-        mDepartments.add(new Department("康复科"));
-        mDepartments.add(new Department("病理科"));
-        mDepartments.add(new Department("男科"));
-        mDepartments.add(new Department("其他科"));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -59,7 +47,10 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
             }
         });
         DepartmentRecyclerViewAdapter adapter = new DepartmentRecyclerViewAdapter(getContext(), mDepartments);
-        adapter.setOnItemClickListener((itemView, pos) -> startFragment(new DoctorListFragment()));
+        adapter.setOnItemClickListener((itemView, pos) -> {
+            NormalContainer.put(NormalContainer.SELECTED_DEPARTMENT, mDepartments.get(pos));
+            startFragment(new DoctorListFragment());
+        });
         adapter.setOnItemLongClickListener((itemView, pos) -> {
             Department department = mDepartments.get(pos);
             new QMUIDialog.MessageDialogBuilder(getContext())
@@ -81,38 +72,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     private String generateDepartmentInfo(Department department) {
         return "楼层:" + department.getFloor() + "\n" +
                 "区域：" + department.getArea().name() + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "绍：介绍：介绍：" + department.getIntroduction();
+                "介绍：" + department.getIntroduction();
     }
 
     @Override

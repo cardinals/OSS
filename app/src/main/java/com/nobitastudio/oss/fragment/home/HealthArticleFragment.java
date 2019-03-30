@@ -241,7 +241,8 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
     }
 
     // 刷新操作
-    public void refresh(Boolean isCancelPull) {
+    @Override
+    protected void refresh(Boolean isCancelPull) {
         // 获取 healthArticle
         getAsyn(Arrays.asList("health-article", "queryMore"), ConstantContainer.GET_PAGER_PARAMS,
                 new ReflectStrategy<>(new TypeReference<List<HealthArticle>>() {

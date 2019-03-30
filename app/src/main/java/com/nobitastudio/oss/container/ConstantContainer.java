@@ -34,7 +34,7 @@ public class ConstantContainer {
         return DEPARTMENT_MIPMAP == null ? initDepartmentMipmap() : DEPARTMENT_MIPMAP;
     }
 
-    // 初始化保存信息
+    // 初始化科室保存信息
     private static Map<String, Integer> initDepartmentMipmap() {
         DEPARTMENT_MIPMAP = new HashMap<>();
         DEPARTMENT_MIPMAP.put("全科", R.mipmap.ic_general);
@@ -66,6 +66,11 @@ public class ConstantContainer {
         return DEPARTMENT_MIPMAP;
     }
 
+    // 包含图标的科室有哪些
+    public static final List<String> CONTAIN_IC_DEPARTMENTS = Arrays.asList("全科", "美容科", "麻醉科", "营养科", "眼科", "化验科", "皮肤科",
+            "整形科", "中医科", "生殖科", "外科", "内科", "泌尿科", "妇科", "儿科", "肿瘤科", "脑科", "内分泌科", "骨科", "耳鼻喉科", "男科",
+            "口腔科", "病理科", "影像科", "传染科", "康复科");
+
     // 高德地图导航
     // 石河子大学附属医院坐标：经度：86.059641,纬度：44.299419,注意构造函数是 LatLng（纬度，经度）
     public static final LatLng SHZ_UNIVERSITY_FIRST_AFFILIATED_HOSPITAL_LATLNG = new LatLng(44.299419, 86.059641);
@@ -94,5 +99,5 @@ public class ConstantContainer {
     }
 
     // 默认的分页参数
-    public static final List<GetParam> GET_PAGER_PARAMS = Arrays.asList(new GetParam("page","0"),new GetParam("limit","20"));
+    public static final List<GetParam> GET_PAGER_PARAMS = Arrays.asList(new GetParam("page", "0"), new GetParam("limit", "20"));
 }

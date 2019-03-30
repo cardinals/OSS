@@ -50,6 +50,7 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     private void init() {
         initBase(); // 基础的初始化
         initLast(); // 自定义初始化
+
     }
 
     private void initBase() {

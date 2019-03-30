@@ -60,7 +60,8 @@ public class BootFragment extends BaseFragment {
         }
     }
 
-    private void init() {
+    @Override
+    protected void init() {
         View mLastController = new LastController(getContext(), R.drawable.bg_boot_three, new ControllerClickHandler() {
             @Override
             public void startFragment(BaseFragment targetFragment) {
@@ -119,10 +120,7 @@ public class BootFragment extends BaseFragment {
     }
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_boot, null);
-        ButterKnife.bind(this, root);
-        init();
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_boot;
     }
 }

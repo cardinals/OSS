@@ -109,9 +109,8 @@ public class HomeController extends BaseController {
                         });
                 break;
             case R.id.health_article_linearLayout:
-                HealthArticleFragment mHealthArticleFragment = new HealthArticleFragment();
-                mHandler.startFragment(mHealthArticleFragment);
-                mHealthArticleFragment.refresh(false);
+                mHandler.startFragment(new HealthArticleFragment());
+//                mHealthArticleFragment.refresh(false);
                 break;
             case R.id.smart_linearLayout:
                 break;
@@ -394,6 +393,7 @@ public class HomeController extends BaseController {
         initPullFreshLayout();
         initTabs();
         initPagers();
+        // refresh 无用 .需要初始化完毕后进行调用
     }
 
     public HomeController(Context context, ControllerClickHandler mHandler) {

@@ -70,8 +70,6 @@ public abstract class StandardFragment extends BaseFragment
     // SCALE_TRANSITION_CONFIG  从中间出
     protected static final TransitionConfig animConfig = SLIDE_TRANSITION_CONFIG;  // 默认左右滑动
 
-    Boolean inited = Boolean.FALSE;   // 初始化过,便不再需要初始化
-
     ExecutorService executorService;  // 线程池 ,暂不使用
 
     @Override
@@ -85,15 +83,9 @@ public abstract class StandardFragment extends BaseFragment
         if (!inited) {
             // 初始化操作
             init();
+            inited = Boolean.TRUE;
         }
         super.onResume();
-    }
-
-    @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(getLayoutId(), null);
-        ButterKnife.bind(this, root);
-        return root;
     }
 
     public StandardFragment() {
@@ -115,14 +107,15 @@ public abstract class StandardFragment extends BaseFragment
     }
 
     // 初始化方法
-    private void init() {
+    @Override
+    protected void init() {
         initFirstCustom();
         initBase();
         initMiddleCustom();
         initTopBar();
         initRefreshLayout();
         initLastCustom();
-        inited = Boolean.TRUE;
+        refresh(Boolean.FALSE); // 刷新数据
     }
 
     // 当需要在最开始进行初始化，重写该方法
@@ -181,9 +174,6 @@ public abstract class StandardFragment extends BaseFragment
 
     // 得到topbar 因为类型不同.使用view
     protected abstract View getTopBar();
-
-    // ================ view
-    protected abstract int getLayoutId();
 
     // 用户最后进行初始化，进行大部分的初始化工作
     protected abstract void initLastCustom();

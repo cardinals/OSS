@@ -65,16 +65,14 @@ public class TestFragment extends BaseFragment {
 //        );
     }
 
-    private void init() {
+    @Override
+    protected void init() {
 
     }
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_test, null);
-        ButterKnife.bind(this, root);
-        init();
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_test;
     }
 
 
