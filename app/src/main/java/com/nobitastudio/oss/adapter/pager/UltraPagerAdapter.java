@@ -59,7 +59,7 @@ public class UltraPagerAdapter extends PagerAdapter {
         container.addView(root);
         root.setOnClickListener((view) -> {
             // 存参数
-            NormalContainer.put(NormalContainer.SELECTED_HOSPITAL_ACTIVITY,selectedHospitalActivity);
+            NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE,selectedHospitalActivity);
             Toasty.info(mContext,"id:" + selectedHospitalActivity.getId() + ",url：" + selectedHospitalActivity.getUrl()).show();
             mHandler.startFragment(new QDWebViewFixFragment());
         });

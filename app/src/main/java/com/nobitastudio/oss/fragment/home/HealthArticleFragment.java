@@ -235,5 +235,4 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
         initPagers();
     }
 
-
 }

@@ -38,7 +38,7 @@ public class QDWebViewFixFragment extends QDWebExplorerFragment {
         String url = ConstantContainer.OSS_SERVER_RUNTIME + "/html" + "/test.html";  // 展示的url
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_URL, url);
-        bundle.putString(EXTRA_TITLE, ((HealthArticle) NormalContainer.get(NormalContainer.SELECTED_HOSPITAL_ACTIVITY)).getTitle());
+        bundle.putString(EXTRA_TITLE, ((HealthArticle) NormalContainer.get(NormalContainer.SELECTED_HEALTH_ARTICLE)).getTitle());
         setArguments(bundle);
     }
 

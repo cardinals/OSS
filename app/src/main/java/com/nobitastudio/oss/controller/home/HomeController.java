@@ -209,7 +209,7 @@ public class HomeController extends BaseController {
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
         mHeadlineRecycleViewAdapter.setOnItemClickListener((itemView, pos) -> {
             HealthArticle mSelectedHeadline = mHeadLines.get(pos);
-            NormalContainer.put(NormalContainer.SELECTED_HEADLINE,mSelectedHeadline);
+            NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE,mSelectedHeadline);
             Toasty.info(mContext,"id:" + mSelectedHeadline.getId() + ",url：" + mSelectedHeadline.getUrl()).show();
             mHandler.startFragment(new QDWebViewFixFragment());
         });

@@ -46,5 +46,10 @@ public class DoctorLectureRecyclerViewAdapter extends BaseRecyclerViewAdapter<He
         holder.setText(R.id.video_time_textview, DateUtil.formatSecondsToStandardString(item.getOtherData()));
     }
 
+    // 支持链式写法. 暂不启用
+    public DoctorLectureRecyclerViewAdapter setItemClickListener(OnItemClickListener listener) {
+        setOnItemClickListener(listener);
+        return this;
+    }
 
 }
