@@ -74,9 +74,9 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
      * @return
      */
     private String generateDepartmentInfo(Department department) {
-        return "楼层:" + department.getFloor() + "\n" +
-                "区域：" + department.getArea().name() + "\n" +
-                "介绍：" + department.getIntroduction();
+        return "楼层: " + department.getFloor() + "楼" +  "\n" +
+                "区域: " + department.getArea().name() + "区" + "\n" +
+                "介绍: " + department.getIntroduction();
     }
 
     @Override
