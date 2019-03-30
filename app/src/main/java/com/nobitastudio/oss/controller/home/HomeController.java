@@ -2,28 +2,21 @@ package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
 import com.blankj.utilcode.util.ToastUtils;
-import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.adapter.pager.UltraPagerAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.DoctorLectureRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
@@ -48,10 +41,8 @@ import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
-import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import com.tmall.ultraviewpager.UltraViewPager;
-import com.tmall.ultraviewpager.UltraViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,7 +51,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
 
@@ -119,7 +109,9 @@ public class HomeController extends BaseController {
                         });
                 break;
             case R.id.health_article_linearLayout:
-                mHandler.startFragment(new HealthArticleFragment());
+                HealthArticleFragment mHealthArticleFragment = new HealthArticleFragment();
+                mHandler.startFragment(mHealthArticleFragment);
+                mHealthArticleFragment.refresh(false);
                 break;
             case R.id.smart_linearLayout:
                 break;
@@ -142,10 +134,10 @@ public class HomeController extends BaseController {
     }
 
     HashMap<HealthArticleFragment.Pager, View> mPages;
-    public List<HealthArticle> mHealthArticles;// 医院活动.健康头条.名医讲堂  全部
-    public List<HealthArticle> mHospitalActivities;// 医院活动
-    public List<HealthArticle> mHeadLines;// 健康头条
-    public List<HealthArticle> mDoctorLectures;// 名医讲堂
+    List<HealthArticle> mHealthArticles;// 医院活动.健康头条.名医讲堂  全部
+    List<HealthArticle> mHospitalActivities;// 医院活动
+    List<HealthArticle> mHeadlines;// 健康头条
+    List<HealthArticle> mDoctorLectures;// 名医讲堂
 
     TipDialogHelper mTipDialogHelper;
     PagerAdapter mUltraPagerAdapter; // 医院活动
@@ -167,7 +159,7 @@ public class HomeController extends BaseController {
         // 初始化数据
         mHealthArticles = new ArrayList<>();
         mHospitalActivities = new ArrayList<>();
-        mHeadLines = new ArrayList<>();
+        mHeadlines = new ArrayList<>();
         mDoctorLectures = new ArrayList<>();
 
         // 初始化 adapter
@@ -206,9 +198,9 @@ public class HomeController extends BaseController {
                 return POSITION_NONE;   // 修复数据刷新但是高度不刷新的异常
             }
         }; // pager
-        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
+        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadlines);// 健康头条
         mHeadlineRecycleViewAdapter.setOnItemClickListener((itemView, pos) -> {
-            HealthArticle mSelectedHeadline = mHeadLines.get(pos);
+            HealthArticle mSelectedHeadline = mHeadlines.get(pos);
             NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE,mSelectedHeadline);
             Toasty.info(mContext,"id:" + mSelectedHeadline.getId() + ",url：" + mSelectedHeadline.getUrl()).show();
             mHandler.startFragment(new QDWebViewFixFragment());
@@ -357,23 +349,18 @@ public class HomeController extends BaseController {
                         // 清除
                         mHealthArticles.clear();
                         mHospitalActivities.clear();
-                        runOnUIThread(() -> {
-                            mHospitalActivityUltraViewPager.refresh();
-                        });
-                        mHeadLines.clear();
+                        mHeadlines.clear();
                         mDoctorLectures.clear();
 
                         // 存储
                         mHealthArticles.addAll(healthArticles);
                         mHospitalActivities.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.HOSPITAL_ACTIVITY)).collect(Collectors.toList()));
-                        runOnUIThread(() -> {
-                            mHospitalActivityUltraViewPager.refresh();
-                        });
-                        mHeadLines.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.HEADLINE)).collect(Collectors.toList()));
+                        mHeadlines.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.HEADLINE)).collect(Collectors.toList()));
                         mDoctorLectures.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.DOCTOR_LECTURE)).collect(Collectors.toList()));
 
                         // notify  run on mainThread
-                        runOnUIThread(() -> {
+                        runOnUiThread(() -> {
+                            mHospitalActivityUltraViewPager.refresh();
                             mHeadlineRecycleViewAdapter.notifyDataSetChanged();
                             mDoctorLectureRecyclerViewAdapter.notifyDataSetChanged();
                         });

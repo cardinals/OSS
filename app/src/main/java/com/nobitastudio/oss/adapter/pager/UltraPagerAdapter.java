@@ -30,18 +30,18 @@ import es.dmoral.toasty.Toasty;
 public class UltraPagerAdapter extends PagerAdapter {
 
     Context mContext;
-    List<HealthArticle> mHospitalActivities;
+    List<HealthArticle> mHealthArticles;
 
     ControllerClickHandler mHandler;
 
-    public UltraPagerAdapter(Context mContext, List<HealthArticle> mHospitalActivities) {
+    public UltraPagerAdapter(Context mContext, List<HealthArticle> mHealthArticles) {
         this.mContext = mContext;
-        this.mHospitalActivities = mHospitalActivities;
+        this.mHealthArticles = mHealthArticles;
     }
 
     @Override
     public int getCount() {
-        return mHospitalActivities.size();
+        return mHealthArticles.size();
     }
 
     @Override
@@ -53,8 +53,7 @@ public class UltraPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
         View root = LayoutInflater.from(container.getContext()).inflate(R.layout.ultrapager_item, null);
         ImageView imageView = root.findViewById(R.id.imageview);
-        HealthArticle selectedHospitalActivity = mHospitalActivities.get(position);
-        Log.i("tag:", ConstantContainer.OSS_SERVER_RUNTIME + selectedHospitalActivity.getIconUrl());
+        HealthArticle selectedHospitalActivity = mHealthArticles.get(position);
         Glide.with(mContext).load(ConstantContainer.OSS_SERVER_RUNTIME + selectedHospitalActivity.getIconUrl()).into(imageView);
         container.addView(root);
         root.setOnClickListener((view) -> {

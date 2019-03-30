@@ -149,15 +149,15 @@ public class OkHttpUtil {
 
     // url ->  server_ip + restfulParam + getParam 返回 /?key=value
     public static String generateGetParam(List<GetParam> getParams) {
-        String getParamFormatted = "";
+        StringBuilder getParamFormatted = new StringBuilder();
         if (getParams != null && getParams.size() != 0) {
-            getParamFormatted = getParamFormatted + "/?";
+            getParamFormatted.append("/?");
             for (GetParam getParam : getParams) {
-                getParamFormatted = getParam.getKey() + "=" + getParam.getValue() + "&";
+                getParamFormatted.append(getParam.getKey()).append("=").append(getParam.getValue()).append("&");
             }
-            getParamFormatted = getParamFormatted.substring(0, getParamFormatted.length() - 1); //去掉末尾的/
+            getParamFormatted = new StringBuilder(getParamFormatted.substring(0, getParamFormatted.length() - 1)); //去掉末尾的/
         }
-        return getParamFormatted;
+        return getParamFormatted.toString();
     }
 
     // 获取请求

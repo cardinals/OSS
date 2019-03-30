@@ -154,7 +154,7 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     }
 
     // 在主线程上运行
-    protected void runOnUIThread(Runnable action) {
+    protected void runOnUiThread(Runnable action) {
         this.post(action);
     }
 

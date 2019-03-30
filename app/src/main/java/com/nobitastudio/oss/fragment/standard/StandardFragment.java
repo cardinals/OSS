@@ -1,6 +1,7 @@
 package com.nobitastudio.oss.fragment.standard;
 
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,7 +52,7 @@ import okhttp3.OkHttpClient;
  * @description
  */
 public abstract class StandardFragment extends BaseFragment
-    implements HttpHandler {
+        implements HttpHandler {
 
     @BindView(R.id.pull_to_refresh)
     protected QMUIPullRefreshLayout mPullRefreshLayout;
@@ -394,7 +395,10 @@ public abstract class StandardFragment extends BaseFragment
     // 服务器发生错误. 如果需要改变展示方式，重写该方法
     @Override
     public OkHttpUtil.ErrorHandler getErrorHandler() {
-        return (call, response) -> showErrorTipDialog("服务器发生错误,请联系系统管理员");
+        return (call, response) -> {
+            Log.e("网络错误,错误码:", String.valueOf(response.code()));
+            showErrorTipDialog("服务器发生错误,请联系系统管理员");
+        };
     }
 
     // get请求
@@ -455,6 +459,11 @@ public abstract class StandardFragment extends BaseFragment
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
                 Boolean.FALSE, restParams, getParams, requestBody, null,
                 getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
+    // ==================== 线程
+    public void runOnUiThread(Runnable action) {
+        getActivity().runOnUiThread(action);
     }
 
 

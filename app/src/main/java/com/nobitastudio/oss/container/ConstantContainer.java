@@ -5,8 +5,11 @@ import com.amap.api.maps.model.Poi;
 import com.amap.api.navi.AmapNaviParams;
 import com.amap.api.navi.AmapNaviType;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.model.dto.GetParam;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,4 +92,7 @@ public class ConstantContainer {
                 return AMAP_NAVI_DRIVER_PARAM;
         }
     }
+
+    // 默认的分页参数
+    public static final List<GetParam> GET_PAGER_PARAMS = Arrays.asList(new GetParam("page","0"),new GetParam("limit","20"));
 }
