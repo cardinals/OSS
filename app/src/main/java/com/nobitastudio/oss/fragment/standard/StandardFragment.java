@@ -20,6 +20,7 @@ import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.helper.ViewHelper;
+import com.nobitastudio.oss.base.inter.HttpHandler;
 import com.nobitastudio.oss.model.dto.GetParam;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.util.DateUtil;
@@ -49,7 +50,8 @@ import okhttp3.OkHttpClient;
  * @date 2019/01/29 16:08
  * @description
  */
-public abstract class StandardFragment extends BaseFragment {
+public abstract class StandardFragment extends BaseFragment
+    implements HttpHandler {
 
     @BindView(R.id.pull_to_refresh)
     protected QMUIPullRefreshLayout mPullRefreshLayout;
@@ -377,17 +379,20 @@ public abstract class StandardFragment extends BaseFragment {
     }
 
     // 当网络不可用时,的处理策略.默认显示.当前网络不可用tipdialog .若需要改变.重写该方法
+    @Override
     public OkHttpUtil.NetworkUnavailableHandler getNetworkUnavailableHandler() {
         return () -> showInfoTipDialog("当前网络不可用");
     }
 
     // ===================== okHttpUtil
     // 获取默认的连接失败处理器.默认显示 服务器开小差了  如果需要改变展示方式，重写该方法
+    @Override
     public OkHttpUtil.ConnectFailHandler getConnectFailHandler() {
         return (call, e) -> showInfoTipDialog("服务器开小差了,请稍后再试");
     }
 
     // 服务器发生错误. 如果需要改变展示方式，重写该方法
+    @Override
     public OkHttpUtil.ErrorHandler getErrorHandler() {
         return (call, response) -> showErrorTipDialog("服务器发生错误,请联系系统管理员");
     }

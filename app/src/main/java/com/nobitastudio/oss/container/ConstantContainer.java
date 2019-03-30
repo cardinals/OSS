@@ -22,6 +22,8 @@ public class ConstantContainer {
     public static final String OSS_SERVER_ONLINE = "http://www.nobitastudio.cn";  // 线上地址
     public static final String OSS_SERVER_LOCAL = "http://10.0.2.2";  // 本地服务
 
+    public static final String OSS_SERVER_RUNTIME = OSS_SERVER_LOCAL; // 运行地址
+
     // 科室图片相关
     public static Map<String, Integer> DEPARTMENT_MIPMAP;
 

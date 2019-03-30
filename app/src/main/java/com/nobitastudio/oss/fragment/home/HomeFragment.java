@@ -113,11 +113,14 @@ public class HomeFragment extends BaseFragment {
                 HomeFragment.this.startFragmentAndDestroyCurrent(targetFragment);
             }
         };
-        mPages.put(Pager.HOME, new HomeController(getContext(), mHandler));
+        HomeController homeController = new HomeController(getContext(), mHandler);
+        mPages.put(Pager.HOME, homeController);
         mPages.put(Pager.INFO, new InfoController(getContext(), mHandler));
         mPages.put(Pager.MINE, new MineController(getContext(), mHandler));
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
+
+        homeController.refresh(false);
     }
 
     private void initTabs() {

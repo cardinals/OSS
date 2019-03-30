@@ -22,6 +22,8 @@ import android.webkit.WebChromeClient;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.container.ConstantContainer;
+import com.nobitastudio.oss.container.NormalContainer;
+import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
@@ -31,11 +33,12 @@ import com.qmuiteam.qmui.widget.webview.QMUIWebViewContainer;
 // 提供浏览器支持
 public class QDWebViewFixFragment extends QDWebExplorerFragment {
 
+    // 仅用于测试
     public QDWebViewFixFragment() {
-        String url = ConstantContainer.OSS_SERVER_LOCAL + "/swagger-ui.html";
+        String url = ConstantContainer.OSS_SERVER_RUNTIME + "/html" + "/test.html";  // 展示的url
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_URL, url);
-        bundle.putString(EXTRA_TITLE, "浏览器fragment");
+        bundle.putString(EXTRA_TITLE, ((HealthArticle) NormalContainer.get(NormalContainer.SELECTED_HOSPITAL_ACTIVITY)).getTitle());
         setArguments(bundle);
     }
 
@@ -43,7 +46,6 @@ public class QDWebViewFixFragment extends QDWebExplorerFragment {
     protected boolean needDispatchSafeAreaInset() {
         return true;
     }
-
 
     @Override
     protected void configWebView(QMUIWebViewContainer webViewContainer, QMUIWebView webView) {

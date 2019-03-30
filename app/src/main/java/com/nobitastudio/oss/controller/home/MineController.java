@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
@@ -37,7 +38,7 @@ import butterknife.OnClick;
  * @date 2019/01/28 14:03
  * @description
  */
-public class MineController extends QMUIWindowInsetLayout {
+public class MineController extends BaseController {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
@@ -48,9 +49,7 @@ public class MineController extends QMUIWindowInsetLayout {
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
 
-    ControllerClickHandler mHandler;
     DialogHelper mDialogHelper;
-    Context mContext;
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     @OnClick({R.id.head_imageview, R.id.username_textview,
@@ -80,7 +79,13 @@ public class MineController extends QMUIWindowInsetLayout {
                 .setOnClickListener(view -> mHandler.startFragment(new SettingFragment()));
     }
 
-    protected void init() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.controller_mine;
+    }
+
+    @Override
+    public void initLast() {
         initTopBar();
         initQMUILinearLayout();
         initRefreshLayout();
@@ -192,12 +197,6 @@ public class MineController extends QMUIWindowInsetLayout {
     }
 
     public MineController(Context mContext, ControllerClickHandler mHandler) {
-        super(mContext);
-        this.mHandler = mHandler;
-        this.mContext = mContext;
-        LayoutInflater.from(mContext).inflate(R.layout.controller_mine, this);
-        ButterKnife.bind(this);
-        mDialogHelper = new DialogHelper(mContext);
-        init();
+        super(mContext,mHandler);
     }
 }

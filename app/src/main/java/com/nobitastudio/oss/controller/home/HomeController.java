@@ -2,6 +2,8 @@ package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.TypeReference;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
@@ -20,6 +23,7 @@ import com.nobitastudio.oss.activity.PlayVideoActivity;
 import com.nobitastudio.oss.adapter.pager.UltraPagerAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.DoctorLectureRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
@@ -31,7 +35,12 @@ import com.nobitastudio.oss.fragment.home.MedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.NavigationFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.mine.RegisterRecordFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.common.error.ErrorCode;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.model.enumeration.HealthArticleType;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
@@ -42,8 +51,10 @@ import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.UltraViewPagerAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,7 +66,7 @@ import butterknife.OnClick;
  * @date 2019/01/28 14:03
  * @description
  */
-public class HomeController extends QMUIWindowInsetLayout {
+public class HomeController extends BaseController {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
@@ -115,8 +126,10 @@ public class HomeController extends QMUIWindowInsetLayout {
 //                Toasty.success(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
 //                Toasty.info(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
 //                Toasty.warning(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
-                mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
+//                mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
 //                ActivityUtils.startActivity(new Intent(mContext, PlayVideoActivity.class));
+//                showNetworkLoadingTipDialog("测试", 1500);
+                refresh(Boolean.FALSE);
                 break;
             case R.id.topbar_right_setting_button:
                 ToastUtils.showShort("进入天气预报");
@@ -125,80 +138,18 @@ public class HomeController extends QMUIWindowInsetLayout {
     }
 
     HashMap<HealthArticleFragment.Pager, View> mPages;
-    HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
-    DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter;
-    ControllerClickHandler mHandler;
-    List<HealthArticle> mHealthArticles;// 医院活动.健康头条.名医讲堂  全部
-    List<HealthArticle> mHospitalActivities;// 医院活动
-    List<HealthArticle> mHeadLines;// 健康头条
-    List<HealthArticle> mDoctorLectures;// 名医讲堂
+    public List<HealthArticle> mHealthArticles;// 医院活动.健康头条.名医讲堂  全部
+    public List<HealthArticle> mHospitalActivities;// 医院活动
+    public List<HealthArticle> mHeadLines;// 健康头条
+    public List<HealthArticle> mDoctorLectures;// 名医讲堂
 
     TipDialogHelper mTipDialogHelper;
-    Context mContext;
-    private PagerAdapter mUltraPagerAdapter; // 医院活动
+    PagerAdapter mUltraPagerAdapter; // 医院活动
+    HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter; //头条
+    DoctorLectureRecyclerViewAdapter mDoctorLectureRecyclerViewAdapter; // 名医讲座
 
-    private PagerAdapter mPagerAdapter = new PagerAdapter() {
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public int getCount() {
-            return mPages.size();
-        }
-
-        @Override
-        public Object instantiateItem(final ViewGroup container, int position) {
-            View page = mPages.get(HealthArticleFragment.Pager.getPagerFromPosition(position));
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            container.addView(page, params);
-            return page;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-//            if (mChildCount == 0) {
-//                return POSITION_NONE;
-//            }
-//            return super.getItemPosition(object);
-            return POSITION_NONE;   // 修复数据刷新但是高度不刷新的异常
-        }
-
-        @Override
-        public void notifyDataSetChanged() {
-            super.notifyDataSetChanged();
-        }
-    };  // 健康资讯
+    private PagerAdapter mPagerAdapter;  // 健康资讯
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
-
-    /**
-     * 初始化方法
-     */
-    private void init(Context context) {
-        initBasic(context);
-        initTopBar();
-        initUltraViewPager();
-        initQMUILinearLayout();
-        initPullFreshLayout();
-        initTabs();
-        initPagers();
-
-        refresh();
-    }
-
-    // 刷新操作
-    private void refresh() {
-        // 获取 healthArticle
-
-
-    }
 
     private void initQMUILinearLayout() {
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
@@ -216,7 +167,41 @@ public class HomeController extends QMUIWindowInsetLayout {
         mDoctorLectures = new ArrayList<>();
 
         // 初始化 adapter
-        mUltraPagerAdapter = new UltraPagerAdapter(mContext, mHospitalActivities);
+        mUltraPagerAdapter = new UltraPagerAdapter(mContext, mHospitalActivities).setControllerClickHandler(mHandler);  // 轮播图
+        mPagerAdapter = new PagerAdapter() {
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+
+            @Override
+            public int getCount() {
+                return mPages.size();
+            }
+
+            @Override
+            public Object instantiateItem(final ViewGroup container, int position) {
+                View page = mPages.get(HealthArticleFragment.Pager.getPagerFromPosition(position));
+                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                container.addView(page, params);
+                return page;
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+//            if (mChildCount == 0) {
+//                return POSITION_NONE;
+//            }
+//            return super.getItemPosition(object);
+                return POSITION_NONE;   // 修复数据刷新但是高度不刷新的异常
+            }
+        }; // pager
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadLines);// 健康头条
         mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
     }
@@ -324,20 +309,7 @@ public class HomeController extends QMUIWindowInsetLayout {
             @Override
             public void onRefresh() {
                 // 刷新操作
-                mHealthArticles.remove(0);
-                mHealthArticles.remove(1);
-                mHealthArticles.remove(2);
-                mHealthArticles.remove(3);
-                mHealthArticles.remove(4);
-                mPagerAdapter.notifyDataSetChanged();
-                // 完成后调用finishRefresh关闭
-                mPullRefreshLayout.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullRefreshLayout.finishRefresh();
-                        ToastUtils.showShort("刷新成功");
-                    }
-                }, 2000);
+                refresh(Boolean.TRUE);
             }
         });
     }
@@ -347,44 +319,83 @@ public class HomeController extends QMUIWindowInsetLayout {
      */
     private void initTopBar() {
         mTopBar.setBackgroundDividerEnabled(false);
-        mTopBar.setTitle(getResources().getString(R.string.home));
+//        mTopBar.setTitle(getResources().getString(R.string.home));
         mTopBar.addLeftImageButton(R.mipmap.ic_qr_code, R.id.topbar_left_qr_code_button)
                 .setOnClickListener(view -> ToastUtils.showShort("程序员小哥哥已累死,请给我们点时间吧~"));
-        TextView textView = new TextView(mContext);
-        textView.setText("这是搜索");
+//        TextView textView = new TextView(mContext);
+//        textView.setText("这是搜索");
 //        mTopBar.setCenterView(textView);  // 传入搜索的view
         mTopBar.addRightTextButton("多云转小雨 33℃", R.id.topbar_right_setting_button)
                 .setOnClickListener(v -> ToastUtils.showShort("进入天气预报"));
         mTopBar.setBackgroundColor(getResources().getColor(R.color.qmui_config_color_transparent, null));
     }
 
-    protected void showNetworkLoadingTipDialog(String detailMsg) {
-        mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg);
+    // 刷新操作
+    public HomeController refresh(Boolean isCancelPull) {
+        // 获取 healthArticle
+        getAsyn(Arrays.asList("health-article", "queryLatestArticles"), null,
+                new ReflectStrategy<>(new TypeReference<List<HealthArticle>>() {
+                }),
+                new OkHttpUtil.SuccessHandler<List<HealthArticle>>() {
+                    @Override
+                    public void handle(List<HealthArticle> healthArticles) {
+                        // 清除
+                        mHealthArticles.clear();
+                        mHospitalActivities.clear();
+                        runOnUIThread(() -> {
+                            mHospitalActivityUltraViewPager.refresh();
+                        });
+                        mHeadLines.clear();
+                        mDoctorLectures.clear();
+
+                        // 存储
+                        mHealthArticles.addAll(healthArticles);
+                        mHospitalActivities.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.HOSPITAL_ACTIVITY)).collect(Collectors.toList()));
+                        runOnUIThread(() -> {
+                            mHospitalActivityUltraViewPager.refresh();
+                        });
+                        mHeadLines.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.HEADLINE)).collect(Collectors.toList()));
+                        mDoctorLectures.addAll(healthArticles.stream().filter(item -> item.getType().equals(HealthArticleType.DOCTOR_LECTURE)).collect(Collectors.toList()));
+
+                        // notify  run on mainThread
+                        runOnUIThread(() -> {
+                            mHeadlineRecycleViewAdapter.notifyDataSetChanged();
+                            mDoctorLectureRecyclerViewAdapter.notifyDataSetChanged();
+                        });
+                        if (isCancelPull) {
+                            mPullRefreshLayout.finishRefresh();
+                        }
+                    }
+                }, new OkHttpUtil.FailHandler<List<HealthArticle>>() {
+                    @Override
+                    public void handle(ServiceResult<List<HealthArticle>> serviceResult) {
+                        showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+                        if (isCancelPull) {
+                            mPullRefreshLayout.finishRefresh();
+                        }
+                    }
+                });
+        return this;
     }
 
-    protected void closeTipDialog() {
-        mTipDialogHelper.closeTipDialog();
+    @Override
+    protected int getLayoutId() {
+        return R.layout.controller_home;
     }
 
-    protected void showErrorTipDialog(String errorMsg, Long delayMills) {
-        mTipDialogHelper.showErrorTipDialog(errorMsg, delayMills, mTopBar);
-    }
-
-    protected void showInfoTipDialog(String infoMsg, Long delayMills) {
-        mTipDialogHelper.showInfoTipDialog(infoMsg, delayMills, mTopBar);
-    }
-
-    protected void showSuccessTipDialog(String successMsg, Long delayMills) {
-        mTipDialogHelper.showSuccessTipDialog(successMsg, delayMills, mTopBar);
+    @Override
+    public void initLast() {
+        initBasic(mContext);
+        initTopBar();
+        initUltraViewPager();
+        initQMUILinearLayout();
+        initPullFreshLayout();
+        initTabs();
+        initPagers();
     }
 
     public HomeController(Context context, ControllerClickHandler mHandler) {
-        super(context);
-        this.mHandler = mHandler;
-        this.mContext = context;
-        LayoutInflater.from(context).inflate(R.layout.controller_home, this);
-        ButterKnife.bind(this);
-        init(context);
+        super(context, mHandler);
         //mViewPager.
     }
 }

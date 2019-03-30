@@ -2,11 +2,11 @@ package com.nobitastudio.oss.controller.home;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.fragment.home.ExpressFragment;
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * @date 2019/01/28 14:03
  * @description
  */
-public class InfoController extends QMUIWindowInsetLayout {
+public class InfoController extends BaseController {
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
@@ -40,8 +40,6 @@ public class InfoController extends QMUIWindowInsetLayout {
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
 
-    ControllerClickHandler mHandler;
-    Context mContext;
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
     private void initQMUILinearLayout() {
@@ -148,7 +146,13 @@ public class InfoController extends QMUIWindowInsetLayout {
         };
     }
 
-    protected void init() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.controller_info;
+    }
+
+    @Override
+    public void initLast() {
         initTopBar();
         initQMUILinearLayout();
         initRefreshLayout();
@@ -156,12 +160,7 @@ public class InfoController extends QMUIWindowInsetLayout {
     }
 
     public InfoController(Context context, ControllerClickHandler mHandler) {
-        super(context);
-        this.mHandler = mHandler;
-        this.mContext = context;
-        LayoutInflater.from(context).inflate(R.layout.controller_info, this);
-        ButterKnife.bind(this);
-        init();
+        super(context,mHandler);
     }
 
 }

@@ -44,9 +44,4 @@ public class DoctorLectureRecyclerViewAdapter extends BaseRecyclerViewAdapter<He
         holder.setText(R.id.publish_time_textview, DateUtil.formatLocalDateTimeToStandardString(mData.get(position).getPublishTime()));
         holder.setText(R.id.video_time_textview,mData.get(position).getOtherData());
     }
-
-    @Override
-    public int getItemCount() {
-        return 20;
-    }
 }

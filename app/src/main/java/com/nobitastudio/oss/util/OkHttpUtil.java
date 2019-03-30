@@ -3,6 +3,7 @@ package com.nobitastudio.oss.util;
 import android.app.Activity;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.blankj.utilcode.util.NetworkUtils;
@@ -62,7 +63,7 @@ public class OkHttpUtil {
         void handle(ServiceResult<T> serviceResult);
     }
 
-    // 错错误
+    // 错误
     public interface ErrorHandler {
         void handle(Call call, Response response);
     }
@@ -212,13 +213,16 @@ public class OkHttpUtil {
                             if (result.getState() == 0) {
                                 // 成功
                                 if (result.getResult() instanceof JSONObject) {
-                                    T t;
-                                    if (reflectStrategy.isClass()) {
-                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass());
-                                    } else {
-                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTypeReference());
-                                    }
-                                    result.setResult(t);
+//                                    T t;
+//                                    if (reflectStrategy.isClass()) {
+//                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass());
+//                                    } else {
+//                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTypeReference());
+//                                    }
+//                                    result.setResult(t);
+                                    result.setResult(((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass()));
+                                } else if (result.getResult() instanceof JSONArray) {
+                                    result.setResult(((JSONArray) result.getResult()).toJavaObject(reflectStrategy.getTypeReference()));
                                 } else {
                                     return;
                                 }

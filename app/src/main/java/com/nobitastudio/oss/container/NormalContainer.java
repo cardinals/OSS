@@ -20,6 +20,7 @@ public class NormalContainer implements Serializable {
     //  key
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity
     public static final String USER = "USER"; // 登录的用户
+    public static final String SELECTED_HOSPITAL_ACTIVITY = "SELECTED_HOSPITAL_ACTIVITY";
 
     public static void put(String key, Object value) {
         container.put(key, value);
