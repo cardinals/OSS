@@ -95,7 +95,7 @@ public class DialogHelper {
      * @param cancelMsg       显示取消位置的按钮  文字 暂时未使用,可以传入null
      * @param confirmMsg      显示确认位置的按钮  文字
      * @param cancelListener  点击取消的监听器  暂时未使用,可以传入null
-     * @param confirmListener 点击确认的监听器  暂时未使用,客串日null
+     * @param confirmListener 点击确认的监听器
      */
     public QMUIDialog showLongMessageDialog(String title, String content,
                                             String cancelMsg, QMUIDialogAction.ActionListener cancelListener,

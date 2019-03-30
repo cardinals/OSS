@@ -170,7 +170,7 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void refresh(Boolean isCancelPull) {
-        ((HomeController) mPages.get(Pager.HOME)).refresh(false);
+        ((HomeController) mPages.get(Pager.HOME)).refresh(false);  // HomeController 没有生命周期.先初始化再刷新数据.
     }
 
     @Override
