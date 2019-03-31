@@ -8,14 +8,20 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.entity.Department;
+import com.nobitastudio.oss.model.entity.Doctor;
+import com.nobitastudio.oss.model.entity.MedicalCard;
+import com.nobitastudio.oss.model.entity.Visit;
+import com.nobitastudio.oss.util.DateUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -25,6 +31,18 @@ import es.dmoral.toasty.Toasty;
  */
 public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
 
+    @BindView(R.id.department_textview)
+    TextView mDepartmentTextView;
+    @BindView(R.id.doctor_name_textview)
+    TextView mDoctorNameTextView;
+    @BindView(R.id.diagnosis_date_textview)
+    TextView mDiagnosisDateTextView;
+    @BindView(R.id.diagnosis_time_textview)
+    TextView mDiagnosisTimeTextView;
+    @BindView(R.id.diagnosis_room_textview)
+    TextView mDiagnosisRoomTextView;  // 诊室位置  暂时填充为科室的位置
+    @BindView(R.id.diagnosis_cost_textview)
+    TextView mDiagnosisCostTextView;
     @BindView(R.id.choose_medical_card_textview)
     TextView mChooseMedicalCardTextView;
     @BindView(R.id.medical_card_ownername_linearlayout)
@@ -65,31 +83,41 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
+    // 正常的初始化操作
+    private void intBasic() {
+        mDepartmentTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getName());
+        mDoctorNameTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DOCTOR, Doctor.class).getName());
+        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
+        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
+        mDiagnosisRoomTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getAddress());
+        mDiagnosisCostTextView.setText(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getCost().toString() + " 元");
+    }
+
     /**
      * 判断用户是否存在有绑定的诊疗卡
      *
      * @return
      */
     private Boolean isBindMedicalCard() {
-        if (Boolean.TRUE) {
+        List<MedicalCard> mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+        if (mBindMedicalCards == null || mBindMedicalCards.isEmpty()) {
+            // 未绑定诊疗卡
+            showMessagePositiveDialog("温馨提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
+                    "取消", (dialog, index) -> {
+                        dialog.dismiss();
+                    }, "立即绑定/创建", (dialog, index) -> {
+                        dialog.dismiss();
+                        startFragment(new MedicalCardFragment());
+                    });
+        } else {
             // 已有绑定的诊疗卡
-            List<String> items = Arrays.asList("陈雄", "楚楚", "冯周", "陈雄陈雄", "陈雄陈雄陈雄");
+            List<String> items = mBindMedicalCards.stream().map(MedicalCard::getOwnerName).collect(Collectors.toList());
             showListPopView(mChooseMedicalCardTextView, items, 120, 160,
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
                         popViewDismiss();
                     },
                     null);
-        } else {
-            // 未绑定诊疗卡
-            showMessagePositiveDialog("温馨提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
-                    "取消", (dialog, index) -> {
-                        ToastUtils.showShort("用户已经取消");
-                        dialog.dismiss();
-                    }, "立即绑定/创建", (dialog, index) -> {
-                        ToastUtils.showShort("goto medicalcard ic_activity");
-                        dialog.dismiss();
-                    });
         }
         return Boolean.FALSE;
     }
@@ -142,6 +170,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        intBasic();
         initSolidImage(mRegisterBasicMsgSolidImageView);
     }
 

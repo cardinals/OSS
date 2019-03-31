@@ -1,15 +1,17 @@
 package com.nobitastudio.oss.adapter.recyclerview;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.container.NormalContainer;
+import com.nobitastudio.oss.model.entity.Department;
+import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.Visit;
+import com.nobitastudio.oss.model.enumeration.Area;
 import com.nobitastudio.oss.util.DateUtil;
-import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
  * @description 这是类描述
  */
 public class VisitRecycleViewAdapter extends BaseRecyclerViewAdapter<Visit> {
+
     public VisitRecycleViewAdapter(Context ctx, List<Visit> list) {
         super(ctx, list);
     }
@@ -31,27 +34,26 @@ public class VisitRecycleViewAdapter extends BaseRecyclerViewAdapter<Visit> {
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, Visit item) {
-        TextView mDateTextView = holder.getTextView(R.id.date_textview);
-        TextView mWeekTextView = holder.getTextView(R.id.week_textview);
-        TextView mTimeSlotTextView = holder.getTextView(R.id.time_slot_textview);
-        TextView mHospitalNameTextView = holder.getTextView(R.id.hospital_name_textview);
-        TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textview);
-        TextView mAreaTextView = holder.getTextView(R.id.area_textview);
-        QMUIRoundButton mGreenRoundButton = (QMUIRoundButton) holder.getView(R.id.green_roundbutton);
-        QMUIRoundButton mRedRoundButton = (QMUIRoundButton) holder.getView(R.id.red_roundbutton);
+        holder.getTextView(R.id.date_textview).setText(DateUtil.convertToStandardDate(item.getDiagnosisTime()));
+        holder.getTextView(R.id.week_textview).setText(DateUtil.convertDayOfWeekToChinese(item.getDiagnosisTime().getDayOfWeek()));
+        // item.getDiagnosisTime().getHour() 返回 0 ~ 23 14点后是下午.
+        holder.getTextView(R.id.time_slot_textview).setText(item.getDiagnosisTime().getHour() < 13 ? "上午" : "下午");
+        holder.getTextView(R.id.hospital_name_textview).setText(mContext.getString(R.string.hospital_name));
+        holder.getTextView(R.id.submajor_textview).setText(((Doctor) NormalContainer.get(NormalContainer.SELECTED_DOCTOR)).getSubMajor());
+        holder.getTextView(R.id.area_textview).setText(Area.convertToChinese(((Department) NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT)).getArea()));
+        initButton(item, holder.getButton(R.id.roundButton));
+    }
 
-        mDateTextView.setText(DateUtil.formatLocalDateTimeToSimpleString2(item.getDiagnosisTime()));
-        mWeekTextView.setText(item.getDiagnosisTime().getDayOfWeek().name());
-        mTimeSlotTextView.setText("上午");
-        mHospitalNameTextView.setText("石河子大学医学院");
-        mSubMajorTextView.setText("这是医生的亚专业");
-        mAreaTextView.setText("A区");
-        if (position > 3) {
-            mGreenRoundButton.setVisibility(View.GONE);
-            mRedRoundButton.setVisibility(View.VISIBLE);
+    // 决定医生是否有号
+    private void initButton(Visit visit, Button button) {
+        if (visit.getLeftAmount() != 0) {
+            button.setText("有号");
+            button.setTextColor(mContext.getResources().getColor(R.color.app_color_theme_5, null));
+            button.setBackground(mContext.getDrawable(R.drawable.bg_green_radius_button));
         } else {
-            mGreenRoundButton.setVisibility(View.VISIBLE);
-            mRedRoundButton.setVisibility(View.GONE);
+            button.setText("无号");
+            button.setTextColor(mContext.getResources().getColor(R.color.app_color_theme_2, null));
+            button.setBackground(mContext.getDrawable(R.drawable.bg_red_radius_button));
         }
     }
 }

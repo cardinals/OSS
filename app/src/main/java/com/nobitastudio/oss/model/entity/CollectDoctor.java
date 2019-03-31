@@ -1,7 +1,9 @@
 package com.nobitastudio.oss.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -19,6 +21,8 @@ import java.time.LocalDateTime;
 @Table(name = "collect_doctor")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CollectDoctor  implements Serializable {
 
     private static final long serialVersionUID = 2521556559394088770L;
@@ -36,4 +40,9 @@ public class CollectDoctor  implements Serializable {
 
     @Column(name = "create_time")
     private LocalDateTime createTime;
+
+    public CollectDoctor(Integer userId, Integer doctorId) {
+        this.userId = userId;
+        this.doctorId = doctorId;
+    }
 }

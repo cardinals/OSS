@@ -10,5 +10,20 @@ public enum Area {
     A,
     B,
     C,
-    D
+    D;
+
+    public static String convertToChinese(Area area) {
+        switch (area) {
+            case A:
+                return "A区";
+            case B:
+                return "B区";
+            case C:
+                return "C区";
+            case D:
+                return "D区";
+            default:
+                return "A区";
+        }
+    }
 }

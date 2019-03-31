@@ -18,6 +18,7 @@ public class ErrorCode {
     public static final String UNKNOWN_ERROR = "UNKNOWN_ERROR";  // 400 500 404等错误 未知错误
     public static final String NOT_FIND_USER_BY_MOBILE = "NOT_FIND_USER_BY_MOBILE";
     public static final String MOBILE_OR_PASSWORD_ERROR = "MOBILE_OR_PASSWORD_ERROR";
+    public static final String HAS_COLLECT_DOCTOR = "HAS_COLLECT_DOCTOR";
 
     public static String get(String errorCode) {
         if (errorCodeContainer == null) {
@@ -28,10 +29,11 @@ public class ErrorCode {
 
     private static synchronized void initErrorCode() {
         errorCodeContainer = new HashMap<>();
-        errorCodeContainer.put("UNDEFINED_ERROR", "未定义错误");
-        errorCodeContainer.put("UNKNOWN_ERROR", "发生未知错误,请联系系统管理员");
-        errorCodeContainer.put("NOT_FIND_USER_BY_MOBILE", "该手机号尚未注册");
-        errorCodeContainer.put("MOBILE_OR_PASSWORD_ERROR", "账号或密码错误");
+        errorCodeContainer.put(UNDEFINED_ERROR, "未定义错误");
+        errorCodeContainer.put(UNKNOWN_ERROR, "发生未知错误,请联系系统管理员");
+        errorCodeContainer.put(NOT_FIND_USER_BY_MOBILE, "该手机号尚未注册");
+        errorCodeContainer.put(MOBILE_OR_PASSWORD_ERROR, "账号或密码错误");
+        errorCodeContainer.put(HAS_COLLECT_DOCTOR,"您以收藏该医生,请勿重复收藏");
     }
 
 }

@@ -15,7 +15,7 @@
 
         <!-- 左边布局 -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="24dp"
@@ -89,6 +89,7 @@
                 <TextView
                     android:id="@+id/area_textview"
                     style="@style/QDCommonDescription"
+                    android:layout_marginLeft="@dimen/dp_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -98,30 +99,16 @@
         </LinearLayout>
 
         <!-- 右侧现实是否有号 -->
-        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-            android:id="@+id/green_roundbutton"
-            style="@style/QMUI.RoundButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+        <Button
+            android:id="@+id/roundButton"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_gravity="center"
-            android:layout_marginRight="24dp"
-            android:clickable="false"
-            android:text="有号"
-            android:textColor="@color/app_color_theme_5"
-            android:visibility="gone"
-            app:qmui_borderColor="@color/app_color_theme_5" />
-
-        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-            android:id="@+id/red_roundbutton"
-            style="@style/QMUI.RoundButton"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="24dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_red_radius_button"
             android:clickable="false"
             android:text="无号"
-            android:textColor="@color/app_color_theme_2"
-            app:qmui_borderColor="@color/app_color_theme_2" />
+            android:textColor="@color/app_color_theme_2" />
 
     </LinearLayout>
 

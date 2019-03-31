@@ -9,7 +9,6 @@ import com.nobitastudio.oss.fragment.about.AboutFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
-import com.nobitastudio.oss.model.dto.LoginResult;
 import com.nobitastudio.oss.model.entity.User;
 
 import butterknife.BindView;
@@ -86,7 +85,7 @@ public class LoginOldFragment extends StandardWithTobBarLayoutFragment {
      *
      * @param user
      */
-    private ServiceResult<LoginResult> userLogin(User user) {
+    private ServiceResult userLogin(User user) {
         return ServiceResult.success(null);
     }
 

@@ -34,6 +34,6 @@ public class HeadlineRecycleViewAdapter extends BaseRecyclerViewAdapter<HealthAr
         Glide.with(mContext).load(ConstantContainer.OSS_SERVER_RUNTIME + item.getIconUrl()).into(holder.getImageView(R.id.cover_imageview));
         holder.setText(R.id.title_textview, item.getTitle());
         holder.setText(R.id.label_textview, item.getLabel());
-        holder.setText(R.id.publish_time_textview, DateUtil.formatLocalDateTimeToStandardString(item.getPublishTime()));
+        holder.setText(R.id.publish_time_textview, DateUtil.convertToStandardDateTime(item.getPublishTime()));
     }
 }

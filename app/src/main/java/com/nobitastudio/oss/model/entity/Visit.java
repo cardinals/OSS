@@ -24,6 +24,10 @@ public class Visit implements Serializable {
 
     private static final long serialVersionUID = -8300723782462137747L;
 
+    public Visit() {
+        this.diagnosisTime = LocalDateTime.now();
+    }
+
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

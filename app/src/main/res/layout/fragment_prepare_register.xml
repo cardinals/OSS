@@ -85,6 +85,7 @@
 
                         <!--就诊科室-->
                         <TextView
+                            android:id="@+id/department_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -113,6 +114,7 @@
 
                         <!--就诊科室-->
                         <TextView
+                            android:id="@+id/doctor_name_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -141,6 +143,7 @@
 
                         <!--就诊科室-->
                         <TextView
+                            android:id="@+id/diagnosis_date_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -169,6 +172,7 @@
 
                         <!--就诊科室-->
                         <TextView
+                            android:id="@+id/diagnosis_time_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -195,8 +199,9 @@
                             android:gravity="start"
                             android:text="就诊地点:" />
 
-                        <!--就诊科室-->
+                        <!--就诊科室 诊室位置-->
                         <TextView
+                            android:id="@+id/diagnosis_room_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -225,6 +230,7 @@
 
                         <!--就诊科室-->
                         <TextView
+                            android:id="@+id/diagnosis_cost_textview"
                             style="@style/QDCommonDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

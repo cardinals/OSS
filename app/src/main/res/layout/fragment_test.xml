@@ -217,6 +217,17 @@
                         android:layout_marginTop="@dimen/dp_16"
                         android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="确认办理" />
+
+                    <Button
+                        android:background="@drawable/bg_green_radius_button"
+                        android:paddingLeft="@dimen/dp_0"
+                        android:paddingRight="@dimen/dp_0"
+                        android:layout_width="40dp"
+                        android:textColor="@color/app_color_theme_5"
+                        android:layout_height="@dimen/dp_40"
+                        android:text="有号" />
+
+
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

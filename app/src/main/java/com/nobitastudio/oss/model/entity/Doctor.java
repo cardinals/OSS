@@ -45,6 +45,8 @@ public class Doctor implements Serializable {
     @Enumerated(EnumType.STRING)
     private DoctorLevel level;
 
+    private String iconUrl;
+
     @Column(name = "department_id")
     private Integer departmentId;
 }

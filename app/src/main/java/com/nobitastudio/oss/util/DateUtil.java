@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -19,10 +20,11 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    public static final String STANDARD_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    public static final String DATE_FORMAT = "yyyyMMddHHmmss";
-    public static final String SIMPLE_DATE_FORMAT = "yyyyMMdd";
-    public static final String SIMPLE_DATE_FORMAT_2 = "yyyy-MM-dd";
+    public static final String STANDARD_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+    public static final String STANDARD_DATE_TIME_2 = "yyyyMMddHHmmss";
+    public static final String STANDARD_DATE_2 = "yyyyMMdd";
+    public static final String STANDARD_DATE = "yyyy-MM-dd";
+    public static final String STANDARD_TIME = "HH:mm:ss";
 
     // 将20190101121212 按照指定格式进行转换
     // 由string  类型时间 格式化为指定格式
@@ -31,7 +33,7 @@ public class DateUtil {
             return null;
         }
         if (StringUtils.isBlank(sourceFormat)) {
-            sourceFormat = STANDARD_DATE_FORMAT;
+            sourceFormat = STANDARD_DATE_TIME;
         }
         SimpleDateFormat sourceSdf = new SimpleDateFormat(sourceFormat);
         SimpleDateFormat targetSdf = new SimpleDateFormat(targetFormat);
@@ -73,40 +75,43 @@ public class DateUtil {
         }
     }
 
-
     public static String getCurrentYear() {
         Calendar calendar = Calendar.getInstance();
         return String.valueOf(calendar.get(Calendar.YEAR));
     }
 
     /**
-     * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     * 格式化 LocalDateTime 为String类型 "yyyy-MM-dd HH:mm:ss"
      *
      * @param localDateTime
      * @return
      */
-    public static String formatLocalDateTimeToStandardString(LocalDateTime localDateTime) {
-        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_DATE_FORMAT));
+    public static String convertToStandardDateTime(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_DATE_TIME));
     }
 
     /**
-     * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     * 格式化 LocalDateTime 为String类型 "yyyyMMdd"
      *
      * @param localDateTime
      * @return
      */
-    public static String formatLocalDateTimeToSimpleString(LocalDateTime localDateTime) {
-        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.SIMPLE_DATE_FORMAT));
+    public static String convertToStandardDate2(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_DATE_2));
     }
 
     /**
-     * 格式化 LocalDateTime 为String类型 "yyyyMMdd"，未传入时，返回调用时间
+     * 格式化 LocalDateTime 为String类型 "yyyy-MM-dd"，未传入时，返回调用时间
      *
      * @param localDateTime
      * @return
      */
-    public static String formatLocalDateTimeToSimpleString2(LocalDateTime localDateTime) {
-        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.SIMPLE_DATE_FORMAT_2));
+    public static String convertToStandardDate(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_DATE));
+    }
+
+    public static String convertToStandardTime(LocalDateTime localDateTime) {
+        return localDateTime.format(DateTimeFormatter.ofPattern(DateUtil.STANDARD_TIME));
     }
 
     /**
@@ -115,7 +120,7 @@ public class DateUtil {
      * @param localDateTime
      * @return
      */
-    public static Date formatLocalDateTimeToDate(LocalDateTime localDateTime) {
+    public static Date convertToDate(LocalDateTime localDateTime) {
         return new Date(localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli());
     }
 
@@ -134,6 +139,27 @@ public class DateUtil {
 
         }
         return (hour > 9 ? hour + ":" : (hour == 0 ? "" : "0" + hour + ":")) + (minute < 10 ? "0" + minute : minute + "") + ":" + (sec < 10 ? "0" + sec : sec + "");
+    }
+
+    public static String convertDayOfWeekToChinese(DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+            case MONDAY:
+                return "星期一";
+            case TUESDAY:
+                return "星期二";
+            case WEDNESDAY:
+                return "星期三";
+            case THURSDAY:
+                return "星期四";
+            case FRIDAY:
+                return "星期五";
+            case SATURDAY:
+                return "星期六";
+            case SUNDAY:
+                return "星期天";
+            default:
+                return "";
+        }
     }
 
     public static void main(String[] args) {

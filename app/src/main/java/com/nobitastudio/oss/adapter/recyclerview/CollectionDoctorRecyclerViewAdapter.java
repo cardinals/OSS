@@ -10,9 +10,7 @@ import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
-import com.nobitastudio.oss.fragment.mine.MyCollectFragment;
 import com.nobitastudio.oss.model.entity.Doctor;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class CollectionDoctorRecyclerViewAdapter extends BaseRecyclerViewAdapter
         TextView mDoctorLevelTextView = holder.getTextView(R.id.doctor_level_textView);
         TextView mDoctorDepartmentTextView = holder.getTextView(R.id.deparment_textView);
         TextView mSubMajorTextView = holder.getTextView(R.id.submajor_textView);
-        TextView mSpecialityTextView = holder.getTextView(R.id.speciality_textView);
+        TextView mSpecialityTextView = holder.getTextView(R.id.speciality_textview);
         ImageView mCollectDoctorImageView = holder.getImageView(R.id.collect_doctor_imageview);
         mQMUILinearLayoutHelper.init(holder.getView(R.id.doctor_collect_linearLayout));
         Glide.with(mContext).load(R.drawable.bg_hospital_trademark).into(mDoctorImageView);

@@ -79,7 +79,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new LoginOldFragment();
 //        return new SettingFragment();
 //        return new HomeFragment();
-        return new DepartmentFragment();
+        return new LoginFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();
 //        return new MedicalCardFragment();

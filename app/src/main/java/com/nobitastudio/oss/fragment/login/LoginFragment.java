@@ -1,34 +1,23 @@
 package com.nobitastudio.oss.fragment.login;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.fragment.BaseFragment;
-import com.nobitastudio.oss.base.helper.BottomSheetHelper;
-import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.about.AboutFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
-import com.nobitastudio.oss.fragment.standard.StandardFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
-import com.nobitastudio.oss.model.dto.LoginResult;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.User;
-import com.nobitastudio.oss.util.DateUtil;
 
 import java.util.Arrays;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
