@@ -200,7 +200,14 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
             NormalContainer.put(NormalContainer.SELECTED_VISIT, mAvailableVisits.get(pos));
             startFragment(new PrepareRegisterFragment());
         });
-        allVisitRecycleViewAdapter.setOnItemClickListener((view, pos) -> showInfoTipDialog("该号源以被预约完"));
+        allVisitRecycleViewAdapter.setOnItemClickListener((view, pos) -> {
+            if (mVisits.get(pos).getLeftAmount() == 0) {
+                showInfoTipDialog("该号源以被预约完");
+            } else {
+                NormalContainer.put(NormalContainer.SELECTED_VISIT, mVisits.get(pos));
+                startFragment(new PrepareRegisterFragment());
+            }
+        });
 
         availableVisitRecycleView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
