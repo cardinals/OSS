@@ -52,6 +52,8 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.register_basic_msg_imageview)
     ImageView mRegisterBasicMsgSolidImageView;
 
+    List<MedicalCard> mBindMedicalCards;
+
     @OnClick({R.id.choose_medical_card_textview, R.id.choose_medical_card_imageview,
             R.id.confirm_register_msg})
     void onClick(View v) {
@@ -70,7 +72,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                                 if (isInputVerificationCode()) {
                                     // 输入了验证码
                                     if (isVerificationCodeRight()) {
-                                        // 验证码是正确的,进入准备支付的activity
+                                        // 验证码是正确的,进入准备支付
                                         startFragment(new WaitingPayRegisterFragment());
                                     }
                                 }
@@ -85,6 +87,8 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
 
     // 正常的初始化操作
     private void intBasic() {
+        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+
         mDepartmentTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getName());
         mDoctorNameTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DOCTOR, Doctor.class).getName());
         mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
@@ -99,7 +103,6 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
      * @return
      */
     private Boolean isBindMedicalCard() {
-        List<MedicalCard> mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
         if (mBindMedicalCards == null || mBindMedicalCards.isEmpty()) {
             // 未绑定诊疗卡
             showMessagePositiveDialog("温馨提示", "您尚未绑定任何诊疗卡,请完成诊疗卡绑定后再进行挂号操作。",
@@ -115,6 +118,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
             showListPopView(mChooseMedicalCardTextView, items, 120, 160,
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
+                        NormalContainer.put(NormalContainer.SELECTED_MEDICAL_CARD,mBindMedicalCards.get(position));
                         popViewDismiss();
                     },
                     null);

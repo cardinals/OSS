@@ -18,11 +18,13 @@ import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.Call;
 
 /**
  * @author chenxiong
@@ -95,6 +97,13 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
                 showLoadingFailEmptyView("加载失败", "点击重试", mEmptyView);
             }
         });
+    }
+
+    @Override
+    public OkHttpUtil.ConnectFailHandler getConnectFailHandler() {
+        return (call, e) -> {
+            showLoadingFailEmptyView("加载失败", "点击重试", mEmptyView);
+        };
     }
 
     @Override

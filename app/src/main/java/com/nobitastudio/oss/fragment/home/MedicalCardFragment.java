@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.MedicalCardItemAdapter;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.entity.MedicalCard;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,6 +27,9 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.recyclerview)
     RecyclerView mMedicalCardRecyclerView;
+
+    List<MedicalCard> mBindMedicalCards;
+    MedicalCardItemAdapter mMedicalCardItemAdapter;
 
     @OnClick({R.id.create_medical_card_button, R.id.bind_medical_card_button})
     void onClick(View v) {
@@ -53,10 +60,19 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initMedicalCard();
+        initBasic();
+        initRecyclerView();
     }
 
-    protected void initMedicalCard() {
+    private void initBasic() {
+        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+        if (mBindMedicalCards == null) {
+
+            showNetworkLoadingTipDialog("正在加载");
+        }
+    }
+
+    protected void initRecyclerView() {
         mMedicalCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -64,8 +80,11 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        MedicalCardItemAdapter mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), null);
-        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> startFragment(new MedicalCardDetailFragment()));
+        mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), mBindMedicalCards);
+        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> {
+            NormalContainer.put(NormalContainer.SELECTED_MEDICAL_CARD,mBindMedicalCards.get(pos));
+            startFragment(new MedicalCardDetailFragment());
+        });
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
     }
 

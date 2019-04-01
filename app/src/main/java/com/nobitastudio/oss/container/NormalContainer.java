@@ -34,6 +34,7 @@ public class NormalContainer implements Serializable {
     public static final String SELECTED_DEPARTMENT = "SELECTED_DEPARTMENT"; // 选中的科室
     public static final String SELECTED_DOCTOR = "SELECTED_DOCTOR"; // 选中的科室
     public static final String SELECTED_VISIT = "SELECTED_VISIT"; // 选中的号源
+    public static final String SELECTED_MEDICAL_CARD = "SELECTED_MEDICAL_CARD"; // 选中的诊疗卡
 
     public static void put(String key, Object value) {
         container.put(key, value);
