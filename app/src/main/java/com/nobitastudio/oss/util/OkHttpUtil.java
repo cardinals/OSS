@@ -1,6 +1,8 @@
 package com.nobitastudio.oss.util;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -249,5 +251,35 @@ public class OkHttpUtil {
                                 ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler,
                                 FailHandler<T> failureHandler, ErrorHandler errorHandler) {
         return null;
+    }
+
+    // ============== 接收对象
+    public static Call getImageAsyn(List<String> restParams, List<GetParam> getParams,
+                                    ConnectFailHandler connectFailHandler, SuccessHandler<Bitmap> successHandler,
+                                    ErrorHandler errorHandler) {
+        Request request = generateRequest(METHOD.GET, restParams, getParams, null);
+        Call call = getOkHttpClient().newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // 服务器未返回.未联网.超时等
+                runOnUiThread(() -> connectFailHandler.handle(call, e));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                // 服务器返回了数据
+                if (response.isSuccessful()) {
+                    // 请求返回码 200 - 300 即返回成功
+                    if (response.code() == 200) {
+                        successHandler.handle(BitmapFactory.decodeStream(response.body().byteStream()));
+                    }
+                } else {
+                    // 未授权.500 404 等
+                    runOnUiThread(() -> errorHandler.handle(call, response));
+                }
+            }
+        });
+        return call;  //返回,用于取消网络请求
     }
 }

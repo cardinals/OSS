@@ -325,8 +325,8 @@
                             android:gravity="center"
                             android:ellipsize="end"
                             android:hint="请输入右侧验证码"
-                            android:inputType="number"
-                            android:maxLength="6"
+                            android:inputType="textVisiblePassword"
+                            android:maxLength="5"
                             android:maxLines="1"
                             android:paddingBottom="6dp"
                             android:singleLine="true"
@@ -334,7 +334,7 @@
                             android:textSize="15sp" />
 
                         <ImageView
-                            android:id="@+id/activity_register_pictrueverificationcode_imageview"
+                            android:id="@+id/captcha_imageview"
                             android:layout_width="104dp"
                             android:layout_height="40dp"
                             android:background="@drawable/bg_verificationcode"
