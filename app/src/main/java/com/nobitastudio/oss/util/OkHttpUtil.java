@@ -11,6 +11,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.common.ServiceResult;
@@ -87,7 +88,7 @@ public class OkHttpUtil {
 
     // 获取当前处于哪一个activity
     public static Activity getSelectedActivity() {
-        return NormalContainer.get(NormalContainer.SELECTED_ACTIVITY);
+        return NormalContainerHelper.getInstance().getSelectedActivity();
     }
 
     // 跑在UI线程上

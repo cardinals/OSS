@@ -47,8 +47,8 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
         mDoctorAndVisits = new ArrayList<>();
         mDoctorRecycleViewAdapter = new DoctorRecycleViewAdapter(getContext(), mDoctorAndVisits, mSelectedDepartment);
         mDoctorRecycleViewAdapter.setOnItemClickListener((view, pos) -> {
-            NormalContainer.put(NormalContainer.SELECTED_DOCTOR, mDoctorAndVisits.get(pos).getDoctor());
-            NormalContainer.put(NormalContainer.VISITS, mDoctorAndVisits.get(pos).getVisits());
+            mNormalContainerHelper.setSelectedDoctor(mDoctorAndVisits.get(pos).getDoctor())
+                    .setVisits( mDoctorAndVisits.get(pos).getVisits());
             startFragment(new DoctorDetailFragment());
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
@@ -114,7 +114,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
     }
 
     private void initBasic() {
-        mSelectedDepartment = NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT);
+        mSelectedDepartment = mNormalContainerHelper.getSelectedDepartment();
     }
 
 }

@@ -82,7 +82,7 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
         postAsyn(Arrays.asList("test", "test-login"), null, user, new ReflectStrategy<>(User.class),
                 (userResult) -> {
                     closeTipDialog();
-                    NormalContainer.put(NormalContainer.USER, userResult);
+                    mNormalContainerHelper.setUser(userResult);
                     startFragmentAndDestroyCurrent(new HomeFragment());
                 },
                 (serviceResult) -> {

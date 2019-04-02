@@ -227,14 +227,14 @@ public class HealthArticleFragment extends StandardWithTobBarLayoutFragment {
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadlines);// 健康头条
         mHeadlineRecycleViewAdapter.setOnItemClickListener((itemView, pos) -> {
             HealthArticle mSelectedHeadline = mHeadlines.get(pos);
-            NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE, mSelectedHeadline);
+            mNormalContainerHelper.setSelectedHealthArticle(mSelectedHeadline);
             Toasty.info(getContext(), "id:" + mSelectedHeadline.getId() + ",url：" + mSelectedHeadline.getUrl()).show();
             startFragment(new QDWebViewFixFragment());
         });
         mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
         mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> {
             HealthArticle mSelectedLecture = mDoctorLectures.get(pos);
-            NormalContainer.put(NormalContainer.SELECTED_DOCTOR_LECTURE, mSelectedLecture);
+            mNormalContainerHelper.setSelectedDoctorLecture(mSelectedLecture);
             Toasty.info(getContext(), "id:" + mSelectedLecture.getId() + ",url：" + mSelectedLecture.getUrl()).show();
             startActivity(new Intent(getContext(), PlayVideoActivity.class));
         });

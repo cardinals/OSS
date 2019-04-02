@@ -144,13 +144,13 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
             case R.id.fab:
                 if (mCollectDoctors.contains(mSelectedDoctor)) {
                     postAsyn(Arrays.asList("collect-doctor", "cancel-collect"), null,
-                            new CollectDoctor(((User) NormalContainer.get(NormalContainer.USER)).getId(), mSelectedDoctor.getId()));
+                            new CollectDoctor(mNormalContainerHelper.getUser().getId(), mSelectedDoctor.getId()));
                     mCollectDoctors.remove(mSelectedDoctor);
                     showSuccessTipDialog("您已取消收藏该医生");
                     mFab.setImageResource(R.drawable.ic_heart_white);
                 } else {
                     postAsyn(Arrays.asList("collect-doctor"), null,
-                            new CollectDoctor(((User) NormalContainer.get(NormalContainer.USER)).getId(), mSelectedDoctor.getId()));
+                            new CollectDoctor(mNormalContainerHelper.getUser().getId(), mSelectedDoctor.getId()));
                     mCollectDoctors.add(mSelectedDoctor);
                     showSuccessTipDialog("您已收藏该医生");
                     mFab.setImageResource(R.drawable.ic_heart_red);
@@ -197,14 +197,14 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         VisitRecycleViewAdapter allVisitRecycleViewAdapter = new VisitRecycleViewAdapter(getContext(), mVisits);
 
         availableVisitRecycleViewAdapter.setOnItemClickListener((view, pos) -> {
-            NormalContainer.put(NormalContainer.SELECTED_VISIT, mAvailableVisits.get(pos));
+            mNormalContainerHelper.setSelectedVisit(mAvailableVisits.get(pos));
             startFragment(new PrepareRegisterFragment());
         });
         allVisitRecycleViewAdapter.setOnItemClickListener((view, pos) -> {
             if (mVisits.get(pos).getLeftAmount() == 0) {
                 showInfoTipDialog("该号源以被预约完");
             } else {
-                NormalContainer.put(NormalContainer.SELECTED_VISIT, mVisits.get(pos));
+                mNormalContainerHelper.setSelectedVisit(mVisits.get(pos));
                 startFragment(new PrepareRegisterFragment());
             }
         });
@@ -290,7 +290,7 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         Glide.with(getContext()).load(ConstantContainer.OSS_SERVER_RUNTIME + mSelectedDoctor.getIconUrl()).into(mDoctorImageView);
 
         // 收藏情况
-        mCollectDoctors = NormalContainer.get(NormalContainer.COLLECT_DOCTOR);
+        mCollectDoctors = mNormalContainerHelper.getCollectDoctors();
         mFab.setImageResource(mCollectDoctors.contains(mSelectedDoctor) ? R.drawable.ic_heart_red : R.drawable.ic_heart_white);
 
         // 医生基础信息
@@ -300,14 +300,14 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         // 号源
         mVisits = new ArrayList<>();
         mAvailableVisits = new ArrayList<>();
-        mVisits.addAll(NormalContainer.get(NormalContainer.VISITS));
+        mVisits.addAll(mNormalContainerHelper.getVisits());
         mAvailableVisits.addAll(mVisits.stream().filter(item -> item.getLeftAmount() != 0).collect(Collectors.toList()));
     }
 
     @Override
     protected void initFirstCustom() {
         // 一定要在initLastCustom 之前进行。以为initTopbar需要使用作为标题
-        mSelectedDoctor = NormalContainer.get(NormalContainer.SELECTED_DOCTOR);
+        mSelectedDoctor = mNormalContainerHelper.getSelectedDoctor();
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.widget.Button;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;
@@ -39,8 +40,8 @@ public class VisitRecycleViewAdapter extends BaseRecyclerViewAdapter<Visit> {
         // item.getDiagnosisTime().getHour() 返回 0 ~ 23 14点后是下午.
         holder.getTextView(R.id.time_slot_textview).setText(item.getDiagnosisTime().getHour() < 13 ? "上午" : "下午");
         holder.getTextView(R.id.hospital_name_textview).setText(mContext.getString(R.string.hospital_name));
-        holder.getTextView(R.id.submajor_textview).setText(((Doctor) NormalContainer.get(NormalContainer.SELECTED_DOCTOR)).getSubMajor());
-        holder.getTextView(R.id.area_textview).setText(Area.convertToChinese(((Department) NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT)).getArea()));
+        holder.getTextView(R.id.submajor_textview).setText(NormalContainerHelper.getInstance().getSelectedDoctor().getSubMajor());
+        holder.getTextView(R.id.area_textview).setText(Area.convertToChinese(NormalContainerHelper.getInstance().getSelectedDepartment().getArea()));
         initButton(item, holder.getButton(R.id.roundButton));
     }
 

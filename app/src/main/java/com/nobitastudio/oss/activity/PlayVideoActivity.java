@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.activity.BaseActivity;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.HealthArticle;
@@ -47,7 +48,7 @@ public class PlayVideoActivity extends BaseActivity {
 
         String url = ConstantContainer.OSS_SERVER_RUNTIME + "/video/test-video.mp4"; // 视频源.采用测试视频
 
-        mVideoPlayer.setUp(url, true, NormalContainer.get(NormalContainer.SELECTED_DOCTOR_LECTURE, HealthArticle.class).getTitle()); // 设置title
+        mVideoPlayer.setUp(url, true, NormalContainerHelper.getInstance().getSelectedHealthArticle().getTitle()); // 设置title
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(R.mipmap.bg_video_test);

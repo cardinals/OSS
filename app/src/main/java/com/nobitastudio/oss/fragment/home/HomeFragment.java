@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.base.inter.HttpHandler;
@@ -32,7 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 
 /**
@@ -111,6 +111,7 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
         }
     };
     TipDialogHelper mTipDialogHelper;
+    NormalContainerHelper mNormalContainerHelper;
 
     /**
      * 初始化pagers  分别为 医院主页,消息,我的
@@ -200,14 +201,15 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
     private void initUserData() {
 
         mTipDialogHelper = new TipDialogHelper(getContext());
+        mNormalContainerHelper = NormalContainerHelper.getInstance();
 
         // 绑定的诊疗卡
-        getAsyn(Arrays.asList("medical-card", ((User) NormalContainer.get(NormalContainer.USER)).getId().toString(), "medical-cards"), null,
+        getAsyn(Arrays.asList("medical-card", mNormalContainerHelper.getUser().getId().toString(), "medical-cards"), null,
                 new ReflectStrategy<>(new TypeReference<List<MedicalCard>>() {
                 }), new OkHttpUtil.SuccessHandler<List<MedicalCard>>() {
                     @Override
                     public void handle(List<MedicalCard> medicalCards) {
-                        NormalContainer.put(NormalContainer.BIND_MEDICAL_CARD, medicalCards);
+                        mNormalContainerHelper.setBindMedicalCards(medicalCards);
                     }
                 }, new OkHttpUtil.FailHandler<List<MedicalCard>>() {
                     @Override
@@ -217,12 +219,12 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
                 });
 
         // 收藏的医生
-        getAsyn(Arrays.asList("doctor", ((User) NormalContainer.get(NormalContainer.USER)).getId().toString(), "collect-doctor"), null,
+        getAsyn(Arrays.asList("doctor", mNormalContainerHelper.getUser().getId().toString(), "collect-doctor"), null,
                 new ReflectStrategy<>(new TypeReference<List<Doctor>>() {
                 }), new OkHttpUtil.SuccessHandler<List<Doctor>>() {
                     @Override
                     public void handle(List<Doctor> doctors) {
-                        NormalContainer.put(NormalContainer.COLLECT_DOCTOR, doctors);
+                        mNormalContainerHelper.setCollectDoctors(doctors);
                     }
                 }, new OkHttpUtil.FailHandler<List<Doctor>>() {
                     @Override

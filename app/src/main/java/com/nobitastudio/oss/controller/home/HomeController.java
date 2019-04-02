@@ -200,14 +200,14 @@ public class HomeController extends BaseController {
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHeadlines);// 健康头条
         mHeadlineRecycleViewAdapter.setOnItemClickListener((itemView, pos) -> {
             HealthArticle mSelectedHeadline = mHeadlines.get(pos);
-            NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE,mSelectedHeadline);
+            mNormalContainerHelper.setSelectedHealthArticle(mSelectedHeadline);
             Toasty.info(mContext,"id:" + mSelectedHeadline.getId() + ",url：" + mSelectedHeadline.getUrl()).show();
             mHandler.startFragment(new QDWebViewFixFragment());
         });
         mDoctorLectureRecyclerViewAdapter = new DoctorLectureRecyclerViewAdapter(getContext(), mDoctorLectures); // 名师讲堂
         mDoctorLectureRecyclerViewAdapter.setOnItemClickListener((v, pos) -> {
             HealthArticle mSelectedLecture = mDoctorLectures.get(pos);
-            NormalContainer.put(NormalContainer.SELECTED_DOCTOR_LECTURE,mSelectedLecture);
+            mNormalContainerHelper.setSelectedDoctorLecture(mSelectedLecture);
             Toasty.info(mContext,"id:" + mSelectedLecture.getId() + ",url：" + mSelectedLecture.getUrl()).show();
             mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
         });

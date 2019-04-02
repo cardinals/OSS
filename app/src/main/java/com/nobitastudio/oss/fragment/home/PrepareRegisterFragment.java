@@ -104,16 +104,16 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     private void requestForRegister() {
         showNetworkLoadingTipDialog("正在为您预约挂号");
         postAsyn(Arrays.asList("registration-record", "register"), null,
-                new RegisterDTO(NormalContainer.get(NormalContainer.USER, User.class).getId(),
-                        NormalContainer.get(NormalContainer.SELECTED_MEDICAL_CARD, MedicalCard.class).getId(),
-                        NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getId(),
+                new RegisterDTO(mNormalContainerHelper.getUser().getId(),
+                        mNormalContainerHelper.getSelectedMedicalCard().getId(),
+                        mNormalContainerHelper.getSelectedVisit().getId(),
                         mVerificationCodeEditText.getText().toString().trim()),
                 new ReflectStrategy<>(RegistrationRecord.class),
                 new OkHttpUtil.SuccessHandler<RegistrationRecord>() {
                     @Override
                     public void handle(RegistrationRecord registrationRecord) {
                         closeTipDialog();
-                        NormalContainer.put(NormalContainer.DIAGNOSIS_NO, registrationRecord.getDiagnosisNo());
+                        mNormalContainerHelper.settRegistrationRecord(registrationRecord);
                         requestForImageCaptcha(); // 刷新验证码
                         startFragment(new WaitingPayRegisterFragment());
                     }
@@ -133,7 +133,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
             mCall.cancel();  // 取消上一个call
         }
         isRequestingForImageCaptcha = true;
-        mCall = OkHttpUtil.getImageAsyn(Arrays.asList("image-validate", NormalContainer.get(NormalContainer.USER, User.class).getId().toString()), null,
+        mCall = OkHttpUtil.getImageAsyn(Arrays.asList("image-validate", mNormalContainerHelper.getUser().getId().toString()), null,
                 new OkHttpUtil.ConnectFailHandler() {
                     @Override
                     public void handle(Call call, IOException e) {
@@ -173,7 +173,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
             showListPopView(mChooseMedicalCardTextView, items, 120, 160,
                     (parent, view, position, id) -> {
                         mChooseMedicalCardTextView.setText(items.get(position));
-                        NormalContainer.put(NormalContainer.SELECTED_MEDICAL_CARD, mBindMedicalCards.get(position));
+                        mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(position));
                         popViewDismiss();
                     },
                     null);
@@ -213,13 +213,13 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     // 正常的初始化操作
     private void intBasic() {
         isRequestingForImageCaptcha = false;
-        mDepartmentTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getName());
-        mDoctorNameTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DOCTOR, Doctor.class).getName());
-        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
-        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
-        mDiagnosisRoomTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getAddress());
-        mDiagnosisCostTextView.setText(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getCost().toString() + " 元");
-        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+        mDepartmentTextView.setText(mNormalContainerHelper.getSelectedDepartment().getName());
+        mDoctorNameTextView.setText(mNormalContainerHelper.getSelectedDoctor().getName());
+        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisRoomTextView.setText(mNormalContainerHelper.getSelectedDepartment().getAddress());
+        mDiagnosisCostTextView.setText(mNormalContainerHelper.getSelectedVisit().getCost().toString() + " 元");
+        mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
 
         requestForImageCaptcha();
     }

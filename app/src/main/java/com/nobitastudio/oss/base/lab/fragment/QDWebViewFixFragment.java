@@ -21,6 +21,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.HealthArticle;
@@ -38,7 +39,7 @@ public class QDWebViewFixFragment extends QDWebExplorerFragment {
         String url = ConstantContainer.OSS_SERVER_RUNTIME + "/html" + "/test.html";  // 展示的url
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_URL, url);
-        bundle.putString(EXTRA_TITLE, ((HealthArticle) NormalContainer.get(NormalContainer.SELECTED_HEALTH_ARTICLE)).getTitle());
+        bundle.putString(EXTRA_TITLE, NormalContainerHelper.getInstance().getSelectedHealthArticle().getTitle());
         setArguments(bundle);
     }
 

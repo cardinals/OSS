@@ -16,6 +16,7 @@ import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
 import com.nobitastudio.oss.base.helper.DialogHelper;
 import com.nobitastudio.oss.base.helper.EmptyViewHelper;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.base.helper.PopViewHelper;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
@@ -57,14 +58,15 @@ public abstract class StandardFragment extends BaseFragment
     @BindView(R.id.pull_to_refresh)
     protected QMUIPullRefreshLayout mPullRefreshLayout;
 
-    BottomSheetHelper mBottomSheetHelper;
-    DialogHelper mDialogHelper;
-    EmptyViewHelper mEmptyViewHelper;
-    PopViewHelper mPopViewHelper;
-    SolidImageHelper mSolidImageHelper;
-    TipDialogHelper mTipDialogHelper;
-    ViewHelper mViewHelper;
-    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
+    protected BottomSheetHelper mBottomSheetHelper;
+    protected DialogHelper mDialogHelper;
+    protected EmptyViewHelper mEmptyViewHelper;
+    protected PopViewHelper mPopViewHelper;
+    protected SolidImageHelper mSolidImageHelper;
+    protected TipDialogHelper mTipDialogHelper;
+    protected ViewHelper mViewHelper;
+    protected QMUILinearLayoutHelper mQMUILinearLayoutHelper;
+    protected NormalContainerHelper mNormalContainerHelper;
 
     // SLIDE_TRANSITION_CONFIG  左右滑动
     // SCALE_TRANSITION_CONFIG  从中间出
@@ -77,16 +79,16 @@ public abstract class StandardFragment extends BaseFragment
         return animConfig;
     }
 
-    // 完成初始化操作
-    @Override
-    public void onResume() {
-        if (!inited) {
-            // 初始化操作
-            init();
-            inited = Boolean.TRUE;
-        }
-        super.onResume();
-    }
+//    // 完成初始化操作
+//    @Override
+//    public void onResume() {
+//        if (!inited) {
+//            // 初始化操作
+//            init();
+//            inited = Boolean.TRUE;
+//        }
+//        super.onResume();
+//    }
 
     public StandardFragment() {
         // donothing
@@ -102,7 +104,7 @@ public abstract class StandardFragment extends BaseFragment
         mTipDialogHelper = new TipDialogHelper(getContext());
         mViewHelper = new ViewHelper();
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(getContext());
-
+        mNormalContainerHelper = NormalContainerHelper.getInstance();
 //        executorService = Executors.newCachedThreadPool();
     }
 

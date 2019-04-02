@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.base.lab.fragment.QDWebViewFixFragment;
 import com.nobitastudio.oss.container.ConstantContainer;
@@ -33,10 +34,13 @@ public class UltraPagerAdapter extends PagerAdapter {
     List<HealthArticle> mHealthArticles;
 
     ControllerClickHandler mHandler;
+    NormalContainerHelper mNormalContainerHelper;
+
 
     public UltraPagerAdapter(Context mContext, List<HealthArticle> mHealthArticles) {
         this.mContext = mContext;
         this.mHealthArticles = mHealthArticles;
+        mNormalContainerHelper = NormalContainerHelper.getInstance();
     }
 
     @Override
@@ -58,7 +62,7 @@ public class UltraPagerAdapter extends PagerAdapter {
         container.addView(root);
         root.setOnClickListener((view) -> {
             // 存参数
-            NormalContainer.put(NormalContainer.SELECTED_HEALTH_ARTICLE,selectedHospitalActivity);
+            mNormalContainerHelper.setSelectedHealthArticle(selectedHospitalActivity);
             Toasty.info(mContext,"id:" + selectedHospitalActivity.getId() + ",url：" + selectedHospitalActivity.getUrl()).show();
             mHandler.startFragment(new QDWebViewFixFragment());
         });

@@ -3,6 +3,7 @@ package com.nobitastudio.oss.base.controller;
 import android.content.Context;
 import android.view.LayoutInflater;
 
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.base.inter.HttpHandler;
@@ -28,6 +29,7 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     protected Context mContext;
     protected ControllerClickHandler mHandler;
     protected TipDialogHelper mTipDialogHelper;
+    protected NormalContainerHelper mNormalContainerHelper;
 
     @Override
     public OkHttpUtil.NetworkUnavailableHandler getNetworkUnavailableHandler() {
@@ -55,6 +57,7 @@ public abstract class BaseController extends QMUIWindowInsetLayout
 
     private void initBase() {
         mTipDialogHelper = new TipDialogHelper(mContext);
+        mNormalContainerHelper = NormalContainerHelper.getInstance();
     }
 
     public abstract void initLast();

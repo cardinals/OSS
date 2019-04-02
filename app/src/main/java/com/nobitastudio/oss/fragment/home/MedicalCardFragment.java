@@ -65,7 +65,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     }
 
     private void initBasic() {
-        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+        mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
         if (mBindMedicalCards == null) {
 
             showNetworkLoadingTipDialog("正在加载");
@@ -82,7 +82,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
         });
         mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), mBindMedicalCards);
         mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> {
-            NormalContainer.put(NormalContainer.SELECTED_MEDICAL_CARD,mBindMedicalCards.get(pos));
+            mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
             startFragment(new MedicalCardDetailFragment());
         });
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);

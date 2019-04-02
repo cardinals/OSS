@@ -27,14 +27,6 @@ import es.dmoral.toasty.Toasty;
  */
 public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment {
 
-    public class AppPayResultListener implements PayResultListener {
-
-        @Override
-        public void onPayFinish(Context context, String s, int i, String s1, int i1, Long aLong, String s2) {
-
-        }
-    }
-
     @BindView(R.id.department_textview)
     TextView mDepartmentTextView;
     @BindView(R.id.doctor_name_textview)
@@ -119,6 +111,11 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
         }
     }
 
+    // 初始化基础数据
+    private void initBasic() {
+
+    }
+
     @Override
     protected String getTopBarTitle() {
         return "预约挂号";
@@ -131,6 +128,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView);
     }
 

@@ -21,10 +21,11 @@ public class NormalContainer implements Serializable {
     // 非选择类型
     public static final String USER = "USER"; // 登录的用户
     public static final String VISITS = "VISITS";// 需要展示的号源
-    public static final String COLLECT_DOCTOR = "COLLECT_DOCTOR"; // 收藏的医生
+    public static final String COLLECT_DOCTORS = "COLLECT_DOCTORS"; // 收藏的医生
     public static final String BIND_MEDICAL_CARD = "BIND_MEDICAL_CARD"; // 绑定的诊疗阿卡
     public static final String SETTING_ATTR = "SETTING_ATTR"; // 用户设置
     public static final String DIAGNOSIS_NO = "DIAGNOSIS_NO"; // 当年前挂号单所得到的诊号
+    public static final String REGISTRATION_RECORD = "REGISTRATION_RECORD"; // 最新挂号成功的记录
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity

@@ -55,14 +55,14 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
         });
         adapter = new DepartmentRecyclerViewAdapter(getContext(), mDepartments);
         adapter.setOnItemClickListener((itemView, pos) -> {
-            NormalContainer.put(NormalContainer.SELECTED_DEPARTMENT, mDepartments.get(pos));
+            mNormalContainerHelper.setSelectedDepartment(mDepartments.get(pos));
             startFragment(new DoctorListFragment());
         });
         adapter.setOnItemLongClickListener((itemView, pos) -> {
             Department department = mDepartments.get(pos);
-            showLongMessageDialog(department.getName(),generateDepartmentInfo(department),
-                    null,null,
-                    "知道了",(dialog,index) -> dialog.dismiss());
+            showLongMessageDialog(department.getName(), generateDepartmentInfo(department),
+                    null, null,
+                    "知道了", (dialog, index) -> dialog.dismiss());
         });
         mRecyclerView.setAdapter(adapter);
     }
@@ -74,7 +74,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
      * @return
      */
     private String generateDepartmentInfo(Department department) {
-        return "楼层: " + department.getFloor() + "楼" +  "\n\n" +
+        return "楼层: " + department.getFloor() + "楼" + "\n\n" +
                 "区域: " + department.getArea().name() + "区" + "\n\n" +
                 "介绍: " + department.getIntroduction();
     }
@@ -87,7 +87,7 @@ public class DepartmentFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected View.OnClickListener getEmptyViewRetryButtonListener() {
         return view -> {
-            showLoadingEmptyView("正在加载",mEmptyView);
+            showLoadingEmptyView("正在加载", mEmptyView);
             refresh(Boolean.FALSE);
         };
     }
