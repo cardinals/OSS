@@ -1,6 +1,7 @@
 package com.nobitastudio.oss.fragment.home;
 
 import android.content.Context;
+import android.database.DatabaseUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,9 +12,12 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.RegisterSuccessFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.util.DateUtil;
 import com.nobitastudio.oss.util.PayUtil;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,11 +47,19 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     TextView mDiagnosisRoomTextView;
     @BindView(R.id.register_cost_textview)
     TextView mDiagnosisCostTextView;
-
+    @BindView(R.id.left_time_textview)
+    TextView mLeftTimeTextView;
     @BindView(R.id.hosipital_info_solid_imageview)
     ImageView mHospitalInfoSolidImageView;
     @BindView(R.id.register_detail_solid_imageview)
     ImageView mRegisterDetailSolidImageView;
+    @BindView(R.id.left_time_solid_imageview)
+    ImageView mLeftTimeSolidImageView;
+    @BindView(R.id.attention_imageview)
+    ImageView mAttentionSolidImageView;
+
+    Timer mLeftTimeControllerTimer;
+    Integer mLeftTime;
 
     @OnClick({R.id.cancel_register_button, R.id.pay_now_roundbutton})
     void onClick(View v) {
@@ -61,19 +73,30 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                         "再想想", (dialog, index) -> dialog.dismiss());
                 break;
             case R.id.pay_now_roundbutton:
-                showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
-                        Arrays.asList("支付宝", "微信", "云闪付", "QQ钱包"),
-                        Arrays.asList(0, 1, 2, 3),
-                        (dialog, itemView) -> {
-                            dialog.dismiss();
-                            callPay((Integer) itemView.getTag());
-                            //startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
-                        }
-                );
+                if (mLeftTime > 0) {
+                    showPayChannel();
+                } else {
+                    showInfoTipDialog("该挂号单因逾期未支付已作废");
+                }
                 break;
             default:
                 break;
         }
+    }
+
+    // 展示支付渠道
+    private void showPayChannel() {
+        // 请求服务器查看支付时间
+
+        showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
+                Arrays.asList("支付宝", "微信", "云闪付", "QQ钱包"),
+                Arrays.asList(0, 1, 2, 3),
+                (dialog, itemView) -> {
+                    dialog.dismiss();
+                    callPay((Integer) itemView.getTag());
+//                    startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
+                }
+        );
     }
 
     private void callPay(Integer tag) {
@@ -113,7 +136,43 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     // 初始化基础数据
     private void initBasic() {
+        mDepartmentTextView.setText(mNormalContainerHelper.getSelectedDepartment().getName());
+        mDoctorNameTextView.setText(mNormalContainerHelper.getSelectedDoctor().getName());
+        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
+        mDiagnosisNoTextView.setText(mNormalContainerHelper.getRegistrationRecord().getDiagnosisNo() + " 号");
+        mDiagnosisRoomTextView.setText(mNormalContainerHelper.getSelectedDepartment().getAddress());
+        mDiagnosisCostTextView.setText(mNormalContainerHelper.getSelectedVisit().getCost().toString() + " 元");
+        mLeftTime = mNormalContainerHelper.getLeftTime();
 
+        // 开启定时器.默认30分钟支付时间.不支付则自动销毁至上一个fragment
+        mLeftTimeControllerTimer = new Timer();
+        mLeftTimeControllerTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(() -> {
+                    mLeftTimeTextView.setText(DateUtil.formatSecondsToStandardString(mLeftTime));
+                    if (mLeftTime.equals(0)) {
+                        // 不可支付
+                        mLeftTimeTextView.setText("已超时");
+                        mLeftTimeControllerTimer.cancel();
+                        showInfoTipDialog("该挂号单因逾期未支付已作废");
+                    }
+                    // 最后2分钟时，进行提醒
+                    if (mLeftTime.equals(120)) {
+                        // 不可支付
+                        showMessageNegativeDialog("提醒", "您还剩两分钟可支付。请尽快支付。逾期作废",
+                                "知道了", (dialog, index) -> dialog.dismiss(),
+                                "立即支付", (dialog, index) -> {
+                                    dialog.dismiss();
+                                    showPayChannel();
+                                });
+                    }
+                });
+                mLeftTime--;
+            }
+        }, 0, 1000l);
     }
 
     @Override
@@ -129,7 +188,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     @Override
     protected void initLastCustom() {
         initBasic();
-        initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView);
+        initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView, mLeftTimeSolidImageView, mAttentionSolidImageView);
     }
 
 }

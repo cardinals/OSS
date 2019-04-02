@@ -98,6 +98,10 @@ public class NormalContainerHelper {
         return NormalContainer.get(NormalContainer.SELECTED_MEDICAL_CARD);
     }
 
+    public Integer getLeftTime() {
+        return NormalContainer.get(NormalContainer.LEFT_TIME_PAY);
+    }
+
     // set
     public NormalContainerHelper setUser(User user) {
         NormalContainer.put(NormalContainer.USER, user);
@@ -176,6 +180,11 @@ public class NormalContainerHelper {
 
     public NormalContainerHelper setSelectedMedicalCard(MedicalCard medicalCard) {
         NormalContainer.put(NormalContainer.SELECTED_MEDICAL_CARD, medicalCard);
+        return this;
+    }
+
+    public NormalContainerHelper setLeftTime(Integer leftTime) {
+        NormalContainer.put(NormalContainer.LEFT_TIME_PAY,leftTime);
         return this;
     }
 

@@ -124,20 +124,14 @@ public class DateUtil {
         return new Date(localDateTime.toInstant(ZoneOffset.of("+8")).toEpochMilli());
     }
 
-    public static String formatSecondsToStandardString(String seconds) {
-        Integer s = Integer.valueOf(seconds);
+    public static String formatSecondsToStandardString(Integer seconds) {
         // 小时
-        int hour = s / 3600;
+        int hour = seconds / 3600;
 //        String hour = s / 3600 < 10 ? "0" + s / 3600 : s / 3600 + "";
         // 分钟
-        int minute = (s % 3600) / 60;
+        int minute = (seconds % 3600) / 60;
         // 秒
-        int sec = (s % 3600) % 60;
-        if (hour != 0) {
-
-        } else {
-
-        }
+        int sec = (seconds % 3600) % 60;
         return (hour > 9 ? hour + ":" : (hour == 0 ? "" : "0" + hour + ":")) + (minute < 10 ? "0" + minute : minute + "") + ":" + (sec < 10 ? "0" + sec : sec + "");
     }
 

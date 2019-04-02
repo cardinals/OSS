@@ -281,4 +281,5 @@
 
     <!-- 医院名称 -->
     <string name="hospital_name">石河子大学附属医院</string>
+    <string name="register_attention_before">1.请在30分钟内支付，逾期作废\n2.逾期超5次将会冻结就诊卡</string>
 </resources>

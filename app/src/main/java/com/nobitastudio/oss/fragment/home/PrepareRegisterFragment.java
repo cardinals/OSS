@@ -9,18 +9,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.dto.RegisterDTO;
-import com.nobitastudio.oss.model.entity.Department;
-import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
-import com.nobitastudio.oss.model.entity.User;
-import com.nobitastudio.oss.model.entity.Visit;
 import com.nobitastudio.oss.util.DateUtil;
 import com.nobitastudio.oss.util.OkHttpUtil;
 
@@ -81,8 +76,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     // 选择了诊疗卡
                     if (isInputVerificationCode()) {
                         // 输入了验证码.准备挂号
-                        showMessagePositiveDialog("温馨提示", "1.请在30分钟内支付，逾期作废\n" +
-                                        "2.逾期超5次将会冻结就诊卡",
+                        showMessagePositiveDialog("温馨提示", getString(R.string.register_attention_before),
                                 "取消", (dialog, index) -> dialog.dismiss(),
                                 "我知道了", (dialog, index) -> {
                                     dialog.dismiss();
@@ -114,6 +108,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     public void handle(RegistrationRecord registrationRecord) {
                         closeTipDialog();
                         mNormalContainerHelper.settRegistrationRecord(registrationRecord);
+                        mNormalContainerHelper.setLeftTime(1800);  // 新建的挂号单.默认支付时间是30分钟
                         requestForImageCaptcha(); // 刷新验证码
                         startFragment(new WaitingPayRegisterFragment());
                     }

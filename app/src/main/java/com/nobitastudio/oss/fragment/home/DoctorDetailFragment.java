@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.VisitRecycleViewAdapter;
+import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarFragment;
@@ -307,7 +308,7 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
     @Override
     protected void initFirstCustom() {
         // 一定要在initLastCustom 之前进行。以为initTopbar需要使用作为标题
-        mSelectedDoctor = mNormalContainerHelper.getSelectedDoctor();
+        mSelectedDoctor = NormalContainerHelper.getInstance().getSelectedDoctor();
     }
 
     @Override
