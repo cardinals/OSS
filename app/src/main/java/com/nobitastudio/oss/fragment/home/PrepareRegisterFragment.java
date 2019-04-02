@@ -7,10 +7,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
@@ -71,27 +69,28 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
     Call mCall; // 验证码请求;  用于用户重复请求.重复请求时取消上一个请求.
 
     @OnClick({R.id.choose_medical_card_textview, R.id.choose_medical_card_imageview,
-            R.id.confirm_register_msg, R.id.captcha_imageview})
+            R.id.confirm_register_button, R.id.captcha_imageview})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.choose_medical_card_textview:
             case R.id.choose_medical_card_imageview:
                 isBindMedicalCard();
                 break;
-            case R.id.confirm_register_msg:
+            case R.id.confirm_register_button:
                 if (isChooseMedicalCard()) {
                     // 选择了诊疗卡
                     if (isInputVerificationCode()) {
                         // 输入了验证码.准备挂号
-                        showMessagePositiveDialog("温馨提示", "请在30分钟内支付，逾期作废\n逾期超5次将会冻结就诊卡",
+                        showMessagePositiveDialog("温馨提示", "1.请在30分钟内支付，逾期作废\n" +
+                                        "2.逾期超5次将会冻结就诊卡",
                                 "取消", (dialog, index) -> dialog.dismiss(),
                                 "我知道了", (dialog, index) -> {
                                     dialog.dismiss();
                                     requestForRegister();
                                 });
-                        break;
                     }
                 }
+                break;
             case R.id.captcha_imageview:
                 requestForImageCaptcha();
                 break;
@@ -115,29 +114,16 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     public void handle(RegistrationRecord registrationRecord) {
                         closeTipDialog();
                         NormalContainer.put(NormalContainer.DIAGNOSIS_NO, registrationRecord.getDiagnosisNo());
+                        requestForImageCaptcha(); // 刷新验证码
                         startFragment(new WaitingPayRegisterFragment());
                     }
                 }, new OkHttpUtil.FailHandler<RegistrationRecord>() {
                     @Override
                     public void handle(ServiceResult<RegistrationRecord> serviceResult) {
                         showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
-                        requestForImageCaptcha();
+                        requestForImageCaptcha();// 刷新验证码
                     }
                 });
-    }
-
-    // 正常的初始化操作
-    private void intBasic() {
-        isRequestingForImageCaptcha = false;
-        mDepartmentTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getName());
-        mDoctorNameTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DOCTOR, Doctor.class).getName());
-        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
-        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
-        mDiagnosisRoomTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getAddress());
-        mDiagnosisCostTextView.setText(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getCost().toString() + " 元");
-        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
-
-        requestForImageCaptcha();
     }
 
     // 请求验证码
@@ -222,6 +208,20 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
         } else {
             return Boolean.TRUE;
         }
+    }
+
+    // 正常的初始化操作
+    private void intBasic() {
+        isRequestingForImageCaptcha = false;
+        mDepartmentTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getName());
+        mDoctorNameTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DOCTOR, Doctor.class).getName());
+        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
+        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getDiagnosisTime()));
+        mDiagnosisRoomTextView.setText(NormalContainer.get(NormalContainer.SELECTED_DEPARTMENT, Department.class).getAddress());
+        mDiagnosisCostTextView.setText(NormalContainer.get(NormalContainer.SELECTED_VISIT, Visit.class).getCost().toString() + " 元");
+        mBindMedicalCards = NormalContainer.get(NormalContainer.BIND_MEDICAL_CARD);
+
+        requestForImageCaptcha();
     }
 
     @Override

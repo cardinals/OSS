@@ -351,7 +351,7 @@
 
                 <!-- display the register button-->
                 <Button
-                    android:id="@+id/confirm_register_msg"
+                    android:id="@+id/confirm_register_button"
                     style="@style/AppQDRadiusButton"
                     android:layout_width="match_parent"
                     android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
