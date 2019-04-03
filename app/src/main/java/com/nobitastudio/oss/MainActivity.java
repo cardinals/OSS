@@ -21,6 +21,7 @@ import android.os.Bundle;
 import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
 import com.nobitastudio.oss.fragment.home.DepartmentFragment;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     // 初始化支付功能
     private void initPay() {
-        TrPay.getInstance(this).initPaySdk("appkey", "mychannel");
+        TrPay.getInstance(this).initPaySdk(ConstantContainer.TR_PAY_APP_KEY, ConstantContainer.TR_PAY_CHANEL);
     }
 
     /**

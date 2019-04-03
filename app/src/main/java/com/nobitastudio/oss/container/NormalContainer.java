@@ -27,6 +27,7 @@ public class NormalContainer implements Serializable {
     public static final String DIAGNOSIS_NO = "DIAGNOSIS_NO"; // 当年前挂号单所得到的诊号
     public static final String REGISTRATION_RECORD = "REGISTRATION_RECORD"; // 最新挂号成功的记录
     public static final String LEFT_TIME_PAY = "LEFT_TIME_PAY"; // 剩余支付的时间 以秒计时
+    public static final String OSS_ORDER = "OSS_ORDER"; // 从服务器端获取的订单
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity

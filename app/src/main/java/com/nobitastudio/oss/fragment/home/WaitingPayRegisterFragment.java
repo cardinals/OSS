@@ -10,11 +10,21 @@ import com.base.bj.trpayjar.listener.PayResultListener;
 import com.base.bj.trpayjar.utils.TrPay;
 import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.fragment.home.RegisterSuccessFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.common.error.ErrorCode;
+import com.nobitastudio.oss.model.dto.ConfirmOrCancelRegisterDTO;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.entity.OSSOrder;
+import com.nobitastudio.oss.model.enumeration.OrderState;
 import com.nobitastudio.oss.util.DateUtil;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.nobitastudio.oss.util.PayUtil;
+import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -67,7 +77,20 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
             case R.id.cancel_register_button:
                 showMessageNegativeDialog("温馨提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡"
                         , "取消挂号单", (dialog, index) -> {
-                            ToastUtils.showShort("您已成功取消本次预约挂号");
+                            showNetworkLoadingTipDialog("正在取消挂号单");
+                            getAsyn(Arrays.asList("registration-record", mNormalContainerHelper.getRegistrationRecord().getId(), "cancel"), null,
+                                    new ReflectStrategy<>(ConfirmOrCancelRegisterDTO.class),
+                                    new OkHttpUtil.SuccessHandler<ConfirmOrCancelRegisterDTO>() {
+                                        @Override
+                                        public void handle(ConfirmOrCancelRegisterDTO confirmOrCancelRegisterDTO) {
+                                            showInfoTipDialog("您已取消该挂号单");
+                                        }
+                                    }, new OkHttpUtil.FailHandler<ConfirmOrCancelRegisterDTO>() {
+                                        @Override
+                                        public void handle(ServiceResult<ConfirmOrCancelRegisterDTO> serviceResult) {
+                                            showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+                                        }
+                                    });
                             dialog.dismiss();
                         },
                         "再想想", (dialog, index) -> dialog.dismiss());
@@ -86,14 +109,29 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     // 展示支付渠道
     private void showPayChannel() {
-        // 请求服务器查看支付时间
-
         showSimpleBottomSheetGrid(Arrays.asList(R.mipmap.ic_ali_pay, R.mipmap.wechat, R.mipmap.union_pay, R.mipmap.qq_pay),
                 Arrays.asList("支付宝", "微信", "云闪付", "QQ钱包"),
                 Arrays.asList(0, 1, 2, 3),
                 (dialog, itemView) -> {
                     dialog.dismiss();
-                    callPay((Integer) itemView.getTag());
+                    // 请求服务器查看支付时间
+                    showNetworkLoadingTipDialog("正在准备支付");
+                    getAsyn(Arrays.asList("order", mNormalContainerHelper.getSelectedMedicalCard().getId(), mNormalContainerHelper.getSelectedVisit().getId().toString()),
+                            null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
+                            new OkHttpUtil.SuccessHandler<OSSOrder>() {
+                                @Override
+                                public void handle(OSSOrder ossOrder) {
+                                    if (ossOrder.getCreateTime().plusMinutes(30).isAfter(LocalDateTime.now())) {
+                                        // 在支付时间内
+                                        mNormalContainerHelper.setOrder(ossOrder);
+                                        closeTipDialog();
+                                        callPay((Integer) itemView.getTag());
+                                    } else {
+                                        // 已过支付时间
+                                        showInfoTipDialog("该挂号单因逾期未支付已作废");
+                                    }
+                                }
+                            });
 //                    startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
                 }
         );
@@ -102,19 +140,23 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     private void callPay(Integer tag) {
         switch (tag) {
             case 0:
-                PayUtil.callPay(PayUtil.PayChanel.ALI, getActivity(), "tradeName", "outTradeNo", 10l,
-                        "11", "www.baidu.com", "11",
+//                Double cost = mNormalContainerHelper.getSelectedVisit().getCost() * 100;
+                Double cost = 10.0;
+                PayUtil.callPay(PayUtil.PayChanel.ALI_PAY, getActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
+                        mNormalContainerHelper.getRegistrationRecord().getId(), ConstantContainer.OSS_PAY_CALLBACK_URL, mNormalContainerHelper.getUser().getId().toString(),
                         // 支付成功
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
-                            showSuccessTipDialog("支付成功");
+                            mLeftTimeControllerTimer.cancel();
+                            mLeftTimeTextView.setText("已支付");
+                            validateOrderStatus();
                         },
                         // 支付失败
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
-                            showInfoTipDialog("支付失败");
+                            showInfoTipDialog("请尽快完成支付");
                         });
                 break;
             case 1:
-                PayUtil.callPay(PayUtil.PayChanel.WX, getActivity(), "tradeName", "outTradeNo", 10l,
+                PayUtil.callPay(PayUtil.PayChanel.WECHAT_PAY, getActivity(), "tradeName", "outTradeNo", 10L,
                         "11", "www.baidu.com", "11",
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
                             // 支付成功
@@ -132,6 +174,25 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                 break;
             default:
         }
+    }
+
+    // 验证订单是否支付
+    private void validateOrderStatus() {
+        showNetworkLoadingTipDialog("正在检查支付状态");
+        getSync(Arrays.asList("order", "status", mNormalContainerHelper.getOrder().getId()), null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
+                new OkHttpUtil.SuccessHandler<OSSOrder>() {
+                    @Override
+                    public void handle(OSSOrder ossOrder) {
+                        if (ossOrder.getState().equals(OrderState.HAVE_PAY)) {
+                            mNormalContainerHelper.setOrder(ossOrder);
+                            showSuccessTipDialog("支付成功");
+                            startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
+                        } else {
+                            showInfoTipDialog("当前挂号单尚未支付,若已支付请下拉刷新",2000l);
+                        }
+                    }
+                });
+        mPullRefreshLayout.finishRefresh();
     }
 
     // 初始化基础数据
@@ -161,18 +222,38 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                     }
                     // 最后2分钟时，进行提醒
                     if (mLeftTime.equals(120)) {
-                        // 不可支付
                         showMessageNegativeDialog("提醒", "您还剩两分钟可支付。请尽快支付。逾期作废",
-                                "知道了", (dialog, index) -> dialog.dismiss(),
                                 "立即支付", (dialog, index) -> {
                                     dialog.dismiss();
                                     showPayChannel();
-                                });
+                                },
+                                "知道了", (dialog, index) -> dialog.dismiss());
                     }
                 });
                 mLeftTime--;
             }
         }, 0, 1000l);
+    }
+
+    @Override
+    protected void initRefreshLayout() {
+        mPullRefreshLayout.setEnabled(true);
+        mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
+            @Override
+            public void onMoveTarget(int offset) {
+
+            }
+
+            @Override
+            public void onMoveRefreshView(int offset) {
+
+            }
+
+            @Override
+            public void onRefresh() {
+                validateOrderStatus();
+            }
+        });
     }
 
     @Override

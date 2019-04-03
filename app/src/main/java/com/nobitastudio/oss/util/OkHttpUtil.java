@@ -76,9 +76,9 @@ public class OkHttpUtil {
     // 默认最长的建立连接时长
     public static final int DEFAULT_CONNECT_TIME = 10;
     // 默认最长的写时长
-    public static final int DEFAULT_WRITE_TIME = 10;
+    public static final int DEFAULT_WRITE_TIME = 20;
     // 默认最长的读时长
-    public static final int DEFAULT_READ_TIME = 20;
+    public static final int DEFAULT_READ_TIME = 40;
     // 请求的传递类型.默认Json
     public static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
 
@@ -246,12 +246,51 @@ public class OkHttpUtil {
     }
 
     // ============== 同步 ==============  暂时不需要
-    public static <T> Call sync(METHOD method,
+    public static <T> void sync(METHOD method,
                                 Boolean needHandle, List<String> restParams, List<GetParam> getParams, Object requestBody,
                                 ReflectStrategy<T> reflectStrategy,
-                                ConnectFailHandler connectFailHandler, SuccessHandler<T> successHandler,
+                                NetworkUnavailableHandler networkUnavailableHandler, SuccessHandler<T> successHandler,
                                 FailHandler<T> failureHandler, ErrorHandler errorHandler) {
-        return null;
+        new Thread(() -> {
+            if (!NetworkUtils.isConnected() || (!NetworkUtils.getMobileDataEnabled() && !NetworkUtils.isWifiConnected())) {
+                // 网络未开启  NetworkUtils.isAvailableByPing() 阻塞线程 不可用
+                runOnUiThread(networkUnavailableHandler::handle);
+            } else {
+                Request request = generateRequest(method, restParams, getParams, requestBody);
+                Call call = getOkHttpClient().newCall(request);
+                try {
+                    Response response = call.execute();
+                    // 服务器返回了数据
+                    if (response.isSuccessful()) {
+                        // 请求返回码 200 - 300 即返回成功
+                        if (response.code() == 200) {
+                            ServiceResult<T> result = JSON.parseObject(response.body().string(), ServiceResult.class);
+                            if (result.getState() == 0) {
+                                // 成功
+                                if (result.getResult() instanceof JSONObject) {
+                                    result.setResult(((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass()));
+                                } else if (result.getResult() instanceof JSONArray) {
+                                    result.setResult(((JSONArray) result.getResult()).toJavaObject(reflectStrategy.getTypeReference()));
+                                }
+                                if (result.getResult() != null) {
+                                    runOnUiThread(() -> successHandler.handle(result.getResult()));
+                                } else {
+                                    runOnUiThread(() -> failureHandler.handle(result));
+                                }
+                            } else {
+                                // 失败
+                                runOnUiThread(() -> failureHandler.handle(result));
+                            }
+                        }
+                    } else {
+                        // 未授权.500 404 等
+                        runOnUiThread(() -> errorHandler.handle(call, response));
+                    }
+                } catch (IOException e) {
+                    call.cancel();
+                }
+            }
+        }).start();
     }
 
     // ============== 接收对象

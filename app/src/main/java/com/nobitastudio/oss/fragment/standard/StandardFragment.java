@@ -23,6 +23,7 @@ import com.nobitastudio.oss.base.helper.SolidImageHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.helper.ViewHelper;
 import com.nobitastudio.oss.base.inter.HttpHandler;
+import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.GetParam;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.util.DateUtil;
@@ -393,12 +394,24 @@ public abstract class StandardFragment extends BaseFragment
         };
     }
 
+    // 自定义错误 默认仅仅暂时错误
+    public <T> OkHttpUtil.FailHandler<T> getFailHandler() {
+        return (serviceResult) -> showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+    }
+
     // get请求
     public <T> Call getAsyn(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
                             OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.GET,
                 Boolean.TRUE, restParams, getParams, null, reflectStrategy,
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    public <T> Call getAsyn(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.GET,
+                Boolean.TRUE, restParams, getParams, null, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, getFailHandler(), getErrorHandler());
     }
 
     // 只调用 .不需要处理返回结果
@@ -451,6 +464,20 @@ public abstract class StandardFragment extends BaseFragment
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
                 Boolean.FALSE, restParams, getParams, requestBody, null,
                 getNetworkUnavailableHandler(), null, null, null, null);
+    }
+
+    public <T> void getSync(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
+        OkHttpUtil.sync(OkHttpUtil.METHOD.GET,
+                Boolean.TRUE, restParams, getParams, null, reflectStrategy,
+                getNetworkUnavailableHandler(), successHandler, failureHandler, getErrorHandler());
+    }
+
+    public <T> void getSync(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler) {
+        OkHttpUtil.sync(OkHttpUtil.METHOD.GET,
+                Boolean.TRUE, restParams, getParams, null, reflectStrategy,
+                getNetworkUnavailableHandler(), successHandler, getFailHandler(), getErrorHandler());
     }
 
     // ==================== 线程

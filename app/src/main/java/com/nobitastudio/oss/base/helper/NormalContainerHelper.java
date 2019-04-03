@@ -7,6 +7,7 @@ import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.model.entity.MedicalCard;
+import com.nobitastudio.oss.model.entity.OSSOrder;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.nobitastudio.oss.model.entity.SettingAttr;
 import com.nobitastudio.oss.model.entity.User;
@@ -102,6 +103,10 @@ public class NormalContainerHelper {
         return NormalContainer.get(NormalContainer.LEFT_TIME_PAY);
     }
 
+    public OSSOrder getOrder() {
+        return NormalContainer.get(NormalContainer.OSS_ORDER);
+    }
+
     // set
     public NormalContainerHelper setUser(User user) {
         NormalContainer.put(NormalContainer.USER, user);
@@ -185,6 +190,11 @@ public class NormalContainerHelper {
 
     public NormalContainerHelper setLeftTime(Integer leftTime) {
         NormalContainer.put(NormalContainer.LEFT_TIME_PAY,leftTime);
+        return this;
+    }
+
+    public NormalContainerHelper setOrder(OSSOrder ossOrder) {
+        NormalContainer.put(NormalContainer.OSS_ORDER,ossOrder);
         return this;
     }
 

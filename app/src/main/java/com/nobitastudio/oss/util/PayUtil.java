@@ -18,9 +18,14 @@ import es.dmoral.toasty.Toasty;
  */
 public class PayUtil {
 
-    // 支付方式  支付宝 微信 银联(云闪付) QQ钱包
+    // 支付方式  支付宝 微信 银联(云闪付) QQ钱包  后面两个暂时不支持
     public enum PayChanel {
-        ALI, WX, UNION, QQ
+        WECHAT_PAY,
+        ALI_PAY,
+        UNION_PAY,
+        QQ_WALLET,
+//        HOSPITAL_MONEY,
+//        HOSPITAL_MEDICAL_CAR
     }
 
     private static TrPay getTrPayInstance(Activity activity) {
@@ -53,7 +58,7 @@ public class PayUtil {
                                String backparams, String notifyurl, String userid,
                                paySuccessHandle paySuccessHandle, payFailHandle payFailHandle) {
         switch (payChanel) {
-            case ALI:
+            case ALI_PAY:
                 getTrPayInstance(activity).callAlipay(tradename, outtradeno, amount, backparams, notifyurl, userid,
                         (context, outTradeNo, resultCode, resultString, payType, amount12, tradeName) -> {
                             if (resultCode == TrPayResult.RESULT_CODE_SUCC.getId()) {
@@ -63,7 +68,7 @@ public class PayUtil {
                             }
                         });
                 break;
-            case WX:
+            case WECHAT_PAY:
                 getTrPayInstance(activity).callWxPay(tradename, outtradeno, amount, backparams, notifyurl, userid,
                         (context, outTradeNo, resultCode, resultString, payType, amount1, tradeName) -> {
                             if (resultCode == TrPayResult.RESULT_CODE_SUCC.getId()) {
@@ -73,10 +78,10 @@ public class PayUtil {
                             }
                         });
                 break;
-            case UNION:
+            case UNION_PAY:
                 Toasty.info(activity.getApplicationContext(), "程序员小哥哥正在加紧开发中~").show();
                 break;
-            case QQ:
+            case QQ_WALLET:
                 Toasty.info(activity.getApplicationContext(), "程序员小哥哥正在加紧开发中~").show();
                 break;
             default:

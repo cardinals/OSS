@@ -10,6 +10,8 @@ public enum PaymentChannel {
     WECHAT_PAY,
     ALI_PAY,
     UNION_PAY,
+    QQ_WALLET,
     HOSPITAL_MONEY,
-    HOSPITAL_MEDICAL_CAR
+    HOSPITAL_MEDICAL_CAR,
+    UNDEFINED;
 }

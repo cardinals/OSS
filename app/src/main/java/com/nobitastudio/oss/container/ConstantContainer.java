@@ -26,6 +26,16 @@ public class ConstantContainer {
     public static final String OSS_SERVER_LOCAL = "http://10.0.2.2";  // 本地服务
 
     public static final String OSS_SERVER_RUNTIME = OSS_SERVER_LOCAL; // 运行地址
+    // 图灵支付
+    public static final String OSS_PAY_CALLBACK_URL = OSS_SERVER_ONLINE + "/pay-callback/register" ; // 挂号单支付成功后的回调地址
+    public final static String OSS_TR_PAY_APP_KEY = "dbda983d39d84ba380342b692959d789"; // 图灵支付appkey
+    public final static String OSS_TR_PAY_APP_SECRET = "c6ecab0e551744489c9c771e468ce3e1"; // 图灵支付 app secret // todo 去掉
+    public final static String TEST_TR_PAY_APP_KEY = "be6c44e655104d3d90e0d42432eb3c4d"; // 图灵支付appkey
+    public final static String TEST_TR_PAY_APP_SECRET = "ba16f60bbb634a7aa406e883ae92e4a4"; // 图灵支付 app secret // todo 去掉
+    public final static String TR_PAY_ORDER_QUERY_URL = "http://pay.trsoft.xin/order/trpayGetWay"; // 订单查询
+    public final static String TR_PAY_CHANEL = "OSS_APP_ANDROID"; // 订单查询
+    public final static String TR_PAY_APP_KEY = TEST_TR_PAY_APP_KEY;
+    public final static String TR_PAY_APP_SECRET = TEST_TR_PAY_APP_SECRET; // todo 去掉
 
     // 科室图片相关
     public static Map<String, Integer> DEPARTMENT_MIPMAP;
@@ -35,7 +45,7 @@ public class ConstantContainer {
     }
 
     // 初始化科室保存信息
-    private static Map<String, Integer> initDepartmentMipmap() {
+    private static synchronized Map<String, Integer> initDepartmentMipmap() {
         DEPARTMENT_MIPMAP = new HashMap<>();
         DEPARTMENT_MIPMAP.put("全科", R.mipmap.ic_general);
         DEPARTMENT_MIPMAP.put("美容科", R.mipmap.ic_beauty);
