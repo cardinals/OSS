@@ -48,7 +48,7 @@ public class PlayVideoActivity extends BaseActivity {
 
         String url = ConstantContainer.OSS_SERVER_RUNTIME + "/video/test-video.mp4"; // 视频源.采用测试视频
 
-        mVideoPlayer.setUp(url, true, NormalContainerHelper.getInstance().getSelectedHealthArticle().getTitle()); // 设置title
+        mVideoPlayer.setUp(url, true, NormalContainerHelper.getInstance().getSelectedDoctorLecture().getTitle()); // 设置title
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(R.mipmap.bg_video_test);

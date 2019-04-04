@@ -71,8 +71,6 @@ public class OkHttpUtil {
         void handle(Call call, Response response);
     }
 
-    public static final String OSS_SERVER_ADDRESS = ConstantContainer.OSS_SERVER_LOCAL; // 请求的服务地址
-
     // 默认最长的建立连接时长
     public static final int DEFAULT_CONNECT_TIME = 10;
     // 默认最长的写时长
@@ -165,7 +163,7 @@ public class OkHttpUtil {
 
     // 获取请求
     public static Request generateRequest(METHOD method, List<String> restParams, List<GetParam> getParams, Object requestBody) {
-        Request.Builder mBuilder = new Request.Builder().url(OSS_SERVER_ADDRESS + generateRestParam(restParams) + generateGetParam(getParams));
+        Request.Builder mBuilder = new Request.Builder().url(ConstantContainer.OSS_SERVER_RUNTIME + generateRestParam(restParams) + generateGetParam(getParams));
         switch (method) {
             case GET:
                 return mBuilder.get().build();
