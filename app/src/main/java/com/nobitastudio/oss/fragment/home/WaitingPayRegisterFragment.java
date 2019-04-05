@@ -77,21 +77,8 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
             case R.id.cancel_register_button:
                 showMessageNegativeDialog("温馨提示", "挂号单取消后不可恢复，并且取消超过五次后将冻结该诊疗卡"
                         , "取消挂号单", (dialog, index) -> {
-                            showNetworkLoadingTipDialog("正在取消挂号单");
-                            getAsyn(Arrays.asList("registration-record", mNormalContainerHelper.getRegistrationRecord().getId(), "cancel"), null,
-                                    new ReflectStrategy<>(ConfirmOrCancelRegisterDTO.class),
-                                    new OkHttpUtil.SuccessHandler<ConfirmOrCancelRegisterDTO>() {
-                                        @Override
-                                        public void handle(ConfirmOrCancelRegisterDTO confirmOrCancelRegisterDTO) {
-                                            showInfoTipDialog("您已取消该挂号单");
-                                        }
-                                    }, new OkHttpUtil.FailHandler<ConfirmOrCancelRegisterDTO>() {
-                                        @Override
-                                        public void handle(ServiceResult<ConfirmOrCancelRegisterDTO> serviceResult) {
-                                            showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
-                                        }
-                                    });
                             dialog.dismiss();
+                            cancelRegistration();
                         },
                         "再想想", (dialog, index) -> dialog.dismiss());
                 break;
@@ -105,6 +92,22 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
             default:
                 break;
         }
+    }
+
+    // 取消挂号单
+    private void cancelRegistration() {
+        showNetworkLoadingTipDialog("正在为您取消本次预约");
+        getAsyn(Arrays.asList("registration-record", mNormalContainerHelper.getRegistrationRecord().getId(), "cancel"), null,
+                new ReflectStrategy<>(ConfirmOrCancelRegisterDTO.class),
+                new OkHttpUtil.SuccessHandler<ConfirmOrCancelRegisterDTO>() {
+                    @Override
+                    public void handle(ConfirmOrCancelRegisterDTO confirmOrCancelRegisterDTO) {
+                        mNormalContainerHelper.settRegistrationRecord(confirmOrCancelRegisterDTO.getRegistrationRecord());
+                        mNormalContainerHelper.setOrder(confirmOrCancelRegisterDTO.getOssOrder());
+                        showSuccessTipDialog("取消预约成功");
+                        popBackStack();
+                    }
+                });
     }
 
     // 展示支付渠道

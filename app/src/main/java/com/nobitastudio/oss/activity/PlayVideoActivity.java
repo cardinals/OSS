@@ -12,6 +12,7 @@ import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.widget.PreViewGSYVideoPlayer;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
@@ -31,7 +32,7 @@ import static com.nobitastudio.oss.OSSApplication.getContext;
 public class PlayVideoActivity extends BaseActivity {
 
     @BindView(R.id.video_player)
-    StandardGSYVideoPlayer mVideoPlayer;
+    PreViewGSYVideoPlayer mVideoPlayer;
 
     OrientationUtils mOrientationUtils;
 
@@ -51,7 +52,7 @@ public class PlayVideoActivity extends BaseActivity {
         mVideoPlayer.setUp(url, true, NormalContainerHelper.getInstance().getSelectedDoctorLecture().getTitle()); // 设置title
         ImageView imageView = new ImageView(this);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageResource(R.mipmap.bg_video_test);
+        imageView.setImageResource(R.mipmap.bg_video_test); // 这是封面
         mVideoPlayer.setThumbImageView(imageView);
 
         //增加title  设置padding
@@ -68,6 +69,7 @@ public class PlayVideoActivity extends BaseActivity {
         //设置返回按键功能
         mVideoPlayer.getBackButton().setOnClickListener(v -> onBackPressed());
         mVideoPlayer.startPlayLogic();
+        mOrientationUtils.resolveByClick(); // 进入时就全屏播放
     }
 
     @Override
@@ -81,6 +83,11 @@ public class PlayVideoActivity extends BaseActivity {
         super.onResume();
         NormalContainer.put(NormalContainer.SELECTED_ACTIVITY, this);
         mVideoPlayer.onVideoResume();
+    }
+
+    @Override
+    protected boolean canDragBack() {
+        return false;
     }
 
     @Override

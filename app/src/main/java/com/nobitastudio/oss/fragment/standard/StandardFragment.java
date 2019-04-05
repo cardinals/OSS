@@ -466,6 +466,7 @@ public abstract class StandardFragment extends BaseFragment
                 getNetworkUnavailableHandler(), null, null, null, null);
     }
 
+    // 同步请求
     public <T> void getSync(List<String> restParams, List<GetParam> getParams, ReflectStrategy<T> reflectStrategy,
                             OkHttpUtil.SuccessHandler<T> successHandler, OkHttpUtil.FailHandler<T> failureHandler) {
         OkHttpUtil.sync(OkHttpUtil.METHOD.GET,

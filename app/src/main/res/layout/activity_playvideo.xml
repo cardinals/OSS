@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+    <com.nobitastudio.oss.widget.PreViewGSYVideoPlayer
         android:id="@+id/video_player"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
