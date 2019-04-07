@@ -1,16 +1,15 @@
 package com.nobitastudio.oss.fragment.home;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.dto.ConfirmOrCancelRegisterDTO;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.util.DateUtil;
 import com.nobitastudio.oss.util.OkHttpUtil;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 
 import java.util.Arrays;
 
@@ -25,14 +24,28 @@ import butterknife.OnClick;
  */
 public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
 
+    @BindView(R.id.department_textview)
+    TextView mDepartmentTextView;
+    @BindView(R.id.doctor_name_textview)
+    TextView mDoctorNameTextView;
+    @BindView(R.id.diagnosis_date_textview)
+    TextView mDiagnosisDateTextView;
+    @BindView(R.id.diagnosis_time_textview)
+    TextView mDiagnosisTimeTextView;
+    @BindView(R.id.diagnosis_name_textview)
+    TextView mDiagnosisNameTextView;
+    @BindView(R.id.diagnosis_no_textview)
+    TextView mDiagnosisNoTextView;
+    @BindView(R.id.diagnosis_room_textview)
+    TextView mDiagnosisRoomTextView;
+    @BindView(R.id.register_cost_textview)
+    TextView mDiagnosisCostTextView;
     @BindView(R.id.hosipital_info_solid_imageview)
     ImageView mHospitalInfoSolidImageView;
     @BindView(R.id.register_detail_solid_imageview)
     ImageView mRegisterDetailSolidImageView;
     @BindView(R.id.warm_prompt_solid_imageview)
     ImageView mWarmPromptSolidImageView;
-    @BindView(R.id.cancel_register_button)
-    Button mCancelRegisterRoundButton;
 
     @OnClick({R.id.cancel_register_button})
     void onClick(View v) {
@@ -45,10 +58,18 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
                         },
                         "再想想", (dialog, index) -> dialog.dismiss());
                 break;
-            default:
-                showErrorTipDialog("未处理的点击事件");
-                break;
         }
+    }
+
+    private void initBasic() {
+        mDepartmentTextView.setText(mNormalContainerHelper.getSelectedDepartment().getName());
+        mDoctorNameTextView.setText(mNormalContainerHelper.getSelectedDoctor().getName());
+        mDiagnosisDateTextView.setText(DateUtil.convertToStandardDate(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisTimeTextView.setText(DateUtil.convertToStandardTime(mNormalContainerHelper.getSelectedVisit().getDiagnosisTime()));
+        mDiagnosisNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
+        mDiagnosisNoTextView.setText(mNormalContainerHelper.getRegistrationRecord().getDiagnosisNo() + " 号");
+        mDiagnosisRoomTextView.setText(mNormalContainerHelper.getSelectedDepartment().getAddress());
+        mDiagnosisCostTextView.setText(mNormalContainerHelper.getSelectedVisit().getCost().toString() + " 元");
     }
 
     // 取消挂号单
@@ -79,6 +100,7 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initSolidImage(mHospitalInfoSolidImageView, mRegisterDetailSolidImageView, mWarmPromptSolidImageView);
     }
 

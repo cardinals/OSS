@@ -282,4 +282,7 @@
     <!-- 医院名称 -->
     <string name="hospital_name">石河子大学附属医院</string>
     <string name="register_attention_before">1.请在30分钟内支付，逾期作废\n2.逾期超5次将会冻结就诊卡</string>
+    <string name="register_success_warm_prompt">1.请您在指定的时间段前往石河子大学医学院第一附属医院指定科室的指定诊疗室候诊(若不知道准确地址,可在首页选择导航导诊进行查看)\n
+    2.到就诊地点后,凭借就诊人诊疗卡进行签到,及时就诊。\n
+    3.因未在指定时间内到达或未到达而错过就诊的患者,本医院不承担任何人责任</string>
 </resources>

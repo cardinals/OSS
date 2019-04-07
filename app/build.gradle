@@ -107,10 +107,12 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
+    // 大部分架构是在 qmui：1.2.0  arch：0.3.2 上开发完成
 //    implementation 'com.qmuiteam:qmui:1.1.12'  // qmui widget
     implementation 'com.qmuiteam:qmui:1.2.0'  // qmui widget
 //    implementation 'com.qmuiteam:arch:0.3.1'   // fragment,activity 该版本存在返回动画异常异常
-    implementation 'com.qmuiteam:arch:0.3.2'
+//    implementation 'com.qmuiteam:arch:0.3.2'
+    implementation 'com.qmuiteam:arch:0.4.0'
 
     //leak
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'

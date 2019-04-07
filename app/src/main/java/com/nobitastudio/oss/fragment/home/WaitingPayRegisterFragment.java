@@ -1,20 +1,12 @@
 package com.nobitastudio.oss.fragment.home;
 
-import android.content.Context;
-import android.database.DatabaseUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.base.bj.trpayjar.listener.PayResultListener;
-import com.base.bj.trpayjar.utils.TrPay;
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.container.ConstantContainer;
-import com.nobitastudio.oss.fragment.home.RegisterSuccessFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.common.ServiceResult;
-import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ConfirmOrCancelRegisterDTO;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.OSSOrder;
@@ -65,7 +57,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     ImageView mRegisterDetailSolidImageView;
     @BindView(R.id.left_time_solid_imageview)
     ImageView mLeftTimeSolidImageView;
-    @BindView(R.id.attention_imageview)
+    @BindView(R.id.attention_solid_imageview)
     ImageView mAttentionSolidImageView;
 
     Timer mLeftTimeControllerTimer;
@@ -182,6 +174,24 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     // 验证订单是否支付
     private void validateOrderStatus() {
         showNetworkLoadingTipDialog("正在检查支付状态");
+        if (mNormalContainerHelper.getOrder() == null) {
+            getAsyn(Arrays.asList("order", mNormalContainerHelper.getSelectedMedicalCard().getId(), mNormalContainerHelper.getSelectedVisit().getId().toString()),
+                    null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
+                    new OkHttpUtil.SuccessHandler<OSSOrder>() {
+                        @Override
+                        public void handle(OSSOrder ossOrder) {
+                            mNormalContainerHelper.setOrder(ossOrder);
+                            checkOrderStatus();
+                        }
+                    });
+        } else {
+            checkOrderStatus();
+        }
+        mPullRefreshLayout.finishRefresh();
+    }
+
+    // 检查订单状态
+    private void checkOrderStatus() {
         getSync(Arrays.asList("order", "status", mNormalContainerHelper.getOrder().getId()), null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
                 new OkHttpUtil.SuccessHandler<OSSOrder>() {
                     @Override
@@ -191,11 +201,10 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                             showSuccessTipDialog("支付成功");
                             startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
                         } else {
-                            showInfoTipDialog("当前挂号单尚未支付,若已支付请下拉刷新",2000l);
+                            showInfoTipDialog("当前挂号单尚未支付,若已支付请下拉刷新", 2000l);
                         }
                     }
                 });
-        mPullRefreshLayout.finishRefresh();
     }
 
     // 初始化基础数据
@@ -210,7 +219,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
         mDiagnosisCostTextView.setText(mNormalContainerHelper.getSelectedVisit().getCost().toString() + " 元");
         mLeftTime = mNormalContainerHelper.getLeftTime();
 
-        // 开启定时器.默认30分钟支付时间.不支付则自动销毁至上一个fragment
+        // 开启定时器.默认30分钟支付时间.不支付则不再让其支付
         mLeftTimeControllerTimer = new Timer();
         mLeftTimeControllerTimer.schedule(new TimerTask() {
             @Override

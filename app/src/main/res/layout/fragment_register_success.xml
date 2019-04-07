@@ -442,14 +442,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:gravity="start"
-                                android:text="标准正文标准正文标准正文标准正文标 \n\n\n准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文标准正文" />
-
+                                android:text="@string/register_success_warm_prompt" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="64dp" />
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/dp_64"
+                        android:background="@color/qmui_config_color_white" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout>

@@ -43,6 +43,22 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
+    protected void initRecyclerView() {
+        mMedicalCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        });
+        mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), mBindMedicalCards);
+        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> {
+            mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
+            startFragment(new MedicalCardDetailFragment());
+        });
+        mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
+    }
+
     @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
@@ -67,25 +83,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     private void initBasic() {
         mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
         if (mBindMedicalCards == null) {
-
             showNetworkLoadingTipDialog("正在加载");
         }
     }
-
-    protected void initRecyclerView() {
-        mMedicalCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
-            @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-        });
-        mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), mBindMedicalCards);
-        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> {
-            mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
-            startFragment(new MedicalCardDetailFragment());
-        });
-        mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
-    }
-
 }
