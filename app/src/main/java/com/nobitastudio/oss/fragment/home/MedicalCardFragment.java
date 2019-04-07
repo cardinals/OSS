@@ -5,13 +5,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.MedicalCardItemAdapter;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.MedicalCard;
+import com.nobitastudio.oss.util.OkHttpUtil;
+import com.qmuiteam.qmui.widget.QMUIEmptyView;
+import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -43,6 +50,16 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
         }
     }
 
+    private void initBasic() {
+        mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
+        if (mBindMedicalCards == null) {
+            getBindMedicalCards();
+        } else if (mBindMedicalCards.size() == 0) {
+            showInfoTipDialog("您尚未绑定任何诊疗卡");
+        }
+        initRecyclerView();
+    }
+
     protected void initRecyclerView() {
         mMedicalCardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
@@ -51,17 +68,60 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mMedicalCardItemAdapter = new MedicalCardItemAdapter(getBaseFragmentActivity(), mBindMedicalCards);
-        mMedicalCardItemAdapter.setOnItemClickListener((view,pos) -> {
+        mMedicalCardItemAdapter = new MedicalCardItemAdapter(getContext(), mBindMedicalCards);
+        mMedicalCardItemAdapter.setOnItemClickListener((view, pos) -> {
             mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
             startFragment(new MedicalCardDetailFragment());
         });
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
     }
 
+    // 绑定的诊疗卡
+    private void getBindMedicalCards() {
+        showNetworkLoadingTipDialog("正在查询绑定的诊疗卡");
+        getAsyn(Arrays.asList("medical-card", mNormalContainerHelper.getUser().getId().toString(), "medical-cards"), null,
+                new ReflectStrategy<>(new TypeReference<List<MedicalCard>>() {
+                }), new OkHttpUtil.SuccessHandler<List<MedicalCard>>() {
+                    @Override
+                    public void handle(List<MedicalCard> medicalCards) {
+                        mNormalContainerHelper.setBindMedicalCards(medicalCards);
+                        mBindMedicalCards.clear();
+                        mBindMedicalCards.addAll(medicalCards);
+                        mMedicalCardItemAdapter.notifyDataSetChanged();
+                        if (mNormalContainerHelper.getBindMedicalCards().size() == 0) {
+                            showInfoTipDialog("您尚未绑定任何诊疗卡");
+                        } else {
+                            closeTipDialog();
+                        }
+                    }
+                });
+    }
+
     @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
+    }
+
+    @Override
+    protected void initRefreshLayout() {
+        mPullRefreshLayout.setEnabled(true);
+        mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
+            @Override
+            public void onMoveTarget(int offset) {
+
+            }
+
+            @Override
+            public void onMoveRefreshView(int offset) {
+
+            }
+
+            @Override
+            public void onRefresh() {
+                mPullRefreshLayout.finishRefresh();
+                getBindMedicalCards();
+            }
+        });
     }
 
     @Override
@@ -77,13 +137,5 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initBasic();
-        initRecyclerView();
-    }
-
-    private void initBasic() {
-        mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
-        if (mBindMedicalCards == null) {
-            showNetworkLoadingTipDialog("正在加载");
-        }
     }
 }

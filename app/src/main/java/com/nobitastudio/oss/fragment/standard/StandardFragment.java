@@ -191,6 +191,10 @@ public abstract class StandardFragment extends BaseFragment
         mEmptyViewHelper.showLoadingFailEmptyView(mEmptyView, titleText, buttonText);
     }
 
+    protected void showSimpleTextEmptyView(QMUIEmptyView mEmptyView, String titleText) {
+        mEmptyViewHelper.showSimpleTextEmptyView(mEmptyView,titleText);
+    }
+
     protected void closeLoadingEmptyView(QMUIEmptyView mEmptyView) {
         mEmptyViewHelper.closeLoadingEmptyView(mEmptyView);
     }

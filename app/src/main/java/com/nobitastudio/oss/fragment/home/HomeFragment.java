@@ -204,27 +204,25 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
         mNormalContainerHelper = NormalContainerHelper.getInstance();
 
         // 绑定的诊疗卡
-        getAsyn(Arrays.asList("medical-card", mNormalContainerHelper.getUser().getId().toString(), "medical-cards"), null,
-                new ReflectStrategy<>(new TypeReference<List<MedicalCard>>() {
-                }), new OkHttpUtil.SuccessHandler<List<MedicalCard>>() {
-                    @Override
-                    public void handle(List<MedicalCard> medicalCards) {
-                        mNormalContainerHelper.setBindMedicalCards(medicalCards);
-                    }
-                }, new OkHttpUtil.FailHandler<List<MedicalCard>>() {
-                    @Override
-                    public void handle(ServiceResult<List<MedicalCard>> serviceResult) {
-                        mTipDialogHelper.showInfoTipDialog("获取绑定的诊疗卡失败.请进入'诊疗卡'重新获取", mViewPager);
-                    }
-                });
+        getBindMedicalCards();
 
         // 收藏的医生
+        getCollectDoctors();
+
+        // 设置属性:推送等待
+    }
+
+    // 收藏的医生
+    private void getCollectDoctors() {
         getAsyn(Arrays.asList("doctor", mNormalContainerHelper.getUser().getId().toString(), "collect-doctor"), null,
                 new ReflectStrategy<>(new TypeReference<List<Doctor>>() {
                 }), new OkHttpUtil.SuccessHandler<List<Doctor>>() {
                     @Override
                     public void handle(List<Doctor> doctors) {
-                        mNormalContainerHelper.setCollectDoctors(doctors);
+                        if (mNormalContainerHelper.getCollectDoctors() == null) {
+                            // 可能多次调用
+                            mNormalContainerHelper.setCollectDoctors(doctors);
+                        }
                     }
                 }, new OkHttpUtil.FailHandler<List<Doctor>>() {
                     @Override
@@ -232,8 +230,25 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
                         mTipDialogHelper.showInfoTipDialog("获取收藏的医生失败.请至'我的'收藏中重新获取", mViewPager);
                     }
                 });
+    }
 
-        // 设置属性:推送等待
+    // 绑定的诊疗卡
+    private void getBindMedicalCards() {
+        getAsyn(Arrays.asList("medical-card", mNormalContainerHelper.getUser().getId().toString(), "medical-cards"), null,
+                new ReflectStrategy<>(new TypeReference<List<MedicalCard>>() {
+                }), new OkHttpUtil.SuccessHandler<List<MedicalCard>>() {
+                    @Override
+                    public void handle(List<MedicalCard> medicalCards) {
+                        if (mNormalContainerHelper.getBindMedicalCards() == null) {
+                            mNormalContainerHelper.setBindMedicalCards(medicalCards);
+                        }
+                    }
+                }, new OkHttpUtil.FailHandler<List<MedicalCard>>() {
+                    @Override
+                    public void handle(ServiceResult<List<MedicalCard>> serviceResult) {
+                        mTipDialogHelper.showInfoTipDialog("获取绑定的诊疗卡失败.请进入'诊疗卡'重新获取", mViewPager);
+                    }
+                });
     }
 
     @Override

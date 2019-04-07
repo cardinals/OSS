@@ -28,12 +28,7 @@ public class MedicalCardItemAdapter extends BaseRecyclerViewAdapter<MedicalCard>
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, MedicalCard item) {
-        holder.getTextView(R.id.owner_name_textview).setText("持卡人" + position);
-        holder.getTextView(R.id.medical_card_no_textview).setText("卡号" + position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return 10;
+        holder.getTextView(R.id.owner_name_textview).setText(item.getOwnerName());
+        holder.getTextView(R.id.medical_card_no_textview).setText(item.getId());
     }
 }

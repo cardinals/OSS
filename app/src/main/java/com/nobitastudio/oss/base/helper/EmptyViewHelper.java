@@ -26,6 +26,10 @@ public class EmptyViewHelper {
         mEmptyView.show(false, titleText == null ? "加载失败" : titleText, null, buttonText == null ? "点击重试" : buttonText, mListener);
     }
 
+    public void showSimpleTextEmptyView(QMUIEmptyView mEmptyView, String titleText) {
+        mEmptyView.show(false, titleText == null ? "加载失败" : titleText, null, null,null);
+    }
+
     public void closeLoadingEmptyView(QMUIEmptyView mEmptyView) {
         if (mEmptyView.isShowing()) {
             mEmptyView.hide();
