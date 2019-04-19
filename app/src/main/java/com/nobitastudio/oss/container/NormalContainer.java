@@ -14,6 +14,13 @@ import java.util.Map;
  */
 public class NormalContainer implements Serializable {
 
+    // 进入 InputMobileFragment的意图
+    public enum InputMobileFor {
+        REGISTER, //
+        MODIFY_PASSWORD, // 修改密码
+        CREATE_MEDICAL_CARD; // 创建诊疗卡
+    }
+
     // 容器
     public static Map<String, Object> container = new HashMap<>();
 
@@ -28,6 +35,8 @@ public class NormalContainer implements Serializable {
     public static final String REGISTRATION_RECORD = "REGISTRATION_RECORD"; // 最新挂号成功的记录
     public static final String LEFT_TIME_PAY = "LEFT_TIME_PAY"; // 剩余支付的时间 以秒计时
     public static final String OSS_ORDER = "OSS_ORDER"; // 从服务器端获取的订单
+    public static final String INPUT_MOBILE_FRAGMENT = "INPUT_MOBILE_FRAGMENT";    // 进入InputMobileFragment的意图
+    public static final String INPUT_MOBILE = "INPUT_MOBILE"; // 用户输入的手机号（并非用于登录）
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity

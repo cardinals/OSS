@@ -110,7 +110,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
         mPages.put(Pager.DOCTOR,mCollectDoctorRecyclerView);
         mPages.put(Pager.HEALTH_ARTICLE,mCollectArticleRecyclerView);
         mPages.put(Pager.OTHER,mOtherController);
-        mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getActivity(),null);
+        mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getContext(),null);
         mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
         mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(),null);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);

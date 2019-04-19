@@ -23,7 +23,8 @@ import java.util.List;
  */
 public class NormalContainerHelper {
 
-    private NormalContainerHelper () {}
+    private NormalContainerHelper() {
+    }
 
     private static NormalContainerHelper mNormalContainerHelper;
 
@@ -105,6 +106,14 @@ public class NormalContainerHelper {
 
     public OSSOrder getOrder() {
         return NormalContainer.get(NormalContainer.OSS_ORDER);
+    }
+
+    public NormalContainer.InputMobileFor getInputMobileFragment() {
+        return NormalContainer.get(NormalContainer.INPUT_MOBILE_FRAGMENT);
+    }
+
+    public String getInputMobile() {
+        return NormalContainer.get(NormalContainer.INPUT_MOBILE);
     }
 
     // set
@@ -189,12 +198,22 @@ public class NormalContainerHelper {
     }
 
     public NormalContainerHelper setLeftTime(Integer leftTime) {
-        NormalContainer.put(NormalContainer.LEFT_TIME_PAY,leftTime);
+        NormalContainer.put(NormalContainer.LEFT_TIME_PAY, leftTime);
         return this;
     }
 
     public NormalContainerHelper setOrder(OSSOrder ossOrder) {
-        NormalContainer.put(NormalContainer.OSS_ORDER,ossOrder);
+        NormalContainer.put(NormalContainer.OSS_ORDER, ossOrder);
+        return this;
+    }
+
+    public NormalContainerHelper setInputMobileFragment(NormalContainer.InputMobileFor inputMobileFor) {
+        NormalContainer.put(NormalContainer.INPUT_MOBILE_FRAGMENT, inputMobileFor);
+        return this;
+    }
+
+    public NormalContainerHelper setInputMobile(String mobile) {
+        NormalContainer.put(NormalContainer.INPUT_MOBILE, mobile);
         return this;
     }
 

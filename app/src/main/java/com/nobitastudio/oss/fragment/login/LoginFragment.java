@@ -46,8 +46,10 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
                         Arrays.asList(0, 1, 2),
                         (dialog, itemView) -> {
                             if (itemView.getTag().equals(0)) {
+                                mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.REGISTER);
                                 startFragment(new InputMobileFragment());
                             } else if (itemView.getTag().equals(1)) {
+                                mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.MODIFY_PASSWORD);
                                 startFragment(new InputMobileFragment());
                             } else if (itemView.getTag().equals(2)) {
                                 startFragment(new AboutFragment());
@@ -59,15 +61,15 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     }
 
     private void userClickLogin() {
-        String mobile = userMobileEditText.getText().toString();
-        String password = userPasswordEditText.getText().toString();
-        if (mobile.trim().length() == 0) {
+        String mobile = userMobileEditText.getText().toString().trim();
+        String password = userPasswordEditText.getText().toString().trim();
+        if (mobile.length() == 0) {
             showInfoTipDialog("请输入手机号");
-        } else if (password.trim().length() == 0) {
+        } else if (password.length() == 0) {
             showInfoTipDialog("请输入密码");
-        } else if (!RegexUtils.isMobileExact(mobile.trim())) {
+        } else if (!RegexUtils.isMobileExact(mobile)) {
             showInfoTipDialog("请输入正确手机号");
-        } else if (password.trim().length() < 6 || password.trim().length() > 16) {
+        } else if (password.length() < 6 || password.length() > 16) {
             showInfoTipDialog("密码格式错误,请重新输入");
         } else {
             showNetworkLoadingTipDialog("正在验证");

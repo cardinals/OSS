@@ -47,7 +47,7 @@ public class DoctorRecycleViewAdapter extends BaseRecyclerViewAdapter<DoctorAndV
         Glide.with(mContext).load(ConstantContainer.OSS_SERVER_RUNTIME + doctor.getIconUrl()).into(holder.getImageView(R.id.doctor_imageview));
         holder.getTextView(R.id.doctor_name_textview).setText(doctor.getName());
         holder.getTextView(R.id.doctor_level_textView).setText(DoctorLevel.translateToString(doctor.getLevel()));
-        holder.getTextView(R.id.deparment_textView).setText(mSelectedDepartment.getName());
+        holder.getTextView(R.id.deparment_textview).setText(mSelectedDepartment.getName());
         holder.getTextView(R.id.submajor_textView).setText(doctor.getSubMajor());
         holder.getTextView(R.id.speciality_textview).setText(doctor.getSpecialty());
         initButton(visits, holder.getButton(R.id.roundButton));

@@ -77,8 +77,6 @@ public class PreViewGSYVideoPlayer extends NormalGSYVideoPlayer {
             int width = seekBar.getWidth();
             int time = progress * getDuration() / 100;
             int offset = (int) (width - (getResources().getDimension(R.dimen.seek_bar_image) / 2)) / 100 * progress;
-            Debuger.printfError("***************** " + progress);
-            Debuger.printfError("***************** " + time);
             showPreView(mOriginUrl, time);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mPreviewLayout.getLayoutParams();
             layoutParams.leftMargin = offset;

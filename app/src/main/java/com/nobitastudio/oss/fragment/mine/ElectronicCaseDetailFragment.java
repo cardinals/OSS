@@ -172,12 +172,6 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
-        // 刷新所有controller下的数据
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_electronic_case_detail;
     }

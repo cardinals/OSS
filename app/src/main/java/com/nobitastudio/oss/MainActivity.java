@@ -29,6 +29,7 @@ import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.login.ForgetPasswordFragment;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.login.LoginFragment;
+import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.test.Test4Fragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
 

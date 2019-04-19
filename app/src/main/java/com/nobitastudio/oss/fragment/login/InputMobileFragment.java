@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
@@ -25,7 +26,34 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @OnClick({R.id.next_step_button})
     void onClick(View v) {
-        startFragment(new VerificationCodeFragment());
+        String mobile = mMobileEditText.getText().toString().trim();
+        if (mobile.length() == 0) {
+            showInfoTipDialog("请输入手机号");
+        } else if (!RegexUtils.isMobileExact(mobile)) {
+            showInfoTipDialog("请输入正确手机号");
+        } else {
+            mNormalContainerHelper.setInputMobile(mobile);
+            startFragment(new VerificationCodeFragment());
+        }
+    }
+
+    private void initMobileEditTextHint() {
+        String mHint = "";
+        switch (mNormalContainerHelper.getInputMobileFragment()) {
+            case REGISTER:
+                mHint = "请输入手机号";
+                break;
+            case MODIFY_PASSWORD:
+                mHint = "请输入绑定的手机号";
+                break;
+            case CREATE_MEDICAL_CARD:
+                mHint = "请输入诊疗卡持有者的手机号";
+                break;
+            default:
+                mHint = "请输入手机号";
+                break;
+        }
+        mMobileEditText.setHint(mHint);
     }
 
     @Override
@@ -45,6 +73,8 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        initMobileEditTextHint();
         initCopyRight(mCopyrightTextView);
     }
+
 }
