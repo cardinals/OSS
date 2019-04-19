@@ -44,11 +44,11 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
         } else if (newPassword.length() < 6 || newPassword.length() > 16 || confirmPassword.length() < 6 || confirmPassword.length() > 16) {
             showInfoTipDialog("密码格式错误,请重新输入");
         } else {
+            User user = new User();
+            user.setMobile(mNormalContainerHelper.getInputMobile());
+            user.setPassword(newPassword);
             switch (mNormalContainerHelper.getInputMobileFragment()) {
                 case REGISTER:
-                    User user = new User();
-                    user.setMobile(mNormalContainerHelper.getInputMobile());
-                    user.setPassword(newPassword);
                     showNetworkLoadingTipDialog("正在注册");
                     postAsyn(Arrays.asList("user", "enroll"), null, user, new ReflectStrategy<>(User.class),
                             new OkHttpUtil.SuccessHandler<User>() {
@@ -62,6 +62,17 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                             });
                     break;
                 case MODIFY_PASSWORD:
+                    showNetworkLoadingTipDialog("正在修改密码");
+                    postAsyn(Arrays.asList("user", "pw-by-sms"), null, user, new ReflectStrategy<>(User.class),
+                            new OkHttpUtil.SuccessHandler<User>() {
+                                @Override
+                                public void handle(User user) {
+                                    // 注册成功  进行登录操作
+                                    closeTipDialog();
+                                    mNormalContainerHelper.setUser(user);
+                                    startFragmentAndDestroyCurrent(new HomeFragment());
+                                }
+                            });
                     break;
             }
         }
