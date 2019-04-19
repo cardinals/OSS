@@ -31,6 +31,7 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
         switch (v.getId()) {
             case R.id.feedback_button:
                 showNetworkLoadingTipDialog("正在发送您的反馈",1500);
+                showSuccessTipDialog("感谢您的反馈");
                 break;
             default:
                 break;

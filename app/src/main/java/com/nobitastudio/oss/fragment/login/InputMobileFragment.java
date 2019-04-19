@@ -1,5 +1,6 @@
 package com.nobitastudio.oss.fragment.login;
 
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,13 +21,13 @@ import butterknife.OnClick;
 public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @BindView(R.id.mobile_edittext)
-    EditText mMobileEditText;
+    TextInputLayout mMobileEditText;
     @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
 
     @OnClick({R.id.next_step_button})
     void onClick(View v) {
-        String mobile = mMobileEditText.getText().toString().trim();
+        String mobile = mMobileEditText.getEditText().getText().toString().trim();
         if (mobile.length() == 0) {
             showInfoTipDialog("请输入手机号");
         } else if (!RegexUtils.isMobileExact(mobile)) {

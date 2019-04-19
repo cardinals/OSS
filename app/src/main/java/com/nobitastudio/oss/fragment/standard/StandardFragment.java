@@ -463,6 +463,13 @@ public abstract class StandardFragment extends BaseFragment
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
     }
 
+    public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody, ReflectStrategy<T> reflectStrategy,
+                            OkHttpUtil.SuccessHandler<T> successHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,
+                Boolean.TRUE, restParams, getParams, requestBody, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, getFailHandler(), getErrorHandler());
+    }
+
     // put 请求 不处理返回结果
     public <T> Call putAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.PUT,

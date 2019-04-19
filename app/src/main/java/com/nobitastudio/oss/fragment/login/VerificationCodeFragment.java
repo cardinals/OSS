@@ -7,13 +7,21 @@ import com.mukesh.OtpView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.dto.ConfirmValidateCodeDTO;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.dto.RequestValidateCodeDTO;
+import com.nobitastudio.oss.model.dto.StandardInfo;
+import com.nobitastudio.oss.model.enumeration.SmsMessageType;
+import com.nobitastudio.oss.util.DateUtil;
+import com.nobitastudio.oss.util.OkHttpUtil;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -29,23 +37,102 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
     OtpView mOtpView;
     @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
+    @BindView(R.id.resend_textview)
+    TextView mResendTextView;
+
+    Timer mLeftTimeControllerTimer;
+    Integer mLeftTime;
 
     @OnClick({R.id.resend_textview})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.resend_textview:
-                showSimpleBottomSheetList(Arrays.asList("重新获取验证码", "接听语音验证码"),
-                        (dialog, itemView, position, tag) -> {
-                            dialog.dismiss();
-                            Toasty.success(getContext(), position + tag).show();
-                        });
+                if (mLeftTime.equals(0)) {
+                    showSimpleBottomSheetList(Arrays.asList("重新获取验证码", "接听语音验证码"),
+                            (dialog, itemView, position, tag) -> {
+                                switch (position) {
+                                    case 0:
+                                        reSendSmsToMobile();
+                                        break;
+                                    case 1:
+                                        showInfoTipDialog("程序员小哥哥由于996正在ICU,敬请期待");
+                                        break;
+                                }
+                            });
+                } else {
+                    // 2分钟才能发送一次
+                    showInfoTipDialog("还有" + mLeftTime + "秒您才可重新发送验证码");
+                }
                 break;
         }
     }
 
+    // 重新发送验证码到指定账户
+    private void reSendSmsToMobile() {
+        mLeftTime = 120; // 默认120秒
+        showNetworkLoadingTipDialog("正在发送");
+        mSendToMobileTextView.setText("正在发送验证码");
+        RequestValidateCodeDTO requestValidateCodeDTO = new RequestValidateCodeDTO();
+        requestValidateCodeDTO.setMobile(mNormalContainerHelper.getInputMobile());
+        switch (mNormalContainerHelper.getInputMobileFragment()) {
+            case REGISTER:
+                requestValidateCodeDTO.setSmsMessageType(SmsMessageType.ENROLL);
+                break;
+            case CREATE_MEDICAL_CARD:
+                requestValidateCodeDTO.setSmsMessageType(SmsMessageType.CREATE_MEDICAL_CARD);
+                break;
+            case MODIFY_PASSWORD:
+                requestValidateCodeDTO.setSmsMessageType(SmsMessageType.UPDATE_PASSWORD);
+                break;
+            case BIND_MEDICAL_CARD:
+                requestValidateCodeDTO.setSmsMessageType(SmsMessageType.BIND_MEDICAL_CARD);
+                break;
+        }
+        putAsyn(Arrays.asList("sms-validate", "request-code"), null, requestValidateCodeDTO, new ReflectStrategy<>(StandardInfo.class)
+                , new OkHttpUtil.SuccessHandler<StandardInfo>() {
+                    @Override
+                    public void handle(StandardInfo s) {
+                        showSuccessTipDialog("发送成功");
+                        mSendToMobileTextView.setText("验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile());
+                        mLeftTimeControllerTimer = new Timer();
+                        mLeftTimeControllerTimer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(() -> {
+                                    if (mLeftTime < 1) {
+                                        mResendTextView.setText("重新获取验证码/收不到验证码点这里");
+                                        mLeftTimeControllerTimer.cancel();
+                                    } else {
+                                        mResendTextView.setText(mLeftTime + "秒后重新获取验证码/收不到验证码点这里");
+                                    }
+                                });
+                                mLeftTime--;
+                            }
+                        }, 0, 1000l);
+                    }
+                }, new OkHttpUtil.FailHandler<StandardInfo>() {
+                    @Override
+                    public void handle(ServiceResult<StandardInfo> serviceResult) {
+                        showInfoTipDialog("发送失败,请重试");
+                        mLeftTime = 0;
+                        mResendTextView.setText("重新获取验证码/收不到验证码点这里");
+                    }
+                });
+    }
+
     private void initOptView() {
         mOtpView.setOtpCompletionListener((value) -> {
-            startFragmentAndDestroyCurrent(new CreateMedicalCardFragment());
+            showNetworkLoadingTipDialog("正在验证");
+            ConfirmValidateCodeDTO confirmValidateCodeDTO = new ConfirmValidateCodeDTO(mNormalContainerHelper.getInputMobile(), value);
+            putAsyn(Arrays.asList("sms-validate", "confirm-code"), null, confirmValidateCodeDTO, new ReflectStrategy<>(StandardInfo.class)
+                    , new OkHttpUtil.SuccessHandler<StandardInfo>() {
+                        @Override
+                        public void handle(StandardInfo s) {
+                            // 根据情况跳转至相应的fragment
+                            closeTipDialog();
+                            startFragmentAndDestroyCurrent(new CreateMedicalCardFragment());
+                        }
+                    });
         });
     }
 
@@ -66,6 +153,7 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        reSendSmsToMobile();  // 进入时即发送给指定用户
         initOptView();
         initCopyRight(mCopyrightTextView);
     }

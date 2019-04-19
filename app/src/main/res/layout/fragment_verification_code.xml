@@ -56,7 +56,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_12"
                             android:layout_marginBottom="@dimen/dp_0"
-                            android:text="验证码已发送至 +86 1234567890"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
 
@@ -81,7 +80,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_20"
-                            android:text="50秒后重新获取验证码/收不到验证码点这里"
+                            android:text="重新获取验证码/收不到验证码点这里"
                             android:textColor="@color/qmui_config_color_white"
                             android:textStyle="normal" />
                     </LinearLayout>

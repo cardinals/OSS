@@ -18,7 +18,9 @@ public class NormalContainer implements Serializable {
     public enum InputMobileFor {
         REGISTER, //
         MODIFY_PASSWORD, // 修改密码
+        BIND_MEDICAL_CARD, // 绑定诊疗卡
         CREATE_MEDICAL_CARD; // 创建诊疗卡
+
     }
 
     // 容器
