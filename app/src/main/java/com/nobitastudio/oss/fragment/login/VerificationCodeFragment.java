@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.mukesh.OtpView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
+import com.nobitastudio.oss.fragment.old.ForgetPasswordTwoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.ConfirmValidateCodeDTO;
@@ -58,6 +59,7 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
                                         showInfoTipDialog("程序员小哥哥由于996正在ICU,敬请期待");
                                         break;
                                 }
+                                dialog.dismiss();
                             });
                 } else {
                     // 2分钟才能发送一次
@@ -93,7 +95,7 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
                     @Override
                     public void handle(StandardInfo s) {
                         showSuccessTipDialog("发送成功");
-                        mSendToMobileTextView.setText("验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile());
+                        mSendToMobileTextView.setText(generateSendToMobile());
                         mLeftTimeControllerTimer = new Timer();
                         mLeftTimeControllerTimer.schedule(new TimerTask() {
                             @Override
@@ -120,6 +122,10 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
                 });
     }
 
+    private String generateSendToMobile() {
+        return "验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile().substring(0,4) + "****" + mNormalContainerHelper.getInputMobile().substring(7,11);
+    }
+
     private void initOptView() {
         mOtpView.setOtpCompletionListener((value) -> {
             showNetworkLoadingTipDialog("正在验证");
@@ -130,10 +136,27 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
                         public void handle(StandardInfo s) {
                             // 根据情况跳转至相应的fragment
                             closeTipDialog();
-                            startFragmentAndDestroyCurrent(new CreateMedicalCardFragment());
+                            switch (mNormalContainerHelper.getInputMobileFragment()) {
+                                case MODIFY_PASSWORD:
+                                case REGISTER:
+                                    startFragmentAndDestroyCurrent(new ForgetPasswordFragment());
+                                    break;
+                                case CREATE_MEDICAL_CARD:
+                                    startFragmentAndDestroyCurrent(new CreateMedicalCardFragment());
+                                    break;
+                                case BIND_MEDICAL_CARD:
+                                    bindMedicalCard();
+                                    break;
+                            }
                         }
                     });
         });
+    }
+
+    // 调用bind接口 绑定操作
+    private void bindMedicalCard() {
+
+
     }
 
     @Override

@@ -448,6 +448,13 @@ public abstract class StandardFragment extends BaseFragment
                 getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, failureHandler, getErrorHandler());
     }
 
+    public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody, ReflectStrategy<T> reflectStrategy,
+                             OkHttpUtil.SuccessHandler<T> successHandler) {
+        return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
+                Boolean.TRUE, restParams, getParams, requestBody, reflectStrategy,
+                getNetworkUnavailableHandler(), getConnectFailHandler(), successHandler, getFailHandler(), getErrorHandler());
+    }
+
     // post 请求 不处理返回结果
     public <T> Call postAsyn(List<String> restParams, List<GetParam> getParams, Object requestBody) {
         return OkHttpUtil.asyn(OkHttpUtil.METHOD.POST,
@@ -494,8 +501,9 @@ public abstract class StandardFragment extends BaseFragment
 
     // ==================== 线程
     public void runOnUiThread(Runnable action) {
-        getActivity().runOnUiThread(action);
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(action);
+        }
     }
-
 
 }

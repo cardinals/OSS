@@ -4,9 +4,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.entity.User;
+import com.nobitastudio.oss.util.OkHttpUtil;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -15,7 +22,7 @@ import butterknife.OnClick;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description 用户输入新密码 以及 确认密码
+ * @description 用户输入新密码 以及 确认密码 进入的时候可能是注册也可能是修改密码
  */
 public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
 
@@ -29,8 +36,35 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
     @OnClick({R.id.confirm_modify_password})
     void onClick(View v) {
         // 清除所有fragment 进入homeFragment
-        // clearAllFragment();
-        startFragmentAndDestroyCurrent(new HomeFragment());
+        // clearAllFragment()
+        String newPassword = mNewPasswordEditText.getText().toString().trim();
+        String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
+        if (newPassword.length() == 0 || confirmPassword.length() == 0) {
+            showInfoTipDialog("请输入密码");
+        } else if (newPassword.length() < 6 || newPassword.length() > 16 || confirmPassword.length() < 6 || confirmPassword.length() > 16) {
+            showInfoTipDialog("密码格式错误,请重新输入");
+        } else {
+            switch (mNormalContainerHelper.getInputMobileFragment()) {
+                case REGISTER:
+                    User user = new User();
+                    user.setMobile(mNormalContainerHelper.getInputMobile());
+                    user.setPassword(newPassword);
+                    showNetworkLoadingTipDialog("正在注册");
+                    postAsyn(Arrays.asList("user", "enroll"), null, user, new ReflectStrategy<>(User.class),
+                            new OkHttpUtil.SuccessHandler<User>() {
+                                @Override
+                                public void handle(User user) {
+                                    // 注册成功  进行登录操作
+                                    closeTipDialog();
+                                    mNormalContainerHelper.setUser(user);
+                                    startFragmentAndDestroyCurrent(new HomeFragment());
+                                }
+                            });
+                    break;
+                case MODIFY_PASSWORD:
+                    break;
+            }
+        }
     }
 
     @Override
@@ -40,7 +74,7 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected String getTopBarTitle() {
-        return "确认修改";
+        return "设置密码";
     }
 
     @Override
