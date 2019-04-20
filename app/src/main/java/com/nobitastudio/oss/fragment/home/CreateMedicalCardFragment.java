@@ -115,7 +115,7 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
                                         new OkHttpUtil.SuccessHandler<MedicalCard>() {
                                             @Override
                                             public void handle(MedicalCard medicalCard) {
-                                                showSuccessTipDialog("办理成功,若未进行显示请刷新");
+                                                showSuccessTipDialog("办理成功,若未进行显示请刷新",2500l);
                                                 mNormalContainerHelper.getBindMedicalCards().add(medicalCard);
                                                 popBackStack(MedicalCardFragment.class);
                                             }
