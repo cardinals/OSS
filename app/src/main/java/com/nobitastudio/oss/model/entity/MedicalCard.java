@@ -48,6 +48,9 @@ public class MedicalCard implements Serializable {
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
+    @Column(name = "password")
+    private String password;
+
     /**
      * 更新诊疗卡信息
      * @param medicalCard
@@ -69,6 +72,11 @@ public class MedicalCard implements Serializable {
             this.ownerMobile = medicalCard.getOwnerMobile();
         }
         return this;
+    }
+
+    // 检查创建时的诊疗卡信息是否完整
+    public boolean createInfoIsComplete() {
+        return ownerMobile != null && ownerName != null && ownerIdCard != null && ownerSex != null && ownerAddress != null && password != null;
     }
 
 }

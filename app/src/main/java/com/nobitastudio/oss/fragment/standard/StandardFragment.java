@@ -1,6 +1,8 @@
 package com.nobitastudio.oss.fragment.standard;
 
 import android.content.DialogInterface;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.nobitastudio.oss.util.DateUtil;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -192,7 +195,7 @@ public abstract class StandardFragment extends BaseFragment
     }
 
     protected void showSimpleTextEmptyView(QMUIEmptyView mEmptyView, String titleText) {
-        mEmptyViewHelper.showSimpleTextEmptyView(mEmptyView,titleText);
+        mEmptyViewHelper.showSimpleTextEmptyView(mEmptyView, titleText);
     }
 
     protected void closeLoadingEmptyView(QMUIEmptyView mEmptyView) {
@@ -300,8 +303,20 @@ public abstract class StandardFragment extends BaseFragment
 
     protected QMUIDialog showAutoDialog(String hintText, String content,
                                         String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                        String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
+                                        String confirmMsg, DialogHelper.AutoDialogConfirmListener confirmListener) {
         return mDialogHelper.showAutoDialog(hintText, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
+    }
+
+    public QMUIDialog showAutoDialogNumber(String hintText, String content,
+                                           String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                           String confirmMsg, DialogHelper.AutoDialogConfirmListener confirmListener, int length) {
+        return mDialogHelper.showAutoDialogNumber(hintText, content, cancelMsg, cancelListener, confirmMsg, confirmListener, length);
+    }
+
+    public QMUIDialog showAutoDialogIdCard(String hintText, String content,
+                                           String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                           String confirmMsg, DialogHelper.AutoDialogConfirmListener confirmListener) {
+        return mDialogHelper.showAutoDialogIdCard(hintText, content, cancelMsg, cancelListener, confirmMsg, confirmListener);
     }
 
     // ============================== 展示 popView
@@ -501,8 +516,8 @@ public abstract class StandardFragment extends BaseFragment
 
     // ==================== 线程
     public void runOnUiThread(Runnable action) {
-        if (getActivity() != null) {
-            getActivity().runOnUiThread(action);
+        if (getBaseFragmentActivity() != null) {
+            getBaseFragmentActivity().runOnUiThread(action);
         }
     }
 

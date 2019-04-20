@@ -34,7 +34,8 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.user_password_editText)
     EditText userPasswordEditText;
 
-    @OnClick({R.id.login_button, R.id.chioces_button})
+    @OnClick({R.id.login_button, R.id.chioces_button,
+            R.id.qq_login_imageview, R.id.wechat_login_imageview, R.id.weibo_login_imageview})
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_button:
@@ -56,6 +57,11 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
                             }
                             dialog.dismiss();
                         });
+                break;
+            case R.id.qq_login_imageview:
+            case R.id.wechat_login_imageview:
+            case R.id.weibo_login_imageview:
+                showInfoTipDialog("敬请期待");
                 break;
         }
     }

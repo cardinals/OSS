@@ -42,9 +42,11 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.create_medical_card_button:
+                mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.CREATE_MEDICAL_CARD);
                 startFragment(new InputMobileFragment());
                 break;
             case R.id.bind_medical_card_button:
+                mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.BIND_MEDICAL_CARD);
                 startFragment(new BindMedicalCardOneFragment());
                 break;
         }
@@ -52,10 +54,8 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
 
     private void initBasic() {
         mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
-        if (mBindMedicalCards == null) {
+        if (mBindMedicalCards == null || mBindMedicalCards.size() == 0) {
             getBindMedicalCards();
-        } else if (mBindMedicalCards.size() == 0) {
-            showInfoTipDialog("您尚未绑定任何诊疗卡");
         }
         initRecyclerView();
     }
@@ -122,6 +122,12 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                 getBindMedicalCards();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMedicalCardItemAdapter.notifyDataSetChanged(); // 从创建、解绑、绑定诊疗卡 回退时调用
     }
 
     @Override

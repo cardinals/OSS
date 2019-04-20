@@ -6,20 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.TypeReference;
-import com.blankj.utilcode.util.ToastUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.DepartmentRecyclerViewAdapter;
 import com.nobitastudio.oss.container.ConstantContainer;
-import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.fragment.test.Test4Fragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -8,22 +8,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.TypeReference;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.adapter.recyclerview.DepartmentRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.ItemRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.SimpleRecycleViewAdapter;
 import com.nobitastudio.oss.base.decorator.GridDividerItemDecoration;
+import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.controller.amap.AmapTTSController;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.common.error.ErrorCode;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.vo.ItemDescription;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 
@@ -116,35 +124,13 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.hospital_out_navigation_recyclerview)
     RecyclerView mHospitalOutNavigationRecycleView;
     @BindView(R.id.hospital_inner_navigation_recyclerview)
-    RecyclerView mHospitalInnerNavigationRecyclerView;
-    @BindView(R.id.scrollview)
-    NestedScrollView scrollView;
+    RecyclerView mRecyclerView;
 
     AmapTTSController amapTTSController; // 语音合成
+    List<Department> mDepartments;
+    DepartmentRecyclerViewAdapter adapter;
 
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
-        mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
-            @Override
-            public void onMoveTarget(int offset) {
-
-            }
-
-            @Override
-            public void onMoveRefreshView(int offset) {
-
-            }
-
-            @Override
-            public void onRefresh() {
-                mTopBar.postDelayed(() -> mPullRefreshLayout.finishRefresh(), 1500l);
-            }
-        });
-    }
-
-    protected void initData() {
-//        mEmptyView.hide();
+    protected void initRecyclerView() {
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
                 Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
                         new ItemDescription("步行", R.mipmap.ic_foot)));
@@ -152,44 +138,35 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
         mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 3));
-        initListView();
+        // 初始化科室列表
+        initDepartmentRecyclerView();
     }
 
-    private void initListView() {
-        List<Department> mDepartments = new ArrayList<>();
-        mDepartments.add(new Department("脑科"));
-        mDepartments.add(new Department("内分泌科"));
-        mDepartments.add(new Department("肿瘤科"));
-        mDepartments.add(new Department("儿科"));
-        mDepartments.add(new Department("泌尿科"));
-        mDepartments.add(new Department("内科"));
-        mDepartments.add(new Department("外科"));
-        mDepartments.add(new Department("生殖科"));
-        mDepartments.add(new Department("中医科"));
-        mDepartments.add(new Department("康复科"));
-        mDepartments.add(new Department("病理科"));
-        mDepartments.add(new Department("男科"));
-        mDepartments.add(new Department("其他科"));
-        mHospitalInnerNavigationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+    private void initDepartmentRecyclerView() {
+        showNetworkLoadingTipDialog("正在加载科室列表信息");
+        mDepartments = new ArrayList<>();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
                 return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        SimpleRecycleViewAdapter<Department> adapter = new SimpleRecycleViewAdapter<Department>(getContext(), mDepartments) {
-            @Override
-            public String display(int position, Department department) {
-                return department.toString();
-            }
-        };
+        adapter = new DepartmentRecyclerViewAdapter(getContext(), mDepartments);
         adapter.setOnItemClickListener((itemView, pos) -> {
             Department department = mDepartments.get(pos);
             showLongMessageDialog(department.getName(), generateDepartmentInfo(department),
-                    "关闭", (dialog, index) -> dialog.dismiss(),
-                    null, null);
+                    null, null,
+                    "知道了", (dialog, index) -> dialog.dismiss());
         });
-        mHospitalInnerNavigationRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    //在科室列表生成科室基本信息
+    private String generateDepartmentInfo(Department department) {
+        return "楼层: " + department.getFloor() + "楼" + "\n\n" +
+                "区域: " + department.getArea().name() + "区" + "\n\n" +
+                "介绍: " + department.getIntroduction();
     }
 
     private void initTTS() {
@@ -197,47 +174,30 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
         amapTTSController.init();
     }
 
-    /**
-     * 在科室列表生成科室基本信息
-     *
-     * @param department
-     * @return
-     */
-    private String generateDepartmentInfo(Department department) {
-        return "楼层:" + department.getFloor() + "\n" +
-                "区域：" + department.getArea().name() + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "介绍：介绍：介绍：介绍：介绍：介" + "\n" +
-                "绍：介绍：介绍：" + department.getIntroduction();
+    @Override
+    protected void refresh(Boolean isCancelPull) {
+        getAsyn(Arrays.asList("department"), null, new ReflectStrategy<>(new TypeReference<List<Department>>() {
+                }), new OkHttpUtil.SuccessHandler<List<Department>>() {
+                    @Override
+                    public void handle(List<Department> departments) {
+                        List<Department> mContainICDepartments = departments.stream().filter(ConstantContainer.CONTAIN_IC_DEPARTMENTS::contains)
+                                .collect(Collectors.toList()); // 包含图标的department
+                        List<Department> mNoContainICDepartments = departments.stream().filter(item -> !ConstantContainer.CONTAIN_IC_DEPARTMENTS.contains(item))
+                                .collect(Collectors.toList()); // 不包含图标的department
+                        mDepartments.addAll(mContainICDepartments);
+                        mDepartments.addAll(mNoContainICDepartments);
+                        runOnUiThread(() -> adapter.notifyDataSetChanged());
+                        closeTipDialog();
+                    }
+                },
+                new OkHttpUtil.FailHandler<List<Department>>() {
+                    @Override
+                    public void handle(ServiceResult<List<Department>> serviceResult) {
+                        showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+                        showErrorTipDialog("科室列表加载失败");
+                    }
+                }
+        );
     }
 
     @Override
@@ -264,7 +224,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initSolidImage(mHospitalOutNavigationSolidImageView, mHospitalInnerNavigationSolidImageView);
-        initData();
+        initRecyclerView();
         initTTS();
     }
 }

@@ -167,6 +167,51 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/medical_card_password_linearlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56"
+                        android:paddingLeft="?attr/qmui_content_padding_horizontal"
+                        android:paddingRight="?attr/qmui_content_padding_horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_32"
+                            android:layout_height="@dimen/dp_32"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/ic_security_white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingLeft="@dimen/dp_8"
+                            android:text="诊疗卡密码"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <TextView
+                            android:id="@+id/medical_card_password_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                            android:paddingRight="@dimen/dp_8"
+                            android:text="请输入管理密码"
+                            android:textColorHint="@color/qmui_config_color_white"
+                            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                            android:textColor="@color/qmui_config_color_white" />
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_16"
+                            android:layout_height="@dimen/dp_16"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_arrow_right_small" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/medical_card_owner_address_linearlayout"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_56"

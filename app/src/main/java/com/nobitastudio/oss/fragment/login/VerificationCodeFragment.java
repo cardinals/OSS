@@ -123,7 +123,7 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
     }
 
     private String generateSendToMobile() {
-        return "验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile().substring(0,4) + "****" + mNormalContainerHelper.getInputMobile().substring(7,11);
+        return "验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile().substring(0,3) + "****" + mNormalContainerHelper.getInputMobile().substring(7,11);
     }
 
     private void initOptView() {

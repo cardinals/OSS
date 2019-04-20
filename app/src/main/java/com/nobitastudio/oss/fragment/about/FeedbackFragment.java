@@ -30,8 +30,8 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.feedback_button:
-                showNetworkLoadingTipDialog("正在发送您的反馈",1500);
-                showSuccessTipDialog("感谢您的反馈");
+                showNetworkLoadingTipDialog("正在发送您的反馈");
+                getTopBar().postDelayed(() -> showSuccessTipDialog("感谢您的反馈"), 1500);
                 break;
             default:
                 break;
@@ -42,7 +42,7 @@ public class FeedbackFragment extends StandardWithTobBarLayoutFragment {
         float mShadowAlpha = 1.0f;
         int mShadowElevationDp = 0;
         int mRadius = 6;
-        initQMUILinearLayout(mQMUILinearLayout,mShadowAlpha,mShadowElevationDp,mRadius);
+        initQMUILinearLayout(mQMUILinearLayout, mShadowAlpha, mShadowElevationDp, mRadius);
     }
 
     @Override

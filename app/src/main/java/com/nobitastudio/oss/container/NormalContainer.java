@@ -39,6 +39,8 @@ public class NormalContainer implements Serializable {
     public static final String OSS_ORDER = "OSS_ORDER"; // 从服务器端获取的订单
     public static final String INPUT_MOBILE_FRAGMENT = "INPUT_MOBILE_FRAGMENT";    // 进入InputMobileFragment的意图
     public static final String INPUT_MOBILE = "INPUT_MOBILE"; // 用户输入的手机号（并非用于登录）
+    public static final String WAIT_BIND_MEDICAL_CARD_NO = "WAIT_BIND_MEDICAL_CARD_NO"; // 准备绑定的诊疗卡卡号
+    public static final String MEDICAL_CARD_PASSWORD = "MEDICAL_CARD_PASSWORD"; // 诊疗卡管理密码
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity
@@ -71,5 +73,4 @@ public class NormalContainer implements Serializable {
     public static <T> T get(String key,Class<T> tClass) {
         return (T) container.get(key);
     }
-
 }

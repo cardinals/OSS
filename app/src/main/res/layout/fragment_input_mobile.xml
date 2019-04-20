@@ -54,12 +54,12 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:background="@drawable/bg_transparent_selector_edit"
-                                android:hint="请输入手机号"
+                                android:hint="请输入正确手机号"
                                 android:inputType="number"
-                                android:maxLength="11"
+                                android:maxLength="18"
                                 android:textColor="@color/qmui_config_color_white"
                                 android:textCursorDrawable="@drawable/bg_transparent_input_cursor"
-                                android:textSize="25sp"
+                                android:textSize="20sp"
                                 android:textStyle="normal" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
@@ -72,6 +72,18 @@
                         android:layout_marginTop="@dimen/dp_24"
                         android:layout_marginRight="@dimen/space_left_right_button_minus_12"
                         android:text="下一步" />
+
+                    <TextView
+                        android:id="@+id/attention_textview"
+                        style="@style/QDCommonDescription"
+                        android:layout_marginLeft="@dimen/space_left_right_button_minus_12"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginRight="@dimen/space_left_right_button_minus_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="提示"
+                        android:textColor="@color/qmui_config_color_white"
+                        android:textStyle="normal" />
 
                     <Space
                         android:layout_width="match_parent"

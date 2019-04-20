@@ -56,6 +56,7 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                                 public void handle(User user) {
                                     // 注册成功  进行登录操作
                                     closeTipDialog();
+                                    mNormalContainerHelper.clearAll(); // 先清除所有的内存已有数据
                                     mNormalContainerHelper.setUser(user);
                                     startFragmentAndDestroyCurrent(new HomeFragment());
                                 }
@@ -67,7 +68,7 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                             new OkHttpUtil.SuccessHandler<User>() {
                                 @Override
                                 public void handle(User user) {
-                                    // 注册成功  进行登录操作
+                                    // 修改成功
                                     closeTipDialog();
                                     mNormalContainerHelper.setUser(user);
                                     startFragmentAndDestroyCurrent(new HomeFragment());

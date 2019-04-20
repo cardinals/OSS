@@ -90,6 +90,9 @@ public class User implements Serializable {
     @Column(name = "id_card")
     private String idCard;
 
+    @Column(name = "head_img")
+    private String headImg;
+
     /**
      * 用户更新 仅更新用户名以及身份证号
      *

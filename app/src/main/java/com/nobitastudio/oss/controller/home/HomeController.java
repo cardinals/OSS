@@ -103,7 +103,7 @@ public class HomeController extends BaseController {
             case R.id.electronic_case_linearLayout:
                 mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
                         "取消", (dialog, index) -> dialog.dismiss(),
-                        "确定", (dialog, index) -> {
+                        "确定", (dialog, index,content) -> {
                             dialog.dismiss();
                             mHandler.startFragment(new ElectronicCaseFragment());
                         });

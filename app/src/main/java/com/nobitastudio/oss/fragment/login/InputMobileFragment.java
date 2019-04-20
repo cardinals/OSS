@@ -2,11 +2,11 @@ package com.nobitastudio.oss.fragment.login;
 
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import butterknife.BindView;
@@ -24,37 +24,53 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
     TextInputLayout mMobileEditText;
     @BindView(R.id.copyright_textview)
     TextView mCopyrightTextView;
+    @BindView(R.id.attention_textview)
+    TextView mAttentionTextView;
 
     @OnClick({R.id.next_step_button})
     void onClick(View v) {
-        String mobile = mMobileEditText.getEditText().getText().toString().trim();
-        if (mobile.length() == 0) {
-            showInfoTipDialog("请输入手机号");
-        } else if (!RegexUtils.isMobileExact(mobile)) {
-            showInfoTipDialog("请输入正确手机号");
+        String code = mMobileEditText.getEditText().getText().toString().trim();  // 手机号或者诊疗卡卡号
+        if (mNormalContainerHelper.getInputMobileFragment().equals(NormalContainer.InputMobileFor.BIND_MEDICAL_CARD)) {
+            if (code.length() != 18) {
+                showInfoTipDialog("请输入正确诊疗卡号");
+            } else {
+//                mNormalContainerHelper.setWaitBindMedicalCardNo(code);
+//                mNormalContainerHelper.setInputMobile(mobile); // 通过网络获取medicalCard的信息
+                startFragment(new VerificationCodeFragment());
+            }
         } else {
-            mNormalContainerHelper.setInputMobile(mobile);
-            startFragment(new VerificationCodeFragment());
+            if (code.length() == 0) {
+                showInfoTipDialog("请输入手机号");
+            } else if (!RegexUtils.isMobileExact(code)) {
+                showInfoTipDialog("请输入正确手机号");
+            } else {
+                mNormalContainerHelper.setInputMobile(code);
+                startFragment(new VerificationCodeFragment());
+            }
         }
+
     }
 
-    private void initMobileEditTextHint() {
-        String mHint = "";
+    private void initAttentionContent() {
+        String mAttentionContent = "";
         switch (mNormalContainerHelper.getInputMobileFragment()) {
             case REGISTER:
-                mHint = "请输入手机号";
+                mAttentionContent = "请输入手机号";
                 break;
             case MODIFY_PASSWORD:
-                mHint = "请输入绑定的手机号";
+                mAttentionContent = "请输入绑定的手机号";
                 break;
             case CREATE_MEDICAL_CARD:
-                mHint = "请输入诊疗卡持有者的手机号";
+                mAttentionContent = "请输入诊疗卡持有者的手机号";
+                break;
+            case BIND_MEDICAL_CARD:
+                mAttentionContent = "请输入待绑定诊疗卡卡号";
                 break;
             default:
-                mHint = "请输入手机号";
+                mAttentionContent = "请输入手机号";
                 break;
         }
-        mMobileEditText.setHint(mHint);
+        mAttentionTextView.setText(mAttentionContent);
     }
 
     @Override
@@ -74,7 +90,7 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
-        initMobileEditTextHint();
+        initAttentionContent();
         initCopyRight(mCopyrightTextView);
     }
 

@@ -3,6 +3,7 @@ package com.nobitastudio.oss.base.helper;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,10 @@ public class DialogHelper {
 
     public interface MultiChoiceDialogConfirmListener {
         void onClick(QMUIDialog dialog, int index, int[] selectedIndexes);
+    }
+
+    public interface AutoDialogConfirmListener {
+        void onClick(QMUIDialog dialog, int index, String content);
     }
 
     public DialogHelper(Context mContext) {
@@ -256,15 +261,52 @@ public class DialogHelper {
      */
     public QMUIDialog showAutoDialog(String hintText, String content,
                                      String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
-                                     String confirmMsg, QMUIDialogAction.ActionListener confirmListener) {
-        QMAutoTestDialogBuilder autoTestDialogBuilder = (QMAutoTestDialogBuilder) new QMAutoTestDialogBuilder(mContext, hintText, content)
-                .addAction(cancelMsg, cancelListener)
-                .addAction(confirmMsg, confirmListener);
+                                     String confirmMsg, AutoDialogConfirmListener confirmListener) {
+        QMAutoTestDialogBuilder autoTestDialogBuilder = (QMAutoTestDialogBuilder) new QMAutoTestDialogBuilder(mContext, hintText, content);
+        autoTestDialogBuilder.addAction(cancelMsg, cancelListener)
+                .addAction(confirmMsg, (dialog, index) -> {
+                    confirmListener.onClick(dialog, index, autoTestDialogBuilder.getEditText().getText().toString().trim());
+                });
         dialog = autoTestDialogBuilder.create(mCurrentDialogStyle);
         dialog.show();
         QMUIKeyboardHelper.showKeyboard(autoTestDialogBuilder.getEditText(), true);
         return dialog;
     }
+
+    public QMUIDialog showAutoDialogNumber(String hintText, String content,
+                                     String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                     String confirmMsg, AutoDialogConfirmListener confirmListener,int length) {
+        QMAutoTestDialogBuilder autoTestDialogBuilder = (QMAutoTestDialogBuilder) new QMAutoTestDialogBuilder(mContext, hintText, content);
+        autoTestDialogBuilder.addAction(cancelMsg, cancelListener)
+                .addAction(confirmMsg, (dialog, index) -> {
+                    confirmListener.onClick(dialog, index, autoTestDialogBuilder.getEditText().getText().toString().trim());
+                });
+        dialog = autoTestDialogBuilder.create(mCurrentDialogStyle);
+        dialog.show();
+        autoTestDialogBuilder.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        InputFilter[] filters = {new InputFilter.LengthFilter(length)}; // 限制最大长度为6位
+        autoTestDialogBuilder.getEditText().setFilters(filters);
+        QMUIKeyboardHelper.showKeyboard(autoTestDialogBuilder.getEditText(), true);
+        return dialog;
+    }
+
+    public QMUIDialog showAutoDialogIdCard(String hintText, String content,
+                                           String cancelMsg, QMUIDialogAction.ActionListener cancelListener,
+                                           String confirmMsg, AutoDialogConfirmListener confirmListener) {
+        QMAutoTestDialogBuilder autoTestDialogBuilder = (QMAutoTestDialogBuilder) new QMAutoTestDialogBuilder(mContext, hintText, content);
+        autoTestDialogBuilder.addAction(cancelMsg, cancelListener)
+                .addAction(confirmMsg, (dialog, index) -> {
+                    confirmListener.onClick(dialog, index, autoTestDialogBuilder.getEditText().getText().toString().trim());
+                });
+        dialog = autoTestDialogBuilder.create(mCurrentDialogStyle);
+        dialog.show();
+        autoTestDialogBuilder.getEditText().setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        InputFilter[] filters = {new InputFilter.LengthFilter(18)}; // 限制最大长度为18位
+        autoTestDialogBuilder.getEditText().setFilters(filters);
+        QMUIKeyboardHelper.showKeyboard(autoTestDialogBuilder.getEditText(), true);
+        return dialog;
+    }
+
 
     class QMAutoTestDialogBuilder extends QMUIDialog.AutoResizeDialogBuilder {
         private Context mContext;

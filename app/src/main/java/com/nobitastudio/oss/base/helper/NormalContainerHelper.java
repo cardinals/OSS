@@ -35,6 +35,11 @@ public class NormalContainerHelper {
         return mNormalContainerHelper;
     }
 
+    // 清除所有键值对
+    public void clearAll() {
+        NormalContainer.container.clear();
+    }
+
     // get 方法
     public User getUser() {
         return NormalContainer.get(NormalContainer.USER);
@@ -114,6 +119,14 @@ public class NormalContainerHelper {
 
     public String getInputMobile() {
         return NormalContainer.get(NormalContainer.INPUT_MOBILE);
+    }
+
+    public String getWaitBindMedicalCardNo() {
+        return NormalContainer.get(NormalContainer.WAIT_BIND_MEDICAL_CARD_NO);
+    }
+
+    public String getMedicalCardPassword() {
+        return NormalContainer.get(NormalContainer.MEDICAL_CARD_PASSWORD);
     }
 
     // set
@@ -217,4 +230,13 @@ public class NormalContainerHelper {
         return this;
     }
 
+    public NormalContainerHelper setWaitBindMedicalCardNo(String waitBindMedicalCardNo) {
+        NormalContainer.put(NormalContainer.WAIT_BIND_MEDICAL_CARD_NO, waitBindMedicalCardNo);
+        return this;
+    }
+
+    public NormalContainerHelper setMedicalCardPassword(String medicalCardPassword) {
+        NormalContainer.put(NormalContainer.MEDICAL_CARD_PASSWORD, medicalCardPassword);
+        return this;
+    }
 }

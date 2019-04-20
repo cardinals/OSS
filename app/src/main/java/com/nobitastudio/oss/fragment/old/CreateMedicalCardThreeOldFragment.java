@@ -89,7 +89,7 @@ public class CreateMedicalCardThreeOldFragment extends StandardWithTobBarLayoutF
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
-                        "确定", (dialog, index) -> {
+                        "确定", (dialog, index,content) -> {
                             dialog.dismiss();
                         });
             } else if (itemViewText.equals("性别")) {
@@ -101,7 +101,7 @@ public class CreateMedicalCardThreeOldFragment extends StandardWithTobBarLayoutF
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
-                        "确定", (dialog, index) -> {
+                        "确定", (dialog, index,content) -> {
                             dialog.dismiss();
                         });
             } else if (itemViewText.equals("联系地址")) {
@@ -109,7 +109,7 @@ public class CreateMedicalCardThreeOldFragment extends StandardWithTobBarLayoutF
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
-                        "确定", (dialog, index) -> {
+                        "确定", (dialog, index,content) -> {
                             dialog.dismiss();
                         });
             }

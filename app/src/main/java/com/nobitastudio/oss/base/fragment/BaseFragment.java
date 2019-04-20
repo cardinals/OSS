@@ -67,4 +67,17 @@ public abstract class BaseFragment extends QMUIFragment {
         ButterKnife.bind(this, root);
         return root;
     }
+
+    // 回退到fragmeng 回退栈的指定fragment
+    protected void popBackStack(Class<? extends QMUIFragment> clazz) {
+        getBaseFragmentActivity().popBackStack(clazz);
+    }
+
+
+    // 跳转至指定 fragment 并且清除回退栈中所有fragment
+//    protected void startFragmentAndClearOtherFragment(QMUIFragment targetFragment) {
+//        startFragment(targetFragment);
+//        getBaseFragmentActivity().popBackStack(targetFragment.getClass());
+//    }
+
 }

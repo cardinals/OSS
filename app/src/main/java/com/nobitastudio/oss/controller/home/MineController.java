@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.controller.BaseController;
@@ -31,6 +32,7 @@ import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author chenxiong
@@ -48,6 +50,10 @@ public class MineController extends BaseController {
     QMUIGroupListView mGroupListView;
     @BindView(R.id.QMUILinearLayout)
     QMUILinearLayout mQMUILinearLayout;
+    @BindView(R.id.head_imageview)
+    CircleImageView mUserHeadImageView;
+    @BindView(R.id.username_textview)
+    TextView mUsernameTextView;
 
     DialogHelper mDialogHelper;
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
@@ -175,7 +181,7 @@ public class MineController extends BaseController {
             } else if (itemViewText.equals("电子病历")) {
                 mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
                         "取消", (dialog, index) -> dialog.dismiss(),
-                        "确定", (dialog, index) -> {
+                        "确定", (dialog, index,content) -> {
                             dialog.dismiss();
                             mHandler.startFragment(new ElectronicCaseFragment());
                         });
@@ -194,6 +200,11 @@ public class MineController extends BaseController {
 
     protected void initLastCustom() {
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
+        mUsernameTextView.setText(mNormalContainerHelper.getUser().getName());
+        // 初始化头像
+        if (mNormalContainerHelper.getUser().getHeadImg() != null && !mNormalContainerHelper.getUser().getHeadImg().isEmpty()) {
+
+        }
     }
 
     public MineController(Context mContext, ControllerClickHandler mHandler) {
