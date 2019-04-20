@@ -31,6 +31,7 @@ public class NormalContainer implements Serializable {
     public static final String USER = "USER"; // 登录的用户
     public static final String VISITS = "VISITS";// 需要展示的号源
     public static final String COLLECT_DOCTORS = "COLLECT_DOCTORS"; // 收藏的医生
+    public static final String COLLECT_DOCTOR_AND_DEPARTMENTS = "COLLECT_DOCTOR_AND_DEPARTMENTS"; // 收藏的医生以及对应的科室信息
     public static final String BIND_MEDICAL_CARD = "BIND_MEDICAL_CARD"; // 绑定的诊疗阿卡
     public static final String SETTING_ATTR = "SETTING_ATTR"; // 用户设置
     public static final String DIAGNOSIS_NO = "DIAGNOSIS_NO"; // 当年前挂号单所得到的诊号

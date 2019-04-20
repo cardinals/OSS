@@ -12,8 +12,11 @@ import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.nobitastudio.oss.model.entity.SettingAttr;
 import com.nobitastudio.oss.model.entity.User;
 import com.nobitastudio.oss.model.entity.Visit;
+import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author chenxiong
@@ -51,6 +54,10 @@ public class NormalContainerHelper {
 
     public List<Doctor> getCollectDoctors() {
         return NormalContainer.get(NormalContainer.COLLECT_DOCTORS);
+    }
+
+    public List<DoctorAndDepartment> getCollectDoctorAndDepartments() {
+        return NormalContainer.get(NormalContainer.COLLECT_DOCTOR_AND_DEPARTMENTS);
     }
 
     public List<MedicalCard> getBindMedicalCards() {
@@ -144,6 +151,12 @@ public class NormalContainerHelper {
         NormalContainer.put(NormalContainer.COLLECT_DOCTORS, doctors);
         return this;
     }
+
+    public NormalContainerHelper setCollectDoctorAndDepartments(List<DoctorAndDepartment> doctorAndDepartments) {
+        NormalContainer.put(NormalContainer.COLLECT_DOCTOR_AND_DEPARTMENTS, doctorAndDepartments);
+        return this;
+    }
+
 
     public NormalContainerHelper setBindMedicalCards(List<MedicalCard> medicalCards) {
         NormalContainer.put(NormalContainer.BIND_MEDICAL_CARD, medicalCards);

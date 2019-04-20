@@ -139,8 +139,7 @@
                             android:layout_width="32dp"
                             android:layout_height="48dp"
                             android:layout_marginLeft="48dp"
-                            android:gravity="center"
-                            android:src="@mipmap/ic_security" />
+                            android:gravity="center" />
 
                         <EditText
                             android:id="@+id/verification_code_edittext"

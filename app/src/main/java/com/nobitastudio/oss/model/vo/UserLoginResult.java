@@ -1,5 +1,6 @@
 package com.nobitastudio.oss.model.vo;
 
+import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.model.entity.User;

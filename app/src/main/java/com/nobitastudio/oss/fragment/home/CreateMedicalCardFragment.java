@@ -109,13 +109,13 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
                             "取消创建", (dialog, index) -> dialog.dismiss(),
                             "立刻创建并绑定", (dialog, index) -> {
                                 dialog.dismiss();
-                                showNetworkLoadingTipDialog("正在创建电子诊疗卡", 1000l);
+                                showNetworkLoadingTipDialog("正在办理电子诊疗卡", 1000l);
                                 postAsyn(Arrays.asList("medical-card", "create-and-bind"), null,
                                         new CreateMedicalCardDTO(mNormalContainerHelper.getUser().getId(), mMedicalCard), new ReflectStrategy<>(MedicalCard.class),
                                         new OkHttpUtil.SuccessHandler<MedicalCard>() {
                                             @Override
                                             public void handle(MedicalCard medicalCard) {
-                                                showSuccessTipDialog("创建成功");
+                                                showSuccessTipDialog("办理成功,若未进行显示请刷新");
                                                 mNormalContainerHelper.getBindMedicalCards().add(medicalCard);
                                                 popBackStack(MedicalCardFragment.class);
                                             }

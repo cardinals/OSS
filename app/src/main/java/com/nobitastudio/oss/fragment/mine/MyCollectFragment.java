@@ -8,18 +8,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.CollectionDoctorRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HeadlineRecycleViewAdapter;
+import com.nobitastudio.oss.base.inter.RecyclerViewClickHandler;
 import com.nobitastudio.oss.controller.collection.OtherController;
 import com.nobitastudio.oss.fragment.home.DoctorDetailFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.entity.CollectDoctor;
+import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
+import com.nobitastudio.oss.model.entity.Visit;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 
@@ -33,7 +45,8 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
 
     // 初始化有哪些 pager :收藏的医生 ,收藏的文章
     enum Pager {
-        DOCTOR, HEALTH_ARTICLE,OTHER;
+        DOCTOR, HEALTH_ARTICLE, OTHER;
+
         public static Pager getPagerFromPosition(int position) {
             switch (position) {
                 case 0:
@@ -96,23 +109,87 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
 
     CollectionDoctorRecyclerViewAdapter mCollectDoctorAdapter;
     HeadlineRecycleViewAdapter mHeadlineRecycleViewAdapter;
-    List<HealthArticle> healthArticles;
+    List<HealthArticle> mHealthArticles;
+    List<DoctorAndDepartment> mDoctorAndDepartments;
+    RecyclerViewClickHandler<DoctorAndDepartment> handler;
 
-    private float mShadowAlpha = 1.0f;
-    private int mShadowElevationDp = 10;
-    private int mRadius = 15;
+    // 获取收藏的医生以及对应的科室信息
+    private void getCollectDoctors() {
+        showNetworkLoadingTipDialog("正在获取");
+        getAsyn(Arrays.asList("collect-doctor", mNormalContainerHelper.getUser().getId().toString(), "dt-and-dp"), null,
+                new ReflectStrategy<>(new TypeReference<List<DoctorAndDepartment>>() {
+                }),
+                new OkHttpUtil.SuccessHandler<List<DoctorAndDepartment>>() {
+                    @Override
+                    public void handle(List<DoctorAndDepartment> doctorAndDepartments) {
+                        mNormalContainerHelper.setCollectDoctorAndDepartments(doctorAndDepartments);
+                        mDoctorAndDepartments.clear();
+                        mDoctorAndDepartments.addAll(mNormalContainerHelper.getCollectDoctorAndDepartments());
+                        updateCollectDoctor();
+                        if (mDoctorAndDepartments.size() == 0) {
+                            showInfoTipDialog("你尚未收藏任何医生");
+                        } else {
+                            closeTipDialog();
+                        }
+                        mCollectDoctorAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
+    // 更新容器中收藏的医生信息
+    private void updateCollectDoctor() {
+        mNormalContainerHelper.setCollectDoctors(mDoctorAndDepartments.stream().map(DoctorAndDepartment::getDoctor).collect(Collectors.toList()));
+    }
+
+    // 暂不实现
+    private void getCollectHeadLine() {
+
+    }
+
+    private void initBasic() {
+        mDoctorAndDepartments = new ArrayList<>();
+        mHealthArticles = new ArrayList<>();
+        handler = doctorAndDepartment ->
+                mDialogHelper.showMessageNegativeDialog("提示", "确定要取消收藏" + doctorAndDepartment.getDoctor().getName() + "医生吗",
+                        "取消收藏", (dialog, index) -> {
+                            dialog.dismiss();
+                            mDoctorAndDepartments.remove(doctorAndDepartment);
+                            mCollectDoctorAdapter.notifyDataSetChanged();
+                            updateCollectDoctor();
+                            postAsyn(Arrays.asList("collect-doctor", "cancel-collect"), null,
+                                    new CollectDoctor(mNormalContainerHelper.getUser().getId(), doctorAndDepartment.getDoctor().getId()));
+                        }, "再想想", (dialog, index) -> dialog.dismiss());
+        getCollectDoctors();
+        getCollectHeadLine();
+    }
 
     private void initPagers() {
         mPages = new HashMap<>();
         RecyclerView mCollectDoctorRecyclerView = new RecyclerView(getContext());// 医生
         RecyclerView mCollectArticleRecyclerView = new RecyclerView(getContext()); // 健康资讯
-        OtherController mOtherController = new OtherController(getContext(),null);
-        mPages.put(Pager.DOCTOR,mCollectDoctorRecyclerView);
-        mPages.put(Pager.HEALTH_ARTICLE,mCollectArticleRecyclerView);
-        mPages.put(Pager.OTHER,mOtherController);
-        mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getContext(),null);
-        mCollectDoctorAdapter.setOnItemClickListener((v,pos) -> startFragment(new DoctorDetailFragment()));
-        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(),null);
+        OtherController mOtherController = new OtherController(getContext(), null);
+        mPages.put(Pager.DOCTOR, mCollectDoctorRecyclerView);
+        mPages.put(Pager.HEALTH_ARTICLE, mCollectArticleRecyclerView);
+        mPages.put(Pager.OTHER, mOtherController);
+        mCollectDoctorAdapter = new CollectionDoctorRecyclerViewAdapter(getContext(), mDoctorAndDepartments, handler);
+        mCollectDoctorAdapter.setOnItemClickListener((v, pos) -> {
+            mNormalContainerHelper.setSelectedDepartment(mDoctorAndDepartments.get(pos).getDepartment())
+                    .setSelectedDoctor(mDoctorAndDepartments.get(pos).getDoctor());
+            // 获取指定医生下面的VISIT
+            showNetworkLoadingTipDialog("正在查询号源信息");
+            getAsyn(Arrays.asList("visit", "get-by-doctor", mDoctorAndDepartments.get(pos).getDoctor().getId().toString()), null,
+                    new ReflectStrategy<>(new TypeReference<List<Visit>>() {
+                    }),
+                    new OkHttpUtil.SuccessHandler<List<Visit>>() {
+                        @Override
+                        public void handle(List<Visit> visits) {
+                            closeTipDialog();
+                            mNormalContainerHelper.setVisits(visits);
+                            startFragment(new DoctorDetailFragment());
+                        }
+                    });
+        });
+        mHeadlineRecycleViewAdapter = new HeadlineRecycleViewAdapter(getContext(), mHealthArticles);
         mCollectDoctorRecyclerView.setAdapter(mCollectDoctorAdapter);
         mCollectDoctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
@@ -193,8 +270,9 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
+    public void onResume() {
+        super.onResume();
+        getCollectDoctors();
     }
 
     @Override
@@ -204,6 +282,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initTabs();
         initPagers();
     }
