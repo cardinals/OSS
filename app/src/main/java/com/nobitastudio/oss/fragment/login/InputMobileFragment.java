@@ -55,10 +55,10 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
         String mAttentionContent = "";
         switch (mNormalContainerHelper.getInputMobileFragment()) {
             case REGISTER:
-                mAttentionContent = "请输入手机号";
+                mAttentionContent = "请输入用于登录的手机号";
                 break;
             case MODIFY_PASSWORD:
-                mAttentionContent = "请输入绑定的手机号";
+                mAttentionContent = "请输入用于登录的手机号";
                 break;
             case CREATE_MEDICAL_CARD:
                 mAttentionContent = "请输入诊疗卡持有者的手机号";

@@ -10,9 +10,11 @@ import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.about.AboutFragment;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.User;
+import com.nobitastudio.oss.util.OkHttpUtil;
 
 import java.util.Arrays;
 
@@ -88,14 +90,11 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     private void userLogin(User user) {
         showNetworkLoadingTipDialog("正在验证");
         postAsyn(Arrays.asList("test", "test-login"), null, user, new ReflectStrategy<>(User.class),
-                (userResult) -> {
-                    closeTipDialog();
+                userResult -> {
+                    LoginFragment.this.closeTipDialog();
+                    mNormalContainerHelper.clearAll();
                     mNormalContainerHelper.setUser(userResult);
-                    startFragmentAndDestroyCurrent(new HomeFragment());
-                },
-                (serviceResult) -> {
-                    NormalContainer.remove(NormalContainer.USER);
-                    showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
+                    LoginFragment.this.startFragmentAndDestroyCurrent(new HomeFragment());
                 });
     }
 

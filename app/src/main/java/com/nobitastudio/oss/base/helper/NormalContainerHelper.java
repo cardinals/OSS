@@ -2,6 +2,7 @@ package com.nobitastudio.oss.base.helper;
 
 import android.app.Activity;
 
+import com.nobitastudio.oss.base.activity.BaseActivity;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;
@@ -13,6 +14,7 @@ import com.nobitastudio.oss.model.entity.SettingAttr;
 import com.nobitastudio.oss.model.entity.User;
 import com.nobitastudio.oss.model.entity.Visit;
 import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
+import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,12 @@ public class NormalContainerHelper {
     // 清除所有键值对
     public void clearAll() {
         NormalContainer.container.clear();
+    }
+
+    // 清除所有键值对除了 当前所处在的activity
+    public void clearAllButActivity(QMUIFragmentActivity mainActivity) {
+        NormalContainer.container.clear();
+        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY, mainActivity);
     }
 
     // get 方法

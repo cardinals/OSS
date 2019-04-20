@@ -257,6 +257,11 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
     }
 
     @Override
+    protected boolean canDragBack() {
+        return false;
+    }
+
+    @Override
     public OkHttpUtil.NetworkUnavailableHandler getNetworkUnavailableHandler() {
         return () -> mTipDialogHelper.showInfoTipDialog("当前网络不可用", mViewPager);
     }

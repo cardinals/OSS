@@ -210,7 +210,8 @@ public class OkHttpUtil {
                     if (response.isSuccessful()) {
                         // 请求返回码 200 - 300 即返回成功
                         if (response.code() == 200) {
-                            ServiceResult<T> result = JSON.parseObject(response.body().string(), ServiceResult.class);
+                            String responseJson = response.body().string(); // 用于测试
+                            ServiceResult<T> result = JSON.parseObject(responseJson, ServiceResult.class);
                             if (result.getState() == 0) {
                                 // 成功
                                 if (result.getResult() instanceof JSONObject) {

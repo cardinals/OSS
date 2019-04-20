@@ -43,6 +43,8 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
             showInfoTipDialog("请输入密码");
         } else if (newPassword.length() < 6 || newPassword.length() > 16 || confirmPassword.length() < 6 || confirmPassword.length() > 16) {
             showInfoTipDialog("密码格式错误,请重新输入");
+        } else if (!newPassword.equals(confirmPassword)) {
+            showInfoTipDialog("两次密码不匹配");
         } else {
             User user = new User();
             user.setMobile(mNormalContainerHelper.getInputMobile());
@@ -55,23 +57,26 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                                 @Override
                                 public void handle(User user) {
                                     // 注册成功  进行登录操作
-                                    closeTipDialog();
-                                    mNormalContainerHelper.clearAll(); // 先清除所有的内存已有数据
-                                    mNormalContainerHelper.setUser(user);
-                                    startFragmentAndDestroyCurrent(new HomeFragment());
+                                    showSuccessTipDialog("注册成功,请登录");
+                                    mNormalContainerHelper.clearAllButActivity(getBaseFragmentActivity()); // 先清除所有的内存已有数据
+//                                        mNormalContainerHelper.setUser(user);
+//                                        startFragmentAndDestroyCurrent(new HomeFragment());  返回到登录fragment
+                                    popBackStack(LoginFragment.class);
                                 }
                             });
                     break;
                 case MODIFY_PASSWORD:
                     showNetworkLoadingTipDialog("正在修改密码");
-                    postAsyn(Arrays.asList("user", "pw-by-sms"), null, user, new ReflectStrategy<>(User.class),
+                    putAsyn(Arrays.asList("user", "pw-by-sms"), null, user, new ReflectStrategy<>(User.class),
                             new OkHttpUtil.SuccessHandler<User>() {
                                 @Override
                                 public void handle(User user) {
                                     // 修改成功
-                                    closeTipDialog();
-                                    mNormalContainerHelper.setUser(user);
-                                    startFragmentAndDestroyCurrent(new HomeFragment());
+                                    showSuccessTipDialog("密码修改成功,请重新登录");
+                                    mNormalContainerHelper.clearAllButActivity(getBaseFragmentActivity()); // 先清除所有的内存已有数据
+//                                    mNormalContainerHelper.setUser(user);
+////                                    startFragmentAndDestroyCurrent(new HomeFragment());  返回到登录fragment重新执行登录操作
+                                    popBackStack(LoginFragment.class);
                                 }
                             });
                     break;
