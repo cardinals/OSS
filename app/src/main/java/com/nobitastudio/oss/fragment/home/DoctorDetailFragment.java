@@ -291,7 +291,7 @@ public class DoctorDetailFragment extends StandardWithTobBarFragment {
         Glide.with(getContext()).load(ConstantContainer.OSS_SERVER_RUNTIME + mSelectedDoctor.getIconUrl()).into(mDoctorImageView);
 
         // 收藏情况
-        mCollectDoctors = mNormalContainerHelper.getCollectDoctors();
+        mCollectDoctors = mNormalContainerHelper.getCollectDoctors() == null ? new ArrayList<>() : mNormalContainerHelper.getCollectDoctors();
         mFab.setImageResource(mCollectDoctors.contains(mSelectedDoctor) ? R.drawable.ic_heart_red : R.drawable.ic_heart_white);
 
         // 医生基础信息
