@@ -159,7 +159,6 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
                             postAsyn(Arrays.asList("collect-doctor", "cancel-collect"), null,
                                     new CollectDoctor(mNormalContainerHelper.getUser().getId(), doctorAndDepartment.getDoctor().getId()));
                         }, "再想想", (dialog, index) -> dialog.dismiss());
-        getCollectDoctors();
         getCollectHeadLine();
     }
 
@@ -270,8 +269,7 @@ public class MyCollectFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void onResumeAction() {
         getCollectDoctors();
     }
 

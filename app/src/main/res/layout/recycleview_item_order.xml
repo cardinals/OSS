@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.layout.QMUILinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/order_linearLayout"
     android:layout_width="match_parent"
@@ -81,7 +80,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="1111111111111"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -104,7 +102,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="支付状态"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -127,7 +124,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="11 元"
                 android:textColor="?attr/app_primary_color"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -150,7 +146,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="2018-11-10 10:11:11"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -164,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="支付时间:"
+                android:text="支付或取消时间:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
@@ -173,7 +168,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="2019-11-12 12:11:22"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -196,7 +190,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="支付宝"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>

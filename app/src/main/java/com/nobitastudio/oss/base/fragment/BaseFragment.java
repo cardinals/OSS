@@ -57,7 +57,7 @@ public abstract class BaseFragment extends QMUIFragment {
     protected abstract int getLayoutId();
 
     // 刷新操作.默认在首次进入时以及需要刷新时进行调用
-    protected void refresh(Boolean isCancelPull) {
+    protected void refresh(boolean isCancelPull) {
         // do nothing
     }
 

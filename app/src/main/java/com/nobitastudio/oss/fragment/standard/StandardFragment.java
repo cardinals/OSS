@@ -1,10 +1,7 @@
 package com.nobitastudio.oss.fragment.standard;
 
 import android.content.DialogInterface;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -12,7 +9,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.Gson;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.BottomSheetHelper;
@@ -31,8 +27,6 @@ import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.util.DateUtil;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -46,9 +40,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 
 /**
  * @author chenxiong
@@ -83,17 +75,6 @@ public abstract class StandardFragment extends BaseFragment
         return animConfig;
     }
 
-//    // 完成初始化操作
-//    @Override
-//    public void onResume() {
-//        if (!inited) {
-//            // 初始化操作
-//            init();
-//            inited = Boolean.TRUE;
-//        }
-//        super.onResume();
-//    }
-
     public StandardFragment() {
         // donothing
     }
@@ -110,6 +91,18 @@ public abstract class StandardFragment extends BaseFragment
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(getContext());
         mNormalContainerHelper = NormalContainerHelper.getInstance();
 //        executorService = Executors.newCachedThreadPool();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 每次进入都需要执行的方法(比如后面的应用刷新了数据,那重新该方法，即可调用) 默认什么都不执行
+        onResumeAction();
+    }
+
+    // 每次进入都需要执行的方法
+    protected void onResumeAction() {
+
     }
 
     // 初始化方法

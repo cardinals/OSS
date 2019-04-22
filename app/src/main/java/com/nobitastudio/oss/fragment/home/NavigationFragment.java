@@ -175,7 +175,7 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void refresh(Boolean isCancelPull) {
+    protected void refresh(boolean isCancelPull) {
         getAsyn(Arrays.asList("department"), null, new ReflectStrategy<>(new TypeReference<List<Department>>() {
                 }), new OkHttpUtil.SuccessHandler<List<Department>>() {
                     @Override

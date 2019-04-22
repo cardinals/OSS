@@ -8,16 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.OrderRecyclerViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.entity.OSSOrder;
+import com.nobitastudio.oss.model.enumeration.ItemType;
+import com.nobitastudio.oss.model.enumeration.OrderState;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
+import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 
@@ -29,35 +38,11 @@ import butterknife.BindView;
  */
 public class OrderFragment extends StandardWithTobBarLayoutFragment {
 
-    // 初始化有哪些 pager :挂号订单  报告邮寄订单 开药订单 检查订单  手术订单  住院缴费订单
-    enum Pager {
-        REGISTER, EXPRESS, DRUG, CHECK, OPERATION, HOSPITALIZE;
-
-        public static Pager getPagerFromPosition(int position) {
-            switch (position) {
-                case 0:
-                    return REGISTER;
-                case 1:
-                    return EXPRESS;
-                case 2:
-                    return DRUG;
-                case 3:
-                    return CHECK;
-                case 4:
-                    return OPERATION;
-                case 5:
-                    return HOSPITALIZE;
-                default:
-                    return REGISTER;
-            }
-        }
-    }
-
     @BindView(R.id.pagers)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
     QMUITabSegment mTabSegment;
-    private HashMap<Pager, View> mPages;
+    private HashMap<ItemType, View> mPages;
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
         private int mChildCount = 0;
 
@@ -73,7 +58,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
 
         @Override
         public Object instantiateItem(final ViewGroup container, int position) {
-            View page = mPages.get(Pager.getPagerFromPosition(position));
+            View page = mPages.get(ItemType.getFromPosition(position));
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             container.addView(page, params);
             return page;
@@ -99,6 +84,119 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
         }
     };
 
+    List<OSSOrder> mOssOrders; // 所有订单情况  以下的订单均是该订单的子订单
+    List<OSSOrder> mRegisterOrders; // 挂号订单
+    List<OSSOrder> mExpressOrders;  // 报告邮寄订单
+    List<OSSOrder> mDrugOrders; // 开药订单
+    List<OSSOrder> mCheckOrders;  // 检查订单
+    List<OSSOrder> mOperationOrders; // 手术订单
+    List<OSSOrder> mHospitalizeOrders; // 住院缴费订单
+    OrderRecyclerViewAdapter mRegisterOrdersAdapter;
+    OrderRecyclerViewAdapter mExpressOrdersAdapter;
+    OrderRecyclerViewAdapter mDrugOrdersAdapter;
+    OrderRecyclerViewAdapter mCheckOrdersAdapter;
+    OrderRecyclerViewAdapter mOperationOrdersAdapter;
+    OrderRecyclerViewAdapter mHospitalizeOrdersAdapter;
+
+    private void initBasic() {
+        mOssOrders = new ArrayList<>();
+        mRegisterOrders = new ArrayList<>(); // 挂号订单
+        mExpressOrders = new ArrayList<>();  // 报告邮寄订单
+        mDrugOrders = new ArrayList<>(); // 开药订单
+        mCheckOrders = new ArrayList<>();  // 检查订单
+        mOperationOrders = new ArrayList<>(); // 手术订单
+        mHospitalizeOrders = new ArrayList<>(); // 住院缴费订单
+        mRegisterOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mRegisterOrders);
+        mExpressOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mExpressOrders);
+        mDrugOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mDrugOrders);
+        mCheckOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mCheckOrders);
+        mOperationOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mOperationOrders);
+        mHospitalizeOrdersAdapter = new OrderRecyclerViewAdapter(getContext(), mHospitalizeOrders);
+    }
+
+    // 刷新数据-进行网络连接
+    @Override
+    protected void refresh(boolean isCancelPull) {
+        showNetworkLoadingTipDialog("正在加载");
+        getAsyn(Arrays.asList("order", "queryAll", mNormalContainerHelper.getUser().getId().toString()), null,
+                new ReflectStrategy<>(new TypeReference<List<OSSOrder>>() {
+                }),
+                new OkHttpUtil.SuccessHandler<List<OSSOrder>>() {
+                    @Override
+                    public void handle(List<OSSOrder> ossOrders) {
+                        closeTipDialog();
+                        mOssOrders.clear();
+                        mOssOrders.addAll(ossOrders);
+                        notifyDataChanged(null); // 刷新完成默认显示全部订单情况
+                    }
+                });
+    }
+
+    // 不进行网络连接 ,仅仅根性adapter的数据 用于更改界面
+    private void notifyDataChanged(OrderState state) {
+        mRegisterOrders.clear();
+        mExpressOrders.clear();
+        mDrugOrders.clear();
+        mCheckOrders.clear();
+        mOperationOrders.clear();
+        mHospitalizeOrders.clear();
+        mRegisterOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.REGISTER) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.REGISTER);
+                    }
+                }).collect(Collectors.toList()));
+        mExpressOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.EXPRESS) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.EXPRESS);
+                    }
+                }).collect(Collectors.toList()));
+        mDrugOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.DRUG) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.DRUG);
+                    }
+                }).collect(Collectors.toList()));
+        mCheckOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.CHECK) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.CHECK);
+                    }
+                }).collect(Collectors.toList()));
+        mOperationOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.OPERATION) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.OPERATION);
+                    }
+                }).collect(Collectors.toList()));
+        mHospitalizeOrders.addAll(
+                mOssOrders.stream().filter(item -> {
+                    if (state != null) {
+                        return item.getItemType().equals(ItemType.HOSPITALIZE) && item.getState().equals(state);
+                    } else {
+                        return item.getItemType().equals(ItemType.HOSPITALIZE);
+                    }
+                }).collect(Collectors.toList()));
+
+        mRegisterOrdersAdapter.notifyDataSetChanged();
+        mExpressOrdersAdapter.notifyDataSetChanged();
+        mDrugOrdersAdapter.notifyDataSetChanged();
+        mCheckOrdersAdapter.notifyDataSetChanged();
+        mOperationOrdersAdapter.notifyDataSetChanged();
+        mHospitalizeOrdersAdapter.notifyDataSetChanged();
+    }
+
     private void initPagers() {
         mPages = new HashMap<>();
         RecyclerView mRegisterOrderRecyclerView = new RecyclerView(getContext());
@@ -107,15 +205,14 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
         RecyclerView mCheckOrderRecyclerView = new RecyclerView(getContext());
         RecyclerView mOperationOrderRecyclerView = new RecyclerView(getContext());
         RecyclerView mHospitalizeOrderRecyclerView = new RecyclerView(getContext());
-        mPages.put(Pager.REGISTER, mRegisterOrderRecyclerView);
-        mPages.put(Pager.EXPRESS, mExpressOrderRecyclerView);
-        mPages.put(Pager.DRUG, mDrugOrderRecyclerView);
-        mPages.put(Pager.CHECK, mCheckOrderRecyclerView);
-        mPages.put(Pager.OPERATION, mOperationOrderRecyclerView);
-        mPages.put(Pager.HOSPITALIZE, mHospitalizeOrderRecyclerView);
+        mPages.put(ItemType.REGISTER, mRegisterOrderRecyclerView);
+        mPages.put(ItemType.EXPRESS, mExpressOrderRecyclerView);
+        mPages.put(ItemType.DRUG, mDrugOrderRecyclerView);
+        mPages.put(ItemType.CHECK, mCheckOrderRecyclerView);
+        mPages.put(ItemType.OPERATION, mOperationOrderRecyclerView);
+        mPages.put(ItemType.HOSPITALIZE, mHospitalizeOrderRecyclerView);
 
-        OrderRecyclerViewAdapter adapter = new OrderRecyclerViewAdapter(getContext(), null);
-        mRegisterOrderRecyclerView.setAdapter(adapter);
+        mRegisterOrderRecyclerView.setAdapter(mRegisterOrdersAdapter);
         mRegisterOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -123,7 +220,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mExpressOrderRecyclerView.setAdapter(adapter);
+        mExpressOrderRecyclerView.setAdapter(mExpressOrdersAdapter);
         mExpressOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -131,7 +228,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mDrugOrderRecyclerView.setAdapter(adapter);
+        mDrugOrderRecyclerView.setAdapter(mDrugOrdersAdapter);
         mDrugOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -139,7 +236,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mCheckOrderRecyclerView.setAdapter(adapter);
+        mCheckOrderRecyclerView.setAdapter(mCheckOrdersAdapter);
         mCheckOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -147,7 +244,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mOperationOrderRecyclerView.setAdapter(adapter);
+        mOperationOrderRecyclerView.setAdapter(mOperationOrdersAdapter);
         mOperationOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -155,7 +252,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mHospitalizeOrderRecyclerView.setAdapter(adapter);
+        mHospitalizeOrderRecyclerView.setAdapter(mHospitalizeOrdersAdapter);
         mHospitalizeOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -241,30 +338,51 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                 .addTab(mHospitalizeOrder);
     }
 
+
     @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
     }
 
     @Override
+    protected void initRefreshLayout() {
+        mPullRefreshLayout.setEnabled(true);
+        mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
+            @Override
+            public void onMoveTarget(int offset) {
+
+            }
+
+            @Override
+            public void onMoveRefreshView(int offset) {
+
+            }
+
+            @Override
+            public void onRefresh() {
+                mPullRefreshLayout.finishRefresh();
+                refresh(false);
+            }
+        });
+    }
+
+    @Override
     protected void initTopBarLast() {
-        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v ->
-                showListPopView(v, Arrays.asList("待支付订单", "已支付订单", "已取消订单", "全部订单"),
-                        (parent, view, position, id) -> {
-                            popViewDismiss();
-                            ToastUtils.showShort(position);
-                        },
-                        null));
+        mTopBar.addRightImageButton(R.mipmap.ic_plus, R.id.topbar_right_plus_button).setOnClickListener(v -> {
+            List<String> chineseMean = OrderState.getChineseMeans();
+            chineseMean.add("全部订单");
+            showListPopView(v, chineseMean,
+                    (parent, view, position, id) -> {
+                        popViewDismiss();
+                        notifyDataChanged(OrderState.getFromPosition(position));
+                    },
+                    null);
+        });
     }
 
     @Override
     protected String getTopBarTitle() {
         return "我的订单";
-    }
-
-    @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
     }
 
     @Override
@@ -274,6 +392,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initTabs();
         initPagers();
     }

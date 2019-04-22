@@ -80,7 +80,7 @@ public class DoctorListFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void refresh(Boolean isCancelPull) {
+    protected void refresh(boolean isCancelPull) {
         getAsyn(Arrays.asList("doctor", "byDepartment", mSelectedDepartment.getId().toString()), null, new ReflectStrategy<>(new TypeReference<List<DoctorAndVisit>>() {
         }), new OkHttpUtil.SuccessHandler<List<DoctorAndVisit>>() {
             @Override

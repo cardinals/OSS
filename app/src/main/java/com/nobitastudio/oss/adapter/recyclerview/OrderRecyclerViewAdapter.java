@@ -7,6 +7,9 @@ import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.model.entity.OSSOrder;
+import com.nobitastudio.oss.model.enumeration.OrderState;
+import com.nobitastudio.oss.model.enumeration.PaymentChannel;
+import com.nobitastudio.oss.util.DateUtil;
 
 import java.util.List;
 
@@ -33,10 +36,17 @@ public class OrderRecyclerViewAdapter extends BaseRecyclerViewAdapter<OSSOrder> 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, OSSOrder item) {
         mQMUILinearLayoutHelper.init(holder.getView(R.id.order_linearLayout));
-    }
-
-    @Override
-    public int getItemCount() {
-        return 10;
+        holder.getTextView(R.id.order_id_textview).setText(item.getId());
+        holder.getTextView(R.id.pay_state_textview).setText(OrderState.getChineseMean(item.getState()));
+        holder.getTextView(R.id.order_cost_textview).setText(item.getCost().toString() + "元");
+        holder.getTextView(R.id.create_time_textview).setText(DateUtil.convertToStandardDateTime(item.getCreateTime()));
+        if (item.getPayTime() != null) {
+            holder.getTextView(R.id.pay_time_textview).setText(DateUtil.convertToStandardDateTime(item.getPayTime()));
+        } else if (item.getCancelTime() != null) {
+            holder.getTextView(R.id.pay_time_textview).setText(DateUtil.convertToStandardDateTime(item.getCancelTime()));
+        } else {
+            holder.getTextView(R.id.pay_time_textview).setText("待支付");
+        }
+        holder.getTextView(R.id.pay_channel_textview).setText(PaymentChannel.getChineseMean(item.getPaymentChannel()));
     }
 }

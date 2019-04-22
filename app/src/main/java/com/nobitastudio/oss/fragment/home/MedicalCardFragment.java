@@ -125,8 +125,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    protected void onResumeAction() {
         mMedicalCardItemAdapter.notifyDataSetChanged(); // 从创建、解绑、绑定诊疗卡 回退时调用
     }
 

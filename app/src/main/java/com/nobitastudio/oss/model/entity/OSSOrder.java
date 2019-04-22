@@ -32,7 +32,7 @@ public class OSSOrder implements Serializable {
     public OSSOrder(ItemType itemType, Integer userId, String medicalCardId) {
         this.userId = userId;
         this.medicalCardId = medicalCardId;
-        this.name = itemType;
+        this.itemType = itemType;
         this.state = OrderState.WAITING_PAY;
         this.createTime = LocalDateTime.now();
     }
@@ -47,9 +47,9 @@ public class OSSOrder implements Serializable {
     @Column(name = "medical_card_id")
     private String medicalCardId;
 
-    @Column(name = "name")
+    @Column(name = "item_type")
     @Enumerated(EnumType.STRING)
-    private ItemType name;
+    private ItemType itemType;
 
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
@@ -67,4 +67,7 @@ public class OSSOrder implements Serializable {
 
     @Column(name = "cancel_time")
     private LocalDateTime cancelTime;
+
+    @Column(name = "cost")
+    private Double cost;
 }
