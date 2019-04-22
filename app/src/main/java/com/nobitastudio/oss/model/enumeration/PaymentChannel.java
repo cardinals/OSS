@@ -17,7 +17,7 @@ public enum PaymentChannel {
 
     public static String getChineseMean(PaymentChannel paymentChannel) {
         if (paymentChannel == null) {
-            return "待支付";
+            return "未支付";
         }
         switch (paymentChannel) {
             case ALI_PAY:

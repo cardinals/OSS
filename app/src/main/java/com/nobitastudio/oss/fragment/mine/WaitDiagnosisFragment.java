@@ -7,15 +7,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.DiagnosisRecyclerViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.dto.RegistrationAll;
+import com.nobitastudio.oss.model.enumeration.ItemType;
+import com.nobitastudio.oss.util.CommonUtil;
+import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
+import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 
@@ -93,6 +104,27 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
         }
     };
 
+    List<RegistrationAll> mWaitRegistrations;
+    List<RegistrationAll> mFinishRegistrations;
+    List<RegistrationAll> mUnfinishRegistrations;
+    List<RegistrationAll> mRegistrationAlls; // 挂号单封装对象的全部实体
+    DiagnosisRecyclerViewAdapter mWaitRegistrationsAdapter;
+    DiagnosisRecyclerViewAdapter mFinishRegistrationsAdapter;
+    DiagnosisRecyclerViewAdapter mUnfinishRegistrationsAdapter;
+    DiagnosisRecyclerViewAdapter mRegistrationAllsAdapter;
+
+    private void initBasic() {
+        mWaitRegistrations = new ArrayList<>();
+        mFinishRegistrations = new ArrayList<>();
+        mUnfinishRegistrations = new ArrayList<>();
+        mRegistrationAlls = new ArrayList<>();
+
+        mWaitRegistrationsAdapter = new DiagnosisRecyclerViewAdapter(getContext(), mWaitRegistrations);
+        mFinishRegistrationsAdapter = new DiagnosisRecyclerViewAdapter(getContext(), mFinishRegistrations);
+        mUnfinishRegistrationsAdapter = new DiagnosisRecyclerViewAdapter(getContext(), mUnfinishRegistrations);
+        mRegistrationAllsAdapter = new DiagnosisRecyclerViewAdapter(getContext(), mRegistrationAlls);
+    }
+
     private void initPagers() {
         mPages = new HashMap<>();
         RecyclerView mWaitDiagnosisRecyclerView = new RecyclerView(getContext());
@@ -104,8 +136,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
         mPages.put(Pager.UNFINISHED, mUnfinishedDiagnosisRecyclerView);
         mPages.put(Pager.ALL, mAllDiagnosisRecyclerView);
 
-        DiagnosisRecyclerViewAdapter adapter = new DiagnosisRecyclerViewAdapter(getContext(), null);
-        mWaitDiagnosisRecyclerView.setAdapter(adapter);
+        mWaitDiagnosisRecyclerView.setAdapter(mWaitRegistrationsAdapter);
         mWaitDiagnosisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -113,7 +144,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mFinishedDiagnosisRecyclerView.setAdapter(adapter);
+        mFinishedDiagnosisRecyclerView.setAdapter(mFinishRegistrationsAdapter);
         mFinishedDiagnosisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -121,7 +152,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mUnfinishedDiagnosisRecyclerView.setAdapter(adapter);
+        mUnfinishedDiagnosisRecyclerView.setAdapter(mUnfinishRegistrationsAdapter);
         mUnfinishedDiagnosisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -129,7 +160,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mAllDiagnosisRecyclerView.setAdapter(adapter);
+        mAllDiagnosisRecyclerView.setAdapter(mRegistrationAllsAdapter);
         mAllDiagnosisRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -139,6 +170,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
         });
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
+        mTabSegment.selectTab(mNormalContainerHelper.getDiagnosisTypePos()); // 设置选中位置
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -196,6 +228,65 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                 .addTab(mAllDiagnosis);
     }
 
+    // 仅仅更改数据 (现在只支持挂号单项)
+    private void notifyDataChanged(ItemType itemType) {
+        // do nothing
+        mWaitRegistrations.clear();
+        mFinishRegistrations.clear();
+        mUnfinishRegistrations.clear();
+
+        mWaitRegistrations.addAll(mRegistrationAlls.stream().
+                filter(item -> item.getVisit().getDiagnosisTime().isAfter(LocalDateTime.now())).collect(Collectors.toList()));
+
+        mFinishRegistrations.addAll(mRegistrationAlls.stream().filter(item -> {
+            if (itemType != null) {
+                return item.getOssOrder().getItemType().equals(itemType) && judgeIsFinishDiagnosis(item);
+            } else {
+                return judgeIsFinishDiagnosis(item);
+            }
+        }).collect(Collectors.toList()));
+
+        mUnfinishRegistrations.addAll(mRegistrationAlls.stream().filter(item -> {
+            if (itemType != null) {
+                return item.getOssOrder().getItemType().equals(itemType) && judgeIsFinishDiagnosis(item);
+            } else {
+                return judgeIsFinishDiagnosis(item);
+            }
+        }).collect(Collectors.toList()));
+
+        mWaitRegistrationsAdapter.notifyDataSetChanged();
+        mFinishRegistrationsAdapter.notifyDataSetChanged();
+        mUnfinishRegistrationsAdapter.notifyDataSetChanged();
+        mRegistrationAllsAdapter.notifyDataSetChanged();
+    }
+
+    // todo 现在没有后台数据表支持判断是完成就诊还是 未就诊. 采用随机来模拟
+    private boolean judgeIsFinishDiagnosis(RegistrationAll registrationAll) {
+        return CommonUtil.getRandom(0, 20) > 10;
+    }
+
+    @Override
+    protected void refresh(boolean isCancelPull) {
+        showNetworkLoadingTipDialog("正在加载");
+        getAsyn(Arrays.asList("registration-record", "registrationAll", mNormalContainerHelper.getUser().getId().toString()), null,
+                new ReflectStrategy<>(new TypeReference<List<RegistrationAll>>() {
+                }),
+                new OkHttpUtil.SuccessHandler<List<RegistrationAll>>() {
+                    @Override
+                    public void handle(List<RegistrationAll> registrationAlls) {
+                        if (registrationAlls.size() > 0) {
+                            closeTipDialog();
+                            mRegistrationAlls.clear();
+                            mRegistrationAlls.addAll(registrationAlls);
+                            notifyDataChanged(null);
+                        } else {
+                            showInfoTipDialog("你尚未有任何就诊记录");
+                        }
+                    }
+                });
+    }
+
+
     @Override
     public TransitionConfig onFetchTransitionConfig() {
         return SCALE_TRANSITION_CONFIG;
@@ -207,7 +298,13 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
                 showListPopView(v, Arrays.asList("挂号单项", "检查项", "手术项", "全部"),
                         (parent, view, position, id) -> {
                             popViewDismiss();
-                            ToastUtils.showShort(position);
+                            if (position == 1 || position == 2) {
+                                showInfoTipDialog("正在开发中");
+                            } else if (position == 0) {
+                                notifyDataChanged(ItemType.REGISTER);
+                            } else {
+                                notifyDataChanged(null);
+                            }
                         },
                         null));
     }
@@ -220,6 +317,23 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initRefreshLayout() {
         mPullRefreshLayout.setEnabled(true);
+        mPullRefreshLayout.setOnPullListener(new QMUIPullRefreshLayout.OnPullListener() {
+            @Override
+            public void onMoveTarget(int offset) {
+
+            }
+
+            @Override
+            public void onMoveRefreshView(int offset) {
+
+            }
+
+            @Override
+            public void onRefresh() {
+                mPullRefreshLayout.finishRefresh();
+                refresh(false);
+            }
+        });
     }
 
     @Override
@@ -229,7 +343,9 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initTabs();
         initPagers();
     }
+
 }

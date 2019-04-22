@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
@@ -160,6 +161,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                         dialog.dismiss();
                     }, "立即绑定/创建", (dialog, index) -> {
                         dialog.dismiss();
+                        mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
                         startFragment(new MedicalCardFragment());
                     });
         } else {

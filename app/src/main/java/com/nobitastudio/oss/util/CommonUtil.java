@@ -188,5 +188,15 @@ public class CommonUtil {
         return strOrderState;
     }
 
+    /**
+     * @param begin
+     * @param end
+     * @return return begin - end random
+     */
+    public static Integer getRandom(Integer begin, Integer end) {
+        Integer random = begin + (int) (Math.random() * (end - begin));
+        return random;
+    }
+
 
 }

@@ -24,7 +24,7 @@ import butterknife.BindView;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description 订单
+ * @description 电子病历详情
  */
 public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragment {
 

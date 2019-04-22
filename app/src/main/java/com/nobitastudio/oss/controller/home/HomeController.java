@@ -89,6 +89,7 @@ public class HomeController extends BaseController {
             case R.id.pay_linearLayout:
                 break;
             case R.id.medical_card_linearLayout:
+                mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
                 mHandler.startFragment(new MedicalCardFragment());
                 break;
             case R.id.navigation_linearLayout:
@@ -101,12 +102,15 @@ public class HomeController extends BaseController {
                 mHandler.startFragment(new RegisterRecordFragment());
                 break;
             case R.id.electronic_case_linearLayout:
-                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
-                        "取消", (dialog, index) -> dialog.dismiss(),
-                        "确定", (dialog, index,content) -> {
-                            dialog.dismiss();
-                            mHandler.startFragment(new ElectronicCaseFragment());
-                        });
+                showInfoTipDialog("请选择需要查看的患者诊疗卡",2500l);
+                mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
+                mHandler.startFragment(new MedicalCardFragment()); // 进入诊疗卡界面选择查看哪一张诊疗卡的病历信息
+//                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
+//                        "取消", (dialog, index) -> dialog.dismiss(),
+//                        "确定", (dialog, index,content) -> {
+//                            dialog.dismiss();
+//                            mHandler.startFragment(new ElectronicCaseFragment());
+//                        });
                 break;
             case R.id.health_article_linearLayout:
                 mHandler.startFragment(new HealthArticleFragment());

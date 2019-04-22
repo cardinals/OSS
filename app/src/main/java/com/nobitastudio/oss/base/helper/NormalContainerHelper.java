@@ -144,7 +144,15 @@ public class NormalContainerHelper {
         return NormalContainer.get(NormalContainer.MEDICAL_CARD_PASSWORD);
     }
 
-    // set
+    public Integer getDiagnosisTypePos() {
+        return NormalContainer.get(NormalContainer.SELECTED_DIAGNOSIS_TYPE_POS);
+    }
+
+    public NormalContainer.EnterMedicalCardFor getEnterMedicalCardFor() {
+        return NormalContainer.get(NormalContainer.ENTER_MEDICAL_CARD_FOR);
+    }
+
+    // ===========================================set
     public NormalContainerHelper setUser(User user) {
         NormalContainer.put(NormalContainer.USER, user);
         return this;
@@ -258,6 +266,16 @@ public class NormalContainerHelper {
 
     public NormalContainerHelper setMedicalCardPassword(String medicalCardPassword) {
         NormalContainer.put(NormalContainer.MEDICAL_CARD_PASSWORD, medicalCardPassword);
+        return this;
+    }
+
+    public NormalContainerHelper setDiagnosisTypePos(Integer pos) {
+        NormalContainer.put(NormalContainer.SELECTED_DIAGNOSIS_TYPE_POS, pos);
+        return this;
+    }
+
+    public NormalContainerHelper setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor enterMedicalCardFor) {
+        NormalContainer.put(NormalContainer.INPUT_MOBILE_FRAGMENT, enterMedicalCardFor);
         return this;
     }
 }

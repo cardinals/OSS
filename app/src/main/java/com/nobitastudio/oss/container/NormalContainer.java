@@ -23,6 +23,12 @@ public class NormalContainer implements Serializable {
 
     }
 
+    public enum EnterMedicalCardFor{
+        ELECTRONIC_CASE, // 查看电子病历
+        DRUG_DETAIL, // 查看药品
+        NORMAL; // 正常情况
+    }
+
     // 容器
     public static Map<String, Object> container = new HashMap<>();
 
@@ -42,6 +48,7 @@ public class NormalContainer implements Serializable {
     public static final String INPUT_MOBILE = "INPUT_MOBILE"; // 用户输入的手机号（并非用于登录）
     public static final String WAIT_BIND_MEDICAL_CARD_NO = "WAIT_BIND_MEDICAL_CARD_NO"; // 准备绑定的诊疗卡卡号
     public static final String MEDICAL_CARD_PASSWORD = "MEDICAL_CARD_PASSWORD"; // 诊疗卡管理密码
+    public static final String ENTER_MEDICAL_CARD_FOR = "ENTER_MEDICAL_CARD_FOR";    // 进入medicalcardFragment的意图
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity
@@ -53,6 +60,7 @@ public class NormalContainer implements Serializable {
     public static final String SELECTED_DOCTOR = "SELECTED_DOCTOR"; // 选中的科室
     public static final String SELECTED_VISIT = "SELECTED_VISIT"; // 选中的号源
     public static final String SELECTED_MEDICAL_CARD = "SELECTED_MEDICAL_CARD"; // 选中的诊疗卡
+    public static final String SELECTED_DIAGNOSIS_TYPE_POS = "SELECTED_DIAGNOSIS_TYPE_POS"; // 进入查看就诊情况时的默认显示的tab，默认显示的是待就诊(0)
 
     public static void put(String key, Object value) {
         container.put(key, value);

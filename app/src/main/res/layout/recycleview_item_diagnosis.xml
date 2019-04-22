@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.qmuiteam.qmui.layout.QMUILinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/diagnosis_linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="184dp"
+    android:layout_height="208dp"
     android:layout_gravity="center_horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginTop="8dp"
@@ -24,6 +23,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/type_textview"
             style="@style/QDCommonTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,11 +77,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/pay_time_textview"
+                android:id="@+id/department_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="脑科"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -100,11 +99,33 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/order_cost_textview"
+                android:id="@+id/doctor_name_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="打我发发"
+
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="就诊时间:"
+                android:textColor="?attr/qmui_config_color_gray_5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/diagnosis_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -123,11 +144,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/create_time_textview"
+                android:id="@+id/diagnosis_room_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="3楼101带娃"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -146,11 +166,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/order_id_textview"
+                android:id="@+id/medical_card_ownername_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="啛啛喳喳错"
                 android:textColor="@color/app_color_blue"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -169,11 +188,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/pay_state_textview"
+                android:id="@+id/medical_card_id_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="11111111"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>

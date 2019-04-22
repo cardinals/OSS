@@ -124,10 +124,14 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                 new OkHttpUtil.SuccessHandler<List<OSSOrder>>() {
                     @Override
                     public void handle(List<OSSOrder> ossOrders) {
-                        closeTipDialog();
-                        mOssOrders.clear();
-                        mOssOrders.addAll(ossOrders);
-                        notifyDataChanged(null); // 刷新完成默认显示全部订单情况
+                        if (ossOrders.size() > 0) {
+                            closeTipDialog();
+                            mOssOrders.clear();
+                            mOssOrders.addAll(ossOrders);
+                            notifyDataChanged(null); // 刷新完成默认显示全部订单情况
+                        } else {
+                            showInfoTipDialog("您尚未有任何订单信息");
+                        }
                     }
                 });
     }
@@ -315,7 +319,7 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
         QMUITabSegment.Tab mCheckOrder = new QMUITabSegment.Tab(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_selected),
-                "检查订费", false
+                "检查费", false
         );
 
         QMUITabSegment.Tab mOperationOrder = new QMUITabSegment.Tab(
@@ -337,7 +341,6 @@ public class OrderFragment extends StandardWithTobBarLayoutFragment {
                 .addTab(mOperationOrder)
                 .addTab(mHospitalizeOrder);
     }
-
 
     @Override
     public TransitionConfig onFetchTransitionConfig() {

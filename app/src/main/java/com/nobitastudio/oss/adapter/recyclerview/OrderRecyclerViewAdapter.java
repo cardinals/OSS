@@ -45,7 +45,7 @@ public class OrderRecyclerViewAdapter extends BaseRecyclerViewAdapter<OSSOrder> 
         } else if (item.getCancelTime() != null) {
             holder.getTextView(R.id.pay_time_textview).setText(DateUtil.convertToStandardDateTime(item.getCancelTime()));
         } else {
-            holder.getTextView(R.id.pay_time_textview).setText("待支付");
+            holder.getTextView(R.id.pay_time_textview).setText("未支付");
         }
         holder.getTextView(R.id.pay_channel_textview).setText(PaymentChannel.getChineseMean(item.getPaymentChannel()));
     }
