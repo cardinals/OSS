@@ -189,7 +189,7 @@ public class NormalContainerHelper {
         return this;
     }
 
-    public NormalContainerHelper settRegistrationRecord(RegistrationRecord registrationRecord) {
+    public NormalContainerHelper setRegistrationRecord(RegistrationRecord registrationRecord) {
         NormalContainer.put(NormalContainer.REGISTRATION_RECORD, registrationRecord);
         return this;
     }

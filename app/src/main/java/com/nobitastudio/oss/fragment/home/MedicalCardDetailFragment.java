@@ -7,9 +7,12 @@ import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.entity.Bind;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.model.enumeration.Sex;
 import com.nobitastudio.oss.util.DateUtil;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,8 +48,13 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     void OnClick(View v) {
         switch (v.getId()) {
             case R.id.unbind_medical_card_button:
-                showMessageNegativeDialog("温馨提示", "1.\n2.\n3.",
-                        "取消绑定", (dialog, pos) -> dialog.dismiss(),
+                showMessageNegativeDialog("温馨提示", "确定要取消绑定吗",
+                        "取消绑定", (dialog, pos) -> {
+                            dialog.dismiss();
+                            putAsyn(Arrays.asList("bind", "unbind"), null,
+                                    new Bind(mNormalContainerHelper.getUser().getId(), mNormalContainerHelper.getSelectedMedicalCard().getId()));
+                            popBackStack();
+                        },
                         "再想想", (dialog, pos) -> dialog.dismiss());
             default:
                 break;

@@ -102,7 +102,7 @@ public abstract class StandardFragment extends BaseFragment
 
     // 每次进入都需要执行的方法
     protected void onResumeAction() {
-
+        refresh(Boolean.FALSE); // 刷新数据
     }
 
     // 初始化方法
@@ -114,7 +114,6 @@ public abstract class StandardFragment extends BaseFragment
         initTopBar();
         initRefreshLayout();
         initLastCustom();
-        refresh(Boolean.FALSE); // 刷新数据
     }
 
     // 当需要在最开始进行初始化，重写该方法

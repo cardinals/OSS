@@ -11,11 +11,9 @@ import com.nobitastudio.oss.adapter.recyclerview.MedicalCardItemAdapter;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
-import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.util.OkHttpUtil;
-import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.util.Arrays;
@@ -55,7 +53,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
     private void initBasic() {
         mBindMedicalCards = mNormalContainerHelper.getBindMedicalCards();
         if (mBindMedicalCards == null || mBindMedicalCards.size() == 0) {
-            getBindMedicalCards();
+            refresh(false);
         }
         initRecyclerView();
     }
@@ -76,8 +74,8 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
     }
 
-    // 绑定的诊疗卡
-    private void getBindMedicalCards() {
+    @Override
+    protected void refresh(boolean isCancelPull) {
         showNetworkLoadingTipDialog("正在查询绑定的诊疗卡");
         getAsyn(Arrays.asList("medical-card", mNormalContainerHelper.getUser().getId().toString(), "medical-cards"), null,
                 new ReflectStrategy<>(new TypeReference<List<MedicalCard>>() {
@@ -119,14 +117,9 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
             @Override
             public void onRefresh() {
                 mPullRefreshLayout.finishRefresh();
-                getBindMedicalCards();
+                refresh(false);
             }
         });
-    }
-
-    @Override
-    protected void onResumeAction() {
-        mMedicalCardItemAdapter.notifyDataSetChanged(); // 从创建、解绑、绑定诊疗卡 回退时调用
     }
 
     @Override

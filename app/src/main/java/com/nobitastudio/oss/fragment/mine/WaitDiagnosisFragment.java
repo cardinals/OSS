@@ -262,7 +262,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
 
     // todo 现在没有后台数据表支持判断是完成就诊还是 未就诊. 采用随机来模拟
     private boolean judgeIsFinishDiagnosis(RegistrationAll registrationAll) {
-        return CommonUtil.getRandom(0, 20) > 10;
+        return registrationAll.getVisit().getDiagnosisTime().isBefore(LocalDateTime.now()) && CommonUtil.getRandom(0, 20) > 10;
     }
 
     @Override

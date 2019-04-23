@@ -80,7 +80,7 @@ public class RegisterSuccessFragment extends StandardWithTobBarLayoutFragment {
                 new OkHttpUtil.SuccessHandler<ConfirmOrCancelRegisterDTO>() {
                     @Override
                     public void handle(ConfirmOrCancelRegisterDTO confirmOrCancelRegisterDTO) {
-                        mNormalContainerHelper.settRegistrationRecord(confirmOrCancelRegisterDTO.getRegistrationRecord());
+                        mNormalContainerHelper.setRegistrationRecord(confirmOrCancelRegisterDTO.getRegistrationRecord());
                         mNormalContainerHelper.setOrder(confirmOrCancelRegisterDTO.getOssOrder());
                         showSuccessTipDialog("取消预约成功");
                         popBackStack();

@@ -108,7 +108,7 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                     @Override
                     public void handle(RegistrationRecord registrationRecord) {
                         closeTipDialog();
-                        mNormalContainerHelper.settRegistrationRecord(registrationRecord);
+                        mNormalContainerHelper.setRegistrationRecord(registrationRecord);
                         mNormalContainerHelper.setLeftTime(1800);  // 新建的挂号单.默认支付时间是30分钟
                         requestForImageCaptcha(); // 刷新验证码
                         startFragment(new WaitingPayRegisterFragment());
