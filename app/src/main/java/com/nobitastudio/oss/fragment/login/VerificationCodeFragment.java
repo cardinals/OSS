@@ -167,6 +167,8 @@ public class VerificationCodeFragment extends StandardWithTobBarLayoutFragment {
         return "验证码已发送至 +86 " + mNormalContainerHelper.getInputMobile().substring(0, 3) + "****" + mNormalContainerHelper.getInputMobile().substring(7, 11);
     }
 
+    // todo 待优化:在绑定诊疗卡时，应该是将验证码与诊疗卡信息一同发过去。服务器端先验证验证码，再绑定
+    // 而现在的做法是：调用了两个接口,先调用验证码接口.再调用绑定接口，如果接口不够隐蔽,便可以跳过验证码接口，直接访问绑定诊疗卡接口
     private void initOptView() {
         mOtpView.setOtpCompletionListener((value) -> {
             showNetworkLoadingTipDialog("正在验证");
