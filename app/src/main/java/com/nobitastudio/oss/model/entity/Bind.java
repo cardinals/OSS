@@ -1,5 +1,7 @@
 package com.nobitastudio.oss.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,6 +43,7 @@ public class Bind implements Serializable {
     private String medicalCardId;
 
     @Column(name = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
 
     /**

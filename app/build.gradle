@@ -137,5 +137,8 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
     implementation 'javax.persistence:javax.persistence-api:2.2'
 
+    // jackSon json -> 用于 localdatetime 的序列化以及反序列化
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6'
+
 
 }

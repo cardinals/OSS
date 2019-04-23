@@ -1,8 +1,9 @@
-package com.nobitastudio.oss.fragment.home;
+package com.nobitastudio.oss.fragment.old;
 
 import android.view.View;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.fragment.old.BindMedicalCardTwoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 
 import butterknife.OnClick;

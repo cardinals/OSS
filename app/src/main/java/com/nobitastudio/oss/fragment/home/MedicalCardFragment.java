@@ -45,7 +45,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                 break;
             case R.id.bind_medical_card_button:
                 mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.BIND_MEDICAL_CARD);
-                startFragment(new BindMedicalCardOneFragment());
+                startFragment(new InputMobileFragment());
                 break;
         }
     }

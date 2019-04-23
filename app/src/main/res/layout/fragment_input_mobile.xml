@@ -54,7 +54,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:background="@drawable/bg_transparent_selector_edit"
-                                android:hint="请输入正确手机号"
+                                android:hint="请按提示正确输入"
                                 android:inputType="number"
                                 android:maxLength="18"
                                 android:textColor="@color/qmui_config_color_white"
@@ -82,6 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="提示"
+                        android:textSize="17sp"
                         android:textColor="@color/qmui_config_color_white"
                         android:textStyle="normal" />
 

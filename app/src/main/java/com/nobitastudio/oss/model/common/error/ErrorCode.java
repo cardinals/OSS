@@ -26,7 +26,14 @@ public class ErrorCode {
     public static final String HAS_CANCEL_REGISTER = "HAS_CANCEL_REGISTER"; // 订单已经处于取消装填
     public static final String SMS_CODE_SEND_FAIL = "SMS_CODE_SEND_FAIL"; // 验证码发送失败
     public static final String MOBILE_HAS_REGISTER = "MOBILE_HAS_REGISTER"; // 该手机号已经注册
-
+    public static final String NOT_FIND_USER_BY_ID = "NOT_FIND_USER_BY_ID"; // 未查找到指定用户
+    public static final String NOT_FIND_REGISTRATION_BY_ID = "NOT_FIND_REGISTRATION_BY_ID"; // 未查找到指定挂号单
+    public static final String NOT_FIND_ORDER_BY_ID = "NOT_FIND_ORDER_BY_ID"; // 未查找到指定订单
+    public static final String NOT_FIND_VISIT_BY_ID = "NOT_FIND_VISIT_BY_ID"; // 未查找到指定号源
+    public static final String NOT_FIND_MEDICAL_CARD_BY_ID = "NOT_FIND_MEDICAL_CARD_BY_ID"; // 未查找到指定诊疗卡
+    public static final String NOT_FIND_DEPARTMENT_BY_ID = "NOT_FIND_DEPARTMENT_BY_ID"; // 未查找到指定科室
+    public static final String NOT_FIND_DOCTOR_BY_ID = "NOT_FIND_DOCTOR_BY_ID"; // 未查找到指定医生
+    public static final String NOT_FIND_DIAGNOSIS_ROOM_BY_ID = "NOT_FIND_DIAGNOSIS_ROOM_BY_ID"; // 未查找到指定就诊室
 
     public static String get(String errorCode) {
         if (errorCodeContainer == null) {
@@ -49,6 +56,14 @@ public class ErrorCode {
         errorCodeContainer.put(HAS_CANCEL_REGISTER, "该挂号单已处于取消预约状态,请勿重复取消");
         errorCodeContainer.put(SMS_CODE_SEND_FAIL,"验证码发送失败,请重试");
         errorCodeContainer.put(MOBILE_HAS_REGISTER,"该手机号已经注册");
+        errorCodeContainer.put(NOT_FIND_USER_BY_ID,"未查找到指定用户");
+        errorCodeContainer.put(NOT_FIND_REGISTRATION_BY_ID,"未查找到指定挂号单");
+        errorCodeContainer.put(NOT_FIND_ORDER_BY_ID,"未查找到指定订单");
+        errorCodeContainer.put(NOT_FIND_VISIT_BY_ID,"未查找到指定号源");
+        errorCodeContainer.put(NOT_FIND_MEDICAL_CARD_BY_ID,"未查找到指定诊疗卡");
+        errorCodeContainer.put(NOT_FIND_DEPARTMENT_BY_ID,"未查找到指定科室");
+        errorCodeContainer.put(NOT_FIND_DOCTOR_BY_ID,"未查找到指定医生");
+        errorCodeContainer.put(NOT_FIND_DIAGNOSIS_ROOM_BY_ID,"未查找到指定就诊室");
     }
 
 }

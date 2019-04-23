@@ -8,6 +8,11 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.dto.ReflectStrategy;
+import com.nobitastudio.oss.model.entity.MedicalCard;
+import com.nobitastudio.oss.util.OkHttpUtil;
+
+import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,7 +41,17 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
             } else {
 //                mNormalContainerHelper.setWaitBindMedicalCardNo(code);
 //                mNormalContainerHelper.setInputMobile(mobile); // 通过网络获取medicalCard的信息
-                startFragment(new VerificationCodeFragment());
+                showNetworkLoadingTipDialog("正在查询该诊疗卡");
+                getAsyn(Arrays.asList("medical-card", code), null, new ReflectStrategy<MedicalCard>(MedicalCard.class),
+                        new OkHttpUtil.SuccessHandler<MedicalCard>() {
+                            @Override
+                            public void handle(MedicalCard medicalCard) {
+                                mNormalContainerHelper.setSelectedMedicalCard(medicalCard);
+                                mNormalContainerHelper.setInputMobile(medicalCard.getOwnerMobile());
+                                closeTipDialog();
+                                startFragment(new VerificationCodeFragment());
+                            }
+                        });
             }
         } else {
             if (code.length() == 0) {
@@ -55,19 +70,19 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
         String mAttentionContent = "";
         switch (mNormalContainerHelper.getInputMobileFragment()) {
             case REGISTER:
-                mAttentionContent = "请输入用于登录的手机号";
+                mAttentionContent = "提示:请输入用于登录的手机号";
                 break;
             case MODIFY_PASSWORD:
-                mAttentionContent = "请输入用于登录的手机号";
+                mAttentionContent = "提示:请输入用于登录的手机号";
                 break;
             case CREATE_MEDICAL_CARD:
-                mAttentionContent = "请输入诊疗卡持有者的手机号";
+                mAttentionContent = "提示:请输入诊疗卡持有者的手机号";
                 break;
             case BIND_MEDICAL_CARD:
-                mAttentionContent = "请输入待绑定诊疗卡卡号";
+                mAttentionContent = "提示:请输入待绑定诊疗卡卡号";
                 break;
             default:
-                mAttentionContent = "请输入手机号";
+                mAttentionContent = "提示:请输入手机号";
                 break;
         }
         mAttentionTextView.setText(mAttentionContent);
