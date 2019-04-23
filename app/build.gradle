@@ -56,47 +56,68 @@ configurations.all {
 
 dependencies {
 
-//    implementation 'me.codeboy.android:align-text-view:2.3.2' // 左右对齐textview  底部存在大量空白
-//    implementation "org.projectlombok:lombok:1.18.4"  // lombok
+    //    implementation 'me.codeboy.android:align-text-view:2.3.2' // 左右对齐textview  底部存在大量空白
+    //    implementation "org.projectlombok:lombok:1.18.4"  // lombok
+
     // 汉字转拼音
-//    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
-//    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3' // 可选，适用于Android的中国地区词典
-//    implementation 'com.github.promeg:tinypinyin-lexicons-java-cncity:2.0.3' // 可选，适用于Java的中国地区词典
+    //    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
+    //    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3' // 可选，适用于Android的中国地区词典
+    //    implementation 'com.github.promeg:tinypinyin-lexicons-java-cncity:2.0.3' // 可选，适用于Java的中国地区词典
 
     // C:\Users\Administrator\.gradle\caches\modules-2\files-2.1 包位置
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
-    implementation 'de.hdodenhof:circleimageview:2.2.0'// 圆形头像
-    implementation 'com.github.bumptech.glide:glide:4.7.1'// 图片加载
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1' // 图片加载
-    implementation 'com.android.support:cardview-v7:28.0.0'// cardview
-//    implementation 'com.squareup.okhttp3:okhttp:3.12.0'// 网络通信
-    implementation 'com.squareup.okhttp3:okhttp:3.14.0'// 网络通信
-    implementation 'com.google.code.gson:gson:2.8.5' // 序列化 暂时不启用 使用AliBaba的 FastJson代替
-    implementation 'com.alibaba:fastjson:1.2.56' // 序列化 反序列化
+    // 圆形头像
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+
+    // 图片加载
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+    // 图片加载
+    implementation 'com.android.support:cardview-v7:28.0.0'
+
+    // cardview
+
+    //    implementation 'com.squareup.okhttp3:okhttp:3.12.0'// 网络通信
+    implementation 'com.squareup.okhttp3:okhttp:3.14.0'
+
+    // 网络通信
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // 序列化 暂时不启用 使用AliBaba的 FastJson代替
+    implementation 'com.alibaba:fastjson:1.2.56'
+
+    // 序列化 反序列化
 
     // 测试
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation files('libs/paysdk-release-1.2.2.jar')
 
-    implementation files('libs/paysdk-release-1.2.2.jar') // 图灵支付
+    // 图灵支付
 
     // 轮播图
     implementation('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
         transitive = true
     }
+    implementation 'cn.jiguang.sdk:jpush:3.1.1'
 
-    implementation 'cn.jiguang.sdk:jpush:3.1.1'  // 此处以JPush 3.1.1 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.1.9'  // 此处以JCore 1.1.9 版本为例。
+    // 此处以JPush 3.1.1 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.9'
+
+    // 此处以JCore 1.1.9 版本为例。
 
     // 工具，混淆依赖
-    implementation "com.blankj:free-proguard:0.0.10"
+    implementation 'com.blankj:free-proguard:0.0.10'
     implementation 'com.blankj:utilcode:1.23.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
-    implementation 'org.greenrobot:eventbus:3.1.1' // eventbus
+    // eventbus
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
 
-    implementation 'org.apache.commons:commons-lang3:3.8.1' // apache 工具
+    // apache 工具
 
     // android support 支持
     implementation "com.android.support:support-v4:$supportVersion"
@@ -108,27 +129,38 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
     // 大部分架构是在 qmui：1.2.0  arch：0.3.2 上开发完成
-//    implementation 'com.qmuiteam:qmui:1.1.12'  // qmui widget
-    implementation 'com.qmuiteam:qmui:1.2.0'  // qmui widget
-//    implementation 'com.qmuiteam:arch:0.3.1'   // fragment,activity 该版本存在返回动画异常异常
-//    implementation 'com.qmuiteam:arch:0.3.2'
+
+    //    implementation 'com.qmuiteam:qmui:1.1.12'  // qmui widget
+    implementation 'com.qmuiteam:qmui:1.2.0'
+
+    // qmui widget
+
+    //    implementation 'com.qmuiteam:arch:0.3.1'   // fragment,activity 该版本存在返回动画异常异常
+
+    //    implementation 'com.qmuiteam:arch:0.3.2'
     implementation 'com.qmuiteam:arch:0.4.0'
 
     //leak
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'  // adapter
+    // adapter
+    implementation 'com.github.GrenderG:Toasty:1.4.0'
 
-    implementation 'com.github.GrenderG:Toasty:1.4.0'  // material 风格的toast
+    // material 风格的toast
+    implementation 'com.github.glomadrian:Grav:1.1'
 
-    implementation 'com.github.glomadrian:Grav:1.1' // 泡沫背景
+    // 泡沫背景
+    implementation 'com.shuyu:GSYVideoPlayer:6.0.0-beta'
 
-    implementation 'com.shuyu:GSYVideoPlayer:6.0.0-beta'  // 视频播放器
+    // 视频播放器
 
     // https://jitpack.io/#mukeshsolanki/android-otpview-pinview 最新版本号
-    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3' // 短信验证码界面
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3'
+
+    // 短信验证码界面
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.2'
@@ -140,5 +172,6 @@ dependencies {
     // jackSon json -> 用于 localdatetime 的序列化以及反序列化
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6'
 
-
+    // org.apache.http.legacy
+    implementation files('libs/org.apache.http.legacy.jar')
 }

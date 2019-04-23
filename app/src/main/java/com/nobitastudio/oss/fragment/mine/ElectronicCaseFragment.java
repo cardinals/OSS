@@ -24,7 +24,7 @@ import butterknife.BindView;
  * @author chenxiong
  * @email nobita0522@qq.com
  * @date 2019/01/29 16:08
- * @description 订单详情
+ * @description 电子病历
  */
 public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
 
@@ -91,10 +91,6 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
             super.notifyDataSetChanged();
         }
     };
-
-    private static float mShadowAlpha = 1.0f;
-    private static int mShadowElevationDp = 10;
-    private static int mRadius = 15;
 
     private void initPagers() {
         mPages = new HashMap<>();

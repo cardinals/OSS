@@ -25,8 +25,8 @@ public class NormalContainer implements Serializable {
 
     public enum EnterMedicalCardFor{
         ELECTRONIC_CASE, // 查看电子病历
-        DRUG_DETAIL, // 查看药品
-        NORMAL; // 正常情况
+        DRUG_DETAIL, // 查看药品 查看最近的就诊情况
+        NORMAL; // 正常情况 .查看详情用于解绑
     }
 
     // 容器

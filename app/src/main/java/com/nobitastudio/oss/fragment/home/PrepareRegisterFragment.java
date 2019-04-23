@@ -89,9 +89,6 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
             case R.id.captcha_imageview:
                 requestForImageCaptcha();
                 break;
-            default:
-                showErrorTipDialog("不支持的点击事件");
-                break;
         }
     }
 

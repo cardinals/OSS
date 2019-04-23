@@ -102,8 +102,7 @@ public class HomeController extends BaseController {
                 mHandler.startFragment(new RegisterRecordFragment());
                 break;
             case R.id.electronic_case_linearLayout:
-                showInfoTipDialog("请选择需要查看的患者诊疗卡",2500l);
-                mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
+                mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.ELECTRONIC_CASE);
                 mHandler.startFragment(new MedicalCardFragment()); // 进入诊疗卡界面选择查看哪一张诊疗卡的病历信息
 //                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
 //                        "取消", (dialog, index) -> dialog.dismiss(),

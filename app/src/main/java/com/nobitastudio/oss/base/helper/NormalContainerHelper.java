@@ -275,7 +275,7 @@ public class NormalContainerHelper {
     }
 
     public NormalContainerHelper setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor enterMedicalCardFor) {
-        NormalContainer.put(NormalContainer.INPUT_MOBILE_FRAGMENT, enterMedicalCardFor);
+        NormalContainer.put(NormalContainer.ENTER_MEDICAL_CARD_FOR, enterMedicalCardFor);
         return this;
     }
 }

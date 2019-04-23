@@ -10,6 +10,7 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.MedicalCardItemAdapter;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
+import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.MedicalCard;
@@ -68,8 +69,24 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
         });
         mMedicalCardItemAdapter = new MedicalCardItemAdapter(getContext(), mBindMedicalCards);
         mMedicalCardItemAdapter.setOnItemClickListener((view, pos) -> {
-            mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
-            startFragment(new MedicalCardDetailFragment());
+            switch (mNormalContainerHelper.getEnterMedicalCardFor()) {
+                case NORMAL:
+                    mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
+                    startFragment(new MedicalCardDetailFragment());
+                    break;
+                case DRUG_DETAIL:
+                    break;
+                case ELECTRONIC_CASE:
+                    showAutoDialogNumber("请输入诊疗卡管理密码", getContext().getString(R.string.warm_prompt_electronic_case),
+                            "取消", (dialog, index) -> dialog.dismiss(),
+                            "确定", (dialog, index, content) -> {
+                                dialog.dismiss();
+//                            showNetworkLoadingTipDialog("正在验证");
+                                // 验证管理密码
+                                startFragment(new ElectronicCaseFragment());
+                            }, 6);
+                    break;
+            }
         });
         mMedicalCardRecyclerView.setAdapter(mMedicalCardItemAdapter);
     }
@@ -89,7 +106,18 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                         if (mNormalContainerHelper.getBindMedicalCards().size() == 0) {
                             showInfoTipDialog("您尚未绑定任何诊疗卡");
                         } else {
-                            closeTipDialog();
+                            switch (mNormalContainerHelper.getEnterMedicalCardFor()) {
+                                case ELECTRONIC_CASE:
+                                    showInfoTipDialog("请选择需查看病例详情的诊疗卡", 2500l);
+                                    break;
+                                case DRUG_DETAIL:
+                                    showInfoTipDialog("请选择您需查看药品详情的诊疗卡", 2500l);
+                                    break;
+                                case NORMAL:
+                                default:
+                                    closeTipDialog();
+                                    break;
+                            }
                         }
                     }
                 });

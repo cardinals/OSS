@@ -191,7 +191,6 @@ public class MineController extends BaseController {
 //                            mHandler.startFragment(new ElectronicCaseFragment());
 //                        });
             } else if (itemViewText.equals("电子处方")) {
-                showInfoTipDialog("请选择需要查看的诊疗卡");
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.DRUG_DETAIL);
                 mHandler.startFragment(new MedicalCardFragment());
             } else if (itemViewText.equals("已就诊")) {
