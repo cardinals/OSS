@@ -7,22 +7,14 @@ import android.graphics.BitmapFactory;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
-import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.GetParam;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
-import com.nobitastudio.oss.model.entity.Bind;
-import com.nobitastudio.oss.model.entity.User;
 
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -211,7 +203,7 @@ public class OkHttpUtil {
                         // 请求返回码 200 - 300 即返回成功
                         if (response.code() == 200) {
                             String responseJson = response.body().string(); // 用于测试
-                            ServiceResult<T> result = JSON.parseObject(responseJson, ServiceResult.class);
+                            ServiceResult result = JSON.parseObject(responseJson, ServiceResult.class);
                             if (result.getState() == 0) {
                                 // 成功
                                 if (result.getResult() instanceof JSONObject) {
@@ -228,7 +220,7 @@ public class OkHttpUtil {
                                 } else {
                                     return;
                                 }
-                                runOnUiThread(() -> successHandler.handle(result.getResult()));
+                                runOnUiThread(() -> successHandler.handle((T)(result.getResult())));
                             } else {
                                 // 失败
                                 runOnUiThread(() -> failureHandler.handle(result));

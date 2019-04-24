@@ -16,11 +16,18 @@
 
 package com.nobitastudio.oss;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.base.lab.fragment.QDWebViewFixFragment;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.home.CreateMedicalCardFragment;
@@ -32,6 +39,11 @@ import com.nobitastudio.oss.fragment.login.LoginFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.test.Test4Fragment;
 import com.nobitastudio.oss.fragment.test.TestFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author chenxiong
@@ -50,21 +62,97 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            initPay();
-            BaseFragment fragment = getFirstFragment();
+            initPermission();
+        }
+    }
 
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(getContextViewId(), fragment, fragment.getClass().getSimpleName())
-                    .addToBackStack(fragment.getClass().getSimpleName())
-                    .commit();
+    // 开始启动，开启framgent的回退栈，
+    private void startUp() {
+        initPay();
+
+        BaseFragment fragment = getFirstFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(getContextViewId(), fragment, fragment.getClass().getSimpleName())
+                .addToBackStack(fragment.getClass().getSimpleName())
+                .commit();
+    }
+
+    // 初始化应用权限
+    private void initPermission() {
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.MODIFY_AUDIO_SETTINGS)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.MODIFY_AUDIO_SETTINGS);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.INTERNET);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_NETWORK_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_NETWORK_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CHANGE_WIFI_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.CHANGE_WIFI_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_WIFI_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_WIFI_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WAKE_LOCK)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WAKE_LOCK);
+        }
+        if (permissionList.size() != 0) {
+            ActivityCompat.requestPermissions(MainActivity.this, permissionList.toArray(new String[0]), ConstantContainer.REQUEST_CODE);
+        } else {
+            startUp();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case ConstantContainer.REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toasty.warning(getApplicationContext(), "必须同意所有权限才能使用本程序").show();
+                            finish();
+                        }
+                    }
+                    startUp();
+                } else {
+                    Toasty.error(getApplicationContext(), "发生未知错误").show();
+                    finish();
+                }
+                break;
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY,this);
+        NormalContainer.put(NormalContainer.SELECTED_ACTIVITY, this);
     }
 
     // 初始化支付功能
@@ -74,6 +162,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     /**
      * 检测登录及其异常状态
+     *
      * @return
      */
     protected BaseFragment getFirstFragment() {
@@ -81,6 +170,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        return new LoginOldFragment();
 //        return new SettingFragment();
 //        return new HomeFragment();
+//        return new QDWebViewFixFragment();
         return new LoginFragment();
 //        return new UserInfoFragment();
 //        return new ForgetPasswordOneFragment();

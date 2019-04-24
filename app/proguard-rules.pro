@@ -118,3 +118,17 @@
 -keep public class **.R$*{
    public static final int *;
 }
+
+# 网络不混淆
+-keep class org.apache.http.** { *; }
+-keep class android.net.http.** { *; }
+-dontwarn org.apache.http.**
+-dontwarn android.net.http.**
+
+# 高德地图 todo 可能需要修改
+-dontwarn com.amap.api.**
+-dontwarn com.a.a.**
+-dontwarn com.autonavi.**
+-keep class com.amap.api.** {*;}
+-keep class com.autonavi.** {*;}
+-keep class com.a.a.** {*;}

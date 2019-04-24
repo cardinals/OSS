@@ -25,21 +25,31 @@ import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.entity.HealthArticle;
+import com.nobitastudio.oss.util.CommonUtil;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.webview.QMUIWebView;
 import com.qmuiteam.qmui.widget.webview.QMUIWebViewContainer;
 
+import es.dmoral.toasty.Toasty;
+
 // 提供浏览器支持
 public class QDWebViewFixFragment extends QDWebExplorerFragment {
 
     // 仅用于测试
     public QDWebViewFixFragment() {
+//        String url = ConstantContainer.OSS_SERVER_RUNTIME + "/html" + "/test.html";  // 展示的url
+//        Bundle bundle = new Bundle();
+//        bundle.putString(EXTRA_URL, url);
+//        bundle.putString(EXTRA_TITLE, NormalContainerHelper.getInstance().getSelectedHealthArticle().getTitle());
+
         String url = ConstantContainer.OSS_SERVER_RUNTIME + "/html" + "/test.html";  // 展示的url
+        String url2 = "https://www.baidu.com";  // 展示的url
         Bundle bundle = new Bundle();
-        bundle.putString(EXTRA_URL, url);
-        bundle.putString(EXTRA_TITLE, NormalContainerHelper.getInstance().getSelectedHealthArticle().getTitle());
+        Boolean is = CommonUtil.getRandom(0,20) > 10;
+        bundle.putString(EXTRA_URL, is ? url : url2);
+        bundle.putString(EXTRA_TITLE, "test");
         setArguments(bundle);
     }
 

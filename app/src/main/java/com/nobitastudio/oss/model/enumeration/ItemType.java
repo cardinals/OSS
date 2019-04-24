@@ -20,7 +20,9 @@ public enum ItemType {
     // 住院订单
     HOSPITALIZE,
     // 诊疗卡类型
-    MEDICAL_CARD;
+    MEDICAL_CARD,
+    // 电子病历 :包含 药品，检查，手术
+    ELECTRONIC_CASE;
 
     // 根据位置获取对应枚举值
     public static ItemType getFromPosition(int pos) {

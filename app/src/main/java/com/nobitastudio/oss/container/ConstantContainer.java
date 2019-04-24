@@ -37,6 +37,8 @@ public class ConstantContainer {
     public final static String TR_PAY_CHANEL = "OSS_APP_ANDROID"; // 订单查询
     public final static String TR_PAY_APP_KEY = TEST_TR_PAY_APP_KEY;
     public final static String TR_PAY_APP_SECRET = TEST_TR_PAY_APP_SECRET; // todo 去掉
+    public final static int REQUEST_CODE = 101; // 请求权限时的code参数
+
 
     // 科室图片相关
     public static Map<String, Integer> DEPARTMENT_MIPMAP;

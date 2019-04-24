@@ -191,10 +191,10 @@ public class CommonUtil {
     /**
      * @param begin
      * @param end
-     * @return return begin - end random
+     * @return return [begin - end] random
      */
     public static Integer getRandom(Integer begin, Integer end) {
-        Integer random = begin + (int) (Math.random() * (end - begin));
+        Integer random = begin + (int) (Math.random() * (end - begin + 1));
         return random;
     }
 

@@ -57,11 +57,15 @@ configurations.all {
 dependencies {
 
     //    implementation 'me.codeboy.android:align-text-view:2.3.2' // 左右对齐textview  底部存在大量空白
+
     //    implementation "org.projectlombok:lombok:1.18.4"  // lombok
 
     // 汉字转拼音
+
     //    implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
+
     //    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3' // 可选，适用于Android的中国地区词典
+
     //    implementation 'com.github.promeg:tinypinyin-lexicons-java-cncity:2.0.3' // 可选，适用于Java的中国地区词典
 
     // C:\Users\Administrator\.gradle\caches\modules-2\files-2.1 包位置
@@ -172,6 +176,7 @@ dependencies {
     // jackSon json -> 用于 localdatetime 的序列化以及反序列化
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.6'
 
-    // org.apache.http.legacy
+    //    implementation files('libs/org.apache.http.legacy.jar')
     implementation files('libs/org.apache.http.legacy.jar')
+
 }
