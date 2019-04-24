@@ -120,15 +120,24 @@
 }
 
 # 网络不混淆
--keep class org.apache.http.** { *; }
--keep class android.net.http.** { *; }
--dontwarn org.apache.http.**
--dontwarn android.net.http.**
+-keep class android.net.** { *; }
+-keep class com.android.internal.http.** { *; }
+-keep class org.apache.** { *; }
+-dontwarn android.net.**
+-dontwarn com.android.internal.http.**
+-dontwarn org.apache.**
 
-# 高德地图 todo 可能需要修改
--dontwarn com.amap.api.**
--dontwarn com.a.a.**
--dontwarn com.autonavi.**
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.**
+
+# 高德地图
 -keep class com.amap.api.** {*;}
 -keep class com.autonavi.** {*;}
 -keep class com.a.a.** {*;}
+-dontwarn com.amap.api.**
+-dontwarn com.autonavi.**
+-dontwarn com.a.a.**
+
+# 下面是使用所有的都不混淆,实在是不行就采用这种策略(默认点击运行时就是如此,尚未解决。全部都不混淆)
+-keep class **.** {*;}
