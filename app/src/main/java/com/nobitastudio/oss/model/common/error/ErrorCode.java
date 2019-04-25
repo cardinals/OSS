@@ -34,6 +34,14 @@ public class ErrorCode {
     public static final String NOT_FIND_DEPARTMENT_BY_ID = "NOT_FIND_DEPARTMENT_BY_ID"; // 未查找到指定科室
     public static final String NOT_FIND_DOCTOR_BY_ID = "NOT_FIND_DOCTOR_BY_ID"; // 未查找到指定医生
     public static final String NOT_FIND_DIAGNOSIS_ROOM_BY_ID = "NOT_FIND_DIAGNOSIS_ROOM_BY_ID"; // 未查找到指定就诊室
+    public static final String MEDICAL_CARD_BIND_UPPER_LIMIT = "MEDICAL_CARD_BIND_UPPER_LIMIT"; // 诊疗卡绑定数以上限
+    public static final String MOBILE_BIND_UPPER_LIMIT = "MEDICAL_CARD_BIND_UPPER_LIMIT"; // 手机号绑定数以上限
+    public static final String MOBILE_HAVE_BIND = "MOBILE_HAVE_BIND"; // 您已绑定该诊疗卡
+    public static final String NOT_FIND_ELECTRONIC_CASE_BY_ID = "NOT_FIND_ELECTRONIC_CASE_BY_ID"; // 未查找到指定电子病历
+    public static final String NOT_FIND_DRUG_BY_ID = "NOT_FIND_DRUG_BY_ID"; // 未查找到指定药品信息
+    public static final String NOT_FIND_CHECK_ITEM_BY_ID = "NOT_FIND_CHECK_ITEM_BY_ID"; // 未查找到指定检查项信息
+    public static final String NOT_FIND_OPERATION_ITEM_BY_ID = "NOT_FIND_OPERATION_ITEM_BY_ID"; // 未查找到指定手术项信息
+    public static final String MEDICAL_CARD_PASSWORD_ERROR = "MEDICAL_CARD_PASSWORD_ERROR"; // 诊疗卡密码错误
 
     public static String get(String errorCode) {
         if (errorCodeContainer == null) {
@@ -64,6 +72,11 @@ public class ErrorCode {
         errorCodeContainer.put(NOT_FIND_DEPARTMENT_BY_ID,"未查找到指定科室");
         errorCodeContainer.put(NOT_FIND_DOCTOR_BY_ID,"未查找到指定医生");
         errorCodeContainer.put(NOT_FIND_DIAGNOSIS_ROOM_BY_ID,"未查找到指定就诊室");
+        errorCodeContainer.put(MEDICAL_CARD_BIND_UPPER_LIMIT,"绑定失败,该诊疗卡绑定数已上限");
+        errorCodeContainer.put(MOBILE_BIND_UPPER_LIMIT,"绑定失败,该号码绑定数已上限");
+        errorCodeContainer.put(MOBILE_HAVE_BIND,"绑定失败,您已绑定该诊疗卡");
+        errorCodeContainer.put(NOT_FIND_ELECTRONIC_CASE_BY_ID,"绑定失败,未查找到指定电子病历");
+        errorCodeContainer.put(MEDICAL_CARD_PASSWORD_ERROR,"诊疗卡密码错误");
     }
 
 }

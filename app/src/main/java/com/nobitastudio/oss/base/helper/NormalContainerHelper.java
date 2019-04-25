@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.nobitastudio.oss.base.activity.BaseActivity;
 import com.nobitastudio.oss.container.NormalContainer;
+import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.HealthArticle;
@@ -152,6 +153,14 @@ public class NormalContainerHelper {
         return NormalContainer.get(NormalContainer.ENTER_MEDICAL_CARD_FOR);
     }
 
+    public List<ElectronicCaseDTO> getElectronicCases() {
+        return NormalContainer.get(NormalContainer.ELECTRONIC_CASES);
+    }
+
+    public ElectronicCaseDTO getSelectedElectronicCase() {
+        return NormalContainer.get(NormalContainer.SELECTED_ELECTRONIC_CASES);
+    }
+
     // ===========================================set
     public NormalContainerHelper setUser(User user) {
         NormalContainer.put(NormalContainer.USER, user);
@@ -276,6 +285,16 @@ public class NormalContainerHelper {
 
     public NormalContainerHelper setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor enterMedicalCardFor) {
         NormalContainer.put(NormalContainer.ENTER_MEDICAL_CARD_FOR, enterMedicalCardFor);
+        return this;
+    }
+
+    public NormalContainerHelper setElectronicCases(List<ElectronicCaseDTO> electronicCaseDTOS) {
+        NormalContainer.put(NormalContainer.ELECTRONIC_CASES, electronicCaseDTOS);
+        return this;
+    }
+
+    public NormalContainerHelper setSelectedElectronicCase(ElectronicCaseDTO electronicCaseDTO) {
+        NormalContainer.put(NormalContainer.SELECTED_DIAGNOSIS_TYPE_POS, electronicCaseDTO);
         return this;
     }
 }

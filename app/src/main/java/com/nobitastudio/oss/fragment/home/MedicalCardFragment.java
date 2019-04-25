@@ -12,6 +12,7 @@ import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.InputMobileFragment;
 import com.nobitastudio.oss.fragment.mine.ElectronicCaseFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.util.OkHttpUtil;
@@ -81,9 +82,20 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                             "取消", (dialog, index) -> dialog.dismiss(),
                             "确定", (dialog, index, content) -> {
                                 dialog.dismiss();
-//                            showNetworkLoadingTipDialog("正在验证");
-                                // 验证管理密码
-                                startFragment(new ElectronicCaseFragment());
+                                showNetworkLoadingTipDialog("正在验证");
+                                // 验证诊疗卡管理密码
+                                getAsyn(Arrays.asList("electronic-case", mBindMedicalCards.get(pos).getId(), content,"findAll"), null,
+                                        new ReflectStrategy<>(new TypeReference<List<ElectronicCaseDTO>>() {
+                                        }), new OkHttpUtil.SuccessHandler<List<ElectronicCaseDTO>>() {
+                                            @Override
+                                            public void handle(List<ElectronicCaseDTO> electronicCaseDTOS) {
+                                                mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
+                                                mNormalContainerHelper.setElectronicCases(electronicCaseDTOS);
+                                                closeTipDialog();
+                                                startFragment(new ElectronicCaseFragment());
+                                            }
+                                        }
+                                );
                             }, 6);
                     break;
             }

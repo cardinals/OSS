@@ -26,7 +26,7 @@ public class ConstantContainer {
     public static final String OSS_SERVER_ONLINE = "http://www.nobitastudio.cn";  // 线上地址
     public static final String OSS_SERVER_LOCAL = "http://10.0.2.2";  // 本地服务
 
-    public static final String OSS_SERVER_RUNTIME = OSS_SERVER_ONLINE; // 运行地址
+    public static final String OSS_SERVER_RUNTIME = OSS_SERVER_LOCAL; // 运行地址
     // 图灵支付
     public static final String OSS_PAY_CALLBACK_URL = OSS_SERVER_ONLINE + "/pay-callback/register" ; // 挂号单支付成功后的回调地址
     public final static String OSS_TR_PAY_APP_KEY = "dbda983d39d84ba380342b692959d789"; // 图灵支付appkey

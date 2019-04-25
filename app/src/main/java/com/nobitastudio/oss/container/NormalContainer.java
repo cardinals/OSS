@@ -49,6 +49,8 @@ public class NormalContainer implements Serializable {
     public static final String WAIT_BIND_MEDICAL_CARD_NO = "WAIT_BIND_MEDICAL_CARD_NO"; // 准备绑定的诊疗卡卡号
     public static final String MEDICAL_CARD_PASSWORD = "MEDICAL_CARD_PASSWORD"; // 诊疗卡管理密码
     public static final String ENTER_MEDICAL_CARD_FOR = "ENTER_MEDICAL_CARD_FOR";    // 进入medicalcardFragment的意图
+    public static final String ELECTRONIC_CASES = "ELECTRONIC_CASES";    // 电子病历详情
+    public static final String SELECTED_ELECTRONIC_CASES = "SELECTED_ELECTRONIC_CASES";    // 用户选择的电子病历详情
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity

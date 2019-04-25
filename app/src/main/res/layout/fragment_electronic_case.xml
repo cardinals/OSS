@@ -40,7 +40,7 @@
                         <!-- 用户头像 -->
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="144dp"
+                            android:layout_height="128dp"
                             android:background="#00A8E1"
                             android:orientation="horizontal">
 
@@ -49,7 +49,7 @@
                                 android:layout_width="96dp"
                                 android:layout_height="96dp"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="@dimen/dp_60"
+                                android:layout_marginLeft="@dimen/dp_48"
                                 android:contentDescription="@string/nav_header_desc"
                                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                                 android:src="@drawable/ic_user"
@@ -80,13 +80,12 @@
                                         android:textColor="@color/qmui_config_color_white" />
 
                                     <TextView
-                                        android:id="@+id/medical_card_ownername_linearlayout"
+                                        android:id="@+id/medical_card_ownername_textview"
                                         style="@style/QDCommonDescription"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_marginBottom="@dimen/dp_0"
                                         android:gravity="center_vertical"
-                                        android:text="陈陈陈"
                                         android:textColor="@color/qmui_config_color_white" />
                                 </LinearLayout>
 
@@ -113,7 +112,6 @@
                                         android:layout_height="match_parent"
                                         android:layout_marginBottom="@dimen/dp_0"
                                         android:gravity="center_vertical"
-                                        android:text="女"
                                         android:textColor="@color/qmui_config_color_white" />
                                 </LinearLayout>
 
@@ -140,7 +138,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_marginBottom="@dimen/dp_0"
                                         android:gravity="center_vertical"
-                                        android:text="3 岁"
+
                                         android:textColor="@color/qmui_config_color_white" />
                                 </LinearLayout>
 
@@ -167,7 +165,6 @@
                                         android:layout_height="match_parent"
                                         android:layout_marginBottom="@dimen/dp_0"
                                         android:gravity="center_vertical"
-                                        android:text="8888********111111"
                                         android:textColor="@color/qmui_config_color_white" />
                                 </LinearLayout>
                             </LinearLayout>

@@ -59,9 +59,9 @@ public class ElectronicCase {
     @Column(name = "use_drug_advise")
     private String useDrugAdvise;
 
-    // 检查医嘱
-    @Column(name = "check_advise")
-    private String checkAdvise;
+    // 检查描述
+    @Column(name = "check_des")
+    private String checkDes;
 
     // 其他医嘱
     @Column(name = "other_advise")

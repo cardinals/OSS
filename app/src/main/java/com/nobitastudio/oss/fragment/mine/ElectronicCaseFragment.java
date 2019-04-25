@@ -7,16 +7,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.EmergencyRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HospitalizeRecordRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.OutpatientRecordRecyclerViewAdapter;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
+import com.nobitastudio.oss.model.enumeration.ElectronicCaseType;
+import com.nobitastudio.oss.model.enumeration.Sex;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 
@@ -45,6 +53,15 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
             }
         }
     }
+
+    @BindView(R.id.medical_card_ownername_textview)
+    TextView mMedicalCardOwnerNameTextView;
+    @BindView(R.id.medical_card_owner_sex_textview)
+    TextView mMedicalCardOwnerSexTextView;
+    @BindView(R.id.medical_card_owner_age_textview)
+    TextView mMedicalCardOwnerAgeTextView;
+    @BindView(R.id.medical_card_id_textview)
+    TextView mMedicalCardIdTextView;
 
     @BindView(R.id.pagers)
     ViewPager mViewPager;
@@ -92,6 +109,36 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         }
     };
 
+    OutpatientRecordRecyclerViewAdapter mOutpatientRecordRecyclerViewAdapter;
+    HospitalizeRecordRecyclerViewAdapter mHospitalizeRecordRecyclerViewAdapter;
+    EmergencyRecyclerViewAdapter mEmergencyRecyclerViewAdapter;
+
+    List<ElectronicCaseDTO> mElectronicCaseDTOS;
+    List<ElectronicCaseDTO> mOutpatientElectronicCaseDTOS;
+    List<ElectronicCaseDTO> mHospitalizeElectronicCaseDTOS;
+    List<ElectronicCaseDTO> mEmergencyElectronicCaseDTOS;
+
+    private void initBasic() {
+        mMedicalCardOwnerNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
+        mMedicalCardOwnerSexTextView.setText(Sex.getChineseSex(mNormalContainerHelper.getSelectedMedicalCard().getOwnerSex()));
+        // 511602199705220175  6 ~ 13 是生日（取的时候去 6 ~ 14 因为 subString，最后一个不算）
+        String idCard = mNormalContainerHelper.getSelectedMedicalCard().getOwnerIdCard();
+        LocalDate bir = LocalDate.of(Integer.valueOf(idCard.substring(6,10)),Integer.valueOf(idCard.substring(10,12)),Integer.valueOf(idCard.substring(12,14)));
+        mMedicalCardOwnerAgeTextView.setText(Period.between(bir, LocalDate.now()).getYears() + "岁");
+        mMedicalCardIdTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getId());
+
+        mElectronicCaseDTOS = mNormalContainerHelper.getElectronicCases();
+        mOutpatientElectronicCaseDTOS = mElectronicCaseDTOS.stream()
+                .filter(item -> item.getElectronicCase().getCaseType().equals(ElectronicCaseType.OUTPATIENT)).collect(Collectors.toList());
+        mHospitalizeElectronicCaseDTOS = mElectronicCaseDTOS.stream()
+                .filter(item -> item.getElectronicCase().getCaseType().equals(ElectronicCaseType.HOSPITALIZE)).collect(Collectors.toList());
+        mEmergencyElectronicCaseDTOS = mElectronicCaseDTOS.stream()
+                .filter(item -> item.getElectronicCase().getCaseType().equals(ElectronicCaseType.EMERGENCY)).collect(Collectors.toList());
+        mOutpatientRecordRecyclerViewAdapter = new OutpatientRecordRecyclerViewAdapter(getContext(), mOutpatientElectronicCaseDTOS);
+        mHospitalizeRecordRecyclerViewAdapter = new HospitalizeRecordRecyclerViewAdapter(getContext(), mHospitalizeElectronicCaseDTOS);
+        mEmergencyRecyclerViewAdapter = new EmergencyRecyclerViewAdapter(getContext(), mEmergencyElectronicCaseDTOS);
+    }
+
     private void initPagers() {
         mPages = new HashMap<>();
 
@@ -99,11 +146,19 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         RecyclerView mHospitalizeRecyclerView = new RecyclerView(getContext());
         RecyclerView mEmergencyRecyclerView = new RecyclerView(getContext());
 
-        OutpatientRecordRecyclerViewAdapter mOutpatientRecordRecyclerViewAdapter = new OutpatientRecordRecyclerViewAdapter(getContext(), null);
-        HospitalizeRecordRecyclerViewAdapter mHospitalizeRecordRecyclerViewAdapter = new HospitalizeRecordRecyclerViewAdapter(getContext(), null);
-        EmergencyRecyclerViewAdapter mEmergencyRecyclerViewAdapter = new EmergencyRecyclerViewAdapter(getContext(), null);
-
-        mOutpatientRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> startFragment(new ElectronicCaseDetailFragment()));// 进入电子病历详情
+        // 进入电子病历详情
+        mOutpatientRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
+            mNormalContainerHelper.setSelectedElectronicCase(mOutpatientElectronicCaseDTOS.get(pos));
+            startFragment(new ElectronicCaseDetailFragment());
+        });
+        mHospitalizeRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
+            mNormalContainerHelper.setSelectedElectronicCase(mOutpatientElectronicCaseDTOS.get(pos));
+            startFragment(new ElectronicCaseDetailFragment());
+        });
+        mEmergencyRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
+            mNormalContainerHelper.setSelectedElectronicCase(mOutpatientElectronicCaseDTOS.get(pos));
+            startFragment(new ElectronicCaseDetailFragment());
+        });
 
         mOutpatientRecyclerView.setAdapter(mOutpatientRecordRecyclerViewAdapter);
         mOutpatientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
@@ -203,17 +258,13 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     }
 
     @Override
-    protected void initRefreshLayout() {
-        mPullRefreshLayout.setEnabled(true);
-    }
-
-    @Override
     protected int getLayoutId() {
         return R.layout.fragment_electronic_case;
     }
 
     @Override
     protected void initLastCustom() {
+        initBasic();
         initTabs();
         initPagers();
     }

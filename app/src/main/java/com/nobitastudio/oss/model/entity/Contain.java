@@ -25,7 +25,7 @@ public class Contain implements Serializable {
     private static final long serialVersionUID = 7468056643932027289L;
 
     public Contain(String orderId, ItemType itemType, String itemId) {
-        this.orderId = orderId;
+        this.ossOrderId = orderId;
         this.itemType = itemType;
         this.itemId = itemId;
         this.amount = 1;
@@ -37,7 +37,7 @@ public class Contain implements Serializable {
     private Integer id;
 
     @Column(name = "order_id")
-    private String orderId;
+    private String ossOrderId;
 
     @Column(name = "item_type")
     @Enumerated(EnumType.STRING)

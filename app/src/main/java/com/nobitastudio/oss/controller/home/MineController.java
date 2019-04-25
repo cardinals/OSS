@@ -181,7 +181,6 @@ public class MineController extends BaseController {
             if (itemViewText.equals("挂号记录")) {
                 mHandler.startFragment(new RegisterRecordFragment());
             } else if (itemViewText.equals("电子病历")) {
-                showInfoTipDialog("请选择需要查看的诊疗卡");
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.ELECTRONIC_CASE);
                 mHandler.startFragment(new MedicalCardFragment());
 //                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),

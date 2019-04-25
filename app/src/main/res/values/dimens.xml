@@ -91,5 +91,6 @@
     <dimen name="dp_54">54dp</dimen>
     <dimen name="dp_66">66dp</dimen>
     <dimen name="dp_64">64dp</dimen>
+    <dimen name="dp_48">48dp</dimen>
 
 </resources>
