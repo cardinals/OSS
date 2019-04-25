@@ -52,7 +52,6 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     private void init() {
         initBase(); // 基础的初始化
         initLast(); // 自定义初始化
-
     }
 
     private void initBase() {
@@ -61,6 +60,11 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     }
 
     public abstract void initLast();
+
+    // 数据刷新操作
+    public void refresh(Boolean isCancelPull) {
+        // 默认什么都不做
+    }
 
     // todo 测试及其兼容使用
     public BaseController(Context context) {

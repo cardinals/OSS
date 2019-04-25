@@ -114,7 +114,7 @@
                         android:background="?attr/app_primary_color">
 
                         <TextView
-                            android:id="@+id/doctor_level_textView"
+                            android:id="@+id/doctor_level_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -129,7 +129,7 @@
 
             <!-- 门诊科室 -->
             <TextView
-                android:id="@+id/deparment_textview"
+                android:id="@+id/department_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -152,7 +152,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/submajor_textView"
+                    android:id="@+id/submajor_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"

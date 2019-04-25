@@ -10,6 +10,7 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.controller.electroniccase.CheckController;
 import com.nobitastudio.oss.controller.electroniccase.DiagnosisController;
 import com.nobitastudio.oss.controller.electroniccase.DrugController;
+import com.nobitastudio.oss.controller.electroniccase.OperationController;
 import com.nobitastudio.oss.controller.electroniccase.OtherAdviseController;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -30,7 +31,7 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
 
     // 初始化有哪些 pager :诊断医嘱  药品医嘱  检查医嘱  其他医嘱
     enum Pager {
-        DIAGNOSIS, DRUG, CHECK, OTHER_ADVISE;
+        DIAGNOSIS, DRUG, CHECK, OPERATION, OTHER_ADVISE;
 
         public static Pager getPagerFromPosition(int position) {
             switch (position) {
@@ -41,6 +42,8 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
                 case 2:
                     return CHECK;
                 case 3:
+                    return OPERATION;
+                case 4:
                     return OTHER_ADVISE;
                 default:
                     return DIAGNOSIS;
@@ -100,6 +103,7 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
         mPages.put(Pager.DIAGNOSIS, new DiagnosisController(getContext()));
         mPages.put(Pager.DRUG, new DrugController(getContext()));
         mPages.put(Pager.CHECK, new CheckController(getContext()));
+        mPages.put(Pager.OPERATION, new OperationController(getContext()));
         mPages.put(Pager.OTHER_ADVISE, new OtherAdviseController(getContext()));
 
         mViewPager.setAdapter(mPagerAdapter);
@@ -121,6 +125,7 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
 
             }
         });
+        mTabSegment.selectTab(mNormalContainerHelper.getElectronicCaseTypePos()); // 设置选中位置
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
     }
 
@@ -145,13 +150,19 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
         QMUITabSegment.Tab mDrugAdvise = new QMUITabSegment.Tab(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug),
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug_selected),
-                "药品医嘱", false
+                "处方详情", false
         );
 
         QMUITabSegment.Tab mCheckAdvise = new QMUITabSegment.Tab(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check),
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_selected),
-                "检查医嘱", false
+                "检查详情", false
+        );
+
+        QMUITabSegment.Tab mOperation = new QMUITabSegment.Tab(
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation),
+                ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation_selected),
+                "手术详情", false
         );
 
         QMUITabSegment.Tab mOtherAdvise = new QMUITabSegment.Tab(
@@ -163,6 +174,7 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
         mTabSegment.addTab(mDiagnosisAdvise)
                 .addTab(mDrugAdvise)
                 .addTab(mCheckAdvise)
+                .addTab(mOperation)
                 .addTab(mOtherAdvise);
     }
 

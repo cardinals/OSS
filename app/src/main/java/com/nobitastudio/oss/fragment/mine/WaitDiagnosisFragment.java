@@ -170,7 +170,6 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
         });
         mViewPager.setAdapter(mPagerAdapter);
         mTabSegment.setupWithViewPager(mViewPager, false);
-        mTabSegment.selectTab(mNormalContainerHelper.getDiagnosisTypePos()); // 设置选中位置
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -188,6 +187,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
 
             }
         });
+        mTabSegment.selectTab(mNormalContainerHelper.getDiagnosisTypePos()); // 设置选中位置
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
     }
 

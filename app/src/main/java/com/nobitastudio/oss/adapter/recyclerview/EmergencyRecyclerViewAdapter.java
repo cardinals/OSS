@@ -9,7 +9,6 @@ import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
-import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.nobitastudio.oss.model.enumeration.DoctorLevel;
 import com.nobitastudio.oss.util.DateUtil;
 
@@ -42,7 +41,7 @@ public class EmergencyRecyclerViewAdapter extends BaseRecyclerViewAdapter<Electr
         Glide.with(mContext).load(ConstantContainer.OSS_SERVER_RUNTIME + item.getRegistrationAll().getDoctor().getIconUrl())
                 .into(holder.getImageView(R.id.doctor_imageview));
         holder.getTextView(R.id.doctor_name_textview).setText(item.getRegistrationAll().getDoctor().getName());
-        holder.getTextView(R.id.doctor_level_textView).setText(DoctorLevel.translateToString(item.getRegistrationAll().getDoctor().getLevel()));
+        holder.getTextView(R.id.doctor_level_textview).setText(DoctorLevel.translateToString(item.getRegistrationAll().getDoctor().getLevel()));
         holder.getTextView(R.id.department_textview).setText(item.getRegistrationAll().getDepartment().getName());
         holder.getTextView(R.id.speciality_textview).setText(item.getRegistrationAll().getDoctor().getSubMajor());
         holder.getTextView(R.id.diagnosis_time_textview).setText(DateUtil.convertToStandardDateTime(item.getElectronicCase().getDiagnosisTime()));

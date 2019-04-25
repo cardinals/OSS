@@ -119,6 +119,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     List<ElectronicCaseDTO> mEmergencyElectronicCaseDTOS;
 
     private void initBasic() {
+        showInfoTipDialog("请选择需查看详情的就诊概况",2000l);
         mMedicalCardOwnerNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
         mMedicalCardOwnerSexTextView.setText(Sex.getChineseSex(mNormalContainerHelper.getSelectedMedicalCard().getOwnerSex()));
         // 511602199705220175  6 ~ 13 是生日（取的时候去 6 ~ 14 因为 subString，最后一个不算）
@@ -152,11 +153,11 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
             startFragment(new ElectronicCaseDetailFragment());
         });
         mHospitalizeRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
-            mNormalContainerHelper.setSelectedElectronicCase(mOutpatientElectronicCaseDTOS.get(pos));
+            mNormalContainerHelper.setSelectedElectronicCase(mHospitalizeElectronicCaseDTOS.get(pos));
             startFragment(new ElectronicCaseDetailFragment());
         });
         mEmergencyRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
-            mNormalContainerHelper.setSelectedElectronicCase(mOutpatientElectronicCaseDTOS.get(pos));
+            mNormalContainerHelper.setSelectedElectronicCase(mEmergencyElectronicCaseDTOS.get(pos));
             startFragment(new ElectronicCaseDetailFragment());
         });
 

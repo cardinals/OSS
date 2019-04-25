@@ -182,15 +182,11 @@ public class MineController extends BaseController {
                 mHandler.startFragment(new RegisterRecordFragment());
             } else if (itemViewText.equals("电子病历")) {
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.ELECTRONIC_CASE);
+                mNormalContainerHelper.setElectronicCaseTypePos(0); // 默认在第1个位置
                 mHandler.startFragment(new MedicalCardFragment());
-//                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
-//                        "取消", (dialog, index) -> dialog.dismiss(),
-//                        "确定", (dialog, index,content) -> {
-//                            dialog.dismiss();
-//                            mHandler.startFragment(new ElectronicCaseFragment());
-//                        });
             } else if (itemViewText.equals("电子处方")) {
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.DRUG_DETAIL);
+                mNormalContainerHelper.setElectronicCaseTypePos(1); // 电子处方在第1个位置
                 mHandler.startFragment(new MedicalCardFragment());
             } else if (itemViewText.equals("已就诊")) {
                 mNormalContainerHelper.setDiagnosisTypePos(1);  // 进入时默认选中 已就诊

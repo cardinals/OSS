@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
 import com.nobitastudio.oss.base.helper.NormalContainerHelper;
 import com.nobitastudio.oss.base.helper.TipDialogHelper;
@@ -68,7 +69,7 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
     @BindView(R.id.fragment_tabs)
     QMUITabSegment mTabSegment;
 
-    private HashMap<Pager, View> mPages;
+    private HashMap<Pager, BaseController> mPages;
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
 
         private int mChildCount = 0;
@@ -186,7 +187,7 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
 
     @Override
     protected void refresh(boolean isCancelPull) {
-        ((HomeController) mPages.get(Pager.HOME)).refresh(false);  // HomeController 没有生命周期.先初始化再刷新数据.
+        mPages.get(Pager.HOME).refresh(false);  // HomeController 没有生命周期.先初始化再刷新数据.
     }
 
     @Override

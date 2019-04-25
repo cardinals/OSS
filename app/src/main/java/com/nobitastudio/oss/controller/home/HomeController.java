@@ -103,6 +103,7 @@ public class HomeController extends BaseController {
                 break;
             case R.id.electronic_case_linearLayout:
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.ELECTRONIC_CASE);
+                mNormalContainerHelper.setElectronicCaseTypePos(0); // 默认在第1个位置
                 mHandler.startFragment(new MedicalCardFragment()); // 进入诊疗卡界面选择查看哪一张诊疗卡的病历信息
 //                mDialogHelper.showAutoDialog("请输入诊疗卡密码(非登录密码)", mContext.getString(R.string.warm_prompt_electronic_case),
 //                        "取消", (dialog, index) -> dialog.dismiss(),
@@ -340,7 +341,8 @@ public class HomeController extends BaseController {
     }
 
     // 刷新操作
-    public HomeController refresh(Boolean isCancelPull) {
+    @Override
+    public void refresh(Boolean isCancelPull) {
         // 获取 healthArticle
         getAsyn(Arrays.asList("health-article", "queryLatestArticles"), null,
                 new ReflectStrategy<>(new TypeReference<List<HealthArticle>>() {
@@ -379,7 +381,6 @@ public class HomeController extends BaseController {
                         }
                     }
                 });
-        return this;
     }
 
     @Override

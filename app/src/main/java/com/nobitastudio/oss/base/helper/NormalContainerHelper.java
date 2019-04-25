@@ -158,7 +158,11 @@ public class NormalContainerHelper {
     }
 
     public ElectronicCaseDTO getSelectedElectronicCase() {
-        return NormalContainer.get(NormalContainer.SELECTED_ELECTRONIC_CASES);
+        return NormalContainer.get(NormalContainer.SELECTED_ELECTRONIC_CASE);
+    }
+
+    public Integer getElectronicCaseTypePos() {
+        return NormalContainer.get(NormalContainer.SELECTED_ELECTRONIC_CASE_TYPE_POS);
     }
 
     // ===========================================set
@@ -294,7 +298,12 @@ public class NormalContainerHelper {
     }
 
     public NormalContainerHelper setSelectedElectronicCase(ElectronicCaseDTO electronicCaseDTO) {
-        NormalContainer.put(NormalContainer.SELECTED_DIAGNOSIS_TYPE_POS, electronicCaseDTO);
+        NormalContainer.put(NormalContainer.SELECTED_ELECTRONIC_CASE, electronicCaseDTO);
+        return this;
+    }
+
+    public NormalContainerHelper setElectronicCaseTypePos(Integer pos) {
+        NormalContainer.put(NormalContainer.SELECTED_ELECTRONIC_CASE_TYPE_POS, pos);
         return this;
     }
 }
