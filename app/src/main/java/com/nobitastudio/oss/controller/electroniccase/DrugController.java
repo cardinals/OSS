@@ -3,24 +3,25 @@ package com.nobitastudio.oss.controller.electroniccase;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nobitastudio.oss.R;
-import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
-import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.adapter.recyclerview.DrugRecyclerViewAdapter;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
+import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
 import com.nobitastudio.oss.model.entity.Drug;
-import com.qmuiteam.qmui.layout.QMUILinearLayout;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
+import com.nobitastudio.oss.model.vo.DrugAndCount;
+import com.nobitastudio.oss.util.DateUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author chenxiong
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  * @date 2019/01/28 14:03
  * @description
  */
-public class DrugController extends QMUIWindowInsetLayout {
+public class DrugController extends BaseController {
 
     @BindView(R.id.drug_detail_solid_imageview)
     ImageView mDrugDetailSolidImageView;
@@ -36,37 +37,30 @@ public class DrugController extends QMUIWindowInsetLayout {
     ImageView mDrugProfileSolidImageView;
     @BindView(R.id.drug_note_solid_imageview)
     ImageView mDrugNoteSolidImageView;
-
+    @BindView(R.id.use_drug_advise_textview)
+    TextView mUseDrugAdviseTextView;
     @BindView(R.id.drug_detail_recyclerview)
     RecyclerView mDrugDetailRecyclerView;
+    @BindView(R.id.order_create_time_textview)
+    TextView mOrderCreateTimeTextView;
+    @BindView(R.id.drug_cost_all_textview)
+    TextView mDRugCostAllTextView;
 
-    QMUILinearLayoutHelper mQMUILinearLayoutHelper;
+    ElectronicCaseDTO selectedElectronicDTO;
+    DrugRecyclerViewAdapter adapter;
 
-    public class DrugDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter<Drug> {
-
-        public DrugDetailRecyclerViewAdapter(Context ctx, List<Drug> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_drug;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Drug item) {
-            mQMUILinearLayoutHelper.init(holder.getView(R.id.drug_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.controller_electronic_case_detail_drug;
     }
 
-    protected void init(Context context) {
-        new SolidImageHelper(context).initSolidImage(mDrugDetailSolidImageView, mDrugProfileSolidImageView, mDrugNoteSolidImageView);
-        mDrugDetailRecyclerView.setAdapter(new DrugDetailRecyclerViewAdapter(context,null));
+    @Override
+    public void initLast() {
+        selectedElectronicDTO = mNormalContainerHelper.getSelectedElectronicCase();
+        new SolidImageHelper(mContext).initSolidImage(mDrugDetailSolidImageView, mDrugProfileSolidImageView, mDrugNoteSolidImageView);
+        adapter = new DrugRecyclerViewAdapter(mContext, generateDrugAndCount());
+        adapter.setOnItemClickListener((view,pos) -> showInfoTipDialog("正在开发中"));
+        mDrugDetailRecyclerView.setAdapter(adapter);
         mDrugDetailRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
             @Override
             public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -74,14 +68,29 @@ public class DrugController extends QMUIWindowInsetLayout {
                         ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
-        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(context);
+        mOrderCreateTimeTextView.setText(DateUtil.convertToStandardDateTime(selectedElectronicDTO.getOssOrder().getCreateTime()));
+        double allCost = 0;
+        for (int i = 0; i < selectedElectronicDTO.getDrugs().size(); i++) {
+            allCost += selectedElectronicDTO.getDrugs().get(i).getPrice() * selectedElectronicDTO.getDrugCount().get(i);
+        }
+        mDRugCostAllTextView.setText(allCost + "元");
+        mUseDrugAdviseTextView.setText(selectedElectronicDTO.getElectronicCase().getUseDrugAdvise());
+    }
+
+    // 将 drug 以及 对应的数量封装在一个对象中.用于适配器使用
+    private List<DrugAndCount> generateDrugAndCount() {
+        List<DrugAndCount> drugAndCounts = new ArrayList<>();
+        for (int i = 0; i < selectedElectronicDTO.getDrugs().size(); i++) {
+            drugAndCounts.add(new DrugAndCount(selectedElectronicDTO.getDrugs().get(i), selectedElectronicDTO.getDrugCount().get(i)));
+        }
+        return drugAndCounts;
     }
 
     public DrugController(Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.controller_electronic_case_detail_drug, this);
-        ButterKnife.bind(this);
-        init(context);
     }
 
+    public DrugController(Context context, ControllerClickHandler mHandler) {
+        super(context, mHandler);
+    }
 }

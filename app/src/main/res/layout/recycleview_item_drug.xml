@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drug_linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,14 +24,14 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/drug_name_textview"
             style="@style/QDCommonTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginBottom="0dp"
-            android:layout_weight="1"
-            android:text="药品名" />
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,11 +76,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/pay_time_textview"
+                android:id="@+id/drug_count_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="1"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -98,11 +98,11 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/order_cost_textview"
+                android:id="@+id/drug_count_unit_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="瓶"
+                android:text="常规"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -121,11 +121,10 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/order_id_textview"
+                android:id="@+id/drug_cost_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="11.00元"
                 android:textColor="@color/app_color_blue"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -145,10 +144,10 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/drug_cost_all_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:text="22.00元"
                 android:textColor="@color/app_color_blue"
                 android:textSize="13sp" />
         </LinearLayout>

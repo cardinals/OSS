@@ -10,7 +10,7 @@ import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.inter.RecyclerViewClickHandler;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.model.enumeration.DoctorLevel;
-import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
+import com.nobitastudio.oss.model.vo.DoctorAndDepartment;
 
 import java.util.List;
 

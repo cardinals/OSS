@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
+import com.nobitastudio.oss.base.controller.BaseController;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.base.helper.SolidImageHelper;
+import com.nobitastudio.oss.base.inter.ControllerClickHandler;
 import com.nobitastudio.oss.model.entity.Drug;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -28,8 +30,7 @@ import butterknife.ButterKnife;
  * @date 2019/01/28 14:03
  * @description
  */
-public class CheckController extends QMUIWindowInsetLayout {
-
+public class CheckController extends BaseController {
 
     @BindView(R.id.check_detail_solid_imageview)
     ImageView mCheckDetailSolidImageView;
@@ -38,51 +39,40 @@ public class CheckController extends QMUIWindowInsetLayout {
     @BindView(R.id.check_note_solid_imageview)
     ImageView mCheckNoteSolidImageView;
 
-    @BindView(R.id.drug_detail_recyclerview)
-    RecyclerView mDrugDetailRecyclerView;
+    @BindView(R.id.check_detail_recyclerview)
+    RecyclerView mCheckDetailRecyclerView;
 
     private QMUILinearLayoutHelper mQMUILinearLayoutHelper;
 
-    public class DrugDetailRecyclerViewAdapter extends BaseRecyclerViewAdapter<Drug> {
+    public CheckController(Context context) {
+        super(context);
+    }
 
-        public DrugDetailRecyclerViewAdapter(Context ctx, List<Drug> list) {
-            super(ctx, list);
-        }
-
-        @Override
-        public int getItemLayoutId(int viewType) {
-            return R.layout.recycleview_item_check;
-        }
-
-        @Override
-        public void bindData(RecyclerViewHolder holder, int position, Drug item) {
-            mQMUILinearLayoutHelper.init(holder.getView(R.id.check_linearLayout));
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
+    public CheckController(Context context, ControllerClickHandler mHandler) {
+        super(context, mHandler);
     }
 
     protected void init(Context context) {
-        new SolidImageHelper(context).initSolidImage(mCheckDetailSolidImageView, mCheckProfileSolidImageView, mCheckNoteSolidImageView);
-        mDrugDetailRecyclerView.setAdapter(new DrugDetailRecyclerViewAdapter(context,null));
-        mDrugDetailRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
-            @Override
-            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-            }
-        });
-        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(context);
+
     }
 
-    public CheckController(Context context) {
-        super(context);
-        LayoutInflater.from(context).inflate(R.layout.controller_electronic_case_detail_check, this);
-        ButterKnife.bind(this);
-        init(context);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.controller_electronic_case_detail_check;
+    }
+
+    @Override
+    public void initLast() {
+//        new SolidImageHelper(mContext).initSolidImage(mCheckDetailSolidImageView, mCheckProfileSolidImageView, mCheckNoteSolidImageView);
+//        mDrugDetailRecyclerView.setAdapter(new DrugDetailRecyclerViewAdapter(mContext,null));
+//        mDrugDetailRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {
+//            @Override
+//            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+//                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//            }
+//        });
+//        mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
     }
 
 }

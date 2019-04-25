@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.model.vo;
+package com.nobitastudio.oss.model.dto;
 
 import com.nobitastudio.oss.R;
 

@@ -9,7 +9,7 @@ import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
 import com.nobitastudio.oss.base.helper.QMUILinearLayoutHelper;
 import com.nobitastudio.oss.container.ConstantContainer;
-import com.nobitastudio.oss.model.dto.DoctorAndVisit;
+import com.nobitastudio.oss.model.vo.DoctorAndVisit;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;
 import com.nobitastudio.oss.model.entity.Visit;

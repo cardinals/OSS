@@ -5,7 +5,7 @@ import android.content.Context;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.base.adapter.BaseRecyclerViewAdapter;
 import com.nobitastudio.oss.base.adapter.RecyclerViewHolder;
-import com.nobitastudio.oss.model.vo.ItemDescription;
+import com.nobitastudio.oss.model.dto.ItemDescription;
 
 import java.util.List;
 

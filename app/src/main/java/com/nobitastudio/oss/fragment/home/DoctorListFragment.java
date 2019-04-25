@@ -8,23 +8,20 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.TypeReference;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.DoctorRecycleViewAdapter;
-import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
-import com.nobitastudio.oss.model.dto.DoctorAndVisit;
+import com.nobitastudio.oss.model.vo.DoctorAndVisit;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import okhttp3.Call;
 
 /**
  * @author chenxiong

@@ -1,9 +1,9 @@
-package com.nobitastudio.oss.model.vo;
+package com.nobitastudio.oss.model.dto;
 
-import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
 import com.nobitastudio.oss.model.entity.HealthArticle;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.model.entity.User;
+import com.nobitastudio.oss.model.vo.DoctorAndDepartment;
 
 import java.io.Serializable;
 import java.util.List;

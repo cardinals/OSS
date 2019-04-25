@@ -1,4 +1,4 @@
-package com.nobitastudio.oss.model.dto;
+package com.nobitastudio.oss.model.vo;
 
 import com.nobitastudio.oss.model.entity.Department;
 import com.nobitastudio.oss.model.entity.Doctor;

@@ -127,12 +127,12 @@
                         android:text="开具时间:" />
 
                     <TextView
+                        android:id="@+id/order_create_time_textview"
                         style="@style/QDCommonDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="0dp"
                         android:gravity="start"
-                        android:text="2018-11-12 11:11:10"
                         android:textColor="?attr/qmui_config_color_gray_1" />
 
                 </LinearLayout>
@@ -154,12 +154,12 @@
                         android:text="总金额:" />
 
                     <TextView
+                        android:id="@+id/drug_cost_all_textview"
                         style="@style/QDCommonDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="0dp"
                         android:gravity="start"
-                        android:text="费用"
                         android:textColor="?attr/app_primary_color" />
 
                 </LinearLayout>
@@ -212,12 +212,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/use_drug_advise_textview"
                     style="@style/QDCommonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:gravity="start"
-                    android:text="@string/test_long"
                     android:textColor="?attr/qmui_config_color_gray_1" />
             </LinearLayout>
         </LinearLayout>

@@ -2,7 +2,6 @@ package com.nobitastudio.oss.base.helper;
 
 import android.app.Activity;
 
-import com.nobitastudio.oss.base.activity.BaseActivity;
 import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
 import com.nobitastudio.oss.model.entity.Department;
@@ -14,12 +13,10 @@ import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.nobitastudio.oss.model.entity.SettingAttr;
 import com.nobitastudio.oss.model.entity.User;
 import com.nobitastudio.oss.model.entity.Visit;
-import com.nobitastudio.oss.model.dto.DoctorAndDepartment;
+import com.nobitastudio.oss.model.vo.DoctorAndDepartment;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author chenxiong

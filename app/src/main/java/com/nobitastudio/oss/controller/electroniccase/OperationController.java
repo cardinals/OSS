@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
  */
 public class OperationController extends QMUIWindowInsetLayout {
 
-
     @BindView(R.id.check_detail_solid_imageview)
     ImageView mCheckDetailSolidImageView;
     @BindView(R.id.check_profile_solid_imageview)

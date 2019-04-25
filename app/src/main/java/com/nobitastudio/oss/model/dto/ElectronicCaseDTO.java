@@ -3,6 +3,7 @@ package com.nobitastudio.oss.model.dto;
 import com.nobitastudio.oss.model.entity.CheckItem;
 import com.nobitastudio.oss.model.entity.Drug;
 import com.nobitastudio.oss.model.entity.ElectronicCase;
+import com.nobitastudio.oss.model.entity.OSSOrder;
 import com.nobitastudio.oss.model.entity.OperationItem;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ElectronicCaseDTO {
+
+    // 产生电子病历时生成的订单实体
+    private OSSOrder ossOrder;
 
     // 电子病历实体信息
     private ElectronicCase electronicCase;
