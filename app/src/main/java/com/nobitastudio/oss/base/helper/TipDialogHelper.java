@@ -27,6 +27,7 @@ public class TipDialogHelper {
 
     public QMUITipDialog closeTipDialog() {
         if (mQmuiTipDialog != null) {
+            //  mQmuiTipDialog.dismiss(); 只是暂时隐藏 activity执行OnResume时会唤醒
             mQmuiTipDialog.dismiss();
         }
         return mQmuiTipDialog;
