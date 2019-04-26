@@ -68,7 +68,8 @@ public class UpgradeTipTask implements UpgradeTask {
         SpannableStringBuilder text = new SpannableStringBuilder();
         if(mNewVersion == QDUpgradeManager.VERSION_1_1_12){
             text.append("1.支持电子病历的查看\n");
-            text.append("2.修复重复挂号时提示错误");
+            text.append("2.修复重复挂号时提示错误\n");
+            text.append("3.修复支付调起时提示信息异常\n");
         }else if(mNewVersion == QDUpgradeManager.VERSION_1_1_11){
             text.append("1. Updated arch library to 0.3.0. Now developer must update support library to 28 or use androidx.\n");
             text.append("2. Feature: Added custom typeface support in QMUITabSegment.\n");
