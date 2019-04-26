@@ -23,10 +23,18 @@ public class NormalContainer implements Serializable {
 
     }
 
+    // 进入 MedicalCardFragment 的意图
     public enum EnterMedicalCardFor{
         ELECTRONIC_CASE, // 查看电子病历
         DRUG_DETAIL, // 查看药品 查看最近的就诊情况
+        EXPRESS, // 邮寄报告
         NORMAL; // 正常情况 .查看详情用于解绑
+    }
+
+    // 进入 ElectronicCaseFragment 的意图  暂时为启用
+    public enum EnterElectronicCaseFor {
+        NORMAL, // 普通情况:查看电子病历详情 进入 electronicCaseDetailFragment
+        EXPRESS; // 邮寄检查报告 :进入ExpressFragment
     }
 
     // 容器
@@ -50,7 +58,8 @@ public class NormalContainer implements Serializable {
     public static final String MEDICAL_CARD_PASSWORD = "MEDICAL_CARD_PASSWORD"; // 诊疗卡管理密码
     public static final String ENTER_MEDICAL_CARD_FOR = "ENTER_MEDICAL_CARD_FOR";    // 进入medicalcardFragment的意图
     public static final String ELECTRONIC_CASES = "ELECTRONIC_CASES";    // 电子病历详情
-    public static final String SELECTED_ELECTRONIC_CASE = "SELECTED_ELECTRONIC_CASE";    // 用户选择的电子病历详情
+    public static final String ENTER_ELECTRONIC_CASE_FOR = "ENTER_ELECTRONIC_CASE_FOR"; // 进入 ElectronicCaseFragment 的意图
+
 
     // 选择类型
     public static final String SELECTED_ACTIVITY = "SELECTED_ACTIVITY"; // 当前的activity
@@ -64,6 +73,7 @@ public class NormalContainer implements Serializable {
     public static final String SELECTED_MEDICAL_CARD = "SELECTED_MEDICAL_CARD"; // 选中的诊疗卡
     public static final String SELECTED_DIAGNOSIS_TYPE_POS = "SELECTED_DIAGNOSIS_TYPE_POS"; // 进入查看就诊情况时的默认显示的tab，默认显示的是待就诊(0)
     public static final String SELECTED_ELECTRONIC_CASE_TYPE_POS = "SELECTED_ELECTRONIC_CASE_TYPE_POS"; // 进入查看电子病历详情情况时的默认显示的tab，默认显示的是诊断医嘱(0)
+    public static final String SELECTED_ELECTRONIC_CASE = "SELECTED_ELECTRONIC_CASE";    // 用户选择的电子病历详情
 
     public static void put(String key, Object value) {
         container.put(key, value);

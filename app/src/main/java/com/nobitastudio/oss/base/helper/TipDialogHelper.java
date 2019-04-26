@@ -15,25 +15,15 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
  */
 public class TipDialogHelper {
 
-    private static TipDialogHelper mTipDialogHelper;
-
     QMUITipDialog mQmuiTipDialog;
 
     long mDefaultTipDialogShowTime = 1500l;
 
     Context mContext;
 
-    private TipDialogHelper(Context mContext) {
+    public TipDialogHelper(Context mContext) {
         this.mContext = mContext;
     }
-
-    public static synchronized TipDialogHelper getInstance(Context mContext) {
-        if (mTipDialogHelper == null) {
-            mTipDialogHelper = new TipDialogHelper(mContext);
-        }
-        return mTipDialogHelper;
-    }
-
 
     public QMUITipDialog closeTipDialog() {
         if (mQmuiTipDialog != null) {

@@ -15,6 +15,7 @@ import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.entity.User;
 import com.nobitastudio.oss.util.OkHttpUtil;
+import com.qmuiteam.qmui.util.QMUIPackageHelper;
 
 import java.util.Arrays;
 
@@ -35,6 +36,8 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     EditText userMobileEditText;
     @BindView(R.id.user_password_editText)
     EditText userPasswordEditText;
+    @BindView(R.id.version_textview)
+    TextView versionTextView;
 
     @OnClick({R.id.login_button, R.id.chioces_button,
             R.id.qq_login_imageview, R.id.wechat_login_imageview, R.id.weibo_login_imageview})
@@ -126,6 +129,7 @@ public class LoginFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initCopyRight(mCopyrightTextView);
+        versionTextView.setText(QMUIPackageHelper.getAppVersion(getContext()));
         // 通过glide 加载gif 到背景中
     }
 

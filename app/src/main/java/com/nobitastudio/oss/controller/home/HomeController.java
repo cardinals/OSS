@@ -87,6 +87,7 @@ public class HomeController extends BaseController {
                 mHandler.startFragment(new DepartmentFragment());
                 break;
             case R.id.pay_linearLayout:
+                showInfoTipDialog("正在开发中");
                 break;
             case R.id.medical_card_linearLayout:
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
@@ -96,7 +97,8 @@ public class HomeController extends BaseController {
                 mHandler.startFragment(new NavigationFragment());
                 break;
             case R.id.express_linearLayout:
-                mHandler.startFragment(new ExpressFragment());
+                mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.EXPRESS);
+                mHandler.startFragment(new MedicalCardFragment());
                 break;
             case R.id.register_record_linearLayout:
                 mHandler.startFragment(new RegisterRecordFragment());
@@ -117,8 +119,10 @@ public class HomeController extends BaseController {
 //                mHealthArticleFragment.refresh(false);
                 break;
             case R.id.smart_linearLayout:
+                showInfoTipDialog("正在开发中");
                 break;
             case R.id.consulting_linearLayout:
+                showInfoTipDialog("正在开发中");
                 break;
             case R.id.coming_soon_linearLayout:
 //                Toasty.error(mContext, "This is an error toast.", Toast.LENGTH_SHORT, true).show();
@@ -128,10 +132,10 @@ public class HomeController extends BaseController {
 //                mContext.startActivity(new Intent(mContext, PlayVideoActivity.class));
 //                ActivityUtils.startActivity(new Intent(mContext, PlayVideoActivity.class));
 //                showNetworkLoadingTipDialog("测试", 1500);
-                refresh(Boolean.FALSE);
+//                refresh(Boolean.FALSE);
                 break;
             case R.id.topbar_right_setting_button:
-                ToastUtils.showShort("进入天气预报");
+                showInfoTipDialog("正在开发中");
                 break;
         }
     }
@@ -156,8 +160,8 @@ public class HomeController extends BaseController {
     }
 
     private void initBasic(Context context) {
-        mTipDialogHelper = TipDialogHelper.getInstance(context);
-        mDialogHelper = DialogHelper.getInstance(context);
+        mTipDialogHelper = new TipDialogHelper(mContext);
+        mDialogHelper = new DialogHelper(context);
 
         // 初始化数据
         mHealthArticles = new ArrayList<>();

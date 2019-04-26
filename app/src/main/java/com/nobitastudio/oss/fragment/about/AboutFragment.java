@@ -18,7 +18,7 @@ import butterknife.BindView;
  */
 public class AboutFragment extends StandardWithTobBarLayoutFragment {
 
-    @BindView(R.id.version_textView)
+    @BindView(R.id.version_textview)
     TextView versionTextView;
     @BindView(R.id.about_list_groupList)
     QMUIGroupListView aboutListQMUIGroupListView;

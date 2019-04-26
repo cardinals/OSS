@@ -5,14 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nobitastudio.oss.R;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.login.VerificationCodeFragment;
 import com.nobitastudio.oss.fragment.old.ForgetPasswordTwoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
+import com.nobitastudio.oss.model.enumeration.Sex;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,11 +47,11 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
             case R.id.user_img_linearLayout:
                 showSimpleBottomSheetList(Arrays.asList("拍照", "相簿相片"), (dialog, itemView, position, tag) -> {
                     dialog.dismiss();
+                    showInfoTipDialog("正在开发中");
                 });
                 break;
             case R.id.save_info_button:
-                showNetworkLoadingTipDialog("正在保存");
-                mTopBar.postDelayed(this::closeTipDialog, 1500l);
+                showInfoTipDialog("正在开发中");
                 break;
         }
     }
@@ -58,7 +61,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
         mUsernameItemView = mGroupListView.createItemView(
                 null,
                 "用户名",
-                "nobita",
+                mNormalContainerHelper.getUser().getName(),
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -82,7 +85,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
         mIdCardItemView = mGroupListView.createItemView(
                 null,
                 "身份证号",
-                "511602199705220175",
+                mNormalContainerHelper.getUser().getIdCard() == null ? "未设置" : mNormalContainerHelper.getUser().getIdCard(),
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -100,7 +103,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
         mMobileItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_china),
                 "手机",
-                "+86 15709932234",
+                "+86 " + mNormalContainerHelper.getUser().getMobile(),
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -108,7 +111,7 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
         mWechatItemView = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.wechat),
                 "微信",
-                "yebidaxiong233",
+                "未绑定",
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
@@ -156,13 +159,25 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
                         "取消", (dialog, index) -> dialog.dismiss(),
                         "确认修改", (dialog, index) -> dialog.dismiss());
             } else if (itemViewText.equals("性别")) {
-                showListPopView(mSexItemView.getDetailTextView(), Arrays.asList("男", "女", "保密"), 120, 160, (parent, view, position, id) -> {
+                List<String> sexes = Arrays.asList("男", "女", "保密");
+                showListPopView(mSexItemView.getDetailTextView(), sexes, 120, 160, (parent, view, position, id) -> {
+                    mSexItemView.setDetailText(sexes.get(position));
                     popViewDismiss();
                 }, null);
             } else if (itemViewText.equals("修改密码")) {
+                mNormalContainerHelper.setInputMobile(mNormalContainerHelper.getUser().getMobile());
+                mNormalContainerHelper.setInputMobileFragment(NormalContainer.InputMobileFor.MODIFY_PASSWORD);
                 startFragment(new VerificationCodeFragment());
             } else if (itemViewText.equals("身份证号")) {
-                showInfoTipDialog("身份证号不可修改");
+                showInfoTipDialog("正在开发中");
+            } else if (itemViewText.equals("手机")) {
+                showInfoTipDialog("正在开发中");
+            } else if (itemViewText.equals("微信")) {
+                showInfoTipDialog("正在开发中");
+            } else if (itemViewText.equals("QQ")) {
+                showInfoTipDialog("正在开发中");
+            } else if (itemViewText.equals("微博")) {
+                showInfoTipDialog("正在开发中");
             }
         };
     }
@@ -180,6 +195,5 @@ public class UserInfoFragment extends StandardWithTobBarLayoutFragment {
     @Override
     protected void initLastCustom() {
         initGroupListView();
-
     }
 }

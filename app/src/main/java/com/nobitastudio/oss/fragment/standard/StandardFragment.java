@@ -82,11 +82,11 @@ public abstract class StandardFragment extends BaseFragment
     // 初始化基本变量
     protected void initBase() {
         mBottomSheetHelper = new BottomSheetHelper(getContext());
-        mDialogHelper = DialogHelper.getInstance(getContext());
+        mDialogHelper = new DialogHelper(getContext());
         mEmptyViewHelper = new EmptyViewHelper(getEmptyViewRetryButtonListener());
         mPopViewHelper = new PopViewHelper(getContext());
         mSolidImageHelper = new SolidImageHelper(getContext());
-        mTipDialogHelper = TipDialogHelper.getInstance(getContext());
+        mTipDialogHelper = new TipDialogHelper(getContext());
         mViewHelper = new ViewHelper();
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(getContext());
         mNormalContainerHelper = NormalContainerHelper.getInstance();

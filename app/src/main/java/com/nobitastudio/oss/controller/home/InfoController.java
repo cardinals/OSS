@@ -22,6 +22,7 @@ import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author chenxiong
@@ -41,6 +42,11 @@ public class InfoController extends BaseController {
     QMUIGroupListView mGroupListView;
 
     QMUILinearLayoutHelper mQMUILinearLayoutHelper;
+
+    @OnClick({R.id.register_remind_linearlayout, R.id.pay_info_linearlayout, R.id.hospital_announce_linearlayout,})
+    void onClick(View v) {
+        showInfoTipDialog("正在开发中");
+    }
 
     private void initQMUILinearLayout() {
         mQMUILinearLayoutHelper = new QMUILinearLayoutHelper(mContext);
@@ -136,13 +142,14 @@ public class InfoController extends BaseController {
 
     private View.OnClickListener getOnclickListener() {
         return v -> {
-            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
-            CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
-            if (itemViewText.equals("邮寄报告")) {
-                mHandler.startFragment(new ExpressFragment());
-            } else {
-                mHandler.startFragment(new TestFragment());
-            }
+//            QMUICommonListItemView itemView = (QMUICommonListItemView) v;
+//            CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
+//            if (itemViewText.equals("邮寄报告")) {
+//                mHandler.startFragment(new ExpressFragment());
+//            } else {
+//                mHandler.startFragment(new TestFragment());
+//            }
+            showInfoTipDialog("正在开发中");
         };
     }
 
@@ -160,7 +167,7 @@ public class InfoController extends BaseController {
     }
 
     public InfoController(Context context, ControllerClickHandler mHandler) {
-        super(context,mHandler);
+        super(context, mHandler);
     }
 
 }

@@ -13,6 +13,7 @@ import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.EmergencyRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.HospitalizeRecordRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.OutpatientRecordRecyclerViewAdapter;
+import com.nobitastudio.oss.container.NormalContainer;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.dto.ElectronicCaseDTO;
 import com.nobitastudio.oss.model.enumeration.ElectronicCaseType;
@@ -121,15 +122,15 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     private void initBasic() {
         mElectronicCaseDTOS = mNormalContainerHelper.getElectronicCases();
         if (mElectronicCaseDTOS.size() == 0) {
-            showInfoTipDialog("该诊疗卡暂无就诊情况",2000l);
+            showInfoTipDialog("该诊疗卡暂无就诊情况", 2000l);
         } else {
-            showInfoTipDialog("请选择需查看详情的就诊概况",2000l);
+            showInfoTipDialog("请选择需查看详情的就诊概况", 2000l);
         }
         mMedicalCardOwnerNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
         mMedicalCardOwnerSexTextView.setText(Sex.getChineseSex(mNormalContainerHelper.getSelectedMedicalCard().getOwnerSex()));
         // 511602199705220175  6 ~ 13 是生日（取的时候去 6 ~ 14 因为 subString，最后一个不算）
         String idCard = mNormalContainerHelper.getSelectedMedicalCard().getOwnerIdCard();
-        LocalDate bir = LocalDate.of(Integer.valueOf(idCard.substring(6,10)),Integer.valueOf(idCard.substring(10,12)),Integer.valueOf(idCard.substring(12,14)));
+        LocalDate bir = LocalDate.of(Integer.valueOf(idCard.substring(6, 10)), Integer.valueOf(idCard.substring(10, 12)), Integer.valueOf(idCard.substring(12, 14)));
         mMedicalCardOwnerAgeTextView.setText(Period.between(bir, LocalDate.now()).getYears() + "岁");
         mMedicalCardIdTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getId());
 
@@ -142,14 +143,7 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         mOutpatientRecordRecyclerViewAdapter = new OutpatientRecordRecyclerViewAdapter(getContext(), mOutpatientElectronicCaseDTOS);
         mHospitalizeRecordRecyclerViewAdapter = new HospitalizeRecordRecyclerViewAdapter(getContext(), mHospitalizeElectronicCaseDTOS);
         mEmergencyRecyclerViewAdapter = new EmergencyRecyclerViewAdapter(getContext(), mEmergencyElectronicCaseDTOS);
-    }
 
-    private void initPagers() {
-        mPages = new HashMap<>();
-
-        RecyclerView mOutpatientRecyclerView = new RecyclerView(getContext());
-        RecyclerView mHospitalizeRecyclerView = new RecyclerView(getContext());
-        RecyclerView mEmergencyRecyclerView = new RecyclerView(getContext());
 
         // 进入电子病历详情
         mOutpatientRecordRecyclerViewAdapter.setOnItemClickListener((view, pos) -> {
@@ -164,6 +158,14 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
             mNormalContainerHelper.setSelectedElectronicCase(mEmergencyElectronicCaseDTOS.get(pos));
             startFragment(new ElectronicCaseDetailFragment());
         });
+    }
+
+    private void initPagers() {
+        mPages = new HashMap<>();
+
+        RecyclerView mOutpatientRecyclerView = new RecyclerView(getContext());
+        RecyclerView mHospitalizeRecyclerView = new RecyclerView(getContext());
+        RecyclerView mEmergencyRecyclerView = new RecyclerView(getContext());
 
         mOutpatientRecyclerView.setAdapter(mOutpatientRecordRecyclerViewAdapter);
         mOutpatientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()) {

@@ -30,16 +30,26 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
     @BindView(R.id.groupListView)
     QMUIGroupListView mGroupListView;
 
+    QMUICommonListItemView diagnosisRemindItem;
+    QMUICommonListItemView eatDrugRemindItem;
+    QMUICommonListItemView checkRemindItem;
+    QMUICommonListItemView operationRemindItem;
+    QMUICommonListItemView hospitalActivityRemindItem;
+    QMUICommonListItemView clearCacheItem;
+    QMUICommonListItemView updateInfoItem;
+    QMUICommonListItemView aboutUsItem;
+    QMUICommonListItemView shareItem;
+
     @OnClick({R.id.logout_button})
     void onClick(View v) {
         // 清除所有fragment
-        startFragment(new LoginFragment());
+        showInfoTipDialog("正在开发中");
     }
 
     protected void initGroupListView() {
 
         // ============================ 短信通知
-        QMUICommonListItemView diagnosisRemindItem = mGroupListView.createItemView(
+        diagnosisRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_remind),
                 "就诊提醒",
                 "已关闭",
@@ -47,7 +57,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
 
-        QMUICommonListItemView eatDrugRemindItem = mGroupListView.createItemView(
+        eatDrugRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_drug_big),
                 "吃药提醒",
                 "吃药时推送",
@@ -55,7 +65,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
 
-        QMUICommonListItemView checkRemindItem = mGroupListView.createItemView(
+        checkRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_check_big),
                 "检查提醒",
                 "检查前两小时推送",
@@ -63,7 +73,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
 
-        QMUICommonListItemView operationRemindItem = mGroupListView.createItemView(
+        operationRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_operation_big),
                 "手术提醒",
                 "手术前一天推送",
@@ -71,7 +81,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_SWITCH
         );
 
-        QMUICommonListItemView hospitalActivityRemindItem = mGroupListView.createItemView(
+        hospitalActivityRemindItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_preferen),
                 "优惠活动",
                 "实时推送",
@@ -91,7 +101,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 .addTo(mGroupListView);
 
         // ============================ 常用设置 通知
-        QMUICommonListItemView clearCacheItem = mGroupListView.createItemView(
+        clearCacheItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_delete),
                 "清除缓存",
                 "10.1M",
@@ -99,7 +109,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView updateInfoItem = mGroupListView.createItemView(
+        updateInfoItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_edit),
                 "个人资料",
                 null,
@@ -107,7 +117,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView aboutUsItem = mGroupListView.createItemView(
+        aboutUsItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_info),
                 "关于我们",
                 null,
@@ -115,7 +125,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         );
 
-        QMUICommonListItemView shareItem = mGroupListView.createItemView(
+        shareItem = mGroupListView.createItemView(
                 ContextCompat.getDrawable(getContext(), R.mipmap.ic_share),
                 "分享",
                 null,
@@ -138,12 +148,12 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
             QMUICommonListItemView itemView = (QMUICommonListItemView) v;
             CharSequence itemViewText = ((QMUICommonListItemView) v).getText();
             if (itemViewText.equals("就诊提醒")) {
-                changeQMUICommonListItemViewState(itemView,!itemView.getSwitch().isChecked(),"正在开启");
+                changeQMUICommonListItemViewState(itemView, !itemView.getSwitch().isChecked(), "正在开启");
                 // 模拟
-                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView,!itemView.getSwitch().isChecked(),"就诊前两小时推送"),1500);
+                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView, !itemView.getSwitch().isChecked(), "就诊前两小时推送"), 1500);
             } else if (itemViewText.equals("吃药提醒")) {
-                changeQMUICommonListItemViewState(itemView,false,"正在关闭");
-                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView,false,"已关闭"),1500);
+                changeQMUICommonListItemViewState(itemView, false, "正在关闭");
+                mTopBar.postDelayed(() -> changeQMUICommonListItemViewState(itemView, false, "已关闭"), 1500);
             } else if (itemViewText.equals("检查提醒")) {
 
             } else if (itemViewText.equals("手术提醒")) {
@@ -160,6 +170,7 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                             mTopBar.postDelayed(() -> {
                                 closeTipDialog();
                                 showSuccessTipDialog("清除成功");
+                                clearCacheItem.setDetailText("0.0M");
                             }, 3000l);
                         });
             } else if (itemViewText.equals("个人资料")) {
@@ -171,13 +182,16 @@ public class SettingFragment extends StandardWithTobBarLayoutFragment {
                         Arrays.asList(R.mipmap.wechat, R.mipmap.wechat_zone, R.mipmap.weibo, R.mipmap.qq, R.mipmap.qq_zone, R.mipmap.msg_chat),
                         Arrays.asList("微信", "朋友圈", "微博", "QQ", "QQ空间", "短信"),
                         Arrays.asList(1, 2, 3, 4, 5, 6),
-                        (dialog, index) -> dialog.dismiss());
+                        (dialog, index) -> {
+                            dialog.dismiss();
+                            showInfoTipDialog("正在开发中");
+                        });
             }
         };
     }
 
     // 改变gourplistitem的状态
-    private void changeQMUICommonListItemViewState(QMUICommonListItemView itemView,boolean isChecked,String msg) {
+    private void changeQMUICommonListItemViewState(QMUICommonListItemView itemView, boolean isChecked, String msg) {
         itemView.setDetailText(msg);
         if (itemView.getAccessoryType() == QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM) {
             // loading -> switch

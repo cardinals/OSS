@@ -70,11 +70,10 @@
                             android:textSize="18sp" />
 
                         <TextView
-                            android:id="@+id/version_textView"
+                            android:id="@+id/version_textview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="?attr/qmui_config_color_gray_3"
-                            android:text="1.0.0"
                             android:textSize="16sp"/>
 
                     </LinearLayout>

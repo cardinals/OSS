@@ -30,8 +30,6 @@ import java.util.List;
  */
 public class DialogHelper {
 
-    private static DialogHelper mDialogHelper;
-
     Context mContext;
 
     int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
@@ -46,15 +44,8 @@ public class DialogHelper {
         void onClick(QMUIDialog dialog, int index, String content);
     }
 
-    private DialogHelper(Context mContext) {
+    public DialogHelper(Context mContext) {
         this.mContext = mContext;
-    }
-
-    public static synchronized DialogHelper getInstance(Context mContext) {
-        if (mDialogHelper == null) {
-            mDialogHelper = new DialogHelper(mContext);
-        }
-        return mDialogHelper;
     }
 
     /**

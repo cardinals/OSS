@@ -199,7 +199,7 @@ public class HomeFragment extends BaseFragment implements HttpHandler {
     // 初始化用户基础数据 收藏的医生
     private void initUserData() {
 
-        mTipDialogHelper = TipDialogHelper.getInstance(getContext());
+        mTipDialogHelper = new TipDialogHelper(getContext());
         mNormalContainerHelper = NormalContainerHelper.getInstance();
 
         // 绑定的诊疗卡

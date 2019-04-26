@@ -83,7 +83,7 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                                 dialog.dismiss();
                                 showNetworkLoadingTipDialog("正在验证");
                                 // 验证诊疗卡管理密码
-                                getAsyn(Arrays.asList("electronic-case", mBindMedicalCards.get(pos).getId(), content,"findAll"), null,
+                                getAsyn(Arrays.asList("electronic-case", mBindMedicalCards.get(pos).getId(), content, "findAll"), null,
                                         new ReflectStrategy<>(new TypeReference<List<ElectronicCaseDTO>>() {
                                         }), new OkHttpUtil.SuccessHandler<List<ElectronicCaseDTO>>() {
                                             @Override
@@ -92,6 +92,27 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                                                 mNormalContainerHelper.setElectronicCases(electronicCaseDTOS);
                                                 closeTipDialog();
                                                 startFragment(new ElectronicCaseFragment());
+                                            }
+                                        }
+                                );
+                            }, 6);
+                    break;
+                case EXPRESS:
+                    showAutoDialogNumber("请输入诊疗卡管理密码", getContext().getString(R.string.warm_prompt_electronic_case),
+                            "取消", (dialog, index) -> dialog.dismiss(),
+                            "确定", (dialog, index, content) -> {
+                                dialog.dismiss();
+                                showNetworkLoadingTipDialog("正在验证");
+                                // 验证诊疗卡管理密码
+                                getAsyn(Arrays.asList("electronic-case", mBindMedicalCards.get(pos).getId(), content, "findAll"), null,
+                                        new ReflectStrategy<>(new TypeReference<List<ElectronicCaseDTO>>() {
+                                        }), new OkHttpUtil.SuccessHandler<List<ElectronicCaseDTO>>() {
+                                            @Override
+                                            public void handle(List<ElectronicCaseDTO> electronicCaseDTOS) {
+                                                mNormalContainerHelper.setSelectedMedicalCard(mBindMedicalCards.get(pos));
+                                                mNormalContainerHelper.setElectronicCases(electronicCaseDTOS);
+                                                closeTipDialog();
+                                                startFragment(new ExpressFragment());
                                             }
                                         }
                                 );
@@ -123,6 +144,9 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                                     break;
                                 case DRUG_DETAIL:
                                     showInfoTipDialog("请选择您需查看药品详情的诊疗卡", 2000l);
+                                    break;
+                                case EXPRESS:
+                                    showInfoTipDialog("请选择您邮寄报告的诊疗卡");
                                     break;
                                 case NORMAL:
                                 default:

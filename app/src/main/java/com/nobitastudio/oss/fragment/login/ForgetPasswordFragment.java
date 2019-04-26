@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.RegexUtils;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.fragment.home.HomeFragment;
+import com.nobitastudio.oss.fragment.mine.UserInfoFragment;
 import com.nobitastudio.oss.fragment.standard.StandardWithTobBarLayoutFragment;
 import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
@@ -72,11 +73,17 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                                 @Override
                                 public void handle(User user) {
                                     // 修改成功
-                                    showSuccessTipDialog("密码修改成功,请重新登录");
+                                    showSuccessTipDialog("密码修改成功");
                                     mNormalContainerHelper.clearAllButActivity(getBaseFragmentActivity()); // 先清除所有的内存已有数据
 //                                    mNormalContainerHelper.setUser(user);
 ////                                    startFragmentAndDestroyCurrent(new HomeFragment());  返回到登录fragment重新执行登录操作
-                                    popBackStack(LoginFragment.class);
+                                    if (mNormalContainerHelper.getUser() != null) {
+                                        // 从登陆界面过来
+                                        popBackStack(LoginFragment.class);
+                                    } else {
+                                        // 从用户设置界面过来
+                                        popBackStack(UserInfoFragment.class);
+                                    }
                                 }
                             });
                     break;

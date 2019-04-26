@@ -162,6 +162,10 @@ public class NormalContainerHelper {
         return NormalContainer.get(NormalContainer.SELECTED_ELECTRONIC_CASE_TYPE_POS);
     }
 
+    public NormalContainer.EnterElectronicCaseFor getEnterElectronicCaseFor() {
+        return NormalContainer.get(NormalContainer.ENTER_ELECTRONIC_CASE_FOR);
+    }
+
     // ===========================================set
     public NormalContainerHelper setUser(User user) {
         NormalContainer.put(NormalContainer.USER, user);
@@ -301,6 +305,11 @@ public class NormalContainerHelper {
 
     public NormalContainerHelper setElectronicCaseTypePos(Integer pos) {
         NormalContainer.put(NormalContainer.SELECTED_ELECTRONIC_CASE_TYPE_POS, pos);
+        return this;
+    }
+
+    public NormalContainerHelper setEnterElectronicCaseFor(NormalContainer.EnterElectronicCaseFor enterElectronicCaseFor) {
+        NormalContainer.put(NormalContainer.ENTER_ELECTRONIC_CASE_FOR, enterElectronicCaseFor);
         return this;
     }
 }

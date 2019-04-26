@@ -55,7 +55,7 @@ public abstract class BaseController extends QMUIWindowInsetLayout
     }
 
     private void initBase() {
-        mTipDialogHelper = TipDialogHelper.getInstance(mContext);
+        mTipDialogHelper = new TipDialogHelper(mContext);
         mNormalContainerHelper = NormalContainerHelper.getInstance();
     }
 

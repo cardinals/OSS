@@ -192,6 +192,7 @@ public class MineController extends BaseController {
                 mNormalContainerHelper.setDiagnosisTypePos(1);  // 进入时默认选中 已就诊
                 mHandler.startFragment(new WaitDiagnosisFragment());
             } else if (itemViewText.equals("我的咨询")) {
+                showInfoTipDialog("正在开发中");
             } else if (itemViewText.equals("我的诊疗卡")) {
                 mNormalContainerHelper.setEnterMedicalCardFor(NormalContainer.EnterMedicalCardFor.NORMAL);
                 mHandler.startFragment(new MedicalCardFragment());
