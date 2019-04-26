@@ -16,7 +16,7 @@ public class BottomSheetHelper {
 
     Context mContext;
 
-    QMUIBottomSheet mQMUIBottomSheet;
+    private static QMUIBottomSheet mQMUIBottomSheet;
 
     public BottomSheetHelper(Context mContext) {
         this.mContext = mContext;

@@ -110,7 +110,8 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                         mNormalContainerHelper.setOrder(registrationAll.getOssOrder());
                         mNormalContainerHelper.setLeftTime(1800);  // 新建的挂号单.默认支付时间是30分钟
                         requestForImageCaptcha(); // 刷新验证码
-                        startFragment(new WaitingPayRegisterFragment());
+                        startFragment(new WaitingPayRegisterFragment()); // 吊起支付时， 如果支付失败 requestForRegister会被回调，莫名其妙
+//                        startFragmentAndDestroyCurrent(new WaitingPayRegisterFragment());
                     }
                 }, new OkHttpUtil.FailHandler<RegistrationAll>() {
                     @Override
@@ -142,8 +143,6 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                         runOnUiThread(() -> Glide.with(getContext()).load(bitmap).into(mCaptchaImageView));
                     }
                 }, getErrorHandler());
-
-        // 初始化验证码
 
     }
 

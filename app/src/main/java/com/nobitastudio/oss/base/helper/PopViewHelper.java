@@ -25,8 +25,8 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class PopViewHelper {
 
-    QMUIPopup mNormalPopup;
-    QMUIListPopup mListPopup;
+    private static QMUIPopup mNormalPopup;
+    private static QMUIListPopup mListPopup;
 
     Context mContext;
 

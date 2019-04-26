@@ -34,7 +34,7 @@ public class DialogHelper {
 
     int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
-    QMUIDialog dialog;
+    private static QMUIDialog dialog;
 
     public interface MultiChoiceDialogConfirmListener {
         void onClick(QMUIDialog dialog, int index, int[] selectedIndexes);

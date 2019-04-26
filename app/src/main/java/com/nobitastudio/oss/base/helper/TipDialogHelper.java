@@ -15,7 +15,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
  */
 public class TipDialogHelper {
 
-    QMUITipDialog mQmuiTipDialog;
+    private static QMUITipDialog mQmuiTipDialog;
 
     long mDefaultTipDialogShowTime = 1500l;
 
