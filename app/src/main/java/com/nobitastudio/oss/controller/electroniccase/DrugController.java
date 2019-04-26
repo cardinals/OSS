@@ -49,6 +49,14 @@ public class DrugController extends BaseController {
     ElectronicCaseDTO selectedElectronicDTO;
     DrugRecyclerViewAdapter adapter;
 
+    public DrugController(Context context) {
+        super(context);
+    }
+
+    public DrugController(Context context, ControllerClickHandler mHandler) {
+        super(context, mHandler);
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.controller_electronic_case_detail_drug;
@@ -84,13 +92,5 @@ public class DrugController extends BaseController {
             drugAndCounts.add(new DrugAndCount(selectedElectronicDTO.getDrugs().get(i), selectedElectronicDTO.getDrugCount().get(i)));
         }
         return drugAndCounts;
-    }
-
-    public DrugController(Context context) {
-        super(context);
-    }
-
-    public DrugController(Context context, ControllerClickHandler mHandler) {
-        super(context, mHandler);
     }
 }

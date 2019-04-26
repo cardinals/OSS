@@ -127,12 +127,12 @@
                         android:text="总金额:" />
 
                     <TextView
+                        android:id="@+id/check_cost_all_textview"
                         style="@style/QDCommonDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="0dp"
                         android:gravity="start"
-                        android:text="费用"
                         android:textColor="?attr/app_primary_color" />
 
                 </LinearLayout>
@@ -168,7 +168,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="0dp"
-                    android:text="医生备注" />
+                    android:text="检查描述" />
             </LinearLayout>
 
             <View
@@ -185,12 +185,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/check_des_textview"
                     style="@style/QDCommonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:gravity="start"
-                    android:text="@string/test_long"
                     android:textColor="?attr/qmui_config_color_gray_1" />
             </LinearLayout>
         </LinearLayout>
