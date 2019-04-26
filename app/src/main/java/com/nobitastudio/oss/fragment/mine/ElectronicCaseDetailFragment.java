@@ -103,7 +103,7 @@ public class ElectronicCaseDetailFragment extends StandardWithTobBarLayoutFragme
         mPages.put(Pager.DIAGNOSIS, new DiagnosisController(getContext()));
         mPages.put(Pager.DRUG, new DrugController(getContext()));
         mPages.put(Pager.CHECK, new CheckController(getContext()));
-//        mPages.put(Pager.OPERATION, new OperationController(getContext()));
+        mPages.put(Pager.OPERATION, new OperationController(getContext()));
         mPages.put(Pager.OTHER_ADVISE, new OtherAdviseController(getContext()));
 
         mViewPager.setAdapter(mPagerAdapter);

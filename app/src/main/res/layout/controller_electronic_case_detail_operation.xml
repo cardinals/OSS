@@ -31,7 +31,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/check_detail_solid_imageview"
+                    android:id="@+id/operation_detail_solid_imageview"
                     android:layout_width="@dimen/solid_image_common_width"
                     android:layout_height="@dimen/solid_image_common_height" />
 
@@ -42,7 +42,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="0dp"
-                    android:text="检查项详情" />
+                    android:text="手术项详情" />
             </LinearLayout>
 
             <View
@@ -59,7 +59,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/drug_detail_recyclerview"
+                    android:id="@+id/operation_detail_recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -84,7 +84,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/check_profile_solid_imageview"
+                    android:id="@+id/operation_profile_solid_imageview"
                     android:layout_width="@dimen/solid_image_common_width"
                     android:layout_height="@dimen/solid_image_common_height" />
 
@@ -95,7 +95,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="0dp"
-                    android:text="检查项概况" />
+                    android:text="手术项概况" />
             </LinearLayout>
 
             <View
@@ -127,12 +127,12 @@
                         android:text="总金额:" />
 
                     <TextView
+                        android:id="@+id/operation_cost_all_textview"
                         style="@style/QDCommonDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="0dp"
                         android:gravity="start"
-                        android:text="费用"
                         android:textColor="?attr/app_primary_color" />
 
                 </LinearLayout>
@@ -157,7 +157,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/check_note_solid_imageview"
+                    android:id="@+id/operation_note_solid_imageview"
                     android:layout_width="@dimen/solid_image_common_width"
                     android:layout_height="@dimen/solid_image_common_height" />
 
@@ -168,7 +168,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="0dp"
-                    android:text="医生备注" />
+                    android:text="术后医嘱" />
             </LinearLayout>
 
             <View
@@ -185,12 +185,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/operation_advise_textview"
                     style="@style/QDCommonDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:gravity="start"
-                    android:text="@string/test_long"
                     android:textColor="?attr/qmui_config_color_gray_1" />
             </LinearLayout>
         </LinearLayout>

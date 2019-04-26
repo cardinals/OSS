@@ -63,6 +63,10 @@ public class ElectronicCase {
     @Column(name = "check_des")
     private String checkDes;
 
+    // 术后医嘱
+    @Column(name = "operation_advise")
+    private String operationAdvise;
+
     // 其他医嘱
     @Column(name = "other_advise")
     private String otherAdvise;
