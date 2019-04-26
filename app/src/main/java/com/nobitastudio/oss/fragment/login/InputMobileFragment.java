@@ -95,7 +95,16 @@ public class InputMobileFragment extends StandardWithTobBarLayoutFragment {
 
     @Override
     protected String getTopBarTitle() {
-        return "输入手机号";
+        switch (mNormalContainerHelper.getInputMobileFragment()) {
+            case REGISTER:
+            case MODIFY_PASSWORD:
+            case CREATE_MEDICAL_CARD:
+                return "输入手机号";
+            case BIND_MEDICAL_CARD:
+                return "请输入待绑定诊疗卡卡号";
+            default:
+                return "输入手机号";
+        }
     }
 
     @Override

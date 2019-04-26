@@ -116,7 +116,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="检查时间:"
+                android:text="手术时间:"
                 android:textColor="?attr/qmui_config_color_gray_5"
                 android:textSize="13sp" />
 
