@@ -17,7 +17,7 @@ public class TipDialogHelper {
 
     private static QMUITipDialog mQmuiTipDialog;
 
-    long mDefaultTipDialogShowTime = 1500l;
+    private static final long mDefaultTipDialogShowTime = 1500l;
 
     Context mContext;
 
@@ -27,19 +27,8 @@ public class TipDialogHelper {
 
     public QMUITipDialog closeTipDialog() {
         if (mQmuiTipDialog != null) {
-            mQmuiTipDialog.hide();
+            mQmuiTipDialog.dismiss();
         }
-        return mQmuiTipDialog;
-    }
-
-    public QMUITipDialog showNetworkLoadingTipDialog(String detailMsg) {
-        closeTipDialog();
-        mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                .setTipWord(detailMsg == null ? "正在加载" : detailMsg)
-                .create();
-        mQmuiTipDialog.setCancelable(false);
-        mQmuiTipDialog.show();
         return mQmuiTipDialog;
     }
 
@@ -51,17 +40,25 @@ public class TipDialogHelper {
     }
 
     public QMUITipDialog showErrorTipDialog(String errorMsg, View viewToPostDelayed) {
-        showErrorTipDialog(errorMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
-        return mQmuiTipDialog;
+        return showErrorTipDialog(errorMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
     }
 
     public QMUITipDialog showInfoTipDialog(String infoMsg, View viewToPostDelayed) {
-        showInfoTipDialog(infoMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
-        return mQmuiTipDialog;
+        return showInfoTipDialog(infoMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
     }
 
     public QMUITipDialog showSuccessTipDialog(String successMsg, View viewToPostDelayed) {
-        showSuccessTipDialog(successMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
+        return showSuccessTipDialog(successMsg, mDefaultTipDialogShowTime, viewToPostDelayed);
+    }
+
+    public QMUITipDialog showNetworkLoadingTipDialog(String detailMsg) {
+        closeTipDialog();
+        mQmuiTipDialog = new QMUITipDialog.Builder(mContext)
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord(detailMsg == null ? "正在加载" : detailMsg)
+                .create();
+        mQmuiTipDialog.setCancelable(false);
+        mQmuiTipDialog.show();
         return mQmuiTipDialog;
     }
 
@@ -83,7 +80,7 @@ public class TipDialogHelper {
                 .setTipWord(infoMsg == null ? "请勿重复操作" : infoMsg)
                 .create();
         mQmuiTipDialog.show();
-        viewToPostDelayed.postDelayed(mQmuiTipDialog::hide, delayMills == null ? 1500 : delayMills);
+        viewToPostDelayed.postDelayed(mQmuiTipDialog::hide, delayMills == null ? mDefaultTipDialogShowTime : delayMills);
         return mQmuiTipDialog;
     }
 

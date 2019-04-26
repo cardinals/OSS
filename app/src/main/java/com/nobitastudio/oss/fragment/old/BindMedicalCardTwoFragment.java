@@ -24,11 +24,11 @@ public class BindMedicalCardTwoFragment extends StandardWithTobBarLayoutFragment
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.send_verification_code_button:
-                showNetworkLoadingTipDialog("正在发送验证码");
-                mTopBar.postDelayed(() -> {
-                    closeTipDialog();
-                    showSuccessTipDialog("发送成功");
-                },1500l);
+//                showNetworkLoadingTipDialog("正在发送验证码");
+//                mTopBar.postDelayed(() -> {
+//                    closeTipDialog();
+//                    showSuccessTipDialog("发送成功");
+//                },1500l);
                 break;
         }
     }
@@ -45,10 +45,10 @@ public class BindMedicalCardTwoFragment extends StandardWithTobBarLayoutFragment
 
     @Override
     protected void initLastCustom() {
-        showNetworkLoadingTipDialog("正在发送验证码");
-        mTopBar.postDelayed(() -> {
-            closeTipDialog();
-            showSuccessTipDialog("发送成功");
-        },1500l);
+//        showNetworkLoadingTipDialog("正在发送验证码");
+//        mTopBar.postDelayed(() -> {
+//            closeTipDialog();
+//            showSuccessTipDialog("发送成功");
+//        },1500l);
     }
 }

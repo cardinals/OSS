@@ -11,6 +11,7 @@ import com.nobitastudio.oss.model.dto.GetParam;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.util.OkHttpUtil;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import java.util.List;
 
@@ -80,8 +81,8 @@ public abstract class BaseController extends QMUIWindowInsetLayout
         mTipDialogHelper.showNetworkLoadingTipDialog(detailMsg, delayTime, BaseController.this);
     }
 
-    protected void closeTipDialog() {
-        mTipDialogHelper.closeTipDialog();
+    protected QMUITipDialog closeTipDialog() {
+        return mTipDialogHelper.closeTipDialog();
     }
 
     protected void showErrorTipDialog(String errorMsg, Long delayMills) {

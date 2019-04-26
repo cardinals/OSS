@@ -142,10 +142,10 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
     }
 
     private void callPay(Integer tag) {
-        Double cost = 10.0;
+        Double cost = 10.0; // 一毛钱
         switch (tag) {
             case 0:
-                PayUtil.callPay(PayUtil.PayChanel.ALI_PAY, getActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
+                PayUtil.callPay(PayUtil.PayChanel.ALI_PAY, getBaseFragmentActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
                         mNormalContainerHelper.getRegistrationRecord().getId(), ConstantContainer.OSS_PAY_CALLBACK_URL, mNormalContainerHelper.getUser().getId().toString(),
                         // 支付成功
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
@@ -159,7 +159,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                         });
                 break;
             case 1:
-                PayUtil.callPay(PayUtil.PayChanel.WECHAT_PAY, getActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
+                PayUtil.callPay(PayUtil.PayChanel.WECHAT_PAY, getBaseFragmentActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
                         mNormalContainerHelper.getRegistrationRecord().getId(), ConstantContainer.OSS_PAY_CALLBACK_URL, mNormalContainerHelper.getUser().getId().toString(),
                         // 支付成功
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
@@ -275,6 +275,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
             @Override
             public void onRefresh() {
+                mPullRefreshLayout.finishRefresh();
                 validateOrderStatus();
             }
         });
