@@ -119,7 +119,12 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
     List<ElectronicCaseDTO> mEmergencyElectronicCaseDTOS;
 
     private void initBasic() {
-        showInfoTipDialog("请选择需查看详情的就诊概况",2000l);
+        mElectronicCaseDTOS = mNormalContainerHelper.getElectronicCases();
+        if (mElectronicCaseDTOS.size() == 0) {
+            showInfoTipDialog("该诊疗卡暂无就诊情况",2000l);
+        } else {
+            showInfoTipDialog("请选择需查看详情的就诊概况",2000l);
+        }
         mMedicalCardOwnerNameTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getOwnerName());
         mMedicalCardOwnerSexTextView.setText(Sex.getChineseSex(mNormalContainerHelper.getSelectedMedicalCard().getOwnerSex()));
         // 511602199705220175  6 ~ 13 是生日（取的时候去 6 ~ 14 因为 subString，最后一个不算）
@@ -128,7 +133,6 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         mMedicalCardOwnerAgeTextView.setText(Period.between(bir, LocalDate.now()).getYears() + "岁");
         mMedicalCardIdTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getId());
 
-        mElectronicCaseDTOS = mNormalContainerHelper.getElectronicCases();
         mOutpatientElectronicCaseDTOS = mElectronicCaseDTOS.stream()
                 .filter(item -> item.getElectronicCase().getCaseType().equals(ElectronicCaseType.OUTPATIENT)).collect(Collectors.toList());
         mHospitalizeElectronicCaseDTOS = mElectronicCaseDTOS.stream()

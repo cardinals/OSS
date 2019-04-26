@@ -144,7 +144,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
             mNormalContainerHelper.setRegistrationRecord(registrationAll.getRegistrationRecord());
             Duration duration = Duration.between(registrationAll.getOssOrder().getCreateTime(), LocalDateTime.now(ZoneId.of("CTT")));
             long leftTime = 1800 - duration.toMillis() / 1000;
-            mNormalContainerHelper.setLeftTime(Integer.valueOf(String.valueOf(leftTime)));
+            mNormalContainerHelper.setLeftTime(leftTime < 0 ? 0 : Integer.valueOf(String.valueOf(leftTime)));
             RegisterRecordFragment.this.startFragment(new WaitingPayRegisterFragment());
         } else if (registrationAll.getOssOrder().getState().equals(OrderState.HAVE_PAY)) {
             mNormalContainerHelper.setSelectedDepartment(registrationAll.getDepartment());

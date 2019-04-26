@@ -120,10 +120,10 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                         } else {
                             switch (mNormalContainerHelper.getEnterMedicalCardFor()) {
                                 case ELECTRONIC_CASE:
-                                    showInfoTipDialog("请选择需查看病例详情的诊疗卡", 2500l);
+                                    showInfoTipDialog("请选择需查看病例详情的诊疗卡", 2000l);
                                     break;
                                 case DRUG_DETAIL:
-                                    showInfoTipDialog("请选择您需查看药品详情的诊疗卡", 2500l);
+                                    showInfoTipDialog("请选择您需查看药品详情的诊疗卡", 2000l);
                                     break;
                                 case NORMAL:
                                 default:
