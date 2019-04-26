@@ -76,7 +76,6 @@ public class MedicalCardFragment extends StandardWithTobBarLayoutFragment {
                     startFragment(new MedicalCardDetailFragment());
                     break;
                 case DRUG_DETAIL:
-                    break;
                 case ELECTRONIC_CASE:
                     showAutoDialogNumber("请输入诊疗卡管理密码", getContext().getString(R.string.warm_prompt_electronic_case),
                             "取消", (dialog, index) -> dialog.dismiss(),

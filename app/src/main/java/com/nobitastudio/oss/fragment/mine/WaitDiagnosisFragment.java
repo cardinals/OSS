@@ -21,6 +21,7 @@ import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -236,7 +237,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
         mUnfinishRegistrations.clear();
 
         mWaitRegistrations.addAll(mRegistrationAlls.stream().
-                filter(item -> item.getVisit().getDiagnosisTime().isAfter(LocalDateTime.now())).collect(Collectors.toList()));
+                filter(item -> item.getVisit().getDiagnosisTime().isAfter(LocalDateTime.now(ZoneId.of("CTT")))).collect(Collectors.toList()));
 
         mFinishRegistrations.addAll(mRegistrationAlls.stream().filter(item -> {
             if (itemType != null) {
@@ -262,7 +263,7 @@ public class WaitDiagnosisFragment extends StandardWithTobBarLayoutFragment {
 
     // todo 现在没有后台数据表支持判断是完成就诊还是 未就诊. 采用随机来模拟
     private boolean judgeIsFinishDiagnosis(RegistrationAll registrationAll) {
-        return registrationAll.getVisit().getDiagnosisTime().isBefore(LocalDateTime.now()) && CommonUtil.getRandom(0, 20) > 10;
+        return registrationAll.getVisit().getDiagnosisTime().isBefore(LocalDateTime.now(ZoneId.of("CTT"))) && CommonUtil.getRandom(0, 20) > 10;
     }
 
     @Override

@@ -142,6 +142,7 @@ public class RegisterRecordFragment extends StandardWithTobBarLayoutFragment {
             mNormalContainerHelper.setSelectedVisit(registrationAll.getVisit());
             mNormalContainerHelper.setSelectedMedicalCard(registrationAll.getMedicalCard());
             mNormalContainerHelper.setRegistrationRecord(registrationAll.getRegistrationRecord());
+            mNormalContainerHelper.setOrder(registrationAll.getOssOrder());
             Duration duration = Duration.between(registrationAll.getOssOrder().getCreateTime(), LocalDateTime.now(ZoneId.of("CTT")));
             long leftTime = 1800 - duration.toMillis() / 1000;
             mNormalContainerHelper.setLeftTime(leftTime < 0 ? 0 : Integer.valueOf(String.valueOf(leftTime)));

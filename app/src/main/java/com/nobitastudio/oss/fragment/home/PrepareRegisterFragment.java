@@ -15,6 +15,7 @@ import com.nobitastudio.oss.model.common.ServiceResult;
 import com.nobitastudio.oss.model.common.error.ErrorCode;
 import com.nobitastudio.oss.model.dto.ReflectStrategy;
 import com.nobitastudio.oss.model.dto.RegisterDTO;
+import com.nobitastudio.oss.model.dto.RegistrationAll;
 import com.nobitastudio.oss.model.entity.MedicalCard;
 import com.nobitastudio.oss.model.entity.RegistrationRecord;
 import com.nobitastudio.oss.util.DateUtil;
@@ -100,19 +101,20 @@ public class PrepareRegisterFragment extends StandardWithTobBarLayoutFragment {
                         mNormalContainerHelper.getSelectedMedicalCard().getId(),
                         mNormalContainerHelper.getSelectedVisit().getId(),
                         mVerificationCodeEditText.getText().toString().trim()),
-                new ReflectStrategy<>(RegistrationRecord.class),
-                new OkHttpUtil.SuccessHandler<RegistrationRecord>() {
+                new ReflectStrategy<>(RegistrationAll.class),
+                new OkHttpUtil.SuccessHandler<RegistrationAll>() {
                     @Override
-                    public void handle(RegistrationRecord registrationRecord) {
+                    public void handle(RegistrationAll registrationAll) {
                         closeTipDialog();
-                        mNormalContainerHelper.setRegistrationRecord(registrationRecord);
+                        mNormalContainerHelper.setRegistrationRecord(registrationAll.getRegistrationRecord());
+                        mNormalContainerHelper.setOrder(registrationAll.getOssOrder());
                         mNormalContainerHelper.setLeftTime(1800);  // 新建的挂号单.默认支付时间是30分钟
                         requestForImageCaptcha(); // 刷新验证码
                         startFragment(new WaitingPayRegisterFragment());
                     }
-                }, new OkHttpUtil.FailHandler<RegistrationRecord>() {
+                }, new OkHttpUtil.FailHandler<RegistrationAll>() {
                     @Override
-                    public void handle(ServiceResult<RegistrationRecord> serviceResult) {
+                    public void handle(ServiceResult<RegistrationAll> serviceResult) {
                         showInfoTipDialog(ErrorCode.get(serviceResult.getErrorCode()));
                         requestForImageCaptcha();// 刷新验证码
                     }

@@ -17,6 +17,7 @@ import com.nobitastudio.oss.util.PayUtil;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -110,33 +111,40 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                 (dialog, itemView) -> {
                     dialog.dismiss();
                     // 请求服务器查看支付时间
-                    showNetworkLoadingTipDialog("正在准备支付");
-                    getAsyn(Arrays.asList("order", mNormalContainerHelper.getSelectedMedicalCard().getId(), mNormalContainerHelper.getSelectedVisit().getId().toString()),
-                            null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
-                            new OkHttpUtil.SuccessHandler<OSSOrder>() {
-                                @Override
-                                public void handle(OSSOrder ossOrder) {
-                                    if (ossOrder.getCreateTime().plusMinutes(30).isAfter(LocalDateTime.now())) {
-                                        // 在支付时间内
-                                        mNormalContainerHelper.setOrder(ossOrder);
-                                        closeTipDialog();
-                                        callPay((Integer) itemView.getTag());
-                                    } else {
-                                        // 已过支付时间
-                                        showInfoTipDialog("该挂号单因逾期未支付已作废");
-                                    }
-                                }
-                            });
-//                    startFragmentAndDestroyCurrent(new RegisterSuccessFragment());
+//                    showNetworkLoadingTipDialog("正在准备支付");
+                    // 逻辑存在问题.不应该用诊疗卡和号源号去索引订单，存在多个订单.挂号的时候即得到订单信息
+//                    getAsyn(Arrays.asList("order", mNormalContainerHelper.getSelectedMedicalCard().getId(), mNormalContainerHelper.getSelectedVisit().getId().toString()),
+//                            null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
+//                            new OkHttpUtil.SuccessHandler<OSSOrder>() {
+//                                @Override
+//                                public void handle(OSSOrder ossOrder) {
+//                                    if (ossOrder.getCreateTime().plusMinutes(30).isAfter(LocalDateTime.now(ZoneId.of("CTT")))) {
+//                                        // 在支付时间内
+//                                        mNormalContainerHelper.setOrder(ossOrder);
+//                                        closeTipDialog();
+//                                        callPay((Integer) itemView.getTag());
+//                                    } else {
+//                                        // 已过支付时间
+//                                        showInfoTipDialog("该挂号单因逾期未支付已作废");
+//                                    }
+//                                }
+//                            });
+                    if (mNormalContainerHelper.getOrder().getCreateTime().plusMinutes(30).isAfter(LocalDateTime.now(ZoneId.of("CTT")))) {
+                        // 在支付时间内
+                        closeTipDialog();
+                        callPay((Integer) itemView.getTag());
+                    } else {
+                        // 已过支付时间
+                        showInfoTipDialog("该挂号单因逾期未支付已作废");
+                    }
                 }
         );
     }
 
     private void callPay(Integer tag) {
+        Double cost = 10.0;
         switch (tag) {
             case 0:
-//                Double cost = mNormalContainerHelper.getSelectedVisit().getCost() * 100;
-                Double cost = 10.0;
                 PayUtil.callPay(PayUtil.PayChanel.ALI_PAY, getActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
                         mNormalContainerHelper.getRegistrationRecord().getId(), ConstantContainer.OSS_PAY_CALLBACK_URL, mNormalContainerHelper.getUser().getId().toString(),
                         // 支付成功
@@ -151,21 +159,24 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
                         });
                 break;
             case 1:
-                PayUtil.callPay(PayUtil.PayChanel.WECHAT_PAY, getActivity(), "tradeName", "outTradeNo", 10L,
-                        "11", "www.baidu.com", "11",
+                PayUtil.callPay(PayUtil.PayChanel.WECHAT_PAY, getActivity(), "挂号费", mNormalContainerHelper.getOrder().getId(), cost.longValue(),
+                        mNormalContainerHelper.getRegistrationRecord().getId(), ConstantContainer.OSS_PAY_CALLBACK_URL, mNormalContainerHelper.getUser().getId().toString(),
+                        // 支付成功
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
-                            // 支付成功
-                            showSuccessTipDialog("支付成功");
+                            mLeftTimeControllerTimer.cancel();
+                            mLeftTimeTextView.setText("已支付");
+                            validateOrderStatus();
                         },
+                        // 支付失败
                         (context, outTradeNo, resultString, payType, amount, tradeName) -> {
-                            showInfoTipDialog("支付失败");
+                            showInfoTipDialog("请尽快完成支付");
                         });
                 break;
             case 2:
-                Toasty.info(getContext(), "程序员小哥哥正在加紧开发中~").show();
+                showInfoTipDialog("正在开发中");
                 break;
             case 3:
-                Toasty.info(getContext(), "程序员小哥哥正在加紧开发中~").show();
+                showInfoTipDialog("正在开发中");
                 break;
             default:
         }
@@ -192,7 +203,8 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
 
     // 检查订单状态
     private void checkOrderStatus() {
-        getSync(Arrays.asList("order", "status", mNormalContainerHelper.getOrder().getId()), null, new ReflectStrategy<OSSOrder>(OSSOrder.class),
+        getSync(Arrays.asList("order", "status", mNormalContainerHelper.getOrder().getId()), null,
+                new ReflectStrategy<OSSOrder>(OSSOrder.class),
                 new OkHttpUtil.SuccessHandler<OSSOrder>() {
                     @Override
                     public void handle(OSSOrder ossOrder) {
@@ -226,7 +238,7 @@ public class WaitingPayRegisterFragment extends StandardWithTobBarLayoutFragment
             public void run() {
                 runOnUiThread(() -> {
                     mLeftTimeTextView.setText(DateUtil.formatSecondsToStandardString(mLeftTime));
-                    if (mLeftTime.equals(0)) {
+                    if (mLeftTime <= 0) {
                         // 不可支付
                         mLeftTimeTextView.setText("已超时");
                         mLeftTimeControllerTimer.cancel();

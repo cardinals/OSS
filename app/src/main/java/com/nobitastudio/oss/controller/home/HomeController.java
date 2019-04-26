@@ -156,8 +156,8 @@ public class HomeController extends BaseController {
     }
 
     private void initBasic(Context context) {
-        mTipDialogHelper = new TipDialogHelper(context);
-        mDialogHelper = new DialogHelper(context);
+        mTipDialogHelper = TipDialogHelper.getInstance(context);
+        mDialogHelper = DialogHelper.getInstance(context);
 
         // 初始化数据
         mHealthArticles = new ArrayList<>();
