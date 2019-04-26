@@ -151,9 +151,9 @@ public class UpgradeTipTask implements UpgradeTask {
             appendBlockSpace(activity, text);
             text.append("2. Added API to get line count in QMUIFloatLayout");
         } else if (mNewVersion == QDUpgradeManager.VERSION_1_1_1) {
-            text.append("1. Bug fixes: can not read /system/build.prop begin from android 8.0.\n");
+            text.append("1.支持电子病历的查看\n");
             appendBlockSpace(activity, text);
-            text.append("2. Allow custom layout in QMUIPopup.");
+            text.append("2.修复bug\n");
         } else if (mNewVersion <= QDUpgradeManager.VERSION_1_1_0) {
             text.append("1. Added QMUILayout, making it easy to implement shadows, radii, and separators.\n");
             appendBlockSpace(activity, text);
