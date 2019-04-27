@@ -54,7 +54,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:background="@drawable/bg_transparent_selector_edit"
-                                android:hint="请输入密码"
+                                android:hint="请输入密码(至少6位)"
                                 android:inputType="textPassword"
                                 android:maxLength="16"
                                 android:textColor="@color/qmui_config_color_white"
