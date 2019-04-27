@@ -83,7 +83,7 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
                         });
                 break;
             case R.id.medical_card_password_linearlayout:
-                showAutoDialogNumber("该密码用于保护病历等隐私信息", getContext().getString(R.string.warm_prompt_electronic_case),
+                showAutoDialogNumber("请输入管理密码", getContext().getString(R.string.warm_prompt_electronic_case),
                         "取消", (dialog, index) -> dialog.dismiss(),
                         "确定", (dialog, index, content) -> {
                             dialog.dismiss();
@@ -92,7 +92,7 @@ public class CreateMedicalCardFragment extends StandardWithTobBarLayoutFragment 
                         },6);
                 break;
             case R.id.medical_card_owner_address_linearlayout:
-                showAutoDialog("请输入诊疗卡持有者联系地址", getString(R.string.create_medical_card_attention),
+                showAutoDialog("请输入联系地址", getString(R.string.create_medical_card_attention),
                         "取消", (dialog, index) -> {
                             dialog.dismiss();
                         },
