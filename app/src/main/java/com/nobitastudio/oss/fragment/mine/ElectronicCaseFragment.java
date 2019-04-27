@@ -132,7 +132,8 @@ public class ElectronicCaseFragment extends StandardWithTobBarLayoutFragment {
         String idCard = mNormalContainerHelper.getSelectedMedicalCard().getOwnerIdCard();
         LocalDate bir = LocalDate.of(Integer.valueOf(idCard.substring(6, 10)), Integer.valueOf(idCard.substring(10, 12)), Integer.valueOf(idCard.substring(12, 14)));
         mMedicalCardOwnerAgeTextView.setText(Period.between(bir, LocalDate.now()).getYears() + "岁");
-        mMedicalCardIdTextView.setText(mNormalContainerHelper.getSelectedMedicalCard().getId());
+        String medicalCardId = mNormalContainerHelper.getSelectedMedicalCard().getId();
+        mMedicalCardIdTextView.setText(medicalCardId.substring(0,4) + "****" + medicalCardId.substring(15));
 
         mOutpatientElectronicCaseDTOS = mElectronicCaseDTOS.stream()
                 .filter(item -> item.getElectronicCase().getCaseType().equals(ElectronicCaseType.OUTPATIENT)).collect(Collectors.toList());
