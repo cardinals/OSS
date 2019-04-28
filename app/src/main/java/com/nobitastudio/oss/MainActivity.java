@@ -27,6 +27,7 @@ import android.support.v4.content.ContextCompat;
 import com.base.bj.trpayjar.utils.TrPay;
 import com.nobitastudio.oss.base.activity.BaseFragmentActivity;
 import com.nobitastudio.oss.base.fragment.BaseFragment;
+import com.nobitastudio.oss.base.helper.TipDialogHelper;
 import com.nobitastudio.oss.base.lab.fragment.QDWebViewFixFragment;
 import com.nobitastudio.oss.container.ConstantContainer;
 import com.nobitastudio.oss.container.NormalContainer;
@@ -62,7 +63,8 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            initPermission();
+            startUp();
+//            initPermission();  // 取消进入时必须申请权限
         }
     }
 
@@ -126,26 +128,6 @@ public class MainActivity extends BaseFragmentActivity {
             ActivityCompat.requestPermissions(MainActivity.this, permissionList.toArray(new String[0]), ConstantContainer.REQUEST_CODE);
         } else {
             startUp();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case ConstantContainer.REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    for (int result : grantResults) {
-                        if (result != PackageManager.PERMISSION_GRANTED) {
-                            Toasty.warning(getApplicationContext(), "必须同意所有权限才能使用本程序").show();
-                            finish();
-                        }
-                    }
-                    startUp();
-                } else {
-                    Toasty.error(getApplicationContext(), "发生未知错误").show();
-                    finish();
-                }
-                break;
         }
     }
 

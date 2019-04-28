@@ -1,5 +1,10 @@
 package com.nobitastudio.oss.fragment.home;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +16,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.amap.api.navi.AmapNaviPage;
 import com.amap.api.navi.INaviInfoCallback;
 import com.amap.api.navi.model.AMapNaviLocation;
+import com.nobitastudio.oss.MainActivity;
 import com.nobitastudio.oss.R;
 import com.nobitastudio.oss.adapter.recyclerview.DepartmentRecyclerViewAdapter;
 import com.nobitastudio.oss.adapter.recyclerview.ItemRecyclerViewAdapter;
@@ -31,6 +37,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 
 import static com.nobitastudio.oss.container.ConstantContainer.getAmapNaviParamByIndex;
 
@@ -127,16 +134,67 @@ public class NavigationFragment extends StandardWithTobBarLayoutFragment {
     List<Department> mDepartments;
     DepartmentRecyclerViewAdapter adapter;
 
+    int selectedNavTypeIndex = 0; //  默认驾车导航
+
     protected void initRecyclerView() {
         ItemRecyclerViewAdapter mItemAdapter = new ItemRecyclerViewAdapter(getContext(),
                 Arrays.asList(new ItemDescription("驾车", R.mipmap.ic_car), new ItemDescription("骑行", R.mipmap.ic_bicycle),
                         new ItemDescription("步行", R.mipmap.ic_foot)));
-        mItemAdapter.setOnItemClickListener((v, index) -> AmapNaviPage.getInstance().showRouteActivity(getContext(), getAmapNaviParamByIndex(index), mINaviInfoCallback));
+        mItemAdapter.setOnItemClickListener((v, index) -> {
+            selectedNavTypeIndex = index;
+            requestLocationPermission();
+        });
         mHospitalOutNavigationRecycleView.setAdapter(mItemAdapter);
         mHospitalOutNavigationRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mHospitalOutNavigationRecycleView.addItemDecoration(new GridDividerItemDecoration(getContext(), 3));
         // 初始化科室列表
         initDepartmentRecyclerView();
+    }
+
+    // 调起 高德地图导航
+    private void callAmap() {
+        AmapNaviPage.getInstance().showRouteActivity(getContext(), getAmapNaviParamByIndex(selectedNavTypeIndex), mINaviInfoCallback);
+    }
+
+    // 申请定位权限
+    private void requestLocationPermission() {
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(getBaseFragmentActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(getBaseFragmentActivity(), Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(getBaseFragmentActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (permissionList.size() != 0) {
+            requestPermissions(permissionList.toArray(new String[0]), ConstantContainer.REQUEST_CODE);
+        } else {
+            callAmap();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case ConstantContainer.REQUEST_CODE:
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            showInfoTipDialog("您需同意使用定位等权限才可使用该功能", 2500l);
+                            return;
+                        }
+                    }
+                    callAmap();
+                } else {
+                    showInfoTipDialog("发生未知错误");
+                }
+                break;
+        }
     }
 
     private void initDepartmentRecyclerView() {
