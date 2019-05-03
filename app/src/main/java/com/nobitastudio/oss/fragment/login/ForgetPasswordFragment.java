@@ -74,11 +74,11 @@ public class ForgetPasswordFragment extends StandardWithTobBarLayoutFragment {
                                 public void handle(User user) {
                                     // 修改成功
                                     showSuccessTipDialog("密码修改成功");
-                                    mNormalContainerHelper.clearAllButActivity(getBaseFragmentActivity()); // 先清除所有的内存已有数据
 //                                    mNormalContainerHelper.setUser(user);
 ////                                    startFragmentAndDestroyCurrent(new HomeFragment());  返回到登录fragment重新执行登录操作
                                     if (mNormalContainerHelper.getUser() != null) {
                                         // 从登陆界面过来
+                                        mNormalContainerHelper.clearAllButActivity(getBaseFragmentActivity()); // 先清除所有的内存已有数据
                                         popBackStack(LoginFragment.class);
                                     } else {
                                         // 从用户设置界面过来
