@@ -44,6 +44,8 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     @BindView(R.id.attention_textview)
     TextView mTextView;
 
+    MedicalCard mSelectedMedicalCard;
+
     @OnClick({R.id.unbind_medical_card_button})
     void OnClick(View v) {
         switch (v.getId()) {
@@ -63,7 +65,6 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
 
     private void initMedicalCardDetail() {
         // 初始化 textView
-        MedicalCard mSelectedMedicalCard = mNormalContainerHelper.getSelectedMedicalCard();
         mMedicalCardNoTextView.setText(mSelectedMedicalCard.getId());
         mOwnerNameTextView.setText(mSelectedMedicalCard.getOwnerName());
         mOwnerSexTextView.setText(Sex.getChineseSex(mSelectedMedicalCard.getOwnerSex()));
@@ -72,8 +73,13 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     }
 
     @Override
+    protected void initFirstCustom() {
+        mSelectedMedicalCard = mNormalContainerHelper.getSelectedMedicalCard(); // 需要用于产生tobbar title.在initTopbar之前调用
+    }
+
+    @Override
     protected String getTopBarTitle() {
-        return "诊疗卡持有者姓名";
+        return mSelectedMedicalCard.getOwnerName();
     }
 
     @Override
