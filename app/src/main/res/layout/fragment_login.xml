@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_marginStart="50dp"
-                            android:text="门诊服务系统"
+                            android:text="医院门诊医疗服务系统"
                             android:textColor="@color/app_color_theme_4"
                             android:textSize="18sp"
                             android:textStyle="bold" />

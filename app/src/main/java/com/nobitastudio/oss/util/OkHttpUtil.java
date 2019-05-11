@@ -207,13 +207,6 @@ public class OkHttpUtil {
                             if (result.getState() == 0) {
                                 // 成功
                                 if (result.getResult() instanceof JSONObject) {
-//                                    T t;
-//                                    if (reflectStrategy.isClass()) {
-//                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass());
-//                                    } else {
-//                                        t = ((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTypeReference());
-//                                    }
-//                                    result.setResult(t);
                                     result.setResult(((JSONObject) result.getResult()).toJavaObject(reflectStrategy.getTClass()));
                                 } else if (result.getResult() instanceof JSONArray) {
                                     result.setResult(((JSONArray) result.getResult()).toJavaObject(reflectStrategy.getTypeReference()));
