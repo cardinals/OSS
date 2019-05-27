@@ -353,7 +353,7 @@ public abstract class StandardFragment extends BaseFragment
      */
     protected void initCopyRight(TextView... mCopyrightTextView) {
         for (TextView textView : mCopyrightTextView) {
-            textView.setVisibility(View.GONE);
+//            textView.setVisibility(View.GONE); // 取消显示版权信息
             textView.setText(String.format(getResources().getString(R.string.about_copyright), DateUtil.getCurrentYear()));
         }
     }

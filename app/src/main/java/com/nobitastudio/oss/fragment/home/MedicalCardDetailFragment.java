@@ -73,7 +73,7 @@ public class MedicalCardDetailFragment extends StandardWithTobBarLayoutFragment 
     }
 
     @Override
-    protected void initFirstCustom() {
+    protected void initMiddleCustom() {
         mSelectedMedicalCard = mNormalContainerHelper.getSelectedMedicalCard(); // 需要用于产生tobbar title.在initTopbar之前调用
     }
 
